@@ -1,0 +1,1711 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Visual Foundations: the building blocks of design</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F2F4FA; --surface:#FFFFFF; --ink:#1B1F3B; --muted:#4A5070; --line:#D9DDEB;
+  --g1:#D93A62; --g2:#2468D8; --g3:#0E8467; --g4:#A86F00;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#12142A; --surface:#1C2040; --ink:#EEF0FB; --muted:#B4B9D6; --line:#2E3360;
+    --g1:#FF7A9A; --g2:#78A8FF; --g3:#45D1AE; --g4:#F2B93B;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#12142A; --surface:#1C2040; --ink:#EEF0FB; --muted:#B4B9D6; --line:#2E3360;
+  --g1:#FF7A9A; --g2:#78A8FF; --g3:#45D1AE; --g4:#F2B93B;
+  color-scheme:dark;
+}
+html{scroll-padding-top:env(safe-area-inset-top,0px);}
+*,*::before,*::after{box-sizing:inherit;}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"DM Sans",system-ui,-apple-system,"Segoe UI",sans-serif;font-size:17px;line-height:1.55;}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px;}
+h1,h2,h3{font-family:Syne,"DM Sans",system-ui,sans-serif;line-height:1.25;letter-spacing:0.01em;margin:0;}
+
+/* hero */
+.hero{padding:48px 0 40px;}
+.hero-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:36px;align-items:center;}
+.hero h1{font-size:clamp(2.2rem,5.4vw,3.8rem);font-weight:700;letter-spacing:0.01em;line-height:1.2;}
+.hero p.lead{font-size:1.15rem;color:var(--muted);max-width:34ch;margin:18px 0 22px;}
+.jump{display:flex;flex-wrap:wrap;gap:10px;}
+.jump a{color:var(--ink);text-decoration:none;font-weight:700;font-size:.95rem;padding:9px 16px;border-radius:999px;border:2px solid var(--c);background:var(--surface);}
+.jump a:hover{background:var(--c);color:var(--surface);}
+.jump a:focus-visible,input:focus-visible{outline:3px solid var(--ink);outline-offset:3px;}
+.lab{background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:22px;}
+.lab h2{font-size:1.25rem;margin-bottom:4px;}
+.lab p{margin:0 0 16px;color:var(--muted);font-size:.95rem;}
+.sw{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:18px;}
+.sw div{border-radius:12px;padding:30px 8px 8px;font-size:.78rem;font-weight:700;line-height:1.25;}
+.sw div span{display:block;font-weight:500;opacity:.9;}
+.sw div.big{grid-column:span 3;padding:46px 12px 12px;border-radius:16px;font-size:.9rem;}
+label{display:block;font-weight:700;font-size:.9rem;margin-bottom:8px;}
+input[type=range]{width:100%;height:14px;border-radius:99px;appearance:none;-webkit-appearance:none;background:linear-gradient(90deg,hsl(0 80% 55%),hsl(60 80% 55%),hsl(120 80% 45%),hsl(180 80% 45%),hsl(240 80% 60%),hsl(300 80% 55%),hsl(360 80% 55%));margin:0;}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:28px;height:28px;border-radius:50%;background:var(--surface);border:4px solid var(--ink);cursor:grab;}
+input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;background:var(--surface);border:4px solid var(--ink);cursor:grab;}
+
+/* groups */
+.group{padding:36px 0 12px;--c:var(--g1);}
+.group.f{--c:var(--g2);} .group.s{--c:var(--g3);} .group.c{--c:var(--g4);}
+.jump a.j1{--c:var(--g1);} .jump a.j2{--c:var(--g2);} .jump a.j3{--c:var(--g3);} .jump a.j4{--c:var(--g4);}
+.ghead{display:flex;gap:18px;align-items:center;margin-bottom:22px;}
+.gbadge{flex:0 0 72px;height:72px;border-radius:50%;background:var(--c);color:var(--surface);display:grid;place-items:center;}
+.gbadge svg{width:40px;height:40px;}
+.ghead h2{font-size:clamp(1.6rem,3.8vw,2.2rem);font-weight:700;}
+.ghead p{margin:6px 0 0;color:var(--muted);max-width:52ch;}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px;}
+.card{background:var(--surface);border:1px solid var(--line);border-top:5px solid var(--c);border-radius:6px 6px 18px 18px;padding:18px;}
+.tile{width:60px;height:60px;border-radius:16px;display:grid;place-items:center;color:var(--c);background:color-mix(in srgb,var(--c) 14%,var(--surface));margin-bottom:12px;}
+.tile svg{width:38px;height:38px;fill:none;stroke:currentColor;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;}
+.card h3{font-size:1.15rem;font-weight:700;margin-bottom:6px;}
+.card p{margin:0;color:var(--muted);font-size:.97rem;}
+[hidden]{display:none !important;}
+.note{margin:16px 0 0;color:var(--muted);font-size:.92rem;max-width:44ch;}
+.card.has{display:block;text-decoration:none;color:inherit;cursor:pointer;}
+.card.has:hover{border-color:var(--c);}
+.card.has:focus-visible{outline:3px solid var(--ink);outline-offset:3px;}
+.more{display:inline-block;margin-top:12px;font-weight:700;font-size:.92rem;color:var(--ink);padding:6px 12px;border-radius:999px;background:color-mix(in srgb,var(--c) 18%,var(--surface));}
+.lesson{--c:var(--g1);padding-top:20px;padding-bottom:40px;max-width:860px;}
+.btn{font:inherit;font-weight:700;cursor:pointer;border:2px solid var(--ink);background:var(--surface);color:var(--ink);padding:9px 16px;border-radius:999px;}
+.btn:hover{background:var(--ink);color:var(--surface);}
+.btn:focus-visible,.chip:focus-visible,summary:focus-visible{outline:3px solid var(--ink);outline-offset:3px;}
+.lhero{display:flex;gap:18px;align-items:center;margin:26px 0 8px;}
+.lesson h1{font-size:clamp(1.9rem,4.6vw,3rem);font-weight:700;letter-spacing:0.01em;line-height:1.2;}
+.lhero p{margin:6px 0 0;color:var(--muted);}
+.toc{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0 6px;}
+.chip{font:inherit;font-size:.92rem;font-weight:700;cursor:pointer;border:2px solid var(--line);background:var(--surface);color:var(--ink);padding:7px 14px;border-radius:999px;}
+.chip:hover{border-color:var(--c);}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--surface);border-color:var(--ink);}
+.lsec{margin-top:46px;}
+.lsec h2{font-size:clamp(1.45rem,3.3vw,1.9rem);font-weight:700;margin-bottom:14px;}
+.lsec h3{font-size:1.2rem;margin:22px 0 6px;}
+.lsec p,.lsec li{max-width:68ch;}
+.lsec p{margin:0 0 14px;}
+.callout{background:color-mix(in srgb,var(--c) 12%,var(--surface));border-left:6px solid var(--c);border-radius:4px 16px 16px 4px;padding:14px 18px;margin:18px 0;max-width:68ch;}
+.callout p{margin:0 !important;}
+.timeline{list-style:none;margin:16px 0;padding:0 0 0 0;border-left:3px solid var(--line);}
+.timeline li{padding:0 0 18px 22px;position:relative;}
+.timeline li::before{content:"";position:absolute;left:-10px;top:5px;width:17px;height:17px;border-radius:50%;background:var(--c);}
+.timeline b.yr{font-family:Syne,"DM Sans",system-ui,sans-serif;font-size:1.15rem;display:block;}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:20px;margin:18px 0;}
+.wheelrow{display:grid;grid-template-columns:minmax(0,340px) 1fr;gap:24px;align-items:center;}
+.wheelrow svg{width:100%;height:auto;display:block;}
+.wedge{cursor:pointer;stroke:var(--surface);stroke-width:2;}
+.wedge:focus-visible{outline:none;stroke:var(--ink);stroke-width:5;}
+.ctrls{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px;}
+.ctrls .lbl{width:100%;font-weight:700;font-size:.9rem;margin-bottom:-2px;}
+.rswatch{height:90px;border-radius:16px;margin-bottom:12px;}
+.readout h4{font-family:Syne,"DM Sans",system-ui,sans-serif;font-size:1.4rem;margin:0 0 2px;}
+.readout p{margin:0 0 8px !important;color:var(--muted);}
+.pal{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px;}
+.pal div{flex:1 1 90px;border-radius:12px;padding:38px 8px 8px;font-size:.8rem;font-weight:700;line-height:1.3;}
+.pal div span{display:block;font-weight:500;}
+.blend{position:relative;height:190px;border-radius:18px;overflow:hidden;}
+.blend i{position:absolute;width:110px;height:110px;border-radius:50%;display:block;}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.two h3{margin-top:12px;}
+.strip{display:flex;border-radius:12px;overflow:hidden;margin:6px 0 16px;}
+.strip div{flex:1;height:54px;}
+.slab{font-weight:700;font-size:.92rem;margin:12px 0 0;}
+.stack{display:flex;height:70px;border-radius:14px;overflow:hidden;font-weight:700;font-size:.9rem;margin:14px 0;}
+.stack div{display:flex;align-items:center;justify-content:center;text-align:center;padding:0 6px;}
+.albers{display:grid;grid-template-columns:1fr 1fr;border-radius:16px;overflow:hidden;margin:14px 0 8px;}
+.albers div{height:170px;display:grid;place-items:center;}
+.albers span{width:72px;height:72px;background:#B87A4B;display:block;}
+.steps{counter-reset:s;list-style:none;padding:0;margin:14px 0;}
+.steps li{counter-increment:s;position:relative;padding:0 0 16px 50px;min-height:36px;}
+.steps li::before{content:counter(s);position:absolute;left:0;top:-2px;width:34px;height:34px;border-radius:50%;background:var(--c);color:var(--surface);display:grid;place-items:center;font-weight:700;}
+details{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:12px 16px;margin:10px 0;max-width:68ch;}
+summary{cursor:pointer;font-weight:700;}
+details p{margin:10px 0 0 !important;color:var(--muted);}
+.tk li{margin:7px 0;}
+.lsec p b,.lsec li b:not(.yr){background:color-mix(in srgb,var(--c) 20%,transparent);padding:0 .22em;border-radius:5px;-webkit-box-decoration-break:clone;box-decoration-break:clone;}
+.lesson.f{--c:var(--g2);}
+.lesson.s{--c:var(--g3);}
+.lesson.c{--c:var(--g4);}
+.stage{background:var(--bg);border:1px solid var(--line);border-radius:16px;padding:14px;display:grid;place-items:center;min-height:120px;overflow:hidden;}
+.stage svg{max-width:100%;height:auto;}
+.mood{margin:12px 0 0;color:var(--muted);}
+.hx{font:inherit;color:inherit;background:none;border:0;padding:0 .1em;margin:0;cursor:pointer;text-decoration:underline dotted;text-underline-offset:3px;display:inline;}
+.hx::after{content:'';display:inline-block;width:.95em;height:.95em;margin-left:.4em;vertical-align:-.12em;background:currentColor;opacity:.8;-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect x='9' y='9' width='11' height='11' rx='2' fill='none' stroke='black' stroke-width='2'/%3E%3Cpath d='M5 15V6a2 2 0 0 1 2-2h9' fill='none' stroke='black' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E") center/contain no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect x='9' y='9' width='11' height='11' rx='2' fill='none' stroke='black' stroke-width='2'/%3E%3Cpath d='M5 15V6a2 2 0 0 1 2-2h9' fill='none' stroke='black' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E") center/contain no-repeat;}
+.hx:hover::after{opacity:1;}
+.hx.ok::after{opacity:1;-webkit-mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M5 13l4 4L19 7' fill='none' stroke='black' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M5 13l4 4L19 7' fill='none' stroke='black' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");}
+.hx:focus-visible{outline:3px solid currentColor;outline-offset:2px;}
+.swbtns{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:16px;}
+.swbtn{width:46px;height:46px;border-radius:50%;border:3px solid var(--surface);outline:2px solid var(--line);cursor:pointer;padding:0;}
+.swbtn[aria-pressed='true']{outline:4px solid var(--ink);}
+.swbtn:focus-visible{outline:4px solid var(--ink);outline-offset:2px;}
+.rswatch{border:1px solid var(--line);}
+.facts{display:grid;gap:10px;margin-top:10px;}
+.facts p{margin:0 !important;}
+.mockbtn{display:inline-block;padding:10px 18px;border-radius:999px;font-weight:700;margin-top:8px;}
+.mini{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px;margin:14px 0;}
+.mini>div{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:14px;}
+.mini .pair{display:flex;height:46px;border-radius:10px;overflow:hidden;margin-bottom:10px;}
+.mini .pair i{display:block;}
+.mini h3{margin:0 0 4px;font-size:1.05rem;}
+.mini p{margin:0 !important;font-size:.95rem;color:var(--muted);}
+.mock{border-radius:18px;overflow:hidden;border:1px solid rgba(0,0,0,.14);}
+.mock .bar{padding:12px 16px;font-weight:700;}
+.mock .bd{padding:16px;}
+.mock h4{margin:0 0 6px;font-size:1.25rem;}
+.mock p{margin:0 0 12px !important;max-width:none;}
+.tag{display:inline-block;padding:3px 10px;border-radius:999px;font-size:.82rem;font-weight:700;margin-right:6px;}
+.blurme{filter:blur(var(--b,0px));}
+.strip.lab div{display:grid;place-items:center;font-size:.72rem;font-weight:700;}
+canvas{display:block;width:100%;max-width:320px;border-radius:14px;cursor:crosshair;touch-action:none;}
+.sl label{margin:14px 0 6px;}
+table.t{border-collapse:collapse;width:100%;max-width:68ch;margin:12px 0;font-size:.95rem;}
+table.t th,table.t td{border-bottom:1px solid var(--line);padding:8px 10px;text-align:left;}
+.res{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:8px;margin:12px 0;}
+.res div{border:2px solid var(--line);border-radius:12px;padding:8px 12px;font-size:.9rem;}
+.res div b{display:block;}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.row3{display:flex;align-items:center;gap:10px;padding:6px 0;}
+.dot{width:18px;height:18px;border-radius:50%;display:inline-block;flex:0 0 18px;}
+input[type='color']{width:64px;height:40px;padding:0;border:2px solid var(--line);border-radius:10px;background:none;cursor:pointer;}
+@media (max-width:760px){.wheelrow,.two,.cols{grid-template-columns:1fr;}}
+footer{padding:44px 0 56px;color:var(--muted);}
+footer strong{color:var(--ink);}
+@media (max-width:760px){
+  .hero-grid{grid-template-columns:1fr;}
+  .ghead{align-items:flex-start;}
+  .gbadge{flex-basis:56px;height:56px;} .gbadge svg{width:30px;height:30px;}
+}
+@media (prefers-reduced-motion:no-preference){
+  .sw div{transition:background-color .25s;}
+}
+.site{max-width:1080px;margin:0 auto;padding:14px 20px 0;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;font-weight:700;font-size:.95rem;}
+.site a{color:var(--ink);text-decoration:none;padding:7px 14px;border-radius:999px;border:2px solid var(--line);background:var(--surface);}
+.site a:hover{border-color:var(--g2);}
+.site a:focus-visible{outline:3px solid var(--ink);outline-offset:3px;}
+</style>
+</head>
+<body>
+<nav class="site" aria-label="Site"><a href="index.html">&larr; All sections</a><a href="02-typography.html">Next: Typography &rarr;</a></nav>
+<div id="home">
+<header class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <h1>Visual foundations</h1>
+      <p class="lead">34 building blocks behind every good design, from colour to composition. Each one gets a picture and a couple of sentences.</p>
+      <nav class="jump" aria-label="Jump to a group">
+        <a class="j1" href="#colour">Colour</a>
+        <a class="j2" href="#shape">Shape and texture</a>
+        <a class="j3" href="#space">Space and structure</a>
+        <a class="j4" href="#composition">Composition</a>
+      </nav>
+      <p class="note">Every card opens an in-depth lesson. Click a card, or the “Read the full lesson” pill on it, to begin.</p>
+    </div>
+    <div class="lab">
+      <h2>Try it: pick a hue</h2>
+      <p>Slide to change the starting colour. The other swatches show how harmonies are built from it.</p>
+      <div class="sw" id="sw" aria-live="polite"></div>
+      <label for="hue">Hue: <span id="hueval">340</span>° (0 to 360 on the colour wheel)</label>
+      <input id="hue" type="range" min="0" max="360" value="340">
+    </div>
+  </div>
+</header>
+
+<main class="wrap" id="groups"></main>
+
+<footer>
+  <div class="wrap">
+    <p><strong>Up next: <a href="02-typography.html">Typography</a>.</strong> Now that you know how colour, shape and space behave, the next set of ideas covers how type works. Or <a href="index.html">see all sections</a>.</p>
+  </div>
+</footer>
+</div>
+<main class="wrap lesson" id="lesson" hidden></main>
+
+<script>
+var ICONS = {
+theory:'<circle cx="19" cy="19" r="11" fill="#E8456B" fill-opacity=".8" stroke="none"/><circle cx="29" cy="19" r="11" fill="#F5B82E" fill-opacity=".8" stroke="none"/><circle cx="24" cy="29" r="11" fill="#2F7BEA" fill-opacity=".8" stroke="none"/>',
+psychology:'<path d="M24 41C8 29 8 14 17 12c4-1 6 1 7 4 1-3 3-5 7-4 9 2 9 17-7 29z" fill="currentColor" fill-opacity=".3"/>',
+harmony:'<g stroke="none" fill="currentColor"><circle cx="8" cy="34" r="5" fill-opacity=".3"/><circle cx="17" cy="19" r="5.5" fill-opacity=".5"/><circle cx="31" cy="13" r="6" fill-opacity=".75"/><circle cx="40" cy="26" r="6.5"/></g>',
+contrast:'<circle cx="24" cy="24" r="16"/><path d="M24 8a16 16 0 0 1 0 32z" fill="currentColor"/>',
+value:'<g stroke="none" fill="currentColor"><rect x="5" y="9" width="12" height="30" rx="3" fill-opacity=".25"/><rect x="18" y="9" width="12" height="30" rx="3" fill-opacity=".55"/><rect x="31" y="9" width="12" height="30" rx="3"/></g>',
+hue:'<g stroke="none"><rect x="4" y="10" width="8" height="28" rx="2" fill="#E8456B"/><rect x="13" y="10" width="8" height="28" rx="2" fill="#F5A12E"/><rect x="22" y="10" width="8" height="28" rx="2" fill="#2DB67C"/><rect x="31" y="10" width="8" height="28" rx="2" fill="#2F7BEA"/><rect x="40" y="10" width="5" height="28" rx="2" fill="#8E4BDB"/></g>',
+warmcool:'<path d="M24 7a17 17 0 0 0 0 34z" fill="#4C8DF0" stroke="none"/><path d="M24 7a17 17 0 0 1 0 34z" fill="#F2784B" stroke="none"/>',
+models:'<rect x="5" y="10" width="38" height="28" rx="6"/><text x="24" y="29" font-size="13" font-weight="700" font-family="DM Sans,sans-serif" text-anchor="middle" fill="currentColor" stroke="none">RGB</text>',
+access:'<path d="M3 24C10 13 38 13 45 24C38 35 10 35 3 24z"/><circle cx="24" cy="24" r="6" fill="currentColor"/>',
+shape:'<circle cx="10" cy="26" r="6"/><rect x="19" y="20" width="12" height="12" rx="1"/><path d="M39 20l6.5 12h-13z"/>',
+form:'<path d="M24 5l16 9v19l-16 9-16-9V14z"/><path d="M24 24v18M24 24L8 14M24 24l16-10"/>',
+line:'<path d="M5 37C13 7 22 7 26 26s12 14 17-14"/>',
+texture:'<path d="M5 14q5.5-6 11 0t11 0t11 0M5 24q5.5-6 11 0t11 0t11 0M5 34q5.5-6 11 0t11 0t11 0"/>',
+pattern:'<path d="M14 6l8 8-8 8-8-8zM34 6l8 8-8 8-8-8zM14 26l8 8-8 8-8-8zM34 26l8 8-8 8-8-8z" fill="currentColor" fill-opacity=".25"/>',
+space:'<rect x="5" y="5" width="38" height="38" rx="5"/><rect x="25" y="25" width="12" height="12" rx="2" fill="currentColor"/>',
+negative:'<path d="M6 6h36v36H6z M14 24a10 10 0 1 0 20 0a10 10 0 1 0 -20 0z" fill="currentColor" fill-rule="evenodd" stroke="none"/>',
+hierarchy:'<g stroke="none" fill="currentColor"><rect x="7" y="8" width="34" height="10" rx="2"/><rect x="7" y="23" width="23" height="7" rx="2" fill-opacity=".6"/><rect x="7" y="35" width="14" height="5" rx="2" fill-opacity=".35"/></g>',
+balance:'<path d="M8 20h32"/><path d="M24 20l-7 20h14z" fill="currentColor" fill-opacity=".25"/><circle cx="11" cy="12" r="5" fill="currentColor"/><circle cx="37" cy="12" r="5" fill="currentColor"/>',
+symmetry:'<path d="M24 5v38" stroke-dasharray="3 4"/><path d="M21 24L7 11v26z" fill="currentColor" fill-opacity=".3"/><path d="M27 24l14-13v26z" fill="currentColor" fill-opacity=".3"/>',
+scale:'<rect x="5" y="28" width="9" height="9" rx="1.5" fill="currentColor"/><rect x="19" y="8" width="25" height="29" rx="3" fill="currentColor" fill-opacity=".25"/>',
+rhythm:'<g fill="currentColor" stroke="none"><circle cx="6" cy="24" r="3"/><circle cx="15" cy="24" r="5"/><circle cx="26" cy="24" r="7.5"/><circle cx="37" cy="24" r="5"/><circle cx="44" cy="24" r="2.5"/></g>',
+unity:'<g fill="currentColor" fill-opacity=".85" stroke="none"><circle cx="11" cy="24" r="7"/><rect x="20" y="17" width="14" height="14" rx="2"/><path d="M41 17l6 14H35z"/></g>',
+emphasis:'<g fill="currentColor" fill-opacity=".3" stroke="none"><circle cx="9" cy="11" r="3"/><circle cx="24" cy="7" r="3"/><circle cx="40" cy="12" r="3"/><circle cx="8" cy="37" r="3"/><circle cx="40" cy="38" r="3"/><circle cx="24" cy="42" r="3"/></g><circle cx="24" cy="24" r="12" stroke-width="2"/><circle cx="24" cy="24" r="6" fill="currentColor"/>',
+gestalt:'<circle cx="24" cy="24" r="16" stroke-width="5" stroke-dasharray="0.1 8.4"/>',
+composition:'<rect x="5" y="8" width="38" height="32" rx="3"/><path d="M18 8v32M30 8v32M5 19v0M5 19h38M5 29h38" stroke-width="1.5" stroke-opacity=".6"/><circle cx="30" cy="19" r="4" fill="currentColor"/>',
+grid:'<g fill="currentColor" fill-opacity=".25"><rect x="5" y="5" width="10" height="10" rx="2"/><rect x="19" y="5" width="10" height="10" rx="2"/><rect x="33" y="5" width="10" height="10" rx="2"/><rect x="5" y="19" width="10" height="10" rx="2"/><rect x="19" y="19" width="10" height="10" rx="2"/><rect x="33" y="19" width="10" height="10" rx="2"/><rect x="5" y="33" width="10" height="10" rx="2"/><rect x="19" y="33" width="10" height="10" rx="2"/><rect x="33" y="33" width="10" height="10" rx="2"/></g>',
+alignment:'<path d="M8 5v38"/><g fill="currentColor" stroke="none"><rect x="13" y="9" width="28" height="7" rx="2"/><rect x="13" y="21" width="17" height="7" rx="2" fill-opacity=".6"/><rect x="13" y="33" width="23" height="7" rx="2" fill-opacity=".4"/></g>',
+framing:'<rect x="4" y="4" width="40" height="40" rx="4"/><rect x="12" y="12" width="24" height="24" rx="2" fill="currentColor" fill-opacity=".2"/><circle cx="24" cy="22" r="4" fill="currentColor"/>',
+cropping:'<path d="M13 4v31h31M4 13h31v31"/>',
+depth:'<g stroke="none" fill="currentColor"><rect x="5" y="5" width="24" height="24" rx="3" fill-opacity=".2"/><rect x="13" y="13" width="24" height="24" rx="3" fill-opacity=".45"/><rect x="21" y="21" width="22" height="22" rx="3"/></g>',
+perspective:'<path d="M4 17h40M24 17L3 44M24 17L45 44M24 17L14 44M24 17l10 27"/>',
+flow:'<path d="M7 10C41 10 7 37 38 37"/><path d="M31 30l8 7-9 5"/>',
+minimal:'<rect x="5" y="5" width="38" height="38" rx="5"/><circle cx="24" cy="24" r="4" fill="currentColor"/>',
+maximal:'<g stroke="none"><circle cx="17" cy="18" r="11" fill="#E8456B" fill-opacity=".75"/><rect x="21" y="7" width="20" height="20" rx="4" fill="#2F7BEA" fill-opacity=".65"/><path d="M8 41l15-20 15 20z" fill="#F5B82E" fill-opacity=".85"/><circle cx="37" cy="36" r="6" fill="#0E8467"/></g>'
+};
+
+var GROUPS = [
+ {cls:"", id:"colour", title:"Colour", icon:"theory",
+  intro:"Colour does most of the emotional work in a design. These nine ideas explain how it behaves.",
+  items:[
+  ["theory","Colour theory","The rulebook for how colours mix, match and behave beside each other. Start with the colour wheel and the rest builds on it."],
+  ["psychology","Colour psychology","Colours nudge how people feel: red feels urgent, blue feels calm and trustworthy. Meanings shift between cultures, so know your audience."],
+  ["harmony","Colour harmony","Palettes that feel pleasing because of how their hues relate on the wheel. Classic recipes are complementary, analogous and triadic."],
+  ["contrast","Contrast","The difference between two colours or tones. More contrast makes things pop and easier to read; too little makes them blur together."],
+  ["value","Value and saturation","Value is how light or dark a colour is. Saturation is how vivid or grey it is. Adjusting them makes tints, shades and tones without changing the hue."],
+  ["hue","Hue","The pure identity of a colour, like red, green or blue. Think of it as the position you pick around the colour wheel."],
+  ["warmcool","Warm and cool colours","Reds, oranges and yellows feel energetic and close. Blues, greens and purples feel calm and distant. Mixing both creates depth."],
+  ["models","Colour models","Different ways of describing the same colour. RGB and HEX are for screens, CMYK is for ink on paper, and HSL is easiest to tweak by eye."],
+  ["access","Accessibility and colour contrast","Text must contrast enough with its background for everyone to read it. The WCAG guidelines ask for at least 4.5 to 1 for normal-sized text."]
+ ]},
+ {cls:"f", id:"shape", title:"Shape and texture", icon:"shape",
+  intro:"The raw materials you draw with: outlines, volume, lines, surfaces and repeats.",
+  items:[
+  ["shape","Shape","Flat, two-dimensional outlines such as circles, squares and triangles. Circles feel friendly, squares feel stable, triangles feel energetic."],
+  ["form","Form","Shape with depth, the 3D look created by light and shadow. Adding form makes flat things feel solid and real."],
+  ["line","Line","A path between two points. It can guide the eye, divide space or set a mood: thin and straight feels precise, curvy feels playful."],
+  ["texture","Texture","How a surface looks or feels, real or implied: grainy, glossy, rough, soft. A touch of texture stops digital designs feeling sterile."],
+  ["pattern","Pattern","A repeating arrangement of shapes, lines or colours. Great for backgrounds and brand personality, but keep it quiet behind text."]
+ ]},
+ {cls:"s", id:"space", title:"Space and structure", icon:"hierarchy",
+  intro:"How elements share the canvas, and how they get noticed (or not).",
+  items:[
+  ["space","Space","The area in, around and between elements. Treat it as a design material, not leftover room."],
+  ["negative","Positive and negative space","Positive space holds the subject; negative space is the emptiness around it. The arrow hidden between the E and x in the FedEx logo is a famous example."],
+  ["hierarchy","Visual hierarchy","The order in which eyes read things, set by size, colour, contrast and position. If everything shouts, nothing gets heard."],
+  ["balance","Balance","An even spread of visual weight so a layout feels steady, not lopsided. Big, dark or bright items weigh more."],
+  ["symmetry","Symmetry and asymmetry","Symmetry mirrors both sides and feels formal and calm. Asymmetry balances unlike elements and feels more dynamic and modern."],
+  ["scale","Scale and proportion","Scale is how big something is; proportion is how sizes relate to each other. Large jumps in scale create drama and a clear focus."],
+  ["rhythm","Rhythm and repetition","Repeating elements at intervals creates a beat the eye can follow. Break it occasionally so it never gets monotonous."],
+  ["unity","Unity and variety","Unity makes a design feel like one family; variety keeps it interesting. Aim for consistent rules with a few well-placed surprises."],
+  ["emphasis","Emphasis and focal points","The one spot you want people to look at first. Make it different from everything around it in size, colour or position."],
+  ["gestalt","Gestalt principles","Rules for how brains group things: items that are close, similar or aligned are seen as a set. Proximity, similarity, closure and continuity are the big four."]
+ ]},
+ {cls:"c", id:"composition", title:"Composition", icon:"composition",
+  intro:"Putting it all together: arranging, framing and steering the eye.",
+  items:[
+  ["composition","Composition","How every element is arranged inside the frame. A handy starting point is the rule of thirds: place key items where the third-lines cross."],
+  ["grid","Grid systems","An invisible framework of columns and rows that organises content. It keeps layouts consistent and speeds up decisions."],
+  ["alignment","Alignment","Lining elements up along shared edges or centres. It is the fastest way to make a layout look tidy and intentional."],
+  ["framing","Framing","Using borders, shapes or surroundings to focus attention on a subject, like a window around the content."],
+  ["cropping","Cropping","Trimming an image to remove distractions and strengthen focus. Crop tighter for drama, looser for context."],
+  ["depth","Depth and layering","Stacking elements with overlap, shadow, blur and size changes so a flat screen feels three-dimensional."],
+  ["perspective","Perspective","Making things look nearer or farther away, usually with lines that meet at a vanishing point. It adds realism and drama."],
+  ["flow","Visual flow","The path the eye takes through a design, often top-left to bottom-right in left-to-right languages. Leading lines and size steer it."],
+  ["minimal","Minimalism","Using only what is essential: generous space, few colours, simple type. Calm and clear, but every element must earn its place."],
+  ["maximal","Maximalism","More is more: bold colour, layered pattern, big type. It feels exuberant when a clear hierarchy still sits underneath."]
+ ]}
+];
+
+function svg(name){
+  return '<svg viewBox="0 0 48 48" aria-hidden="true" focusable="false">'+ICONS[name]+'</svg>';
+}
+var LESSON_COLOUR_THEORY = `
+<button class="btn" data-back type="button">← Back to Visual foundations</button>
+<div class="lhero">
+  <div class="gbadge"><svg viewBox="0 0 48 48" aria-hidden="true" focusable="false"><circle cx="19" cy="19" r="11" fill="#E8456B" fill-opacity=".85"/><circle cx="29" cy="19" r="11" fill="#F5B82E" fill-opacity=".85"/><circle cx="24" cy="29" r="11" fill="#2F7BEA" fill-opacity=".85"/></svg></div>
+  <div><h1>Colour theory</h1><p>About a 12 minute read, with five things to play with.</p></div>
+</div>
+<nav class="toc" aria-label="In this lesson">
+  <button class="chip" type="button" data-scroll="l-what">What it is</button>
+  <button class="chip" type="button" data-scroll="l-history">History</button>
+  <button class="chip" type="button" data-scroll="l-wheel">The wheel</button>
+  <button class="chip" type="button" data-scroll="l-mix">Mixing</button>
+  <button class="chip" type="button" data-scroll="l-dims">Hue, tints and shades</button>
+  <button class="chip" type="button" data-scroll="l-harmony">Harmonies</button>
+  <button class="chip" type="button" data-scroll="l-context">Context</button>
+  <button class="chip" type="button" data-scroll="l-use">Use it</button>
+  <button class="chip" type="button" data-scroll="l-check">Quick check</button>
+</nav>
+
+<section class="lsec" id="l-what">
+  <h2>What colour theory is</h2>
+  <p>Colour theory is a toolkit of ideas that explains three things: how colours are made, how they relate to each other, and how combinations make people feel.</p>
+  <p>Think of it like music theory. You can play by ear, and plenty of great designers do. But theory gives you names and rules, so you can repeat what works, explain why it works, and fix what doesn’t.</p>
+  <div class="callout"><p><b>By the end you will be able to:</b> read a colour wheel, explain why screens and printers mix colour differently, describe any colour with three simple numbers, build seven kinds of palette, and split colours across a design with the 60-30-10 rule.</p></div>
+  <p>One honest warning: theory is a guide, not a law. Every rule here has famous exceptions. Learn the rule first, then break it on purpose.</p>
+</section>
+
+<section class="lsec" id="l-history">
+  <h2>Where it came from</h2>
+  <p>Colour theory was built up over centuries, one person adding a piece at a time.</p>
+  <ul class="timeline">
+    <li><b class="yr">1666 to 1704</b>Isaac Newton splits sunlight with a prism and finds it contains a spectrum. He later bends the spectrum into a circle, the ancestor of every colour wheel. It was published in his book <i>Opticks</i> in 1704.</li>
+    <li><b class="yr">1810</b>Johann Wolfgang von Goethe publishes <i>Theory of Colours</i>. He cares less about physics and more about how people see colour and how it makes them feel, which is the root of colour psychology.</li>
+    <li><b class="yr">1905</b>Albert Munsell, an American art teacher, creates a system that describes every colour by hue, value (lightness) and chroma (intensity). You will meet these three ideas again below.</li>
+    <li><b class="yr">Early 1900s</b>Johannes Itten teaches at the Bauhaus school and popularises the 12-colour wheel and seven kinds of colour contrast. Most design courses still teach from his work.</li>
+    <li><b class="yr">1963</b>Josef Albers publishes <i>Interaction of Color</i>, showing that a colour never exists alone. It always looks different depending on its neighbours. You can try this in the Context section.</li>
+  </ul>
+</section>
+
+<section class="lsec" id="l-wheel">
+  <h2>The colour wheel</h2>
+  <p>The wheel arranges hues in a circle so you can see how they relate. It has three layers:</p>
+  <ul>
+    <li><b>Primary colours</b> are the starting set. They cannot be made by mixing others in that model.</li>
+    <li><b>Secondary colours</b> are made by mixing two primaries in equal amounts.</li>
+    <li><b>Tertiary colours</b> sit between a primary and a secondary, like red-orange or blue-green.</li>
+  </ul>
+  <p>There are two common wheels, and they have different primaries. The traditional <b>painter’s wheel</b> (called RYB) uses red, yellow and blue. The <b>screen wheel</b> uses red, green and blue light (RGB). Both are useful, so I have put both below.</p>
+  <div class="panel">
+    <div class="ctrls" role="group" aria-label="Choose a wheel">
+      <span class="lbl">Which wheel?</span>
+      <button class="chip" type="button" data-w="screen" aria-pressed="true">Screen wheel (RGB)</button>
+      <button class="chip" type="button" data-w="paint" aria-pressed="false">Painter’s wheel (RYB)</button>
+    </div>
+    <div class="ctrls" role="group" aria-label="Highlight a layer">
+      <span class="lbl">Highlight a layer</span>
+      <button class="chip" type="button" data-f="all" aria-pressed="true">All 12</button>
+      <button class="chip" type="button" data-f="p" aria-pressed="false">Primary</button>
+      <button class="chip" type="button" data-f="s" aria-pressed="false">Secondary</button>
+      <button class="chip" type="button" data-f="t" aria-pressed="false">Tertiary</button>
+    </div>
+    <div class="wheelrow">
+      <svg id="wheel" viewBox="0 0 320 320" role="group" aria-label="Colour wheel. Click or press Enter on a segment to learn about it."></svg>
+      <div class="readout" id="wreadout" aria-live="polite"></div>
+    </div>
+  </div>
+  <div class="callout"><p><b>Worth knowing:</b> in the painter’s wheel the opposite of red is green. In the screen wheel the opposite of red is cyan. Both are “complements”, they just come from different models.</p></div>
+</section>
+
+<section class="lsec" id="l-mix">
+  <h2>How colours mix: light versus ink</h2>
+  <p>There are two ways to mix colour, and they work in opposite directions.</p>
+  <div class="two">
+    <div>
+      <div class="blend" style="background:#000" role="img" aria-label="Red, green and blue light overlapping to make yellow, cyan, magenta and white">
+        <i style="left:calc(50% - 85px);top:16px;background:#f00;mix-blend-mode:screen"></i>
+        <i style="left:calc(50% - 25px);top:16px;background:#0f0;mix-blend-mode:screen"></i>
+        <i style="left:calc(50% - 55px);top:66px;background:#00f;mix-blend-mode:screen"></i>
+      </div>
+      <h3>Additive (light)</h3>
+      <p>Screens start dark and <b>add</b> light. Red plus green plus blue makes white. Red and green make yellow, green and blue make cyan, red and blue make magenta. This is RGB, used for anything viewed on a screen.</p>
+    </div>
+    <div>
+      <div class="blend" style="background:#fff" role="img" aria-label="Cyan, magenta and yellow ink overlapping to make blue, red, green and a dark mix">
+        <i style="left:calc(50% - 85px);top:16px;background:#00b7eb;mix-blend-mode:multiply"></i>
+        <i style="left:calc(50% - 25px);top:16px;background:#ff00a8;mix-blend-mode:multiply"></i>
+        <i style="left:calc(50% - 55px);top:66px;background:#ffeb00;mix-blend-mode:multiply"></i>
+      </div>
+      <h3>Subtractive (ink and paint)</h3>
+      <p>Paper starts white and each layer of ink or paint <b>absorbs</b> (subtracts) some light. Cyan, magenta and yellow together make a dark muddy colour, so printers add black ink as well. This is CMYK, used for print.</p>
+    </div>
+  </div>
+  <p><b>Why designers care:</b> screens can show some very bright colours, like neon greens and electric blues, that printers simply cannot reproduce. If a design is going to both screen and paper, check how the colours convert early, not on print day.</p>
+  <p>The painter’s red-yellow-blue wheel is a teaching model rather than literal physics. Real paint primaries are closer to cyan, magenta and yellow. It is still a handy way to think about colour relationships, which is why it is taught everywhere.</p>
+</section>
+
+<section class="lsec" id="l-dims">
+  <h2>Describing a colour: hue, saturation and lightness</h2>
+  <p>Every colour can be described with three dials. Once you know them, “make it a bit brighter” becomes a precise instruction.</p>
+  <ul>
+    <li><b>Hue</b> is the colour family: red, blue, green. It is measured as an angle around the wheel, from 0 to 360 degrees.</li>
+    <li><b>Saturation</b> is how intense the colour is. At 100% it is vivid; at 0% it is pure grey.</li>
+    <li><b>Lightness</b> (also called value) is how light or dark it is. At 100% it is white and at 0% it is black.</li>
+  </ul>
+  <p>This three-dial system is called <b>HSL</b>. A close cousin, HSB, swaps lightness for brightness.</p>
+  <h3>Tints, tones and shades</h3>
+  <p>Designers get a whole family of colours from a single hue by mixing it with a neutral:</p>
+  <ul>
+    <li>A <b>tint</b> is the colour plus white. Good for backgrounds.</li>
+    <li>A <b>shade</b> is the colour plus black. Good for text and dark states.</li>
+    <li>A <b>tone</b> is the colour plus grey. It feels softer and more sophisticated.</li>
+  </ul>
+  <div class="panel">
+    <label for="th">Base hue: <span id="thv">215</span>°. Drag to watch its tints, tones and shades update</label>
+    <input id="th" type="range" min="0" max="360" value="215">
+    <p class="slab">Tints (adding white)</p><div class="strip" id="s-tint"></div>
+    <p class="slab">Tones (adding grey)</p><div class="strip" id="s-tone"></div>
+    <p class="slab">Shades (adding black)</p><div class="strip" id="s-shade"></div>
+    <p style="margin:0;color:var(--muted);font-size:.92rem" id="s-base"></p>
+  </div>
+</section>
+
+<section class="lsec" id="l-harmony">
+  <h2>Colour harmonies</h2>
+  <p>A harmony is a recipe: pick colours at set distances around the wheel and they tend to look good together. Choose a recipe, then drag the hue slider to move the whole pattern around the wheel. The wheel here is the screen wheel.</p>
+  <div class="panel">
+    <div class="ctrls" role="group" aria-label="Choose a harmony" id="hchips"></div>
+    <div class="wheelrow">
+      <svg id="hwheel" viewBox="0 0 320 320" role="img" aria-label="Colour wheel with the chosen harmony marked by dots"></svg>
+      <div class="readout" id="hreadout" aria-live="polite"></div>
+    </div>
+    <label for="hh" style="margin-top:16px">Base hue: <span id="hhv">340</span>°</label>
+    <input id="hh" type="range" min="0" max="359" value="340">
+    <div class="pal" id="hpal"></div>
+  </div>
+</section>
+
+<section class="lsec" id="l-context">
+  <h2>Colour is relative</h2>
+  <p>Josef Albers’ big lesson was that you can never judge a colour on its own. Look at the two squares below.</p>
+  <div class="albers" role="img" aria-label="The same brown square on a blue background and on a yellow background, looking different">
+    <div style="background:#2A4FA8"><span></span></div>
+    <div style="background:#F2D16B"><span></span></div>
+  </div>
+  <p>The two inner squares are <b>exactly the same colour</b> (HEX #B87A4B). Against blue the square looks warmer and lighter; against yellow it looks darker and duller. This is called simultaneous contrast.</p>
+  <p><b>What to do about it:</b> always judge a colour in place, next to the real colours and sizes it will be used with, and never from a swatch alone.</p>
+</section>
+
+<section class="lsec" id="l-use">
+  <h2>Putting it to work</h2>
+  <h3>The 60-30-10 rule</h3>
+  <p>A simple way to share colour across a design: about 60% a dominant neutral or background, 30% a secondary colour, and 10% a bold accent for the things that matter most, like buttons.</p>
+  <div class="stack" role="img" aria-label="A bar split 60 percent light neutral, 30 percent deep blue, 10 percent pink">
+    <div style="flex:60;background:#EEF1F8;color:#1B1F3B">60% neutral</div>
+    <div style="flex:30;background:#2B3A67;color:#fff">30% secondary</div>
+    <div style="flex:10;background:#E8456B;color:#fff">10%</div>
+  </div>
+  <h3>Build a palette in five steps</h3>
+  <ol class="steps">
+    <li><b>Pick one base hue</b> that matches the mood you want (calm, urgent, premium, playful).</li>
+    <li><b>Choose a harmony</b> from the explorer above to get one or two supporting hues.</li>
+    <li><b>Make tints and shades</b> of each hue: light tints for backgrounds, dark shades for text.</li>
+    <li><b>Add neutrals</b>: an off-white, a few greys and a near-black. Nudging them slightly toward your base hue makes everything feel connected.</li>
+    <li><b>Assign roles</b> with 60-30-10, then check that all text has enough contrast with its background (at least 4.5 to 1 for normal text).</li>
+  </ol>
+  <h3>Try it yourself in Figma</h3>
+  <p>Figma’s labels change slightly between updates, so if something looks a little different, look for the closest match.</p>
+  <ol class="steps">
+    <li>Open Figma and open any Design file, or create a new one with the <b>+ New design file</b> option on the Figma home screen.</li>
+    <li>Press <b>R</b> on your keyboard, then click and drag anywhere on the canvas to draw a rectangle.</li>
+    <li>With the rectangle still selected, look at the <b>right-hand sidebar</b> and make sure the <b>Design</b> tab (the first tab at the top of that sidebar) is active.</li>
+    <li>Scroll down that sidebar to the <b>Fill</b> section. Click the <b>small coloured square</b> at the left of the fill row. A colour picker opens.</li>
+    <li>In the picker, find the small dropdown near the bottom that shows <b>Hex</b>. Click it and choose <b>HSL</b> so you can see the Hue, Saturation and Lightness numbers.</li>
+    <li>Type a hue (for example 215) into the first box. Then close the picker, press <b>Ctrl+D</b> (<b>Cmd+D</b> on a Mac) to duplicate the rectangle, and open its fill picker again.</li>
+    <li>Add <b>180</b> to the hue (215 becomes 35). You have just made a complementary pair. Try +120 and +240 for a triad.</li>
+  </ol>
+  <h3>Common mistakes</h3>
+  <ul class="tk">
+    <li><b>Full saturation everywhere.</b> It tires the eyes. Use vivid colour for accents and softer tones elsewhere.</li>
+    <li><b>Too many hues.</b> Beginners tend to use five or six. Start with one or two and add only when needed.</li>
+    <li><b>Ignoring lightness.</b> Two colours with different hues but the same lightness can be hard to tell apart. Convert your design to greyscale to test this.</li>
+    <li><b>Relying on colour alone.</b> About 1 in 12 men has some form of colour-vision deficiency, so add labels or icons to colour-coded information.</li>
+    <li><b>Pure black on pure white.</b> It can look harsh. A very dark blue or brown on a soft off-white is easier on the eyes.</li>
+  </ul>
+</section>
+
+<section class="lsec" id="l-check">
+  <h2>Quick check</h2>
+  <p>Click each question to reveal the answer.</p>
+  <details><summary>1. In the screen wheel, what do you get by mixing red and green light?</summary><p>Yellow. Light mixing is additive, so red plus green plus blue gives white.</p></details>
+  <details><summary>2. What is the difference between a tint, a tone and a shade?</summary><p>A tint adds white, a tone adds grey and a shade adds black to the original colour.</p></details>
+  <details><summary>3. A designer wants a safe, calm palette with gentle variety. Which harmony fits best?</summary><p>Analogous (neighbouring hues). It feels cohesive, so add interest with differences in lightness.</p></details>
+  <details><summary>4. Why do designers check their work in greyscale?</summary><p>To see whether elements differ enough in lightness. If two colours turn the same grey, they will be hard to tell apart for many viewers.</p></details>
+</section>
+
+<section class="lsec" id="l-recap">
+  <h2>The big ideas</h2>
+  <ul class="tk">
+    <li>The wheel shows how hues relate, and there are two versions: painter’s (RYB) and screen (RGB).</li>
+    <li>Screens mix light by adding; print mixes ink by subtracting.</li>
+    <li>Every colour has a hue, a saturation and a lightness. Tints, tones and shades are variations of one hue.</li>
+    <li>Harmonies are recipes that pick hues at set angles around the wheel.</li>
+    <li>Colour is always judged in context. Use 60-30-10 to share it out, and check contrast.</li>
+  </ul>
+  <p style="margin-top:24px"><button class="btn" data-back type="button">← Back to Visual foundations</button></p>
+</section>
+`;
+
+function shell(title,sub,icon,secs){
+  var svgI='<svg viewBox="0 0 48 48" aria-hidden="true" focusable="false" style="fill:none;stroke:currentColor;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round">'+ICONS[icon]+'</svg>';
+  var back='<button class="btn" data-back type="button">← Back to Visual foundations</button>';
+  return back+'<div class="lhero"><div class="gbadge">'+svgI+'</div><div><h1>'+title+'</h1><p>'+sub+'</p></div></div><nav class="toc" aria-label="In this lesson">'+secs.map(function(s){return '<button class="chip" type="button" data-scroll="'+s[0]+'">'+s[1]+'</button>';}).join('')+'</nav>'+secs.map(function(s){return '<section class="lsec" id="'+s[0]+'">'+s[2]+'</section>';}).join('')+'<p style="margin-top:36px">'+back+'</p>';
+}
+function quick(arr){return `<h2>Quick check</h2><p>Click each question to reveal the answer.</p>`+arr.map(function(q,i){return `<details><summary>${i+1}. ${q[0]}</summary><p>${q[1]}</p></details>`;}).join('');}
+function bigideas(arr){return `<h2>The big ideas</h2><ul class='tk'>`+arr.map(function(x){return '<li>'+x+'</li>';}).join('')+'</ul>';}
+function steps(arr){return `<ol class='steps'>`+arr.map(function(x){return '<li>'+x+'</li>';}).join('')+'</ol>';}
+
+var L_PSY=shell('Colour psychology','How colour shapes feelings and first impressions, and where the science runs out.','psychology',[
+['p-what','What it is',`<h2>What colour psychology is</h2><p>Colour psychology studies how colours shape the way people feel, think and act. Designers use it to match colour to message, such as calm for a meditation app or urgent for a flash sale.</p><p>Here is the honest version. Colours carry <b>associations</b> that can influence first impressions, but the effects are modest. They depend on context (red on a stop sign is not red on a birthday card), on personal experience, and on culture. There is no single “meaning” of blue.</p><div class='callout'><p><b>Treat it as a starting point, not a formula.</b> Use the associations to form a hypothesis, then check it against your audience and market.</p></div>`],
+['p-explore','Colour by colour',`<h2>Colour by colour</h2><p>Pick a colour to see what it often signals, where designers use it, and what to watch out for.</p><div class='panel'><div class='swbtns' id='pbtns' role='group' aria-label='Choose a colour'></div><div id='pout' aria-live='polite'></div></div>`],
+['p-use','Using it well',`<h2>Using it well</h2><h3>Hue is only part of the mood</h3><p>Lightness and saturation change the feeling as much as the hue does. Here is one blue in four moods.</p><div class='pal'><div style='background:#CFE0FA;color:#14213D'>Pastel<span>Gentle, soft</span></div><div style='background:#2F6FD8;color:#fff'>Mid<span>Friendly, open</span></div><div style='background:#14284F;color:#fff'>Deep<span>Serious, authoritative</span></div><div style='background:#00E5FF;color:#003A44'>Neon<span>Techy, energetic</span></div></div><h3>Choose colour with intent</h3>`+steps(['<b>Define the audience</b> and the feeling you want in two or three words.','<b>Look at the category.</b> Banks lean blue and wellness leans green. Decide whether to fit in or deliberately stand out.','<b>Pick a hue</b>, then tune lightness and saturation to match the feeling.','<b>Keep meanings consistent.</b> If red means “error” in one place, it should not mean “sale” in another.','<b>Check cultural meaning</b> in every market you serve, and test with real people.'])+`<h3>Common mistakes</h3><ul class='tk'><li><b>Treating meanings as universal.</b> A colour that reassures in one country may signal mourning in another.</li><li><b>Stereotyping.</b> “Pink for girls, blue for boys” is a habit, not a rule, and it can exclude people.</li><li><b>Forgetting accessibility.</b> An on-mood colour still fails if people cannot read it.</li><li><b>Overstating the science.</b> Be wary of claims like “red makes people buy more”. Test your own design.</li></ul>`],
+['p-check','Quick check',quick([['Can you say “blue always builds trust”?','No. Blue is commonly linked with trust in many Western markets, but the effect is modest and depends on context, shade and culture. Treat it as a hypothesis to test.'],['You want a blue for a children’s app that feels playful, not corporate. What do you adjust?','Lightness and saturation. A brighter, lighter or more saturated blue feels friendlier than a deep navy.'],['Why check cultural meaning before launching in a new country?','The same colour can mean different things. White suggests weddings in many Western countries but mourning in several East Asian cultures.']])],
+['p-recap','Big ideas',bigideas(['Colour associations are real but modest, and context changes them.','Culture can flip a colour’s meaning.','Lightness and saturation shape mood as much as hue.','Keep semantic colours (error, success) consistent.','Form a hypothesis from the associations, then test it.'])]
+]);
+
+var L_HAR=shell('Colour harmony','Why some palettes feel like they belong together, and how to make yours work.','harmony',[
+['h-what','What it is',`<h2>What harmony means</h2><p>A harmonious palette feels like the colours were chosen as a set. Harmony sits between two extremes: too little variety is boring, too much is chaotic.</p><p>The recipes from the Colour theory lesson (complementary, analogous, triadic and so on) are shortcuts to harmony. But a recipe alone does not guarantee it. <b>How much</b> of each colour you use, and <b>how bright or muted</b> each one is, matter just as much as which hues you pick.</p>`],
+['h-mock','See it in use',`<h2>See it in a real layout</h2><p>Choose a recipe, then drag the hue slider. The small page below uses the base hue for the bar and background, and a partner hue for the button and tags.</p><div class='panel'><div class='ctrls' id='hmchips' role='group' aria-label='Choose a harmony'></div><div id='hmock'></div><label for='hhs' style='margin-top:16px'>Base hue: <span id='hhsv'>215</span>°</label><input id='hhs' type='range' min='0' max='359' value='215'><div class='pal' id='hmpal'></div></div>`],
+['h-balance','Make it work',`<h2>How to make a harmony work</h2>`+steps(['<b>Let one colour lead.</b> A good palette has a leader, a supporting colour and a small accent. Equal amounts of everything feels restless.','<b>Vary saturation.</b> Pair one vivid colour with softer, muted partners.','<b>Vary lightness.</b> Use light backgrounds, mid-tones and dark text. If everything has the same lightness the design looks flat.','<b>Use neutrals as glue.</b> Off-whites, greys and near-blacks calm a palette and make the colours look intentional.','<b>Mind temperature.</b> A warm accent on a cool field draws the eye, as in the demo above.'])+`<h3>Breaking harmony on purpose</h3><p>Clashing colours can be the point, as in punk posters or bold streetwear. To make a clash look <b>intentional</b>, commit to it: use large shapes, repeat it consistently, and keep everything else simple.</p><h3>Common mistakes</h3><ul class='tk'><li><b>Using every colour at full strength.</b> It reads as noise.</li><li><b>Picking hues by recipe but ignoring proportion.</b> Try 60-30-10 from the Colour theory lesson.</li><li><b>Skipping the squint test.</b> If the palette falls apart when you squint, lightness is too similar.</li></ul>`],
+['h-check','Quick check',quick([['Why is a recipe alone not enough for harmony?','Proportion and brightness matter too. The same three hues can look balanced or garish depending on how much of each you use and how saturated they are.'],['Which element in the demo uses the partner hue?','The button and tags. Keeping the partner colour to small, important details is the accent in action.'],['When is it fine to clash colours?','When it is a deliberate style choice, applied boldly and consistently.']])],
+['h-recap','Big ideas',bigideas(['Harmony is how colours feel as a set.','Recipes are a start; proportion and saturation finish the job.','One leader, one supporter, one accent.','Vary lightness and add neutrals.','Clash only on purpose.'])]
+]);
+
+var SEVEN=[['Contrast of hue','Pure, different hues side by side. Bold and playful.',[['#E8272B',1],['#F5C400',1],['#1F4FD8',1]]],['Light and dark','The biggest tool for legibility and hierarchy.',[['#F4F4F6',1],['#8A8A92',1],['#16161C',1]]],['Cold and warm','Cool and warm hues push against each other.',[['#2F6FD8',1],['#E8803A',1]]],['Complementary','Opposites on the wheel make each other look more intense.',[['#6A2FC8',1],['#E6D32E',1]]],['Simultaneous','A colour appears to change against its neighbours.',[['#2A4FA8',1],['#B87A4B',1],['#F2D16B',1]]],['Saturation','Vivid next to muted draws attention to the vivid one.',[['#E8272B',1],['#B8484C',1],['#8A6A6B',1]]],['Extension','The amount of each colour matters. A little bright goes a long way.',[['#2B3A67',8],['#E8456B',1]]]];
+var L_CON=shell('Contrast','The difference that creates hierarchy, legibility and drama.','contrast',[
+['c-what','What it is',`<h2>What contrast is</h2><p>Contrast is a noticeable difference between two things. In colour it can mean differences in hue, lightness, saturation or temperature. It is how a design says “look here first”.</p><p>Contrast does two jobs: it makes content <b>readable</b>, and it sets up <b>hierarchy</b>, the order in which things are noticed.</p>`],
+['c-seven','Seven kinds',`<h2>Seven kinds of colour contrast</h2><p>Johannes Itten, the Bauhaus teacher, described seven ways colours can contrast. Most designs combine two or three of them.</p><div class='mini'>`+SEVEN.map(function(s){return `<div><div class='pair' role='img' aria-label='${s[0]} example'>`+s[2].map(function(c){return `<i style='background:${c[0]};flex:${c[1]}'></i>`;}).join('')+`</div><h3>${s[0]}</h3><p>${s[1]}</p></div>`;}).join('')+`</div>`],
+['c-squint','Squint test',`<h2>The squint test</h2><p>Designers blur their work to check that the hierarchy survives. Drag the slider to blur both layouts. In the strong one you can still tell what matters most. In the weak one everything melts together.</p><div class='panel'><label for='csl'>Blur: <span id='cslv'>0</span>% (how a quick glance sees it)</label><input id='csl' type='range' min='0' max='8' step='0.5' value='0'><div class='cols' id='csq' style='margin-top:16px'><div><p class='slab'>Strong contrast</p><div class='mock blurme' style='background:#FFFFFF'><div class='bd'><h4 style='color:#14213D'>Weekend sale</h4><p style='color:#4A5070'>Up to 40% off selected items</p><span class='mockbtn' style='background:#E8456B;color:#fff'>Shop now</span></div></div></div><div><p class='slab'>Weak contrast</p><div class='mock blurme' style='background:#EEF0F4'><div class='bd'><h4 style='color:#A9AFC2'>Weekend sale</h4><p style='color:#BCC1D0'>Up to 40% off selected items</p><span class='mockbtn' style='background:#D5D9E6;color:#EEF0F4'>Shop now</span></div></div></div></div></div>`],
+['c-use','Use it well',`<h2>Using contrast well</h2><ul class='tk'><li><b>Choose one loudest thing</b> per screen, such as the main button. If everything has high contrast, nothing stands out.</li><li><b>Push secondary items back</b> by lowering their contrast, but never so far that people cannot read them.</li><li><b>Check text first.</b> Text needs enough lightness difference from its background. The Accessibility lesson has a checker.</li><li><b>Avoid pure black on pure white</b> for long reading. A very dark blue on soft off-white is gentler.</li></ul>`],
+['c-check','Quick check',quick([['Which kind of contrast is the strongest tool for legibility?','Light and dark contrast, the difference in lightness between text and background.'],['What does the squint test reveal?','Whether the hierarchy survives when detail is blurred. If you cannot tell what matters most, contrast is too similar.'],['Why not make every element high contrast?','Contrast is relative. If everything shouts, nothing stands out.']])],
+['c-recap','Big ideas',bigideas(['Contrast makes things readable and sets hierarchy.','Itten described seven kinds: hue, light-dark, cold-warm, complementary, simultaneous, saturation and extension.','Blur your work to test hierarchy.','Pick one loudest element per screen.'])]
+]);
+
+var L_VAL=shell('Value and saturation','The two dials that make tints, shades and tones.','value',[
+['v-what','What they are',`<h2>Two dials</h2><p><b>Value</b> (also called lightness) is how light or dark a colour is, from black to white. <b>Saturation</b> is how intense it is, from pure grey to full vivid colour.</p><p>Turn the value dial up and you get a <b>tint</b>. Turn it down and you get a <b>shade</b>. Turn the saturation dial down and you get a <b>tone</b>. The hue stays the same throughout.</p>`],
+['v-pick','Try it',`<h2>Explore the two dials</h2><p>Drag the dot in the square, or use the sliders. Across is saturation, up and down is lightness.</p><div class='panel'><div class='wheelrow'><canvas id='vcv' role='img' aria-label='Square showing saturation across and lightness up and down for the chosen hue'></canvas><div class='readout' id='vout' aria-live='polite'></div></div><div class='sl'><label for='vh'>Hue: <span id='vhv'>215</span>°</label><input id='vh' type='range' min='0' max='359' value='215'><label for='vs'>Saturation: <span id='vsv'>70</span>%</label><input id='vs' type='range' min='0' max='100' value='70'><label for='vl'>Lightness: <span id='vlv'>50</span>%</label><input id='vl' type='range' min='0' max='100' value='50'></div><p class='slab'>A ten-step scale from your hue and saturation (light to dark)</p><div class='strip lab' id='vscale'></div></div>`],
+['v-grey','Greyscale',`<h2>Value does the heavy lifting</h2><p>Two colours with the same value look alike in greyscale, even if their hues are very different. This is why designers say <b>a design that works in greyscale works in colour</b>.</p><p>Your readout above shows the grey equivalent of your colour. To test a whole design, turn on greyscale:</p>`+steps(['On an iPhone, open <b>Settings</b>, then tap <b>Accessibility</b>, then <b>Display &amp; Text Size</b>, then <b>Colour Filters</b>.','Switch on <b>Colour Filters</b> and choose <b>Greyscale</b>. Open your design and look for elements that blur together.','In Photoshop, open the <b>Image</b> menu at the top, choose <b>Adjustments</b>, then <b>Desaturate</b> (shortcut Shift+Ctrl+U, or Shift+Cmd+U on a Mac).'])],
+['v-use','Use it well',`<h2>Using value and saturation</h2><ul class='tk'><li><b>Build scales.</b> UI teams make 9 or 10 steps of each hue (like the strip above) so they always have a lighter or darker partner ready.</li><li><b>Use saturation as a volume knob.</b> Muted colours recede; vivid ones demand attention.</li><li><b>Keep dark text on light tints,</b> and light text on dark shades.</li><li><b>Beware very light, very vivid colours.</b> They glow and can strain the eyes.</li></ul>`],
+['v-check','Quick check',quick([['Which dial turns a colour into a tint?','Raising its value (lightness), which is like adding white.'],['What is a tone?','The colour with its saturation reduced, like adding grey. It looks softer.'],['Why test designs in greyscale?','It shows whether elements differ enough in value to be told apart.']])],
+['v-recap','Big ideas',bigideas(['Value is light to dark; saturation is grey to vivid.','Tints, shades and tones are all the same hue.','A ten-step scale gives you a ready-made family.','If it works in greyscale, it works in colour.'])]
+]);
+
+var L_HUE=shell('Hue','The family a colour belongs to, measured as an angle around the wheel.','hue',[
+['u-what','What it is',`<h2>What hue is</h2><p>Hue is the pure identity of a colour: red, orange, yellow, green, blue, violet and everything between. It is the one dial that has nothing to do with lightness or intensity.</p><p>On a digital colour wheel hue is an <b>angle</b> from 0 to 360 degrees. 0 is red, 120 is green, 240 is blue, and 360 brings you back to red.</p>`],
+['u-explore','Explore',`<h2>Slide through the hues</h2><div class='panel'><label for='uh'>Hue angle: <span id='uhv'>20</span>°</label><input id='uh' type='range' min='0' max='359' value='20'><div id='uout' aria-live='polite' style='margin-top:14px'></div></div>`],
+['u-bright','Perceived brightness',`<h2>Same lightness, different brightness</h2><p>Every swatch in the top row has exactly the same lightness value. Yet the greyscale row beneath shows they do not <b>feel</b> equally bright. Yellow looks light and blue looks dark.</p><div class='strip' id='ucol' aria-hidden='true'></div><div class='strip' id='ugrey' aria-hidden='true' style='filter:grayscale(1)'></div><p>The lesson: do not trust the lightness number alone. Always look at the colours, and test in greyscale.</p>`],
+['u-shift','Hue shifting',`<h2>Hue shifting</h2><p>In nature, shadows lean cool and highlights lean warm. Artists copy this by <b>shifting the hue</b> as they go lighter or darker, rather than only changing lightness. Compare the two strips, then drag the slider.</p><div class='panel'><label for='ush'>Base hue: <span id='ushv'>20</span>°</label><input id='ush' type='range' min='0' max='359' value='20'><p class='slab'>Lightness only</p><div class='strip' id='unaive'></div><p class='slab'>With hue shift (shadows toward violet, highlights toward yellow)</p><div class='strip' id='ushift'></div></div>`],
+['u-check','Quick check',quick([['What does a hue of 240 degrees look like on the screen wheel?','Blue.'],['Why do yellow and blue look different in brightness at the same lightness value?','Our eyes are more sensitive to some hues than others. Yellow looks lighter than blue even when the numbers match.'],['What is hue shifting?','Changing the hue slightly as a colour gets lighter or darker, usually warmer in highlights and cooler in shadows, for richer shading.']])],
+['u-recap','Big ideas',bigideas(['Hue is the colour family, an angle from 0 to 360.','Hues differ in perceived brightness even at equal lightness.','Hue shifting makes shading richer than lightness changes alone.'])]
+]);
+
+var L_WC=shell('Warm and cool colours','How temperature changes mood, depth and realism.','warmcool',[
+['w-what','What it is',`<h2>What colour temperature is</h2><p>Colours feel warm or cool. <b>Warm</b> colours (reds, oranges, yellows) feel energetic and sit forward. <b>Cool</b> colours (blues, greens, violets) feel calm and sit back.</p><p>Temperature is <b>relative</b>. A green that looks cool next to orange can look warm next to blue. Some colours, like greens and violets, can lean either way.</p>`],
+['w-sphere','Light and shadow',`<h2>Warm and cool in light</h2><p>Artists create depth by setting a warm light against cool shadows, or the reverse. Pick a mode to see the same sphere change character.</p><div class='panel'><div class='ctrls' id='wmodes' role='group' aria-label='Choose lighting'></div><div id='wsph' style='max-width:420px'></div></div>`],
+['w-kelvin','Kelvin',`<h2>Colour temperature of light</h2><p>Photographers describe light in <b>Kelvin</b> (K). It sounds backwards: <b>lower numbers are warmer</b> (candle light, around 1900 K) and higher numbers are cooler (clear blue sky). Drag the slider to see the colour of the light.</p><div class='panel'><label for='wk'>Temperature: <span id='wkv'>5500</span> K</label><input id='wk' type='range' min='1500' max='10000' step='100' value='5500'><div class='rswatch' id='wksw' style='margin-top:14px;height:110px'></div><p id='wkt' style='margin:0;color:var(--muted)' aria-live='polite'></p></div><p>This is the idea behind <b>white balance</b>. Cameras and photo editors shift an image warmer or cooler so whites look white under the light the photo was taken in.</p>`],
+['w-use','Use it well',`<h2>Using temperature in design</h2><ul class='tk'><li><b>Warm accent on a cool field</b> draws the eye (and the reverse). One small warm button on a cool page stands out strongly.</li><li><b>Warm backgrounds</b> feel friendly and human; <b>cool backgrounds</b> feel crisp, technical and calm.</li><li><b>Create depth</b> by putting cooler tones in the background and warmer tones in the foreground.</li><li><b>Stay consistent.</b> Mixing random temperatures makes images feel mismatched.</li></ul>`],
+['w-check','Quick check',quick([['Which feels like it advances toward the viewer, warm or cool colours?','Warm colours tend to advance and cool colours tend to recede, though the effect is subtle.'],['Is a 2700 K light bulb warmer or cooler than daylight at 6500 K?','Warmer. In Kelvin, lower numbers are warmer.'],['Why is temperature called relative?','Because a colour looks warmer or cooler depending on the colours around it.']])],
+['w-recap','Big ideas',bigideas(['Warm colours advance; cool colours recede.','Temperature is relative to neighbours.','Warm light with cool shadow (or the reverse) creates depth.','In Kelvin, lower is warmer.'])]
+]);
+
+var L_MOD=shell('Colour models','Different ways to describe the same colour with numbers.','models',[
+['m-what','What they are',`<h2>What a colour model is</h2><p>A colour model is a system for describing a colour as numbers. Different models suit different jobs.</p><ul class='tk'><li><b>RGB</b> uses amounts of red, green and blue light, each from 0 to 255. It is the model of screens.</li><li><b>HEX</b> is RGB written in a short code, such as #E8456B. The six characters are three pairs: red, green, blue, each from 00 to FF (that is 0 to 255 in base 16).</li><li><b>HSL</b> uses hue, saturation and lightness. It matches how people think, so it is easiest to tweak by eye.</li><li><b>CMYK</b> uses cyan, magenta, yellow and black ink. It is the model of print.</li></ul>`],
+['m-convert','Converter',`<h2>See one colour in four models</h2><p>Move the three sliders, or tap a preset.</p><div class='panel'><div class='ctrls'><span class='lbl'>Presets</span><button class='chip' type='button' data-p='232,69,107'>Hot pink</button><button class='chip' type='button' data-p='0,102,255'>Electric blue</button><button class='chip' type='button' data-p='34,139,34'>Forest green</button><button class='chip' type='button' data-p='20,30,70'>Midnight</button></div><div class='wheelrow'><div class='rswatch' id='msw' style='height:150px'></div><div class='readout' id='mout' aria-live='polite'></div></div><div class='sl'><label for='mr'>Red: <span id='mrv'></span></label><input id='mr' type='range' min='0' max='255' value='232'><label for='mg'>Green: <span id='mgv'></span></label><input id='mg' type='range' min='0' max='255' value='69'><label for='mb'>Blue: <span id='mbv'></span></label><input id='mb' type='range' min='0' max='255' value='107'></div><p id='mwarn' style='margin:12px 0 0;color:var(--muted)' aria-live='polite'></p></div><p>The CMYK numbers here use a simple formula. Real printers use colour profiles, so printed results will differ.</p>`],
+['m-which','Which to use',`<h2>Which model for which job</h2><table class='t'><tr><th>Job</th><th>Use</th></tr><tr><td>Websites, apps, social posts</td><td>RGB or HEX (in the sRGB profile)</td></tr><tr><td>Tweaking a colour by eye</td><td>HSL or HSB</td></tr><tr><td>Printed flyers, books, packaging</td><td>CMYK</td></tr><tr><td>Exact brand colours on print</td><td>Spot colours such as Pantone</td></tr></table><p>Two more names you will meet. <b>Colour profiles</b> (like sRGB or Display P3) say exactly what a set of RGB numbers means on a screen. <b>LAB and LCH</b> are models built to match human vision, used for accurate colour work.</p>`],
+['m-tools','In your tools',`<h2>Switching models in your tools</h2><h3>Figma</h3>`+steps(['Select a shape, then look at the <b>Fill</b> section in the right-hand sidebar (under the <b>Design</b> tab).','Click the <b>small coloured square</b> at the left of the fill row to open the colour picker.','Find the small dropdown near the bottom of the picker that shows <b>Hex</b>. Click it and choose RGB, HSL or HSB to see the same colour in that model.'])+`<h3>Photoshop</h3>`+steps(['Click the <b>foreground colour square</b> near the bottom of the Toolbar on the left. The Color Picker opens.','The right side of the picker shows <b>H, S, B</b>, <b>R, G, B</b>, <b>L, a, b</b> and <b>C, M, Y, K</b> fields, plus the # (HEX) box. Type in any of them.','To convert a whole document, open the <b>Image</b> menu at the top, choose <b>Mode</b>, then <b>CMYK Color</b>.'])+`<p>In Illustrator the matching command is <b>File</b>, then <b>Document Color Mode</b>, then <b>CMYK Color</b>. Menu names can change between versions, so look for the closest match if they differ.</p>`],
+['m-check','Quick check',quick([['What do the three pairs in #E8456B stand for?','Red (E8), green (45) and blue (6B), each written in base 16.'],['Which model would you use for a printed brochure?','CMYK.'],['Why can a bright screen colour look duller in print?','Screens can show very vivid colours that CMYK ink cannot reproduce.']])],
+['m-recap','Big ideas',bigideas(['RGB and HEX are for screens, CMYK for print, HSL for human tweaking.','HEX is just RGB in a short code.','Very vivid screen colours often shift in print.','Colour profiles define what the numbers mean.'])]
+]);
+
+var L_ACC=shell('Accessibility and colour contrast','Making colour work for everyone, with a real contrast checker.','access',[
+['a-what','Why it matters',`<h2>Why accessible colour matters</h2><p>Roughly 1 in 12 men and 1 in 200 women have some form of colour-vision deficiency. Many more people have low vision, use screens in bright sunlight, or are tired. Accessible colour makes a design usable for all of them and clearer for everyone else too.</p><p>Most teams follow <b>WCAG</b>, the Web Content Accessibility Guidelines. For colour, WCAG sets minimum <b>contrast ratios</b>, a number from 1:1 (no difference) to 21:1 (black on white).</p><table class='t'><tr><th>What</th><th>Level AA</th><th>Level AAA</th></tr><tr><td>Normal text</td><td>4.5 : 1</td><td>7 : 1</td></tr><tr><td>Large text (about 24px, or 19px bold, and up)</td><td>3 : 1</td><td>4.5 : 1</td></tr><tr><td>Icons, borders and other UI parts</td><td>3 : 1</td><td>Not set</td></tr></table>`],
+['a-check','Contrast checker',`<h2>Contrast checker</h2><p>Pick a text colour and a background colour. The results update straight away.</p><div class='panel'><div class='ctrls'><label for='afg' style='margin:0'>Text colour</label><input id='afg' type='color' value='#767676'><span id='afgx'>#767676</span><label for='abg' style='margin:0'>Background</label><input id='abg' type='color' value='#ffffff'><span id='abgx'>#FFFFFF</span><button class='btn' id='aswap' type='button'>Swap</button></div><div id='asamp' style='border-radius:14px;padding:18px;border:1px solid var(--line)'><div style='font-size:1.6rem;font-weight:700'>Large sample text</div><div>Normal sample text: the quick brown fox jumps over the lazy dog.</div></div><p id='aratio' style='font-size:1.4rem;font-weight:700;margin:14px 0 4px' aria-live='polite'></p><div class='res' id='ares'></div></div>`],
+['a-sim','Colour blindness',`<h2>See it through other eyes</h2><p>Pick a vision type. Both columns show the same three server statuses. The left relies on colour alone, the right adds a symbol and a label.</p><svg width='0' height='0' style='position:absolute' aria-hidden='true'><defs><filter id='f-pro' color-interpolation-filters='sRGB'><feColorMatrix type='matrix' values='0.567 0.433 0 0 0 0.558 0.442 0 0 0 0 0.242 0.758 0 0 0 0 0 1 0'/></filter><filter id='f-deu' color-interpolation-filters='sRGB'><feColorMatrix type='matrix' values='0.625 0.375 0 0 0 0.7 0.3 0 0 0 0 0.3 0.7 0 0 0 0 0 1 0'/></filter><filter id='f-tri' color-interpolation-filters='sRGB'><feColorMatrix type='matrix' values='0.95 0.05 0 0 0 0 0.433 0.567 0 0 0 0.475 0.525 0 0 0 0 0 1 0'/></filter><filter id='f-grey' color-interpolation-filters='sRGB'><feColorMatrix type='matrix' values='0.299 0.587 0.114 0 0 0.299 0.587 0.114 0 0 0.299 0.587 0.114 0 0 0 0 0 1 0'/></filter></defs></svg><div class='panel'><div class='ctrls' id='afilters' role='group' aria-label='Choose a vision type'><button class='chip' type='button' data-f='none' aria-pressed='true'>Typical vision</button><button class='chip' type='button' data-f='f-pro' aria-pressed='false'>Protanopia (red-blind)</button><button class='chip' type='button' data-f='f-deu' aria-pressed='false'>Deuteranopia (green-blind)</button><button class='chip' type='button' data-f='f-tri' aria-pressed='false'>Tritanopia (blue-blind)</button><button class='chip' type='button' data-f='f-grey' aria-pressed='false'>Greyscale</button></div><div class='cols' id='asim'><div><p class='slab'>Colour only</p><div class='row3'><span class='dot' style='background:#2E9E4F'></span>Server A</div><div class='row3'><span class='dot' style='background:#F0A500'></span>Server B</div><div class='row3'><span class='dot' style='background:#D62839'></span>Server C</div></div><div><p class='slab'>Colour, symbol and label</p><div class='row3'><span class='dot' style='background:#2E9E4F;color:#fff;display:grid;place-items:center;font-size:.7rem;font-weight:700'>✓</span>Server A: online</div><div class='row3'><span class='dot' style='background:#F0A500;color:#000;display:grid;place-items:center;font-size:.7rem;font-weight:700'>!</span>Server B: slow</div><div class='row3'><span class='dot' style='background:#D62839;color:#fff;display:grid;place-items:center;font-size:.7rem;font-weight:700'>×</span>Server C: down</div></div></div></div><div class='callout'><p><b>The rule:</b> never use colour as the only way to show meaning. Add a label, icon, pattern or position.</p></div><h3>Try out different harmonies from their point of view</h3><p>Pick a harmony and drag the hue slider. The top row shows the colours as most people see them. The bottom row shows what someone with the vision type chosen in the buttons above would see.</p><div class='panel'>${chipsHtml('ahc',[['comp','Complementary'],['analog','Analogous'],['triad','Triadic'],['split','Split-complementary'],['tetra','Tetradic (rectangle)'],['square','Square'],['mono','Monochromatic']],'comp','Choose a harmony')}${rng('ahh','Base hue',0,359,215,1,'°')}<p class='slab'>Typical vision</p><div class='pal' id='ahrow1'></div><p class='slab' id='ahlab'>As seen with typical vision</p><div class='pal' id='ahrow2'></div><p class='mood' id='aho' aria-live='polite'></p></div>`],
+['a-test','Test in the browser',`<h2>Test a real page in Chrome</h2><p>You can check a live page without any extra software.</p><h3>Check a contrast ratio</h3>`+steps(['Open the page in Chrome, <b>right-click</b> on some text, and choose <b>Inspect</b>. A panel called DevTools opens at the side or bottom.','In the <b>Elements</b> tab, look at the <b>Styles</b> pane on the right and find the line starting with <b>color</b>.','Click the <b>small coloured square</b> to the left of that colour value. A picker opens with a <b>Contrast ratio</b> row near the top that shows the number and whether it passes AA and AAA.'])+`<h3>Simulate colour blindness</h3>`+steps(['With DevTools open, press <b>Ctrl+Shift+P</b> (<b>Cmd+Shift+P</b> on a Mac) to open the Command Menu.','Type <b>Rendering</b> and press <b>Enter</b>. A Rendering tab opens in the lower drawer.','Scroll to <b>Emulate vision deficiencies</b> and choose an option such as <b>Protanopia</b>. The whole page changes so you can see problems.'])+`<p>DevTools labels shift over time, so look for the nearest match if something differs.</p>`],
+['a-checkq','Quick check',quick([['What contrast ratio does normal text need to meet WCAG AA?','At least 4.5 to 1.'],['Why is red text on a green background risky?','Many people with red-green colour blindness cannot tell them apart, and the two often have similar lightness. Check contrast and add another cue.'],['How can you make a status indicator accessible without colour?','Add a symbol, a text label, or a pattern alongside the colour.']])],
+['a-recap','Big ideas',bigideas(['Contrast ratios give an objective way to check readability.','Aim for 4.5 to 1 for normal text and 3 to 1 for large text and UI parts.','Never rely on colour alone.','Test with a checker and with a colour-blindness simulator.'])]
+]);
+
+var LESSONS = {
+  "colour-theory": {html: LESSON_COLOUR_THEORY, init: initColourTheory},
+  "colour-psychology": {html: L_PSY, init: initPsychology},
+  "colour-harmony": {html: L_HAR, init: initHarmony},
+  "contrast": {html: L_CON, init: initContrast},
+  "value-and-saturation": {html: L_VAL, init: initValue},
+  "hue": {html: L_HUE, init: initHue},
+  "warm-and-cool-colours": {html: L_WC, init: initWarmCool},
+  "colour-models": {html: L_MOD, init: initModels},
+  "accessibility-and-colour-contrast": {html: L_ACC, init: initAccess}
+};
+function chipsHtml(id,items,cur,lab){return `<div class='ctrls' id='${id}' role='group' aria-label='${lab}'>`+items.map(function(x){return `<button class='chip' type='button' data-v='${x[0]}' aria-pressed='${x[0]===cur}'>${x[1]}</button>`;}).join('')+`</div>`;}
+function bindChips(root,id,cb){var c=root.querySelector('#'+id);c.addEventListener('click',function(e){var b=e.target.closest('.chip');if(!b)return;Array.prototype.slice.call(c.querySelectorAll('.chip')).forEach(function(x){x.setAttribute('aria-pressed',x===b?'true':'false');});cb(b.getAttribute('data-v'));});}
+function rng(id,lab,min,max,val,step,unit){return `<label for='${id}'>${lab}: <span id='${id}v'>${val}</span>${unit||''}</label><input id='${id}' type='range' min='${min}' max='${max}' step='${step||1}' value='${val}'>`;}
+function onRng(root,id,cb){var el=root.querySelector('#'+id),sp=root.querySelector('#'+id+'v');el.addEventListener('input',function(){if(sp){sp.textContent=el.value;}cb(parseFloat(el.value));});}
+
+var L_SHAPE=shell('Shape','Flat outlines and the personalities they carry.','shape',[
+['s-what','What it is',`<h2>What shape is</h2><p>A shape is a flat, two-dimensional area defined by an outline: a circle, a square, a triangle, or something irregular. Everything on a screen is made of shapes, including letters.</p><p>Shapes fall into three families. <b>Geometric</b> shapes (circles, squares, triangles) are precise and man-made. <b>Organic</b> shapes (blobs, leaves, hand-drawn curves) feel natural and friendly. <b>Abstract</b> shapes are simplified forms, like icons, that stand for something real.</p>`],
+['s-explore','Shape personalities',`<h2>Shape personalities</h2><p>Pick a shape to see what it tends to communicate.</p><div class='panel'>${chipsHtml('shc',[['circle','Circle'],['square','Square'],['triangle','Triangle'],['blob','Organic blob']],'circle','Choose a shape')}<div class='wheelrow'><div class='stage' id='shsvg'></div><div class='readout' id='shout' aria-live='polite'></div></div></div>`],
+['s-use','Use it well',`<h2>Using shape well</h2><ul class='tk'><li><b>Repeat a shape language.</b> If your buttons are rounded, round the cards and inputs too.</li><li><b>Mix with purpose.</b> One sharp triangle among circles pulls the eye, so use that for emphasis.</li><li><b>Think about silhouette.</b> A good icon or logo is recognisable as a solid black shape.</li><li><b>Watch container shapes.</b> Rounded containers feel friendly; sharp corners feel serious.</li></ul>`],
+['s-check','Quick check',quick([['Which shape family feels most natural and friendly?','Organic shapes, such as blobs and leaf-like curves.'],['What does a triangle tend to communicate?','Energy, direction and tension. Pointing right it means go or play.'],['Why test a logo as a solid black shape?','If the silhouette is recognisable, the design is strong even without colour or detail.']])],
+['s-recap','Big ideas',bigideas(['Shapes are flat outlines: geometric, organic or abstract.','Each shape carries a personality.','Repeat a shape language for consistency.','A strong silhouette survives without colour.'])]
+]);
+
+var L_FORM=shell('Form','Shape with the illusion of volume, built from light and shadow.','form',[
+['f-what','What it is',`<h2>What form is</h2><p>A circle is a shape. A sphere is a <b>form</b>. Form is the illusion of three dimensions on a flat surface, and designers create it with light and shadow.</p><p>A lit object usually shows five zones: a <b>highlight</b> where light hits directly, a <b>mid-tone</b>, a <b>core shadow</b> on the side away from the light, <b>reflected light</b> bouncing back at the edge, and a <b>cast shadow</b> on the surface beneath.</p>`],
+['f-explore','Light a sphere',`<h2>Light a sphere</h2><p>Switch between a flat circle and a shaded sphere, then turn the light around it.</p><div class='panel'>${chipsHtml('fm',[['flat','Flat'],['shaded','Shaded'],['shadow','Shaded + shadow']],'shaded','Choose a style')}${rng('fa','Light direction',0,359,315,1,'°')}<div class='stage' id='fstage' style='margin-top:14px'></div></div>`],
+['f-use','Use it well',`<h2>Using form well</h2><ul class='tk'><li><b>Pick one light source</b> and keep it for every object on the screen. Shadows should all fall the same way.</li><li><b>Soft shadows feel natural.</b> Hard shadows feel graphic and dramatic.</li><li><b>Know your style.</b> Flat design drops form on purpose for clarity. Realistic styles add lots of it. Many interfaces use a small amount, like a gentle shadow to show a card is raised.</li></ul>`],
+['f-check','Quick check',quick([['What is the difference between a shape and a form?','A shape is flat; a form has the illusion of volume created by light and shadow.'],['Where is the cast shadow?','On the surface beneath or beside the object, on the side away from the light.'],['What goes wrong if shadows point different ways?','The scene looks inconsistent and the objects seem to sit in different lighting.']])],
+['f-recap','Big ideas',bigideas(['Form is shape plus the illusion of depth.','Highlights, mid-tones and shadows build volume.','Keep one consistent light source.'])]
+]);
+
+var L_LINE=shell('Line','Weight, direction and style: the simplest tool in design.','line',[
+['l-what','What it is',`<h2>What a line is</h2><p>A line is a mark that connects two points, or the edge where two areas meet. Lines have <b>weight</b> (thin to thick), <b>direction</b> (horizontal, vertical, diagonal, curved), <b>style</b> (solid, dashed, dotted) and <b>quality</b> (smooth or rough).</p><p>Lines do four jobs: they <b>divide</b> space, <b>connect</b> things, <b>outline</b> shapes, and <b>lead the eye</b> from one place to another.</p>`],
+['l-explore','Draw a line',`<h2>Change a line\u2019s character</h2><div class='panel'>${rng('lw','Weight (px)',1,16,6)}${rng('la','Waviness',0,40,18)}${chipsHtml('ld',[['solid','Solid'],['dashed','Dashed'],['dotted','Dotted']],'solid','Line style')}<div class='stage' id='lsvg'></div><p class='mood' id='lmood' aria-live='polite'></p></div>`],
+['l-use','Use it well',`<h2>Using lines well</h2><ul class='tk'><li><b>Direction sets mood.</b> Horizontal feels calm, vertical feels strong, diagonal feels dynamic, curves feel flowing.</li><li><b>Use leading lines</b> (roads, arrows, borders) to guide the eye to the important thing.</li><li><b>Try space before a line.</b> Boxing everything with borders gets cluttered. Often spacing separates content more gently.</li><li><b>Keep weights consistent.</b> Use one or two stroke weights for icons and dividers.</li></ul>`],
+['l-check','Quick check',quick([['Name three jobs a line can do in a design.','Divide space, connect elements, outline shapes, and lead the eye.'],['What mood does a thick wavy line give compared with a thin straight one?','Thick and wavy feels playful and energetic; thin and straight feels precise and formal.'],['What can replace borders in a busy layout?','Spacing, which separates groups of content more softly.']])],
+['l-recap','Big ideas',bigideas(['Lines have weight, direction, style and quality.','They divide, connect, outline and lead the eye.','Straight is precise, curved is flowing, diagonal is dynamic.','Prefer space over borders where you can.'])]
+]);
+
+var L_TEX=shell('Texture','How a surface looks and feels, real or implied.','texture',[
+['t-what','What it is',`<h2>What texture is</h2><p>Texture is the look or feel of a surface: smooth, rough, grainy, glossy, woven. <b>Physical</b> texture can be touched, like embossed paper. <b>Visual</b> texture is only implied, like a photo of wood or a grain effect over a flat colour.</p><p>On screens, texture adds warmth and depth and stops flat colour feeling sterile.</p>`],
+['t-explore','Add some grain',`<h2>Add texture to flat colour</h2><p>The panel below uses a noise filter drawn in code. Pick a texture type and use the slider to turn it up.</p><div class='panel'>${chipsHtml('tc',[['grain','Fine grain'],['cloud','Soft cloud'],['coarse','Coarse'],['brushed','Brushed']],'grain','Texture type')}${rng('ta','Strength (%)',0,100,40)}<div class='stage' id='tstage' style='margin-top:14px'></div></div>`],
+['t-use','Use it well',`<h2>Using texture well</h2><ul class='tk'><li><b>Keep it subtle behind text.</b> Heavy texture lowers contrast and hurts reading.</li><li><b>Match the idea.</b> Paper and grain feel handmade and warm. Glossy and smooth feel modern and technical.</li><li><b>Be consistent.</b> Use one texture language across a design.</li><li><b>Mind file size.</b> Large texture images slow pages down, so use code-based effects or compress images.</li></ul>`],
+['t-check','Quick check',quick([['What is the difference between physical and visual texture?','Physical texture can be touched; visual texture is only implied by how a surface looks.'],['Why keep texture subtle behind text?','It lowers contrast and makes reading harder.'],['How can you add texture without a large image file?','Use a code-based effect such as noise, or a small tiled image.']])],
+['t-recap','Big ideas',bigideas(['Texture is how a surface looks or feels.','It adds warmth and depth to flat colour.','Keep it quiet behind text and consistent across a design.'])]
+]);
+
+var L_PAT=shell('Pattern','Repeating shapes, lines and colours.','pattern',[
+['p2-what','What it is',`<h2>What a pattern is</h2><p>A pattern is a unit, called a <b>tile</b>, repeated over an area. Patterns can follow a <b>grid</b> (rows and columns), a <b>brick</b> or half-drop layout (every other row shifted), or a <b>scatter</b> (irregular but even).</p><p>A <b>seamless</b> pattern has tile edges that match up, so you cannot see where one tile ends and the next begins.</p>`],
+['p2-explore','Build a pattern',`<h2>Build a pattern</h2><div class='panel'>${chipsHtml('pk',[['dots','Dots'],['stripes','Stripes'],['diamonds','Diamonds'],['checks','Checks']],'dots','Pattern shape')}${rng('ps','Tile size (px)',12,60,28)}${rng('ph','Colour (hue)',0,359,215,1,'°')}<div class='stage' id='pstage' style='margin-top:14px'></div></div>`],
+['p2-use','Use it well',`<h2>Using pattern well</h2><ul class='tk'><li><b>Patterns express brand personality.</b> Think of a supermarket own-brand or a luxury monogram.</li><li><b>Lower the contrast</b> when text sits on top of a pattern.</li><li><b>Avoid harsh stripes.</b> Fine, high-contrast lines can seem to vibrate and cause discomfort for some people.</li><li><b>Scale matters.</b> A large tile feels bold; a tiny one reads almost like texture.</li></ul>`],
+['p2-check','Quick check',quick([['What is a seamless pattern?','A repeating tile whose edges match so no joins are visible.'],['Why can fine, high-contrast stripes be a problem?','They can appear to vibrate and cause visual discomfort.'],['How do you keep text readable on a patterned background?','Lower the pattern\u2019s contrast or place text on a plain panel.']])],
+['p2-recap','Big ideas',bigideas(['A pattern repeats a tile in a grid, brick or scatter layout.','Seamless tiles hide their joins.','Keep contrast low behind text and avoid harsh stripes.'])]
+]);
+
+LESSONS['shape']={html:L_SHAPE,init:initShape,g:'f'};
+LESSONS['form']={html:L_FORM,init:initForm,g:'f'};
+LESSONS['line']={html:L_LINE,init:initLine,g:'f'};
+LESSONS['texture']={html:L_TEX,init:initTexture,g:'f'};
+LESSONS['pattern']={html:L_PAT,init:initPattern,g:'f'};
+var L_SPACE=shell('Space','The area in, around and between things, and a design material in its own right.','space',[
+['sp-what','What it is',`<h2>What space is</h2><p>Space is the area in, around and between elements. Designers also call it <b>white space</b> or <b>negative space</b>, though it does not have to be white. It is an active ingredient, not leftover room.</p><p>Space works at two scales. <b>Micro space</b> sits inside text: letter spacing and line height. <b>Macro space</b> sits between larger things: margins, padding and gaps between sections. Space also groups things. Items placed close together look related.</p>`],
+['sp-explore','Adjust the space',`<h2>Adjust the space</h2><p>Drag both sliders and watch how the same content changes character.</p><div class='panel'>${rng('spg','Gap between elements (px)',0,48,16)}${rng('spp','Padding inside the card (px)',4,56,20)}<div id='spm' style='margin-top:14px'></div><p class='mood' id='spo' aria-live='polite'></p></div>`],
+['sp-use','Use it well',`<h2>Using space well</h2><ul class='tk'><li><b>Group by distance.</b> Keep related items closer together than unrelated ones.</li><li><b>Use a spacing scale.</b> Many teams use multiples of 8 pixels (8, 16, 24, 32, 48) so spacing feels consistent.</li><li><b>Generous space feels calm and premium.</b> Tight space feels dense, urgent or budget.</li><li><b>Do not fill every gap.</b> Empty areas give the eye a place to rest.</li></ul>`],
+['sp-check','Quick check',quick([['What is the difference between micro and macro space?','Micro space is inside text (letter spacing, line height). Macro space is between larger elements (margins, padding, section gaps).'],['How can space show that things are related?','Put them closer together than they are to other things.'],['Why use a spacing scale?','It keeps gaps consistent and makes layout decisions faster.']])],
+['sp-recap','Big ideas',bigideas(['Space is a design material, not leftover room.','Micro space lives in text; macro space lives between blocks.','Distance groups things.','Use a consistent spacing scale.'])]
+]);
+
+var L_NEG=shell('Positive and negative space','The subject, the ground, and the shapes hidden between them.','negative',[
+['n-what','What it is',`<h2>Positive and negative space</h2><p><b>Positive space</b> is the subject: the shapes, text and images you place. <b>Negative space</b> is the empty area around and between them. Designers also call these the <b>figure</b> and the <b>ground</b>.</p><p>Clever designs use both at once. The arrow hidden between the E and the x in the FedEx logo is made entirely of negative space. A classic psychology example is Rubin\u2019s vase, which can look like a vase or like two faces, depending on which part your brain treats as the figure.</p>`],
+['n-explore','Flip the figure',`<h2>Flip figure and ground</h2><p>Change the circle size and swap the colours. Notice how the empty space changes the feeling.</p><div class='panel'>${chipsHtml('nc',[['dark','Light circle on dark'],['light','Dark circle on light']],'dark','Colours')}${rng('nr','Circle size (radius)',10,95,50)}<div class='stage' id='nstage' style='margin-top:14px'></div><p class='mood' id='nout' aria-live='polite'></p></div>`],
+['n-use','Use it well',`<h2>Using negative space well</h2><ul class='tk'><li><b>Let the subject breathe.</b> More empty space around something makes it feel more important.</li><li><b>Look for hidden shapes.</b> Check the gaps between letters and objects, because they form shapes too.</li><li><b>Balance it.</b> Large empty areas should look intentional, not forgotten.</li></ul>`],
+['n-check','Quick check',quick([['What is the figure and what is the ground?','The figure is the subject you notice first. The ground is the space behind and around it.'],['Where is the hidden arrow in the FedEx logo?','In the negative space between the E and the x.'],['What effect does lots of space around an object have?','It makes the object feel more important and premium.']])],
+['n-recap','Big ideas',bigideas(['Positive space is the subject; negative space is what surrounds it.','The brain can flip figure and ground.','Empty space can carry meaning and hidden shapes.'])]
+]);
+
+var L_HIER=shell('Visual hierarchy','The order in which eyes read a design.','hierarchy',[
+['h2-what','What it is',`<h2>What visual hierarchy is</h2><p>Visual hierarchy is the order in which people notice and read things. It is made by comparing elements: the thing that is bigger, bolder, brighter, more isolated or higher up gets seen first.</p><p>The main tools are <b>size</b>, <b>weight</b>, <b>colour and contrast</b>, <b>position</b> and <b>space</b>. A good hierarchy lets someone understand the page in three seconds: first this, then that, then the detail.</p>`],
+['h2-explore','Build a hierarchy',`<h2>Build a hierarchy</h2><p>Everything starts with the same style. Switch on the tools one by one, then try making everything shout.</p><div class='panel'><div class='ctrls' id='hlev' role='group' aria-label='Hierarchy tools'><button class='chip' type='button' data-v='size' aria-pressed='false'>Bigger headline</button><button class='chip' type='button' data-v='weight' aria-pressed='false'>Bolder headline</button><button class='chip' type='button' data-v='colour' aria-pressed='false'>Colour contrast</button><button class='chip' type='button' data-v='space' aria-pressed='false'>More space</button><button class='chip' type='button' data-v='shout' aria-pressed='false'>Make everything shout</button></div><div id='hm'></div><p class='mood' id='ho' aria-live='polite'></p></div>`],
+['h2-use','Use it well',`<h2>Using hierarchy well</h2><ul class='tk'><li><b>Aim for three levels.</b> Primary (headline), secondary (subheads) and tertiary (body and details).</li><li><b>Combine two or three tools</b> rather than using one very strongly.</li><li><b>One main action per screen.</b> Make that button the strongest thing on the page.</li><li><b>Test by squinting.</b> If you cannot tell what matters most, tune the contrast.</li></ul>`],
+['h2-check','Quick check',quick([['Name three tools for creating hierarchy.','Size, weight, colour or contrast, position and space.'],['What happens if every element is bold and large?','Nothing stands out. Hierarchy comes from differences.'],['How do you test a hierarchy quickly?','Squint or blur the design and see what you still notice first.']])],
+['h2-recap','Big ideas',bigideas(['Hierarchy is the order of attention.','Make it with size, weight, contrast, position and space.','Use two or three tools and keep three levels.','If everything shouts, nothing is heard.'])]
+]);
+
+var L_BAL=shell('Balance','An even distribution of visual weight.','balance',[
+['b-what','What it is',`<h2>What balance is</h2><p>Every element has <b>visual weight</b>. Big, dark, bright, complex and isolated things weigh more. Balance is spreading that weight so a layout feels stable rather than tipping to one side.</p><p>Weight also depends on <b>distance from the centre</b>, like a seesaw: a small thing far from the middle can balance a bigger thing close to it.</p>`],
+['b-explore','Seesaw',`<h2>Balance the seesaw</h2><p>Change the size and position of each ball. The beam tilts toward the heavier side.</p><div class='panel'><div class='cols'><div>${rng('bwl','Left size',10,45,30)}${rng('bdl','Left distance',20,150,100)}</div><div>${rng('bwr','Right size',10,45,20)}${rng('bdr','Right distance',20,150,150)}</div></div><div class='stage' id='bstage' style='margin-top:14px'></div><p class='mood' id='bout' aria-live='polite'></p></div>`],
+['b-use','Use it well',`<h2>Using balance well</h2><ul class='tk'><li><b>Trade size for distance.</b> Put a large image near the centre and a small, strong element far away.</li><li><b>Colour has weight.</b> A small bright button can balance a large pale image.</li><li><b>Use imbalance deliberately.</b> Tipped layouts feel tense and dynamic. Choose that on purpose.</li></ul>`],
+['b-check','Quick check',quick([['What makes an element visually heavy?','Large size, dark or bright colour, complexity and isolation.'],['How can a small object balance a large one?','By being placed farther from the centre.'],['When might you want imbalance?','To create tension and energy, as long as it looks intentional.']])],
+['b-recap','Big ideas',bigideas(['Elements carry visual weight.','Weight grows with size, colour, contrast and distance from the centre.','Balance feels stable; imbalance feels tense.'])]
+]);
+
+var L_SYM=shell('Symmetry and asymmetry','Two ways to balance a composition.','symmetry',[
+['sy-what','What it is',`<h2>Symmetry and asymmetry</h2><p><b>Symmetry</b> mirrors elements around a line or point, so both sides match. It feels formal, calm and trustworthy, and it suits things like invitations and institutions.</p><p><b>Asymmetry</b> balances unlike elements, for example one big shape against several small ones. It feels more dynamic, modern and informal. <b>Radial symmetry</b> arranges things around a centre, like a flower or a clock face.</p>`],
+['sy-explore','Compare them',`<h2>Compare the three</h2><div class='panel'>${chipsHtml('syc',[['sym','Symmetrical'],['asym','Asymmetrical'],['rad','Radial']],'sym','Choose a layout')}<div class='stage' id='systage'></div><p class='mood' id='syo' aria-live='polite'></p></div>`],
+['sy-use','Use it well',`<h2>Choosing between them</h2><ul class='tk'><li><b>Symmetry for stability.</b> Use it for formal, calm or traditional messages.</li><li><b>Asymmetry for energy.</b> Use it for editorial, creative or modern designs.</li><li><b>Mix them.</b> A symmetrical grid with one asymmetric highlight can feel structured and lively at once.</li><li><b>Near-symmetry looks like a mistake.</b> If it is almost mirrored, make it exactly mirrored or clearly different.</li></ul>`],
+['sy-check','Quick check',quick([['What feeling does symmetry usually create?','Calm, order and formality.'],['How does an asymmetrical design stay balanced?','By offsetting weight, for instance a large element against several small ones or against empty space.'],['Why avoid near-symmetry?','It reads as an error rather than a choice.']])],
+['sy-recap','Big ideas',bigideas(['Symmetry mirrors; asymmetry offsets.','Symmetry is formal; asymmetry is dynamic.','Radial symmetry spins around a centre.','Commit to one or the other.'])]
+]);
+
+var L_SCALE=shell('Scale and proportion','How big things are, and how sizes relate.','scale',[
+['sc-what','What it is',`<h2>Scale and proportion</h2><p><b>Scale</b> is how big something is. <b>Proportion</b> is how sizes relate to each other, such as headline to body text or image to caption.</p><p>Big jumps in scale create drama and a clear focus. Gentle, consistent ratios create harmony. A <b>modular scale</b> is a set of sizes that each multiply by the same ratio. Music uses ratios like this too.</p>`],
+['sc-explore','Type scale',`<h2>Generate a type scale</h2><p>Pick a ratio and a base size. Every step is the step below multiplied by the ratio.</p><div class='panel'>${chipsHtml('scc',[['1.2','Minor third (1.2)'],['1.25','Major third (1.25)'],['1.333','Perfect fourth (1.333)'],['1.618','Golden ratio (1.618)']],'1.25','Choose a ratio')}${rng('scb','Base size (px)',14,20,16)}<div id='scs' style='margin-top:14px;overflow-x:auto'></div></div>`],
+['sc-use','Use it well',`<h2>Using scale well</h2><ul class='tk'><li><b>Pick a ratio and stick to it.</b> Sizes from a scale feel related even when you cannot say why.</li><li><b>Smaller ratios for dense interfaces,</b> larger ones for editorial and posters.</li><li><b>Use scale contrast for emphasis.</b> One very large element against small ones is instantly the focus.</li><li><b>Keep body text comfortable.</b> Around 16px is a common minimum on screens.</li></ul>`],
+['sc-check','Quick check',quick([['What is a modular scale?','A set of sizes where each step is the previous one multiplied by a fixed ratio.'],['What does a big jump in scale do?','It creates drama and a strong focal point.'],['Which ratio gives the steepest steps here?','The golden ratio, 1.618.']])],
+['sc-recap','Big ideas',bigideas(['Scale is size; proportion is how sizes relate.','A modular scale gives sizes that feel related.','Big jumps create focus; small ratios create calm.'])]
+]);
+
+var L_RHY=shell('Rhythm and repetition','Repeating elements to make a beat the eye can follow.','rhythm',[
+['r-what','What it is',`<h2>Rhythm and repetition</h2><p><b>Repetition</b> uses the same element again and again. <b>Rhythm</b> is the pattern of that repetition, the beat. Both help the eye move through a design and make it feel organised.</p><p>There are a few classic rhythms. <b>Regular</b> repeats identically. <b>Alternating</b> switches between two. <b>Progressive</b> changes step by step, like growing sizes. <b>Random</b> varies without a pattern.</p>`],
+['r-explore','Feel the beat',`<h2>Feel the beat</h2><div class='panel'>${chipsHtml('rc',[['regular','Regular'],['alternating','Alternating'],['progressive','Progressive'],['random','Random']],'regular','Choose a rhythm')}${rng('rs','Spacing (px)',24,60,40)}<div class='stage' id='rstage' style='margin-top:14px'></div><p class='mood' id='ro' aria-live='polite'></p></div>`],
+['r-use','Use it well',`<h2>Using rhythm well</h2><ul class='tk'><li><b>Repeat to unify.</b> Reusing the same button, card or icon style ties a design together.</li><li><b>Break the pattern once</b> to create a focal point. The odd one out gets noticed.</li><li><b>Avoid monotony.</b> Pure regular rhythm over a long page gets dull. Add variety in sizes or spacing.</li></ul>`],
+['r-check','Quick check',quick([['Name the four kinds of rhythm.','Regular, alternating, progressive and random.'],['How can you use repetition to create emphasis?','Repeat a pattern, then break it once. The exception stands out.'],['What risk comes with too much regular rhythm?','Monotony.']])],
+['r-recap','Big ideas',bigideas(['Repetition reuses; rhythm is the beat of that reuse.','Regular, alternating, progressive and random are the basics.','Break a pattern to make a focal point.'])]
+]);
+
+var L_UNI=shell('Unity and variety','Feeling like one family without getting boring.','unity',[
+['u2-what','What it is',`<h2>Unity and variety</h2><p><b>Unity</b> is the sense that all parts belong together. It comes from shared colours, shapes, type and spacing. <b>Variety</b> is difference: it keeps a design interesting and helps things stand apart.</p><p>Too much unity feels boring, and too much variety feels chaotic. Good design lives in between, with <b>consistent rules and a few deliberate surprises</b>.</p>`],
+['u2-explore','Unity to variety',`<h2>Slide from unity to variety</h2><div class='panel'>${rng('uv','Amount of variety (%)',0,100,20)}<div class='stage' id='ustage' style='margin-top:14px'></div><p class='mood' id='uo' aria-live='polite'></p></div>`],
+['u2-use','Use it well',`<h2>Using unity and variety well</h2><ul class='tk'><li><b>Pick what stays the same.</b> For example colour palette and corner style.</li><li><b>Pick what changes.</b> For example size and content.</li><li><b>Limit the surprises.</b> One or two deliberate differences read as emphasis. Ten read as noise.</li></ul>`],
+['u2-check','Quick check',quick([['What creates unity in a design?','Shared colours, shapes, type and spacing.'],['What are the risks at each extreme?','All unity is boring; all variety is chaotic.'],['How many surprises are healthy?','A few. Deliberate exceptions work as emphasis.']])],
+['u2-recap','Big ideas',bigideas(['Unity makes parts belong; variety keeps interest.','Use consistent rules plus a few deliberate surprises.'])]
+]);
+
+var L_EMP=shell('Emphasis and focal points','Deciding where eyes land first.','emphasis',[
+['e-what','What it is',`<h2>Emphasis and focal points</h2><p>A <b>focal point</b> is the spot a design wants you to see first. <b>Emphasis</b> is how you create it: by making one thing different from the things around it.</p><p>Four reliable ways: change the <b>size</b>, change the <b>colour</b>, change the <b>shape</b>, or give it <b>isolation</b> by clearing space around it.</p>`],
+['e-explore','Make a focal point',`<h2>Make a focal point</h2><p>Pick a method. Click any dot to make it the new focus, or use the shuffle button.</p><div class='panel'>${chipsHtml('ec',[['colour','Colour'],['size','Size'],['shape','Shape'],['isolation','Isolation']],'colour','Method')}<div class='ctrls'><button class='btn' id='eshuf' type='button'>Shuffle the focal dot</button></div><div class='stage' id='estage'></div></div>`],
+['e-use','Use it well',`<h2>Using emphasis well</h2><ul class='tk'><li><b>One main focal point</b> per view, plus perhaps a smaller second one.</li><li><b>Make it different, not just louder.</b> Contrast of any kind beats volume.</li><li><b>Save your strongest colour</b> for the thing that matters, such as the main button.</li></ul>`],
+['e-check','Quick check',quick([['Name three ways to make a focal point.','Colour, size, shape or isolation.'],['Why not emphasise everything?','Emphasis is relative. If everything stands out, nothing does.'],['What should the strongest colour be saved for?','The most important element, like the main call-to-action.']])],
+['e-recap','Big ideas',bigideas(['A focal point is where eyes land first.','Create it with colour, size, shape or isolation.','Make one thing different from its neighbours.'])]
+]);
+
+var L_GES=shell('Gestalt principles','How the brain groups things into wholes.','gestalt',[
+['g-what','What it is',`<h2>Gestalt principles</h2><p>\u201cGestalt\u201d is German for a unified whole. Gestalt psychologists in the early 1900s found that people automatically group what they see into patterns, rather than seeing every part separately.</p><p>Designers use these rules to build layouts that organise themselves. The most useful ones are <b>proximity</b>, <b>similarity</b>, <b>closure</b>, <b>continuity</b> and <b>common region</b>.</p>`],
+['g-explore','See them work',`<h2>See the principles work</h2><div class='panel'>${chipsHtml('gc',[['proximity','Proximity'],['similarity','Similarity'],['closure','Closure'],['continuity','Continuity'],['region','Common region']],'proximity','Choose a principle')}<div class='stage' id='gstage'></div><p class='mood' id='go' aria-live='polite'></p></div>`],
+['g-use','Use it well',`<h2>Using gestalt well</h2><ul class='tk'><li><b>Proximity:</b> put labels next to the things they describe.</li><li><b>Similarity:</b> style items of the same type the same way, such as all links.</li><li><b>Closure:</b> you can suggest shapes without drawing every edge, which keeps logos and icons light.</li><li><b>Common region:</b> a card or box says \u201cthese belong together\u201d.</li></ul>`],
+['g-check','Quick check',quick([['Which principle says close things look related?','Proximity.'],['What is closure?','The brain completing a shape even when parts are missing.'],['How does common region group content?','By placing it inside a shared box, card or background area.']])],
+['g-recap','Big ideas',bigideas(['People see wholes before parts.','Proximity, similarity, closure, continuity and common region are the key rules.','Use them to make layouts organise themselves.'])]
+]);
+
+LESSONS['space']={html:L_SPACE,init:initSpace,g:'s'};
+LESSONS['positive-and-negative-space']={html:L_NEG,init:initNegative,g:'s'};
+LESSONS['visual-hierarchy']={html:L_HIER,init:initHierarchy,g:'s'};
+LESSONS['balance']={html:L_BAL,init:initBalance,g:'s'};
+LESSONS['symmetry-and-asymmetry']={html:L_SYM,init:initSymmetry,g:'s'};
+LESSONS['scale-and-proportion']={html:L_SCALE,init:initScale,g:'s'};
+LESSONS['rhythm-and-repetition']={html:L_RHY,init:initRhythm,g:'s'};
+LESSONS['unity-and-variety']={html:L_UNI,init:initUnity,g:'s'};
+LESSONS['emphasis-and-focal-points']={html:L_EMP,init:initEmphasis,g:'s'};
+LESSONS['gestalt-principles']={html:L_GES,init:initGestalt,g:'s'};
+var L_COMP=shell('Composition','How everything is arranged inside the frame.','composition',[
+['c3-what','What it is',`<h2>What composition is</h2><p>Composition is how all the elements are arranged inside the frame: where things sit, how big they are, and how the eye travels between them. It turns a pile of good ingredients into a design.</p><p>A handy starting guide is the <b>rule of thirds</b>. Imagine two vertical and two horizontal lines dividing the frame into nine equal parts. Placing the subject on a line, or where two lines cross, usually feels more natural than dead centre.</p>`],
+['c3-explore','Place the subject',`<h2>Place the subject</h2><p>Try three placements, with and without the guide lines.</p><div class='panel'>${chipsHtml('cc',[['centre','Centred'],['thirds','Rule of thirds'],['off','Pushed to the edge']],'thirds','Placement')}${chipsHtml('cg',[['on','Guides on'],['off','Guides off']],'on','Guides')}<div class='stage' id='cstage'></div><p class='mood' id='co' aria-live='polite'></p></div>`],
+['c3-use','Use it well',`<h2>Using composition well</h2><ul class='tk'><li><b>Decide the focal point first,</b> then arrange everything else around it.</li><li><b>Leave room for the subject to look or move into.</b> A person facing the edge feels cramped.</li><li><b>Guides are guides.</b> Break the rule of thirds when a centred, symmetrical layout suits the message.</li><li><b>Check the edges.</b> Nothing should accidentally touch or get cut off.</li></ul>`],
+['c3-check','Quick check',quick([['What is the rule of thirds?','A guide that divides the frame into nine parts. Subjects on the lines or crossings usually look more natural than dead centre.'],['Is it always wrong to centre a subject?','No. Centred layouts feel formal and stable, which can suit some messages.'],['What should you decide first?','The focal point.']])],
+['c3-recap','Big ideas',bigideas(['Composition is arrangement inside the frame.','The rule of thirds is a helpful starting point, not a law.','Decide the focal point first, then build around it.'])]
+]);
+
+var L_GRID=shell('Grid systems','An invisible framework that keeps layouts consistent.','grid',[
+['gr-what','What it is',`<h2>What a grid is</h2><p>A grid is an invisible framework of <b>columns</b>, <b>gutters</b> (the gaps between columns) and <b>margins</b> (the outer edges) that you align content to. Websites often use 12 columns because 12 divides neatly into halves, thirds, quarters and sixths.</p><p>Grids make layouts consistent, speed up decisions and help different people on a team produce work that matches.</p>`],
+['gr-explore','Play with a grid',`<h2>Play with a grid</h2><p>Change the number of columns and the gutter. The three cards each take a third of the columns.</p><div class='panel'>${rng('grn','Columns',1,12,12)}${rng('grg','Gutter (px)',0,40,16)}${chipsHtml('grs',[['on','Columns shown'],['off','Columns hidden']],'on','Show columns')}<div class='stage' id='gstage'></div><p class='mood' id='gro' aria-live='polite'></p></div>`],
+['gr-figma','In Figma',`<h2>Add a grid in Figma</h2><p>Figma\u2019s labels change slightly between updates, so look for the nearest match if something differs.</p>`+steps(['Press <b>F</b> on your keyboard, then click and drag on the canvas to draw a frame (this is your artboard).','With the frame selected, look at the <b>right-hand sidebar</b> and make sure the <b>Design</b> tab is active. Scroll down to the section called <b>Layout grid</b>.','Click the <b>+</b> (plus) button at the right end of the <b>Layout grid</b> heading. A default grid appears and the frame shows a pattern.','Click the dropdown on the new row (it says <b>Grid</b>) and choose <b>Columns</b>. Then type <b>12</b> in the <b>Count</b> box, and a gutter such as <b>24</b>.','Press <b>Ctrl+Shift+4</b> (<b>Cmd+Shift+4</b> on a Mac) to show or hide the grid. Snap your elements to the column edges.'])],
+['gr-use','Use it well',`<h2>Using grids well</h2><ul class='tk'><li><b>Align to the grid,</b> but allow a few elements to break it on purpose, such as a full-bleed image.</li><li><b>Use fewer columns on small screens.</b> Many sites use 4 on phones, 8 on tablets and 12 on desktop.</li><li><b>Keep gutters consistent</b> so spacing feels even.</li></ul>`],
+['gr-check','Quick check',quick([['What are gutters?','The gaps between columns.'],['Why do many grids use 12 columns?','12 divides evenly into halves, thirds, quarters and sixths.'],['Should every element obey the grid?','Mostly yes, but deliberate breaks can create emphasis.']])],
+['gr-recap','Big ideas',bigideas(['A grid is columns, gutters and margins.','Align content to it for consistency.','Use fewer columns on smaller screens.'])]
+]);
+
+var L_ALIGN=shell('Alignment','Lining things up so a layout looks intentional.','alignment',[
+['al-what','What it is',`<h2>What alignment is</h2><p>Alignment is placing elements so their edges or centres line up along an invisible line. It is the fastest way to make a design look tidy and deliberate.</p><p>Text can be <b>left-aligned</b> (easiest to read in left-to-right languages), <b>centred</b> (formal, good for short lines), <b>right-aligned</b> (useful for numbers and captions) or <b>justified</b> (even on both sides, but can leave odd gaps between words).</p>`],
+['al-explore','Try each one',`<h2>Try each alignment</h2><div class='panel'>${chipsHtml('alc',[['left','Left'],['center','Centred'],['right','Right'],['messy','Messy']],'left','Alignment')}<div class='stage' id='astage'></div><p class='mood' id='alo' aria-live='polite'></p></div>`],
+['al-figma','In Figma',`<h2>Align layers in Figma</h2>`+steps(['Click one layer, then hold <b>Shift</b> and click each other layer you want to line up.','At the top of the <b>right-hand sidebar</b> (under the <b>Design</b> tab) is a row of alignment icons. Click <b>Align left</b>, the first icon in the row, to line up the left edges.','Use the other icons in that row to align horizontal centres, right edges, tops, vertical centres or bottoms.','Shortcut: <b>Alt+A</b> (<b>Option+A</b> on a Mac) aligns left, and <b>Alt+H</b> (<b>Option+H</b>) aligns horizontal centres.'])+`<p>Menu names and shortcuts can change, so check the icon tooltips if one differs.</p>`],
+['al-use','Use it well',`<h2>Using alignment well</h2><ul class='tk'><li><b>Pick a strong edge</b> and align to it. A left edge down the page works for most layouts.</li><li><b>Avoid mixing many alignments</b> in one block. One alignment per section.</li><li><b>Centre short text only.</b> Centred paragraphs are hard to read because the starts of the lines wander.</li><li><b>Align by what you see.</b> Optical alignment sometimes needs a nudge, for example with round shapes next to square ones.</li></ul>`],
+['al-check','Quick check',quick([['Which alignment is easiest to read for long text in English?','Left-aligned.'],['Why avoid centred paragraphs?','The starts of the lines move around, so the eye has trouble finding the next line.'],['What makes a messy layout look messy?','Elements that almost line up but do not.']])],
+['al-recap','Big ideas',bigideas(['Alignment ties elements to shared lines.','Left-aligned is best for long text; centred is for short lines.','Almost aligned looks like a mistake.'])]
+]);
+
+var L_FRAME=shell('Framing','Using surroundings to focus attention.','framing',[
+['fr-what','What it is',`<h2>What framing is</h2><p>Framing draws attention to a subject by surrounding it. The frame can be a literal border, a shape, a window-like cut-out, or a soft darkening toward the edges, called a <b>vignette</b>.</p><p>Frames also <b>hide distractions</b> and suggest depth, as if you are looking through something at the subject.</p>`],
+['fr-explore','Frame a subject',`<h2>Frame a subject</h2><p>The grey dots in the corners are distractions. See what each type of frame does with them.</p><div class='panel'>${chipsHtml('frc',[['none','No frame'],['border','Border'],['window','Window'],['vignette','Vignette'],['shapes','Shapes']],'none','Frame type')}<div class='stage' id='frstage'></div></div>`],
+['fr-use','Use it well',`<h2>Using framing well</h2><ul class='tk'><li><b>Match the frame to the mood.</b> A thin border feels neat; a vignette feels cinematic; a window feels voyeuristic or focused.</li><li><b>Do not let the frame compete.</b> It should help the subject, not outshine it.</li><li><b>Cards are frames.</b> Interface cards, modals and image borders all work as framing.</li></ul>`],
+['fr-check','Quick check',quick([['What is a vignette?','A gradual darkening toward the edges of an image that pulls attention to the centre.'],['How does framing reduce distractions?','It hides or de-emphasises everything outside the frame.'],['Can a UI card act as a frame?','Yes. It surrounds content and separates it from the background.']])],
+['fr-recap','Big ideas',bigideas(['Framing surrounds a subject to focus attention.','Frames can be borders, shapes, windows or vignettes.','A frame should support the subject, not compete.'])]
+]);
+
+var L_CROP=shell('Cropping','Trimming an image to strengthen its message.','cropping',[
+['cr-what','What it is',`<h2>What cropping is</h2><p>Cropping removes the outer parts of an image. It does three useful things: it <b>removes distractions</b>, it <b>strengthens the focal point</b>, and it lets you fit a picture into a required shape such as a square or a wide banner.</p><p>Crop <b>tighter</b> for drama and emotion. Crop <b>looser</b> for context and a sense of place.</p>`],
+['cr-explore','Crop a scene',`<h2>Crop a scene</h2><p>Choose a shape, then zoom in and move the crop around. Notice what you lose as well as what you gain.</p><div class='panel'>${chipsHtml('crc',[['1','Square 1:1'],['0.8','Portrait 4:5'],['1.778','Wide 16:9']],'1','Shape')}${rng('crz','Zoom',1,4,1,0.1,'×')}${rng('crx','Move left or right',0,100,50,1,'%')}${rng('cry','Move up or down',0,100,50,1,'%')}<div class='stage' id='crstage' style='margin-top:14px'></div><p class='mood' id='cro' aria-live='polite'></p></div>`],
+['cr-figma','In Figma',`<h2>Crop an image in Figma</h2>`+steps(['Press <b>F</b> and drag on the canvas to draw a frame in the shape you want, for example a square.','Drag your photo from your computer into the frame so it sits inside it.','Select the frame and, in the <b>Design</b> tab of the right-hand sidebar, make sure <b>Clip content</b> is ticked, so anything outside the frame is hidden.','Double-click the photo inside the frame to select it. Drag it to reposition, and hold <b>Shift</b> while dragging a corner handle to resize it without distortion.'])+`<p>Labels can shift between Figma updates, so look for the closest match.</p>`],
+['cr-use','Use it well',`<h2>Using cropping well</h2><ul class='tk'><li><b>Crop for the destination.</b> A phone banner and a poster need different crops of the same photo.</li><li><b>Keep the subject\u2019s eyes and direction in mind.</b> Leave space in front of where they look.</li><li><b>Avoid cutting at joints.</b> Cropping through wrists, ankles or knees looks awkward.</li><li><b>Keep the original.</b> Crop a copy so you can try other versions.</li></ul>`],
+['cr-check','Quick check',quick([['What does a tight crop usually do?','Adds drama and focus, but loses context.'],['Why crop for each destination?','Different shapes and sizes need different compositions of the same image.'],['Why keep the original file?','So you can make different crops later.']])],
+['cr-recap','Big ideas',bigideas(['Cropping removes distractions and strengthens focus.','Tight is dramatic; loose gives context.','Crop for the destination and keep the original.'])]
+]);
+
+var L_DEPTH=shell('Depth and layering','Making a flat screen feel three-dimensional.','depth',[
+['d-what','What it is',`<h2>What depth and layering are</h2><p>Screens are flat, but designers suggest depth with <b>depth cues</b>. The main ones are <b>overlap</b> (what covers something looks closer), <b>shadow</b> (bigger shadows mean higher up), <b>size</b> (nearer things look bigger) and <b>atmosphere</b> (distant things look paler and blurrier).</p><p>In interfaces, layering shows what sits on top of what: a menu over a page, a dialog over a menu.</p>`],
+['d-explore','Build depth',`<h2>Build depth step by step</h2><div class='panel'>${chipsHtml('dc',[['flat','Flat'],['overlap','Overlap'],['shadow','Shadow'],['atmosphere','Atmosphere']],'flat','Depth cue')}<div class='stage' id='dstage'></div><p class='mood' id='do' aria-live='polite'></p></div>`],
+['d-use','Use it well',`<h2>Using depth well</h2><ul class='tk'><li><b>Use elevation consistently.</b> The higher an element sits, the larger and softer its shadow.</li><li><b>Layer for meaning.</b> Put the most important or temporary things on top.</li><li><b>Keep text on solid areas.</b> Text over busy layers loses contrast.</li></ul>`],
+['d-check','Quick check',quick([['Name three depth cues.','Overlap, shadow, size and atmosphere (paleness and blur for distance).'],['What does a larger, softer shadow suggest?','The element is higher above the surface.'],['Why keep text on a solid area?','Busy layers behind text reduce contrast and readability.']])],
+['d-recap','Big ideas',bigideas(['Overlap, shadow, size and atmosphere create depth.','In interfaces, layers show what is on top.','Use elevation consistently.'])]
+]);
+
+var L_PERS=shell('Perspective','Making things recede toward a vanishing point.','perspective',[
+['pe-what','What it is',`<h2>What perspective is</h2><p>Perspective is how designers show three-dimensional space on a flat surface. In <b>linear perspective</b>, lines that are parallel in real life appear to meet at a <b>vanishing point</b> on the <b>horizon line</b>, which sits at the viewer\u2019s eye level.</p><p>Things also get smaller as they get farther away. Together these cues create strong depth and drama.</p>`],
+['pe-explore','Move the vanishing point',`<h2>Move the vanishing point</h2><div class='panel'>${rng('pex','Vanishing point left or right',0,100,50,1,'%')}${rng('pey','Horizon height',20,150,90)}${chipsHtml('pec',[['on','Guides on'],['off','Guides off']],'on','Guides')}<div class='stage' id='pestage'></div><p class='mood' id='peo' aria-live='polite'></p></div>`],
+['pe-use','Use it well',`<h2>Using perspective well</h2><ul class='tk'><li><b>Pick the horizon first.</b> It sets the viewpoint for everything.</li><li><b>Use converging lines as leading lines</b> to point at the subject.</li><li><b>Stay consistent.</b> Objects in one scene should share the same vanishing points.</li></ul>`],
+['pe-check','Quick check',quick([['Where do parallel lines appear to meet?','At the vanishing point on the horizon line.'],['What does a low horizon suggest?','The viewer is looking up, which feels grand and dramatic.'],['What does the horizon line represent?','The viewer\u2019s eye level.']])],
+['pe-recap','Big ideas',bigideas(['Parallel lines converge at the vanishing point.','The horizon is eye level.','A high horizon looks down; a low horizon looks up.'])]
+]);
+
+var L_FLOW=shell('Visual flow','The path the eye takes through a design.','flow',[
+['vf-what','What it is',`<h2>What visual flow is</h2><p>Visual flow is the route the eye follows through a design. You steer it with <b>size</b> (big first), <b>contrast</b>, <b>leading lines</b> and <b>position</b>. In languages read from left to right, eyes tend to start at the top left.</p><p>Eye-tracking research has shown common scanning shapes. Two worth knowing are the <b>F-pattern</b> for text-heavy pages and the <b>Z-pattern</b> for simple, sparse pages.</p>`],
+['vf-explore','See the patterns',`<h2>See the patterns</h2><div class='panel'>${chipsHtml('vfc',[['f','F-pattern'],['z','Z-pattern']],'f','Pattern')}<div class='stage' id='vfstage'></div><p class='mood' id='vfo' aria-live='polite'></p></div>`],
+['vf-use','Use it well',`<h2>Using flow well</h2><ul class='tk'><li><b>Put the most important thing where eyes land first,</b> usually near the top left.</li><li><b>Place the call to action at the end of the path,</b> where the eye finishes.</li><li><b>Use leading lines and arrows</b> to point toward what matters.</li><li><b>Start lines of text with strong words.</b> In an F-pattern people often only read the first few words of each line.</li></ul>`],
+['vf-check','Quick check',quick([['When does the F-pattern show up?','On text-heavy pages, where people scan the first lines then move down the left edge.'],['Where does the Z-pattern end?','At the bottom right, which is a good spot for a call to action.'],['Name two ways to steer the eye.','Size, contrast, leading lines or position.']])],
+['vf-recap','Big ideas',bigideas(['Flow is the route the eye takes.','F-pattern suits text pages; Z-pattern suits sparse pages.','Put key content on the path and the action at its end.'])]
+]);
+
+var L_MIN=shell('Minimalism','Using only what is essential.','minimal',[
+['mi-what','What it is',`<h2>What minimalism is</h2><p>Minimalism keeps only the essential: generous space, few colours, simple type and plain shapes. It is not emptiness for its own sake. Every element that remains has to earn its place.</p><p>A useful test: remove an element and see whether anything important is lost. If not, leave it out.</p>`],
+['mi-explore','Remove clutter',`<h2>Remove clutter</h2><p>Drag the slider to remove decoration step by step.</p><div class='panel'>${rng('mil','Level of simplification',0,4,0)}<div class='stage' id='mistage' style='margin-top:14px'></div><p class='mood' id='mio' aria-live='polite'></p></div>`],
+['mi-use','Use it well',`<h2>Using minimalism well</h2><ul class='tk'><li><b>Simple is not the same as easy.</b> Minimal designs need very careful spacing and type.</li><li><b>Keep clear signposts.</b> Do not hide important actions or labels just to look clean.</li><li><b>Use one strong accent.</b> With little else going on, a single colour carries a lot.</li></ul>`],
+['mi-check','Quick check',quick([['What is the test for whether to keep an element?','Remove it and see whether anything important is lost.'],['Is minimal the same as empty?','No. Everything left must serve a purpose.'],['What is a risk of over-minimalism?','Hiding important actions or labels so people cannot find them.']])],
+['mi-recap','Big ideas',bigideas(['Minimalism keeps only the essentials.','Space, type and spacing do the work.','Do not hide what people need.'])]
+]);
+
+var L_MAX=shell('Maximalism','More is more: bold, layered and full of personality.','maximal',[
+['ma-what','What it is',`<h2>What maximalism is</h2><p>Maximalism embraces abundance: bold colour, layered pattern, big type, lots of imagery. It is the opposite of minimalism and it feels energetic, expressive and playful.</p><p>The secret is that good maximalism still has <b>structure</b>. Even when a poster is packed, there is a clear hierarchy so the eye knows where to start.</p>`],
+['ma-explore','Add layers',`<h2>Add layers</h2><p>Drag the slider to add one layer at a time. Watch how the headline stays in charge.</p><div class='panel'>${rng('mal','Layers',0,5,0)}<div class='stage' id='mastage' style='margin-top:14px'></div><p class='mood' id='mao' aria-live='polite'></p></div>`],
+['ma-use','Use it well',`<h2>Using maximalism well</h2><ul class='tk'><li><b>Keep one anchor.</b> A very clear headline or image gives the eye a starting point.</li><li><b>Repeat colours and shapes</b> so the layers feel related.</li><li><b>Protect the reading.</b> Place text on solid plates, as in the demo, so it stays legible.</li><li><b>Know your audience.</b> It suits events, entertainment and creative brands, less so serious or safety-critical content.</li></ul>`],
+['ma-check','Quick check',quick([['What keeps maximalism from becoming chaos?','A clear hierarchy and repeated colours and shapes.'],['How can text stay readable on a busy design?','Put it on a solid plate or give it very strong contrast.'],['When is maximalism a poor fit?','For serious, safety-critical or highly functional content.']])],
+['ma-recap','Big ideas',bigideas(['Maximalism is bold, layered and expressive.','It still needs a hierarchy and an anchor.','Protect legibility with solid plates and strong contrast.'])]
+]);
+
+LESSONS['composition']={html:L_COMP,init:initComposition,g:'c'};
+LESSONS['grid-systems']={html:L_GRID,init:initGrid,g:'c'};
+LESSONS['alignment']={html:L_ALIGN,init:initAlignment,g:'c'};
+LESSONS['framing']={html:L_FRAME,init:initFraming,g:'c'};
+LESSONS['cropping']={html:L_CROP,init:initCropping,g:'c'};
+LESSONS['depth-and-layering']={html:L_DEPTH,init:initDepth,g:'c'};
+LESSONS['perspective']={html:L_PERS,init:initPerspective,g:'c'};
+LESSONS['visual-flow']={html:L_FLOW,init:initFlow,g:'c'};
+LESSONS['minimalism']={html:L_MIN,init:initMinimalism,g:'c'};
+LESSONS['maximalism']={html:L_MAX,init:initMaximalism,g:'c'};
+function slug(t){return t.toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"");}
+
+var out = "";
+GROUPS.forEach(function(g){
+  out += '<section class="group '+g.cls+'" id="'+g.id+'"><div class="ghead"><div class="gbadge"><svg viewBox="0 0 48 48" aria-hidden="true" focusable="false" style="fill:none;stroke:currentColor;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round">'+ICONS[g.icon]+'</svg></div><div><h2>'+g.title+'</h2><p>'+g.intro+'</p></div></div><div class="grid">';
+  g.items.forEach(function(it){
+    var sl = slug(it[1]);
+    if (LESSONS[sl]) {
+      out += '<a class="card has" href="#'+sl+'" data-lesson="'+sl+'"><div class="tile">'+svg(it[0])+'</div><h3>'+it[1]+'</h3><p>'+it[2]+'</p><span class="more">Read the full lesson</span></a>';
+    } else {
+      out += '<article class="card"><div class="tile">'+svg(it[0])+'</div><h3>'+it[1]+'</h3><p>'+it[2]+'</p></article>';
+    }
+  });
+  out += '</div></section>';
+});
+document.getElementById("groups").innerHTML = out;
+
+/* hue lab */
+function hslToHex(h,s,l){
+  h=((h%360)+360)%360; s/=100; l/=100;
+  var k=function(n){return (n+h/30)%12;};
+  var a=s*Math.min(l,1-l);
+  var f=function(n){return l-a*Math.max(-1,Math.min(k(n)-3,Math.min(9-k(n),1)));};
+  var x=function(v){return Math.round(v*255).toString(16).padStart(2,"0");};
+  return ("#"+x(f(0))+x(f(8))+x(f(4))).toUpperCase();
+}
+function textOn(hex){
+  var r=parseInt(hex.substr(1,2),16),g=parseInt(hex.substr(3,2),16),b=parseInt(hex.substr(5,2),16);
+  var lin=function(c){c/=255;return c<=0.03928?c/12.92:Math.pow((c+0.055)/1.055,2.4);};
+  var L=0.2126*lin(r)+0.7152*lin(g)+0.0722*lin(b);
+  return L>0.4?"#111111":"#FFFFFF";
+}
+var slider=document.getElementById("hue"), sw=document.getElementById("sw");
+function draw(){
+  var h=parseInt(slider.value,10);document.getElementById('hueval').textContent=h;
+  var list=[
+    {n:"Your hue (base)",d:0,big:true},
+    {n:"Opposite (complementary)",d:180},
+    {n:"Neighbour (analogous)",d:-30},
+    {n:"Neighbour (analogous)",d:30},
+    {n:"Triad one",d:120},
+    {n:"Triad two",d:240}
+  ];
+  var html="";
+  list.forEach(function(c){
+    var hex=hslToHex(h+c.d,72,52);
+    html+='<div class="'+(c.big?"big":"")+'" style="background:'+hex+';color:'+textOn(hex)+'">'+c.n+'<span>'+hex+'</span></div>';
+  });
+  sw.innerHTML=html;
+}
+slider.addEventListener("input",draw);
+draw();
+
+/* lesson helpers */
+function polar(cx,cy,r,deg){var a=(deg-90)*Math.PI/180;return [cx+r*Math.cos(a),cy+r*Math.sin(a)];}
+function wedge(cx,cy,r0,r1,a0,a1){
+  var p0=polar(cx,cy,r1,a0),p1=polar(cx,cy,r1,a1),p2=polar(cx,cy,r0,a1),p3=polar(cx,cy,r0,a0);
+  return 'M'+p0+'A'+r1+','+r1+' 0 0 1 '+p1+'L'+p2+'A'+r0+','+r0+' 0 0 0 '+p3+'Z';
+}
+function hexRgb(h){return [parseInt(h.substr(1,2),16),parseInt(h.substr(3,2),16),parseInt(h.substr(5,2),16)];}
+function mixHex(a,b,t){
+  var A=hexRgb(a),B=hexRgb(b);
+  return "#"+[0,1,2].map(function(i){return Math.round(A[i]+(B[i]-A[i])*t).toString(16).padStart(2,"0");}).join("").toUpperCase();
+}
+
+function initColourTheory(root){
+  var $=function(s){return root.querySelector(s);};
+  var $$=function(s){return Array.prototype.slice.call(root.querySelectorAll(s));};
+  var smooth=!(window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+
+  $$("[data-scroll]").forEach(function(b){
+    b.addEventListener("click",function(){
+      var t=root.querySelector("#"+b.getAttribute("data-scroll"));
+      if(t){t.scrollIntoView({behavior:smooth?"smooth":"auto",block:"start"});}
+    });
+  });
+
+  /* 1. colour wheel */
+  var TYPE={p:"Primary",s:"Secondary",t:"Tertiary"};
+  var WHEELS={
+    screen:[
+      {n:"Red",h:"#FF0000",t:"p"},{n:"Orange",h:"#FF8000",t:"t"},{n:"Yellow",h:"#FFFF00",t:"s",m:"Red light + green light"},
+      {n:"Chartreuse",h:"#80FF00",t:"t"},{n:"Green",h:"#00FF00",t:"p"},{n:"Spring green",h:"#00FF80",t:"t"},
+      {n:"Cyan",h:"#00FFFF",t:"s",m:"Green light + blue light"},{n:"Azure",h:"#0080FF",t:"t"},{n:"Blue",h:"#0000FF",t:"p"},
+      {n:"Violet",h:"#8000FF",t:"t"},{n:"Magenta",h:"#FF00FF",t:"s",m:"Red light + blue light"},{n:"Rose",h:"#FF0080",t:"t"}
+    ],
+    paint:[
+      {n:"Yellow",h:"#FEFE33",t:"p"},{n:"Yellow-orange",h:"#FABC02",t:"t"},{n:"Orange",h:"#FB9902",t:"s",m:"Red + yellow"},
+      {n:"Red-orange",h:"#FD5308",t:"t"},{n:"Red",h:"#FE2712",t:"p"},{n:"Red-violet",h:"#A7194B",t:"t"},
+      {n:"Violet",h:"#8601AF",t:"s",m:"Red + blue"},{n:"Blue-violet",h:"#3D01A4",t:"t"},{n:"Blue",h:"#0247FE",t:"p"},
+      {n:"Blue-green",h:"#0391CE",t:"t"},{n:"Green",h:"#66B032",t:"s",m:"Yellow + blue"},{n:"Yellow-green",h:"#D0EA2B",t:"t"}
+    ]
+  };
+  var wType="screen",wFilter="all",wSel=0;
+  var svgW=$("#wheel"),wro=$("#wreadout");
+  function drawWheel(){
+    var d=WHEELS[wType],h="";
+    d.forEach(function(c,i){
+      var dim=(wFilter!=="all"&&c.t!==wFilter);
+      h+='<path class="wedge" tabindex="0" role="button" aria-label="'+c.n+', '+TYPE[c.t].toLowerCase()+' colour" data-i="'+i+'" d="'+wedge(160,160,62,150,i*30-15,i*30+15)+'" fill="'+c.h+'" opacity="'+(dim?0.18:1)+'"'+(i===wSel?' style="stroke:var(--ink);stroke-width:5"':'')+'></path>';
+    });
+    svgW.innerHTML=h;
+    var c=d[wSel];
+    var how=c.t==="p"?"Cannot be made by mixing other colours in this model.":(c.t==="s"?"Made from: "+c.m+".":"A mix of its two neighbours on the wheel.");
+    wro.innerHTML='<div class="rswatch" style="background:'+c.h+'"></div><h4>'+c.n+'</h4><p>'+TYPE[c.t]+' colour, '+c.h+'</p><p>'+how+'</p><p>Click or tab to any segment of the wheel to learn about it.</p>';
+  }
+  function pickWedge(e){
+    var p=e.target.closest(".wedge");
+    if(!p)return;
+    wSel=parseInt(p.getAttribute("data-i"),10);
+    drawWheel();
+    var again=svgW.querySelector('[data-i="'+wSel+'"]');
+    if(again&&e.type==="keydown"){again.focus();}
+  }
+  svgW.addEventListener("click",pickWedge);
+  svgW.addEventListener("keydown",function(e){if(e.key==="Enter"||e.key===" "){e.preventDefault();pickWedge(e);}});
+  $$("[data-w]").forEach(function(b){
+    b.addEventListener("click",function(){
+      wType=b.getAttribute("data-w");
+      $$("[data-w]").forEach(function(x){x.setAttribute("aria-pressed",x===b?"true":"false");});
+      drawWheel();
+    });
+  });
+  $$("[data-f]").forEach(function(b){
+    b.addEventListener("click",function(){
+      wFilter=b.getAttribute("data-f");
+      $$("[data-f]").forEach(function(x){x.setAttribute("aria-pressed",x===b?"true":"false");});
+      drawWheel();
+    });
+  });
+  drawWheel();
+
+  /* 2. tints, tones, shades */
+  var th=$("#th");
+  function drawStrips(){
+    $('#thv').textContent=th.value;var base=hslToHex(parseInt(th.value,10),75,50);
+    var ts=[0,0.14,0.28,0.42,0.56,0.7,0.84];
+    function strip(id,target){
+      $(id).innerHTML=ts.map(function(t){var c=mixHex(base,target,t);return '<div style="background:'+c+'" title="'+c+'"></div>';}).join("");
+    }
+    strip("#s-tint","#FFFFFF");strip("#s-tone","#808080");strip("#s-shade","#000000");
+    $("#s-base").textContent="Base colour (far left of each strip): "+base+". Hover over any swatch to see its HEX code.";
+  }
+  th.addEventListener("input",drawStrips);
+  drawStrips();
+
+  /* 3. harmony explorer */
+  var SCH=[
+    {k:"comp",n:"Complementary",o:[0,180],d:"Two hues directly opposite each other. This gives maximum contrast and energy, and is great for making a call-to-action pop. Watch out: equal amounts vibrate and tire the eyes, so let one colour dominate and use the other as an accent."},
+    {k:"analog",n:"Analogous",o:[-30,0,30],d:"Three neighbouring hues. Calm, cohesive and natural, like a sunset or a forest. Watch out: there is little hue contrast, so create interest with big differences in lightness."},
+    {k:"triad",n:"Triadic",o:[0,120,240],d:"Three hues evenly spaced around the wheel. Lively and balanced while still varied. Watch out: it can feel childish at full saturation, so mute two of the colours and let one lead."},
+    {k:"split",n:"Split-complementary",o:[0,150,210],d:"A base hue plus the two hues either side of its opposite. It has strong contrast like a complementary scheme but is gentler and harder to get wrong, which makes it a good first choice."},
+    {k:"tetra",n:"Tetradic (rectangle)",o:[0,60,180,240],d:"Two complementary pairs forming a rectangle. Rich and varied. Watch out: four hues is a lot, so pick one dominant colour and keep the others softer."},
+    {k:"square",n:"Square",o:[0,90,180,270],d:"Four hues evenly spaced, 90 degrees apart. Maximum variety with even balance. Watch out: it needs a strong dominant colour or it turns chaotic."},
+    {k:"mono",n:"Monochromatic",o:[0],d:"One hue in many lightness and saturation steps. Elegant, safe and cohesive, and ideal for minimal interfaces. Watch out: it can feel flat, so add a neutral or one punchy accent for emphasis."}
+  ];
+  var hCur=1,hHue=340;
+  var hs=$("#hh"),hw=$("#hwheel"),hro=$("#hreadout"),hpal=$("#hpal"),hch=$("#hchips");
+  hch.innerHTML='<span class="lbl">Which harmony?</span>'+SCH.map(function(s,i){return '<button class="chip" type="button" data-s="'+i+'" aria-pressed="'+(i===hCur?"true":"false")+'">'+s.n+'</button>';}).join("");
+  var ring="";
+  for(var i=0;i<72;i++){
+    var col="hsl("+(i*5)+",80%,55%)";
+    ring+='<path d="'+wedge(160,160,92,150,i*5-2.6,i*5+2.6)+'" fill="'+col+'" stroke="'+col+'" stroke-width=".6"></path>';
+  }
+  function drawHarmony(){
+    var s=SCH[hCur],h=hHue,pts=[],cols=[];
+    if(s.k==="mono"){
+      [22,38,52,70,88].forEach(function(l){cols.push(hslToHex(h,65,l));});
+      pts=[h];
+    } else {
+      s.o.forEach(function(o){pts.push(h+o);cols.push(hslToHex(h+o,100,55));});
+    }
+    var xy=pts.map(function(p){return polar(160,160,121,p);});
+    var g='';
+    if(xy.length>1){g+='<polygon points="'+xy.map(function(p){return p.join(",");}).join(" ")+'" fill="none" stroke="var(--ink)" stroke-width="2.5" stroke-linejoin="round"></polygon>';}
+    xy.forEach(function(p,i){
+      var c=s.k==="mono"?hslToHex(h,65,52):hslToHex(pts[i],100,55);
+      g+='<circle cx="'+p[0]+'" cy="'+p[1]+'" r="13" fill="'+c+'" stroke="var(--ink)" stroke-width="4"></circle>';
+    });
+    hw.innerHTML=ring+g;
+    hro.innerHTML='<h4>'+s.n+'</h4><p>'+s.d+'</p>';
+    var labels=s.k==="mono"?["Darkest","Dark","Mid","Light","Lightest"]:s.o.map(function(o){return o===0?"Base":(o>0?"+":"\u2212")+Math.abs(o)+"\u00B0";});
+    hpal.innerHTML=cols.map(function(c,i){return '<div style="background:'+c+';color:'+textOn(c)+'">'+labels[i]+'<span>'+c+'</span></div>';}).join("");
+  }
+  hch.addEventListener("click",function(e){
+    var b=e.target.closest("[data-s]");
+    if(!b)return;
+    hCur=parseInt(b.getAttribute("data-s"),10);
+    $$("[data-s]").forEach(function(x){x.setAttribute("aria-pressed",x===b?"true":"false");});
+    drawHarmony();
+  });
+  hs.addEventListener("input",function(){$('#hhv').textContent=hs.value;hHue=parseInt(hs.value,10);drawHarmony();});
+  drawHarmony();
+}
+
+function prep(root){
+  var smooth=!(window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+  Array.prototype.slice.call(root.querySelectorAll('[data-scroll]')).forEach(function(b){
+    b.addEventListener('click',function(){var t=root.querySelector('#'+b.getAttribute('data-scroll'));if(t){t.scrollIntoView({behavior:smooth?'smooth':'auto',block:'start'});}});
+  });
+  return {$:function(s){return root.querySelector(s);},$$:function(s){return Array.prototype.slice.call(root.querySelectorAll(s));}};
+}
+function rgbToHsl(r,g,b){
+  r/=255;g/=255;b/=255;
+  var mx=Math.max(r,g,b),mn=Math.min(r,g,b),l=(mx+mn)/2,h=0,s=0,d=mx-mn;
+  if(d){s=d/(1-Math.abs(2*l-1));if(mx===r){h=((g-b)/d)%6;}else if(mx===g){h=(b-r)/d+2;}else{h=(r-g)/d+4;}h*=60;if(h<0){h+=360;}}
+  return [Math.round(h),Math.round(s*100),Math.round(l*100)];
+}
+function relLum(hex){
+  var c=hexRgb(hex).map(function(v){v/=255;return v<=0.03928?v/12.92:Math.pow((v+0.055)/1.055,2.4);});
+  return 0.2126*c[0]+0.7152*c[1]+0.0722*c[2];
+}
+function contrastRatio(a,b){var A=relLum(a),B=relLum(b);return (Math.max(A,B)+0.05)/(Math.min(A,B)+0.05);}
+function lerpHue(a,b,t){var d=((b-a+540)%360)-180;return (a+d*t+360)%360;}
+function hex2(n){return Math.max(0,Math.min(255,Math.round(n))).toString(16).padStart(2,'0');}
+
+function initPsychology(root){
+  var m=prep(root),$=m.$;
+  var C=[
+    {n:'Red',h:'#D62839',f:'Energy, urgency, passion, danger.',u:'Sale tags, alerts and errors, food brands, buttons that need instant attention.',c:'Red means luck and celebration in China and several other East Asian cultures. In many Western financial markets it signals loss, while in some East Asian markets red means prices are rising.'},
+    {n:'Orange',h:'#F28C28',f:'Friendly, playful, enthusiastic, affordable.',u:'Buttons and highlights, youth and creative brands, food and fitness.',c:'Bright orange on white is often low contrast, so check text legibility. It can feel cheap if overused.'},
+    {n:'Yellow',h:'#F5C400',f:'Optimism, warmth, attention, caution.',u:'Highlights, warnings, children’s products, anything that must be noticed fast.',c:'Hard to read as text on white. Meanings vary: in Thailand it is linked to the monarchy, while in some parts of Latin America it can be associated with mourning.'},
+    {n:'Green',h:'#2E9E4F',f:'Growth, nature, health, calm, “go”.',u:'Wellness and eco brands, finance, success messages and confirmed states.',c:'Red and green are hard to tell apart for many colour-blind people, so never rely on that pair alone. Green carries deep religious meaning in many Islamic cultures.'},
+    {n:'Blue',h:'#2F6FD8',f:'Trust, calm, stability, competence.',u:'Banks, healthcare, technology, social networks.',c:'It is so common in these fields that it can feel generic. Some designers avoid it for food because it is rare in nature there.'},
+    {n:'Purple',h:'#7B3FC4',f:'Luxury, creativity, imagination, mystery.',u:'Beauty and premium brands, creative tools, entertainment.',c:'Historically expensive to make, so it was tied to royalty in Europe. In parts of Latin America and Thailand it can be linked to mourning.'},
+    {n:'Pink',h:'#F0609A',f:'Warmth, care, softness, playfulness. Hot pink feels bold and modern.',u:'Beauty, sweets, fashion, youth brands, campaigns that want energy with friendliness.',c:'Avoid assuming pink is for any one group. Audiences are more varied than the stereotype.'},
+    {n:'Black',h:'#14141A',f:'Power, sophistication, luxury, seriousness.',u:'Fashion and luxury, high-contrast text, premium technology.',c:'Linked with mourning in many Western cultures. Large black areas can feel heavy.'},
+    {n:'White',h:'#FFFFFF',f:'Clean, simple, open, pure.',u:'Healthcare, minimal technology, backgrounds and breathing space.',c:'Worn at weddings in many Western countries but linked with mourning in several East Asian cultures. Too much can feel cold or empty.'}
+  ];
+  var cur=0;
+  $('#pbtns').innerHTML=C.map(function(c,i){return "<button class='swbtn' type='button' data-i='"+i+"' aria-label='"+c.n+"' aria-pressed='"+(i===cur)+"' style='background:"+c.h+"'></button>";}).join('');
+  function draw(){
+    var c=C[cur];
+    Array.prototype.slice.call(root.querySelectorAll('.swbtn')).forEach(function(b,i){b.setAttribute('aria-pressed',i===cur?'true':'false');});
+    $('#pout').innerHTML="<div class='rswatch' style='background:"+c.h+"'></div><div class='readout'><h4>"+c.n+"</h4></div><div class='facts'><p><b>Often feels:</b> "+c.f+"</p><p><b>Designers use it for:</b> "+c.u+"</p><p><b>Watch out:</b> "+c.c+"</p></div><span class='mockbtn' style='background:"+c.h+";color:"+textOn(c.h)+";border:1px solid var(--line)'>Example button</span>";
+  }
+  $('#pbtns').addEventListener('click',function(e){var b=e.target.closest('.swbtn');if(!b)return;cur=parseInt(b.getAttribute('data-i'),10);draw();});
+  draw();
+}
+
+function initHarmony(root){
+  var m=prep(root),$=m.$,$$=m.$$;
+  var S=[{n:'Complementary',a:180,b:180},{n:'Analogous',a:30,b:-30},{n:'Triadic',a:120,b:240},{n:'Split-complementary',a:150,b:210}];
+  var cur=0,hue=215;
+  $('#hmchips').innerHTML='<span class=\'lbl\'>Which harmony?</span>'+S.map(function(s,i){return "<button class='chip' type='button' data-s='"+i+"' aria-pressed='"+(i===cur)+"'>"+s.n+"</button>";}).join('');
+  function draw(){
+    var s=S[cur];
+    var bar=hslToHex(hue,62,40),bg=hslToHex(hue,50,96),txt=hslToHex(hue,55,14),body=hslToHex(hue,25,32),acc=hslToHex(hue+s.a,85,50),t2=hslToHex(hue+s.b,70,90),t2t=hslToHex(hue+s.b,60,22);
+    $('#hmock').innerHTML="<div class='mock' style='background:"+bg+"'><div class='bar' style='background:"+bar+";color:"+textOn(bar)+"'>Greenhouse Studio</div><div class='bd'><h4 style='color:"+txt+"'>Plants for small spaces</h4><p style='color:"+body+"'>Pick a kit and we send everything you need.</p><span class='tag' style='background:"+t2+";color:"+t2t+"'>New</span><span class='tag' style='background:"+t2+";color:"+t2t+"'>Easy care</span><br><span class='mockbtn' style='background:"+acc+";color:"+textOn(acc)+"'>Shop kits</span></div></div>";
+    var roles=[['Base (bar)',bar],['Background tint',bg],['Heading',txt],['Accent (button)',acc],['Tags',t2]];
+    $('#hmpal').innerHTML=roles.map(function(r){return "<div style='background:"+r[1]+";color:"+textOn(r[1])+"'>"+r[0]+"<span>"+r[1]+"</span></div>";}).join('');
+  }
+  $('#hmchips').addEventListener('click',function(e){var b=e.target.closest('[data-s]');if(!b)return;cur=parseInt(b.getAttribute('data-s'),10);$$('[data-s]').forEach(function(x){x.setAttribute('aria-pressed',x===b?'true':'false');});draw();});
+  $('#hhs').addEventListener('input',function(e){$('#hhsv').textContent=e.target.value;hue=parseInt(e.target.value,10);draw();});
+  draw();
+}
+
+function initContrast(root){
+  var m=prep(root),$=m.$;
+  $('#csl').addEventListener('input',function(e){$('#cslv').textContent=Math.round(e.target.value/8*100);$('#csq').style.setProperty('--b',e.target.value+'px');});
+}
+
+function initValue(root){
+  var m=prep(root),$=m.$;
+  var H=215,S=70,L=50,W=280;
+  var cv=$('#vcv'),ctx=cv.getContext('2d');
+  cv.width=W;cv.height=W;
+  function paint(){
+    for(var x=0;x<W;x+=4){for(var y=0;y<W;y+=4){ctx.fillStyle='hsl('+H+','+(x/W*100)+'%,'+(100-y/W*100)+'%)';ctx.fillRect(x,y,4,4);}}
+    var px=S/100*W,py=(100-L)/100*W;
+    ctx.beginPath();ctx.arc(px,py,9,0,Math.PI*2);ctx.lineWidth=4;ctx.strokeStyle='#fff';ctx.stroke();
+    ctx.beginPath();ctx.arc(px,py,9,0,Math.PI*2);ctx.lineWidth=1.5;ctx.strokeStyle='#000';ctx.stroke();
+  }
+  function lw(l){return l<25?'very dark':l<45?'dark':l<65?'mid-tone':l<85?'light':'very light';}
+  function sw(s){return s<15?'almost grey':s<45?'muted':s<75?'moderate':'vivid';}
+  function update(){
+    paint();
+    var hex=hslToHex(H,S,L),rgb=hexRgb(hex),g=Math.round(0.299*rgb[0]+0.587*rgb[1]+0.114*rgb[2]),gh='#'+hex2(g)+hex2(g)+hex2(g);
+    $('#vsv').textContent=S;$('#vlv').textContent=L;$('#vhv').textContent=H;
+    $('#vout').innerHTML="<div class='rswatch' style='background:"+hex+"'></div><h4>"+hex+"</h4><p>H "+H+", S "+S+"%, L "+L+"%</p><p>A "+lw(L)+", "+sw(S)+" colour.</p><div class='rswatch' style='background:"+gh+";height:44px'></div><p>Its greyscale equivalent ("+gh.toUpperCase()+")</p>";
+    var ls=[96,90,80,70,60,50,42,34,26,18],lb=['50','100','200','300','400','500','600','700','800','900'];
+    $('#vscale').innerHTML=ls.map(function(l,i){var c=hslToHex(H,S,l);return "<div style='background:"+c+";color:"+textOn(c)+"' title='"+c+"'>"+lb[i]+"</div>";}).join('');
+  }
+  function setFrom(e){
+    var r=cv.getBoundingClientRect(),x=Math.max(0,Math.min(1,(e.clientX-r.left)/r.width)),y=Math.max(0,Math.min(1,(e.clientY-r.top)/r.height));
+    S=Math.round(x*100);L=Math.round(100-y*100);$('#vs').value=S;$('#vl').value=L;update();
+  }
+  var down=false;
+  cv.addEventListener('pointerdown',function(e){down=true;try{cv.setPointerCapture(e.pointerId);}catch(x){}setFrom(e);});
+  cv.addEventListener('pointermove',function(e){if(down){setFrom(e);}});
+  cv.addEventListener('pointerup',function(){down=false;});
+  cv.addEventListener('pointercancel',function(){down=false;});
+  $('#vh').addEventListener('input',function(e){H=parseInt(e.target.value,10);update();});
+  $('#vs').addEventListener('input',function(e){S=parseInt(e.target.value,10);update();});
+  $('#vl').addEventListener('input',function(e){L=parseInt(e.target.value,10);update();});
+  update();
+}
+
+function hueName(h){
+  var t=[[0,'Red'],[15,'Red-orange'],[40,'Orange'],[55,'Yellow-orange'],[65,'Yellow'],[80,'Yellow-green'],[100,'Green'],[160,'Green-cyan'],[175,'Cyan'],[200,'Azure'],[225,'Blue'],[255,'Blue-violet'],[275,'Violet'],[295,'Purple'],[320,'Magenta'],[340,'Rose'],[355,'Red']];
+  var n=t[0][1];t.forEach(function(x){if(h>=x[0]){n=x[1];}});return n;
+}
+function initHue(root){
+  var m=prep(root),$=m.$;
+  function showHue(){
+    $('#uhv').textContent=$('#uh').value;var h=parseInt($('#uh').value,10),hex=hslToHex(h,80,50),comp=hslToHex(h+180,80,50);
+    $('#uout').innerHTML="<div class='rswatch' style='background:"+hex+";height:100px'></div><div class='readout'><h4>"+hueName(h)+"</h4><p>Angle "+h+" degrees, "+hex+"</p><p>Directly opposite on the wheel: "+hueName((h+180)%360)+" ("+comp+")</p></div>";
+  }
+  $('#uh').addEventListener('input',showHue);showHue();
+  var cs='',gs='';
+  for(var i=0;i<12;i++){var c=hslToHex(i*30,85,50);cs+="<div style='background:"+c+"'></div>";}
+  $('#ucol').innerHTML=cs;$('#ugrey').innerHTML=cs;
+  function shift(){
+    $('#ushv').textContent=$('#ush').value;var h=parseInt($('#ush').value,10),ls=[85,72,60,48,36,24,14],a='',b='';
+    ls.forEach(function(l){
+      a+="<div style='background:"+hslToHex(h,70,l)+"'></div>";
+      var t=l>50?(l-50)/50*0.4:(50-l)/50*0.4,hh=l>50?lerpHue(h,55,t):lerpHue(h,265,t);
+      b+="<div style='background:"+hslToHex(hh,70,l)+"'></div>";
+    });
+    $('#unaive').innerHTML=a;$('#ushift').innerHTML=b;
+  }
+  $('#ush').addEventListener('input',shift);shift();
+}
+
+function kelvinRgb(k){
+  var t=k/100,r,g,b;
+  if(t<=66){r=255;g=99.4708025861*Math.log(t)-161.1195681661;}else{r=329.698727446*Math.pow(t-60,-0.1332047592);g=288.1221695283*Math.pow(t-60,-0.0755148492);}
+  if(t>=66){b=255;}else if(t<=19){b=0;}else{b=138.5177312231*Math.log(t-10)-305.0447927307;}
+  return [r,g,b].map(function(v){return Math.max(0,Math.min(255,Math.round(v)));});
+}
+function initWarmCool(root){
+  var m=prep(root),$=m.$,$$=m.$$;
+  var M=[{n:'Warm light, cool shadow',a:'#FFE6B8',b:'#E9976B',c:'#3B4A8C',g:'#5C6BA8'},{n:'Cool light, warm shadow',a:'#D4E8FF',b:'#7FA9DA',c:'#7B3F3A',g:'#9A6A5E'},{n:'All warm',a:'#FFE6B8',b:'#E9976B',c:'#8A3B1F',g:'#A5604A'},{n:'All cool',a:'#D8ECFF',b:'#6F9FD8',c:'#1D3A66',g:'#4A6A99'}];
+  var cur=0;
+  $('#wmodes').innerHTML=M.map(function(x,i){return "<button class='chip' type='button' data-m='"+i+"' aria-pressed='"+(i===cur)+"'>"+x.n+"</button>";}).join('');
+  function sphere(){
+    var x=M[cur];
+    $('#wsph').innerHTML="<svg viewBox='0 0 320 210' role='img' aria-label='A sphere lit in the mode: "+x.n+"' style='width:100%;height:auto;border-radius:14px'><defs><radialGradient id='sg' cx='.35' cy='.3' r='.85'><stop offset='0' stop-color='"+x.a+"'/><stop offset='.5' stop-color='"+x.b+"'/><stop offset='1' stop-color='"+x.c+"'/></radialGradient></defs><rect width='320' height='210' fill='#E9EAEE'/><rect y='150' width='320' height='60' fill='#D9DBE2'/><ellipse cx='185' cy='158' rx='80' ry='14' fill='"+x.g+"' opacity='.55'/><circle cx='150' cy='95' r='62' fill='url(#sg)'/></svg>";
+  }
+  $('#wmodes').addEventListener('click',function(e){var b=e.target.closest('[data-m]');if(!b)return;cur=parseInt(b.getAttribute('data-m'),10);$$('[data-m]').forEach(function(y){y.setAttribute('aria-pressed',y===b?'true':'false');});sphere();});
+  sphere();
+  function kel(){
+    var k=parseInt($('#wk').value,10),c=kelvinRgb(k);
+    $('#wkv').textContent=k;
+    $('#wksw').style.background='rgb('+c.join(',')+')';
+    var d=k<2300?'candle light':k<3300?'a warm household bulb':k<4800?'a cool white bulb, or low morning sun':k<6000?'around midday sun':k<7500?'an overcast sky':'open shade or a clear blue sky';
+    $('#wkt').textContent='Roughly '+d+'. This is an approximation of how the light looks.';
+  }
+  $('#wk').addEventListener('input',kel);kel();
+}
+
+function initModels(root){
+  var m=prep(root),$=m.$,$$=m.$$;
+  function update(){
+    var r=parseInt($('#mr').value,10),g=parseInt($('#mg').value,10),b=parseInt($('#mb').value,10);
+    $('#mrv').textContent=r;$('#mgv').textContent=g;$('#mbv').textContent=b;
+    var hex=('#'+hex2(r)+hex2(g)+hex2(b)).toUpperCase(),hsl=rgbToHsl(r,g,b);
+    var k=1-Math.max(r,g,b)/255,c=0,mm=0,y=0;
+    if(k<1){c=(1-r/255-k)/(1-k);mm=(1-g/255-k)/(1-k);y=(1-b/255-k)/(1-k);}
+    var cm=[c,mm,y,k].map(function(v){return Math.round(v*100);});
+    $('#msw').style.background=hex;
+    $('#mout').innerHTML="<h4>"+hex+"</h4><p>RGB: "+r+", "+g+", "+b+"</p><p>HSL: "+hsl[0]+", "+hsl[1]+"%, "+hsl[2]+"%</p><p>CMYK: "+cm.join('%, ')+"%</p>";
+    $('#mwarn').textContent=(hsl[1]>=90&&hsl[2]>=30&&hsl[2]<=70)?'This is a very vivid colour. Expect it to look duller when printed in CMYK.':'This colour should convert to print without a big change.';
+  }
+  ['#mr','#mg','#mb'].forEach(function(s){$(s).addEventListener('input',update);});
+  $$('[data-p]').forEach(function(b){b.addEventListener('click',function(){var p=b.getAttribute('data-p').split(',');$('#mr').value=p[0];$('#mg').value=p[1];$('#mb').value=p[2];update();});});
+  update();
+}
+
+function initAccess(root){
+  var m=prep(root),$=m.$,$$=m.$$;
+  function check(){
+    var fg=$('#afg').value,bg=$('#abg').value,r=contrastRatio(fg,bg);$('#afgx').textContent=fg.toUpperCase();$('#abgx').textContent=bg.toUpperCase();
+    var s=$('#asamp');s.style.color=fg;s.style.background=bg;
+    $('#aratio').textContent='Contrast ratio: '+r.toFixed(2)+' : 1';
+    var T=[['Normal text, AA',4.5],['Large text, AA',3],['UI parts, AA',3],['Normal text, AAA',7],['Large text, AAA',4.5]];
+    $('#ares').innerHTML=T.map(function(t){var ok=r>=t[1];return "<div style='border-color:"+(ok?'var(--g3)':'var(--g1)')+"'><b>"+(ok?'Pass':'Fail')+"</b>"+t[0]+" (needs "+t[1]+")</div>";}).join('');
+  }
+  $('#afg').addEventListener('input',check);$('#abg').addEventListener('input',check);
+  var vis='none',ahK='comp',ahH=215;
+  var AHS={comp:[0,180],analog:[-30,0,30],triad:[0,120,240],split:[0,150,210],tetra:[0,60,180,240],square:[0,90,180,270]};
+  var AHN={none:'typical vision','f-pro':'protanopia (red-blind)','f-deu':'deuteranopia (green-blind)','f-tri':'tritanopia (blue-blind)','f-grey':'greyscale (no colour)'};
+  var MAT={'f-pro':[[0.567,0.433,0],[0.558,0.442,0],[0,0.242,0.758]],'f-deu':[[0.625,0.375,0],[0.7,0.3,0],[0,0.3,0.7]],'f-tri':[[0.95,0.05,0],[0,0.433,0.567],[0,0.475,0.525]],'f-grey':[[0.299,0.587,0.114],[0.299,0.587,0.114],[0.299,0.587,0.114]]};
+  function simHex(hex){var M=MAT[vis];if(!M){return hex.toUpperCase();}var c=hexRgb(hex);return ('#'+M.map(function(r){return hex2(r[0]*c[0]+r[1]*c[1]+r[2]*c[2]);}).join('')).toUpperCase();}
+  function drawH(){
+    var cols,labels;
+    if(ahK==='mono'){cols=[22,38,52,70,88].map(function(l){return hslToHex(ahH,65,l);});labels=['Darkest','Dark','Mid','Light','Lightest'];}
+    else{var o=AHS[ahK];cols=o.map(function(x){return hslToHex(ahH+x,100,55);});labels=o.map(function(x){return x===0?'Base':(x>0?'+':'\u2212')+Math.abs(x)+'\u00B0';});}
+    var sims=cols.map(simHex);
+    function row(arr){return arr.map(function(c,i){return "<div style='background:"+c+";color:"+textOn(c)+"'>"+labels[i]+"<span>"+c+"</span></div>";}).join('');}
+    $('#ahrow1').innerHTML=row(cols);
+    $('#ahrow2').innerHTML=row(sims);
+    $('#ahlab').textContent='As seen with '+AHN[vis];
+    var close=false,i,j;
+    for(i=0;i<sims.length;i++){for(j=i+1;j<sims.length;j++){var a=hexRgb(sims[i]),b=hexRgb(sims[j]);if(Math.sqrt(Math.pow(a[0]-b[0],2)+Math.pow(a[1]-b[1],2)+Math.pow(a[2]-b[2],2))<45){close=true;}}}
+    $('#aho').textContent=vis==='none'?'Choose a vision type in the buttons above to compare.':close?'Some of these colours look very similar to this viewer. If they carry different meanings, add a label, icon or pattern.':'These colours stay distinguishable for this viewer, but always check contrast too.';
+  }
+  bindChips(root,'ahc',function(v){ahK=v;drawH();});
+  onRng(root,'ahh',function(v){ahH=v;drawH();});
+  drawH();
+  $('#aswap').addEventListener('click',function(){var a=$('#afg').value;$('#afg').value=$('#abg').value;$('#abg').value=a;check();});
+  check();
+  $('#afilters').addEventListener('click',function(e){
+    var b=e.target.closest('[data-f]');if(!b)return;
+    var f=b.getAttribute('data-f');
+    $$('#afilters [data-f]').forEach(function(x){x.setAttribute('aria-pressed',x===b?'true':'false');});
+    $('#asim').style.filter=f==='none'?'none':'url(#'+f+')';vis=f;drawH();
+  });
+}
+
+function initShape(root){
+  var m=prep(root),$=m.$;
+  var D={
+    circle:{svg:`<circle cx='100' cy='100' r='72'/>`,f:'Friendly, whole, safe, communal.',u:'Avatars, buttons, badges, anything meant to feel welcoming.',w:'Can feel soft or unfocused when overused.'},
+    square:{svg:`<rect x='36' y='36' width='128' height='128'/>`,f:'Stable, honest, ordered, dependable.',u:'Grids, cards, and brands that want to feel reliable.',w:'Can feel rigid or boxy.'},
+    triangle:{svg:`<polygon points='100,28 172,160 28,160'/>`,f:'Energy, direction, tension, progress.',u:'Play buttons, warning signs, anything that points.',w:'Sharp points can feel aggressive, and pointing down can feel unstable.'},
+    blob:{svg:`<path d='M100 28c36-6 74 18 72 58s-30 78-72 76-72-34-70-72 24-56 70-62z'/>`,f:'Organic, human, playful, natural.',u:'Wellness, food and friendly technology brands.',w:'Can feel messy without a clear system around it.'}
+  };
+  function draw(k){
+    var d=D[k];
+    $('#shsvg').innerHTML=`<svg viewBox='0 0 200 200' width='240' role='img' aria-label='${k}' style='fill:var(--c)'>${d.svg}</svg>`;
+    $('#shout').innerHTML=`<h4>${k.charAt(0).toUpperCase()+k.slice(1)}</h4><div class='facts'><p><b>Often feels:</b> ${d.f}</p><p><b>Used for:</b> ${d.u}</p><p><b>Watch out:</b> ${d.w}</p></div>`;
+  }
+  bindChips(root,'shc',draw);draw('circle');
+}
+
+function initForm(root){
+  var m=prep(root),$=m.$,mode='shaded',ang=315;
+  function draw(){
+    var a=ang*Math.PI/180,hx=0.5+0.3*Math.sin(a),hy=0.5-0.3*Math.cos(a),sx=150-Math.sin(a)*45;
+    var fill=mode==='flat'?'#3A7BD5':'url(#fg)';
+    var sh=mode==='shadow'?`<ellipse cx='${sx}' cy='178' rx='64' ry='12' fill='#000' opacity='.22'/>`:'';
+    $('#fstage').innerHTML=`<svg viewBox='0 0 300 200' width='100%' style='max-width:380px' role='img' aria-label='A sphere lit from a chosen direction'><defs><radialGradient id='fg' cx='${hx}' cy='${hy}' r='.75'><stop offset='0' stop-color='#CFE2FF'/><stop offset='.45' stop-color='#3A7BD5'/><stop offset='1' stop-color='#0F2A55'/></radialGradient></defs>${sh}<circle cx='150' cy='95' r='70' fill='${fill}'/></svg>`;
+  }
+  bindChips(root,'fm',function(v){mode=v;draw();});
+  onRng(root,'fa',function(v){ang=v;draw();});
+  draw();
+}
+
+function initLine(root){
+  var m=prep(root),$=m.$,w=6,amp=18,dash='solid';
+  function draw(){
+    var d='M20,90',x;
+    for(x=20;x<=380;x+=4){d+=' L'+x+','+(90+amp*Math.sin((x-20)/38)).toFixed(1);}
+    var da=dash==='solid'?'none':dash==='dashed'?(w*3)+' '+(w*2):'0.1 '+(w*2.2);
+    $('#lsvg').innerHTML=`<svg viewBox='0 0 400 180' width='100%' role='img' aria-label='A line with the chosen weight, waviness and style'><path d='${d}' fill='none' stroke='var(--c)' stroke-width='${w}' stroke-linecap='round' stroke-linejoin='round' stroke-dasharray='${da}'/></svg>`;
+    var a=w<3?'Delicate':w<8?'Steady':'Bold',b=amp<4?'straight and precise':amp<20?'a gentle, relaxed curve':'wavy and playful';
+    $('#lmood').textContent=a+' weight with '+b+(dash==='solid'?'.':dash==='dashed'?', broken into dashes, which feels technical or unfinished.':', drawn as dots, which feels light and decorative.');
+  }
+  onRng(root,'lw',function(v){w=v;draw();});
+  onRng(root,'la',function(v){amp=v;draw();});
+  bindChips(root,'ld',function(v){dash=v;draw();});
+  draw();
+}
+
+function initTexture(root){
+  var m=prep(root),$=m.$,T={grain:'0.9',cloud:'0.03',coarse:'0.2',brushed:'0.005 0.7'},kind='grain',amt=40;
+  function draw(){
+    $('#tstage').innerHTML=`<svg viewBox='0 0 320 180' width='100%' style='max-width:420px;border-radius:14px' role='img' aria-label='A coloured panel with a texture overlay'><defs><filter id='tx' x='0' y='0' width='100%' height='100%'><feTurbulence type='fractalNoise' baseFrequency='${T[kind]}' numOctaves='3' seed='4' result='n'/><feColorMatrix in='n' type='saturate' values='0'/></filter></defs><rect width='320' height='180' fill='#E8456B'/><rect width='320' height='180' filter='url(#tx)' opacity='${amt/100}' style='mix-blend-mode:multiply'/><text x='160' y='108' text-anchor='middle' font-size='56' font-weight='700' fill='#fff' font-family='sans-serif'>Aa</text></svg>`;
+  }
+  bindChips(root,'tc',function(v){kind=v;draw();});
+  onRng(root,'ta',function(v){amt=v;draw();});
+  draw();
+}
+
+function initPattern(root){
+  var m=prep(root),$=m.$,k='dots',s=28,h=215;
+  function draw(){
+    var c=hslToHex(h,70,45),bg=hslToHex(h,60,94),t='',tr='';
+    if(k==='dots'){t=`<circle cx='${s/2}' cy='${s/2}' r='${s*0.18}' fill='${c}'/>`;}
+    if(k==='stripes'){t=`<rect width='${s*0.4}' height='${s}' fill='${c}'/>`;tr=` patternTransform='rotate(45)'`;}
+    if(k==='diamonds'){t=`<polygon points='${s/2},${s*0.1} ${s*0.9},${s/2} ${s/2},${s*0.9} ${s*0.1},${s/2}' fill='${c}'/>`;}
+    if(k==='checks'){t=`<rect width='${s/2}' height='${s/2}' fill='${c}'/><rect x='${s/2}' y='${s/2}' width='${s/2}' height='${s/2}' fill='${c}'/>`;}
+    $('#pstage').innerHTML=`<svg viewBox='0 0 320 200' width='100%' style='border-radius:14px' role='img' aria-label='Pattern preview'><defs><pattern id='pt' width='${s}' height='${s}' patternUnits='userSpaceOnUse'${tr}>${t}</pattern></defs><rect width='320' height='200' fill='${bg}'/><rect width='320' height='200' fill='url(#pt)'/></svg>`;
+  }
+  bindChips(root,'pk',function(v){k=v;draw();});
+  onRng(root,'ps',function(v){s=v;draw();});
+  onRng(root,'ph',function(v){h=v;draw();});
+  draw();
+}
+
+function pr(i,k){var x=Math.sin(i*127.1+k*311.7)*43758.5453;return x-Math.floor(x);}
+
+function initSpace(root){
+  var m=prep(root),$=m.$,gap=16,pad=20;
+  function draw(){
+    $('#spm').innerHTML=`<div class='mock' style='background:#fff;color:#14213D'><div style='padding:${pad}px;display:flex;flex-direction:column;gap:${gap}px'><div style='font-weight:700;font-size:1.25rem'>Autumn collection</div><div style='color:#4A5070'>Soft knits and warm layers for cooler days.</div><div><span class='mockbtn' style='margin:0;background:#E8456B;color:#fff'>Browse</span></div></div></div>`;
+    var t=(gap+pad)<24?'Cramped: dense and urgent, hard to scan.':(gap+pad)<56?'Comfortable: easy to scan and group.':'Airy: calm and premium, but items start to feel disconnected.';
+    $('#spo').textContent=t;
+  }
+  onRng(root,'spg',function(v){gap=v;draw();});
+  onRng(root,'spp',function(v){pad=v;draw();});
+  draw();
+}
+
+function initNegative(root){
+  var m=prep(root),$=m.$,mode='dark',r=50;
+  function draw(){
+    var bg=mode==='dark'?'#14213D':'#F4F4F6',fg=mode==='dark'?'#F4F4F6':'#14213D';
+    $('#nstage').innerHTML=`<svg viewBox='0 0 200 200' width='240' role='img' aria-label='A square with a circle in the middle'><rect width='200' height='200' fill='${bg}' stroke='#9AA0BC'/><circle cx='100' cy='100' r='${r}' fill='${fg}'/></svg>`;
+    var circ=Math.min(1,Math.PI*r*r/40000),light=mode==='dark'?circ:1-circ,pct=Math.round(light*100);
+    $('#nout').textContent='Light area: '+pct+'%. '+(pct<20?'Mostly dark, so it feels dense and heavy.':pct<60?'Balanced between light and dark.':'Mostly light, so it feels airy and quiet.')+' Which shape do you see as the figure?';
+  }
+  bindChips(root,'nc',function(v){mode=v;draw();});
+  onRng(root,'nr',function(v){r=v;draw();});
+  draw();
+}
+
+function initHierarchy(root){
+  var m=prep(root),$=m.$,on={size:false,weight:false,colour:false,space:false,shout:false};
+  function draw(){
+    var s=on.shout,base='font-size:1rem;font-weight:400;color:#6B7090;';
+    var hs=s?'font-size:1.4rem;font-weight:800;color:#E8456B;':(on.size?'font-size:2rem;':'font-size:1rem;')+(on.weight?'font-weight:800;':'font-weight:400;')+(on.colour?'color:#14213D;':'color:#6B7090;');
+    var bs=s?'font-size:1.4rem;font-weight:800;color:#E8456B;':base;
+    var bt=s?'background:#FFE04D;color:#E8456B;font-size:1.4rem;font-weight:800;':(on.colour?'background:#E8456B;color:#fff;font-weight:700;':'background:#D8DBE8;color:#6B7090;font-weight:400;');
+    var mb=on.space?'18px':'4px',mt=on.space?'22px':'4px';
+    $('#hm').innerHTML=`<div class='mock' style='background:#fff'><div class='bd' style='padding:20px'><div style='${bs}margin-bottom:2px'>New this week</div><div style='${hs}margin-bottom:${mb}'>Autumn collection</div><div style='${bs}'>Soft knits and warm layers for cooler days.</div><div style='margin-top:${mt}'><span class='mockbtn' style='margin:0;${bt}'>Browse</span></div></div></div>`;
+    var act=['size','weight','colour','space'].filter(function(k){return on[k];});
+    $('#ho').textContent=s?'When everything shouts, your eye has nowhere to go.':act.length===0?'Everything has the same weight, so nothing leads.':'Active tools: '+act.join(', ')+'. '+(act.length>=3?'Now the headline clearly leads, then the details, then the button.':'Add more tools to strengthen the order.');
+  }
+  $('#hlev').addEventListener('click',function(e){var b=e.target.closest('.chip');if(!b)return;var k=b.getAttribute('data-v');on[k]=!on[k];b.setAttribute('aria-pressed',on[k]?'true':'false');draw();});
+  draw();
+}
+
+function initBalance(root){
+  var m=prep(root),$=m.$,wl=30,dl=100,wr=20,dr=150;
+  function draw(){
+    var L=wl*wl*dl,R=wr*wr*dr,tilt=Math.max(-25,Math.min(25,(L-R)/(L+R)*25)),rot=-tilt;
+    $('#bstage').innerHTML=`<svg viewBox='0 0 400 220' width='100%' style='max-width:480px' role='img' aria-label='A seesaw with a ball on each side'><polygon points='200,152 175,205 225,205' fill='#9AA0BC'/><g transform='rotate(${rot.toFixed(2)} 200 150)'><rect x='40' y='146' width='320' height='8' rx='4' fill='#14213D'/><circle cx='${200-dl}' cy='${146-wl}' r='${wl}' fill='var(--c)'/><circle cx='${200+dr}' cy='${146-wr}' r='${wr}' fill='#E8456B'/></g></svg>`;
+    $('#bout').textContent=Math.abs(tilt)<1.5?'Balanced. The weight on each side is about equal.':(tilt>0?'The left side is heavier.':'The right side is heavier.')+' Move a ball or change its size to rebalance.';
+  }
+  onRng(root,'bwl',function(v){wl=v;draw();});
+  onRng(root,'bdl',function(v){dl=v;draw();});
+  onRng(root,'bwr',function(v){wr=v;draw();});
+  onRng(root,'bdr',function(v){dr=v;draw();});
+  draw();
+}
+
+function initSymmetry(root){
+  var m=prep(root),$=m.$;
+  var D={
+    sym:{t:'Symmetrical: both sides mirror each other. It feels formal, stable and calm.',s:`<line x1='160' y1='10' x2='160' y2='190' stroke='#9AA0BC' stroke-dasharray='4 5'/><circle cx='100' cy='70' r='28' fill='var(--c)'/><circle cx='220' cy='70' r='28' fill='var(--c)'/><rect x='60' y='120' width='44' height='44' fill='#E8456B'/><rect x='216' y='120' width='44' height='44' fill='#E8456B'/><polygon points='160,50 182,100 138,100' fill='#14213D'/>`},
+    asym:{t:'Asymmetrical: one large shape is balanced by several small ones. It feels dynamic and modern.',s:`<circle cx='100' cy='100' r='62' fill='var(--c)'/><circle cx='235' cy='55' r='18' fill='#E8456B'/><circle cx='275' cy='115' r='11' fill='#E8456B'/><circle cx='222' cy='150' r='24' fill='#14213D'/>`},
+    rad:{t:'Radial: elements spin around a centre. It draws the eye inward and feels harmonious.',s:`<circle cx='160' cy='100' r='20' fill='#14213D'/>`+[0,1,2,3,4,5,6,7].map(function(i){var a=i*Math.PI/4;return `<circle cx='${(160+Math.cos(a)*62).toFixed(1)}' cy='${(100+Math.sin(a)*62).toFixed(1)}' r='14' fill='${i%2?'#E8456B':'var(--c)'}'/>`;}).join('')}
+  };
+  function draw(k){$('#systage').innerHTML=`<svg viewBox='0 0 320 200' width='100%' style='max-width:440px' role='img' aria-label='${k} layout'>${D[k].s}</svg>`;$('#syo').textContent=D[k].t;}
+  bindChips(root,'syc',draw);draw('sym');
+}
+
+function initScale(root){
+  var m=prep(root),$=m.$,ratio=1.25,base=16;
+  var N=['Caption','Body text','Lead','Subhead','Heading','Headline'];
+  function draw(){
+    var rows=[],n;
+    for(n=4;n>=-1;n--){
+      var s=base*Math.pow(ratio,n);
+      rows.push(`<div style='display:flex;align-items:baseline;gap:14px;border-bottom:1px solid var(--line);padding:6px 0'><span style='flex:0 0 74px;color:var(--muted);font-size:.85rem'>${s.toFixed(1)}px</span><span style='font-size:${s}px;line-height:1.15;white-space:nowrap'>${N[n+1]}</span></div>`);
+    }
+    $('#scs').innerHTML=rows.join('');
+  }
+  bindChips(root,'scc',function(v){ratio=parseFloat(v);draw();});
+  onRng(root,'scb',function(v){base=v;draw();});
+  draw();
+}
+
+function initRhythm(root){
+  var m=prep(root),$=m.$,k='regular',sp=40;
+  function draw(){
+    var n=10,w=60+(n-1)*sp,h='',i;
+    for(i=0;i<n;i++){
+      var r=k==='regular'?14:k==='alternating'?(i%2?8:18):k==='progressive'?5+i*2.2:6+pr(i,3)*16;
+      h+=`<circle cx='${30+i*sp}' cy='45' r='${r.toFixed(1)}' fill='${i%2&&k==='alternating'?'#E8456B':'var(--c)'}'/>`;
+    }
+    $('#rstage').innerHTML=`<svg viewBox='0 0 ${w} 90' width='100%' role='img' aria-label='A row of circles with the chosen rhythm'>${h}</svg>`;
+    $('#ro').textContent={regular:'Regular: a steady beat. Calm and predictable.',alternating:'Alternating: a two-step beat. Feels lively but ordered.',progressive:'Progressive: steady change. Creates movement and direction.',random:'Random: no beat. Feels organic, but loses order.'}[k];
+  }
+  bindChips(root,'rc',function(v){k=v;draw();});
+  onRng(root,'rs',function(v){sp=v;draw();});
+  draw();
+}
+
+function initUnity(root){
+  var m=prep(root),$=m.$,v=20;
+  function draw(){
+    var h='',i;
+    for(i=0;i<12;i++){
+      var cx=40+(i%4)*80,cy=40+Math.floor(i/4)*65,hue=215+(pr(i,1)-0.5)*v*3.6,sz=Math.max(7,22+(pr(i,2)-0.5)*v*0.5),col=hslToHex(hue,70,52),t=pr(i,3)<v/100?pr(i,4):0,e;
+      if(t<0.34){e=`<circle cx='${cx}' cy='${cy}' r='${sz.toFixed(1)}' fill='${col}'/>`;}
+      else if(t<0.67){e=`<rect x='${(cx-sz).toFixed(1)}' y='${(cy-sz).toFixed(1)}' width='${(sz*2).toFixed(1)}' height='${(sz*2).toFixed(1)}' fill='${col}'/>`;}
+      else{e=`<polygon points='${cx},${(cy-sz).toFixed(1)} ${(cx+sz).toFixed(1)},${(cy+sz).toFixed(1)} ${(cx-sz).toFixed(1)},${(cy+sz).toFixed(1)}' fill='${col}'/>`;}
+      h+=e;
+    }
+    $('#ustage').innerHTML=`<svg viewBox='0 0 320 210' width='100%' style='max-width:440px' role='img' aria-label='A grid of shapes with the chosen amount of variety'>${h}</svg>`;
+    $('#uo').textContent=v<15?'Very unified, maybe monotonous.':v<55?'Balanced: clearly one family with some interest.':'Chaotic: little holds these together.';
+  }
+  onRng(root,'uv',function(x){v=x;draw();});
+  draw();
+}
+
+function initEmphasis(root){
+  var m=prep(root),$=m.$,lever='colour',focal=7;
+  function draw(){
+    var h='',i,fx=40+(focal%5)*60,fy=35+Math.floor(focal/5)*50;
+    for(i=0;i<20;i++){
+      var cx=40+(i%5)*60,cy=35+Math.floor(i/5)*50,isF=i===focal,near=!isF&&Math.abs(cx-fx)<=60&&Math.abs(cy-fy)<=50,el;
+      if(isF&&lever==='size'){el=`<circle cx='${cx}' cy='${cy}' r='26' fill='#9AA0BC'/>`;}
+      else if(isF&&lever==='colour'){el=`<circle cx='${cx}' cy='${cy}' r='14' fill='#E8456B'/>`;}
+      else if(isF&&lever==='shape'){el=`<rect x='${cx-14}' y='${cy-14}' width='28' height='28' fill='#9AA0BC'/>`;}
+      else if(near&&lever==='isolation'){el='';}
+      else{el=`<circle cx='${cx}' cy='${cy}' r='14' fill='#9AA0BC'/>`;}
+      h+=`<g data-i='${i}' style='cursor:pointer'>${el}<rect x='${cx-28}' y='${cy-24}' width='56' height='48' fill='transparent'/></g>`;
+    }
+    $('#estage').innerHTML=`<svg viewBox='0 0 340 210' width='100%' style='max-width:440px' role='group' aria-label='A field of dots. Click a dot to make it the focal point.'>${h}</svg>`;
+  }
+  bindChips(root,'ec',function(v){lever=v;draw();});
+  $('#estage').addEventListener('click',function(e){var g=e.target.closest('[data-i]');if(!g)return;focal=parseInt(g.getAttribute('data-i'),10);draw();});
+  $('#eshuf').addEventListener('click',function(){focal=Math.floor(Math.random()*20);draw();});
+  draw();
+}
+
+function initGestalt(root){
+  var m=prep(root),$=m.$,G='#9AA0BC';
+  function prox(){var h='',g,r,c;for(g=0;g<3;g++){for(r=0;r<4;r++){for(c=0;c<2;c++){h+=`<circle cx='${45+g*100+c*16}' cy='${30+r*35}' r='7' fill='var(--c)'/>`;}}}return h;}
+  function sim(){var h='',r,c;for(r=0;r<4;r++){for(c=0;c<6;c++){var cx=40+c*48,cy=30+r*36;h+=c===2?`<rect x='${cx-8}' y='${cy-8}' width='16' height='16' fill='#E8456B'/>`:`<circle cx='${cx}' cy='${cy}' r='8' fill='${G}'/>`;}}return h;}
+  var D={
+    proximity:{t:'Proximity: you see three groups, not 24 dots, because of the gaps between the pairs of columns.',s:prox},
+    similarity:{t:'Similarity: the red squares read as a single column because they look different from everything else.',s:sim},
+    closure:{t:'Closure: you see a circle and a triangle even though parts of the outlines are missing.',s:function(){return `<circle cx='95' cy='85' r='55' fill='none' stroke='var(--c)' stroke-width='7' stroke-dasharray='48 22'/><polygon points='240,30 295,140 185,140' fill='none' stroke='#E8456B' stroke-width='7' stroke-dasharray='60 24'/>`;}},
+    continuity:{t:'Continuity: the eye follows each smooth curve through the crossing point instead of seeing four separate pieces.',s:function(){return `<path d='M20,140 C100,10 220,10 300,140' fill='none' stroke='var(--c)' stroke-width='7' stroke-linecap='round' stroke-dasharray='0.1 13'/><path d='M20,40 C100,160 220,160 300,40' fill='none' stroke='#E8456B' stroke-width='7' stroke-linecap='round' stroke-dasharray='0.1 13'/>`;}},
+    region:{t:'Common region: the boxes group the dots into two sets, even though the spacing between all the dots is similar.',s:function(){var h=`<rect x='20' y='25' width='140' height='120' rx='14' fill='var(--c)' opacity='.18'/><rect x='175' y='25' width='130' height='120' rx='14' fill='#E8456B' opacity='.18'/>`,i;for(i=0;i<3;i++){h+=`<circle cx='${48+i*40}' cy='85' r='9' fill='var(--c)'/><circle cx='${200+i*40}' cy='85' r='9' fill='#E8456B'/>`;}return h;}}
+  };
+  function draw(k){$('#gstage').innerHTML=`<svg viewBox='0 0 320 170' width='100%' style='max-width:440px' role='img' aria-label='Demonstration of ${k}'>${D[k].s()}</svg>`;$('#go').textContent=D[k].t;}
+  bindChips(root,'gc',draw);draw('proximity');
+}
+
+function initComposition(root){
+  var m=prep(root),$=m.$,mode='thirds',guides='on';
+  var P={
+    centre:{x:160,y:100,h:100,t:'Centred: stable and formal, but it can feel static because the horizon splits the image in half.'},
+    thirds:{x:213.3,y:66.7,h:133.3,t:'Rule of thirds: the sun sits where two guide lines cross and the horizon sits on a line. It feels natural and lively.'},
+    off:{x:295,y:22,h:185,t:'Pushed to the edge: the subject feels cramped and the empty ground dominates.'}
+  };
+  function draw(){
+    var p=P[mode];
+    var g=guides==='on'?`<g stroke='#fff' stroke-width='1.5' stroke-dasharray='5 4' opacity='.9'><line x1='106.7' y1='0' x2='106.7' y2='200'/><line x1='213.3' y1='0' x2='213.3' y2='200'/><line x1='0' y1='66.7' x2='320' y2='66.7'/><line x1='0' y1='133.3' x2='320' y2='133.3'/></g>`:'';
+    $('#cstage').innerHTML=`<svg viewBox='0 0 320 200' width='100%' style='max-width:460px;border-radius:12px' role='img' aria-label='A sun over a horizon'><rect width='320' height='200' fill='#BFD8F5'/><rect y='${p.h}' width='320' height='${200-p.h}' fill='#7DB38A'/><circle cx='${p.x}' cy='${p.y}' r='18' fill='#F5B82E'/>${g}</svg>`;
+    $('#co').textContent=p.t;
+  }
+  bindChips(root,'cc',function(v){mode=v;draw();});
+  bindChips(root,'cg',function(v){guides=v;draw();});
+  draw();
+}
+
+function initGrid(root){
+  var m=prep(root),$=m.$,n=12,g=16,show='on';
+  function draw(){
+    var span=n>=3?Math.floor(n/3):n,cols='repeat('+n+',1fr)',cells='',i;
+    for(i=0;i<n;i++){cells+=`<div style='background:rgba(232,69,107,.22)'></div>`;}
+    var content=`<div style='grid-column:span ${n};height:34px;background:#14213D;border-radius:6px'></div>`+[0,1,2].map(function(){return `<div style='grid-column:span ${span};height:86px;background:#3A7BD5;border-radius:6px'></div>`;}).join('')+`<div style='grid-column:span ${n};height:24px;background:#9AA0BC;border-radius:6px'></div>`;
+    $('#gstage').innerHTML=`<div style='position:relative;width:100%;max-width:520px'><div style='display:grid;grid-template-columns:${cols};gap:${g}px'>${content}</div>`+(show==='on'?`<div style='position:absolute;top:0;left:0;right:0;bottom:0;display:grid;grid-template-columns:${cols};gap:${g}px;pointer-events:none'>${cells}</div>`:'')+`</div>`;
+    $('#gro').textContent=n+' column'+(n>1?'s':'')+' with '+g+'px gutters. Each card spans '+span+' column'+(span>1?'s':'')+'.';
+  }
+  onRng(root,'grn',function(v){n=v;draw();});
+  onRng(root,'grg',function(v){g=v;draw();});
+  bindChips(root,'grs',function(v){show=v;draw();});
+  draw();
+}
+
+function initAlignment(root){
+  var m=prep(root),$=m.$,mode='left';
+  function draw(){
+    var ta=mode==='messy'?'left':mode,off=mode==='messy'?[0,38,12,60]:[0,0,0,0];
+    $('#astage').innerHTML=`<div class='mock' style='background:#fff;color:#14213D;width:100%;max-width:420px;text-align:${ta}'><div class='bd' style='padding:20px'><div style='font-weight:700;font-size:1.3rem;margin-left:${off[0]}px'>Harvest dinner</div><div style='color:#4A5070;margin:8px 0 12px ${off[1]}px'>Join us on Friday for seasonal food and music.</div><div style='color:#4A5070;margin:0 0 14px ${off[2]}px'>Doors open at 7pm.</div><span class='mockbtn' style='margin:0 0 0 ${off[3]}px;background:#E8456B;color:#fff'>Reserve a table</span></div></div>`;
+    $('#alo').textContent={left:'Left: strong edge, easy to read. The safe default.',center:'Centred: formal and balanced, good for short lines like invitations.',right:'Right: unusual for text. Fine for numbers or short captions.',messy:'Messy: every line starts in a different place, so it looks careless even though the content is the same.'}[mode];
+  }
+  bindChips(root,'alc',function(v){mode=v;draw();});
+  draw();
+}
+
+function initFraming(root){
+  var m=prep(root),$=m.$,k='none';
+  function draw(){
+    var fr='';
+    if(k==='border'){fr=`<rect x='14' y='14' width='292' height='172' fill='none' stroke='#14213D' stroke-width='6'/>`;}
+    if(k==='window'){fr=`<path d='M0,0H320V200H0Z M70,40H250V160H70Z' fill='#14213D' fill-rule='evenodd' opacity='.88'/>`;}
+    if(k==='vignette'){fr=`<defs><radialGradient id='vg'><stop offset='.45' stop-color='#000' stop-opacity='0'/><stop offset='1' stop-color='#000' stop-opacity='.65'/></radialGradient></defs><rect width='320' height='200' fill='url(#vg)'/>`;}
+    if(k==='shapes'){fr=`<rect x='30' y='18' width='260' height='164' rx='18' fill='none' stroke='#14213D' stroke-width='5'/><rect x='58' y='42' width='204' height='116' rx='12' fill='none' stroke='#E8456B' stroke-width='4'/>`;}
+    $('#frstage').innerHTML=`<svg viewBox='0 0 320 200' width='100%' style='max-width:460px;border-radius:12px' role='img' aria-label='A subject with a frame type applied'><rect width='320' height='200' fill='#CFE0F5'/><circle cx='30' cy='30' r='14' fill='#9AA0BC'/><circle cx='292' cy='40' r='10' fill='#9AA0BC'/><circle cx='40' cy='172' r='12' fill='#9AA0BC'/><circle cx='282' cy='165' r='16' fill='#9AA0BC'/><circle cx='160' cy='100' r='36' fill='#F5B82E'/><circle cx='160' cy='100' r='20' fill='#E8456B'/>${fr}</svg>`;
+  }
+  bindChips(root,'frc',function(v){k=v;draw();});
+  draw();
+}
+
+function initCropping(root){
+  var m=prep(root),$=m.$,ar=1,z=1,px=50,py=50;
+  var SC=`<rect width='600' height='400' fill='#BFD8F5'/><circle cx='440' cy='110' r='42' fill='#F5B82E'/><path d='M0,300 C120,230 220,300 320,260 S520,230 600,280 V400 H0Z' fill='#7DB38A'/><rect x='60' y='240' width='60' height='40' fill='#9AA0BC'/><rect x='505' y='250' width='16' height='70' fill='#7A5A3A'/><circle cx='513' cy='235' r='34' fill='#4F9A66'/><circle cx='205' cy='255' r='18' fill='#E8456B'/><rect x='190' y='273' width='30' height='60' rx='8' fill='#E8456B'/><circle cx='275' cy='268' r='14' fill='#2F6FD8'/><rect x='262' y='282' width='26' height='50' rx='7' fill='#2F6FD8'/>`;
+  function draw(){
+    var bw=600,bh=600/ar;
+    if(bh>400){bh=400;bw=400*ar;}
+    var vw=bw/z,vh=bh/z,x=(600-vw)*px/100,y=(400-vh)*py/100;
+    $('#crstage').innerHTML=`<div style='width:100%;max-width:460px;aspect-ratio:${ar};border-radius:12px;overflow:hidden'><svg viewBox='${x.toFixed(1)} ${y.toFixed(1)} ${vw.toFixed(1)} ${vh.toFixed(1)}' preserveAspectRatio='xMidYMid slice' width='100%' height='100%' role='img' aria-label='A cropped landscape scene'>${SC}</svg></div>`;
+    $('#cro').textContent=z<1.4?'Loose crop: lots of context, the subject is small.':z<2.5?'Medium crop: the subject is clear and still has some surroundings.':'Tight crop: dramatic detail, but context is gone.';
+  }
+  bindChips(root,'crc',function(v){ar=parseFloat(v);draw();});
+  onRng(root,'crz',function(v){z=v;draw();});
+  onRng(root,'crx',function(v){px=v;draw();});
+  onRng(root,'cry',function(v){py=v;draw();});
+  draw();
+}
+
+function initDepth(root){
+  var m=prep(root),$=m.$,mode='flat';
+  var S={
+    flat:{t:'Flat: three cards side by side. There is no sense of front or back.',c:[[0,60,104,110,'#3A7BD5','none','none',1],[118,60,104,110,'#3A7BD5','none','none',1],[236,60,104,110,'#3A7BD5','none','none',1]]},
+    overlap:{t:'Overlap: the card that covers another reads as closer. This is the simplest depth cue.',c:[[10,20,150,110,'#9DBDEB','none','none',1],[80,60,150,110,'#6B9BE0','none','none',2],[170,100,150,110,'#3A7BD5','none','none',3]]},
+    shadow:{t:'Shadow: bigger, softer shadows suggest more height above the surface.',c:[[10,20,150,110,'#9DBDEB','0 2px 4px rgba(0,0,0,.25)','none',1],[80,60,150,110,'#6B9BE0','0 8px 16px rgba(0,0,0,.28)','none',2],[170,100,150,110,'#3A7BD5','0 18px 30px rgba(0,0,0,.35)','none',3]]},
+    atmosphere:{t:'Atmosphere: distant things are smaller, paler and blurrier. Front items are larger, sharper and more saturated.',c:[[10,24,116,84,'#B9CDEC','none','blur(1.6px)',1],[90,66,140,100,'#8CAEE3','0 6px 12px rgba(0,0,0,.2)','blur(.6px)',2],[170,100,170,120,'#2F6FD8','0 18px 30px rgba(0,0,0,.35)','none',3]]}
+  };
+  function draw(){
+    var s=S[mode];
+    $('#dstage').innerHTML=`<div style='position:relative;width:340px;max-width:100%;height:230px'>`+s.c.map(function(c){return `<div style='position:absolute;left:${c[0]}px;top:${c[1]}px;width:${c[2]}px;height:${c[3]}px;background:${c[4]};box-shadow:${c[5]};filter:${c[6]};z-index:${c[7]};border-radius:12px;border:2px solid #fff'></div>`;}).join('')+`</div>`;
+    $('#do').textContent=s.t;
+  }
+  bindChips(root,'dc',function(v){mode=v;draw();});
+  draw();
+}
+
+function initPerspective(root){
+  var m=prep(root),$=m.$,vx=50,hy=90,guides='on';
+  function draw(){
+    var x=vx*3.2;
+    var gl=guides==='on'?`<g stroke='#E8456B' stroke-width='1.3' opacity='.9'><line x1='${x}' y1='${hy}' x2='0' y2='200'/><line x1='${x}' y1='${hy}' x2='320' y2='200'/><line x1='${x}' y1='${hy}' x2='0' y2='0'/><line x1='${x}' y1='${hy}' x2='320' y2='0'/><line x1='${x}' y1='${hy}' x2='0' y2='${hy+40}'/><line x1='${x}' y1='${hy}' x2='320' y2='${hy+40}'/></g><line x1='0' y1='${hy}' x2='320' y2='${hy}' stroke='#14213D' stroke-width='1.5' stroke-dasharray='5 4'/><circle cx='${x}' cy='${hy}' r='5' fill='#E8456B'/>`:'';
+    $('#pestage').innerHTML=`<svg viewBox='0 0 320 200' width='100%' style='max-width:460px;border-radius:12px' role='img' aria-label='A road narrowing toward a vanishing point'><rect width='320' height='200' fill='#CFE0F5'/><rect y='${hy}' width='320' height='${200-hy}' fill='#B7C4A8'/><polygon points='${x},${hy} 70,200 250,200' fill='#6B7090'/><line x1='${x}' y1='${hy}' x2='160' y2='200' stroke='#fff' stroke-width='3' stroke-dasharray='10 8'/>${gl}</svg>`;
+    $('#peo').textContent=hy<70?'High horizon: you are looking down on the scene (a bird\u2019s-eye view). More ground is visible.':hy>120?'Low horizon: you are looking up (a worm\u2019s-eye view). More sky, and it feels grand and dramatic.':'Mid horizon: a neutral, eye-level view.';
+  }
+  onRng(root,'pex',function(v){vx=v;draw();});
+  onRng(root,'pey',function(v){hy=v;draw();});
+  bindChips(root,'pec',function(v){guides=v;draw();});
+  draw();
+}
+
+function initFlow(root){
+  var m=prep(root),$=m.$,k='f';
+  var layout=`<rect width='320' height='220' fill='#fff' stroke='#D8DBE8'/><rect x='10' y='10' width='300' height='22' rx='4' fill='#D8DBE8'/><rect x='10' y='42' width='140' height='92' rx='6' fill='#B7C9EE'/><rect x='165' y='48' width='140' height='10' rx='3' fill='#14213D'/><rect x='165' y='66' width='120' height='7' rx='3' fill='#9AA0BC'/><rect x='165' y='80' width='130' height='7' rx='3' fill='#9AA0BC'/><rect x='165' y='100' width='70' height='22' rx='11' fill='#E8456B'/><rect x='10' y='146' width='94' height='62' rx='6' fill='#D8DBE8'/><rect x='113' y='146' width='94' height='62' rx='6' fill='#D8DBE8'/><rect x='216' y='146' width='94' height='62' rx='6' fill='#D8DBE8'/>`;
+  var D={
+    f:{t:'F-pattern: eyes read across the top, drop down and read a shorter line, then scan down the left edge. Put key words at the start of lines.',p:'M16,21 H304 M16,58 H200 M16,21 V206',d:[[16,21],[16,58],[16,150]]},
+    z:{t:'Z-pattern: eyes go across the top, sweep diagonally down, then across the bottom. The end of the path is a good place for the call to action.',p:'M16,21 L304,21 L16,200 L304,200',d:[[16,21],[304,21],[16,200],[304,200]]}
+  };
+  function draw(){
+    var s=D[k],dots=s.d.map(function(d,i){return `<circle cx='${d[0]}' cy='${d[1]}' r='9' fill='#E8456B'/><text x='${d[0]}' y='${d[1]+4}' text-anchor='middle' font-size='11' font-weight='700' fill='#fff' font-family='sans-serif'>${i+1}</text>`;}).join('');
+    $('#vfstage').innerHTML=`<svg viewBox='0 0 320 220' width='100%' style='max-width:440px' role='img' aria-label='A page layout with the ${k} reading pattern drawn on top'>${layout}<path d='${s.p}' fill='none' stroke='#E8456B' stroke-width='3' stroke-linecap='round' stroke-linejoin='round' opacity='.85'/>${dots}</svg>`;
+    $('#vfo').textContent=s.t;
+  }
+  bindChips(root,'vfc',function(v){k=v;draw();});
+  draw();
+}
+
+function initMinimalism(root){
+  var m=prep(root),$=m.$,lv=0;
+  function draw(){
+    var bg=lv<1?'linear-gradient(135deg,#FFD1E8,#C6D8FF)':'#fff',sh=lv<2?'0 14px 34px rgba(0,0,0,.35)':'none',bd=lv<3?'3px dashed #E8456B':'1px solid #E3E6F0';
+    var n=2+(lv<1?1:0)+(lv<2?3:0)+(lv<3?2:0)+(lv<4?1:0);
+    var h=`<div style='position:relative;background:${bg};box-shadow:${sh};border:${bd};border-radius:16px;padding:20px;width:100%;max-width:360px;color:#14213D'>`;
+    if(lv<1){h+=`<span style='position:absolute;top:8px;right:14px;font-size:1.4rem'>\u2726 \u2736</span><span style='position:absolute;bottom:8px;left:14px;font-size:1.2rem'>\u2605 \u2726</span>`;}
+    if(lv<4){h+=`<div style='font-size:1.5rem'>\u25C6</div>`;}
+    if(lv<2){h+=`<span class='tag' style='background:#FFE04D;color:#14213D'>NEW</span>`;}
+    if(lv<3){h+=`<div style='font-size:.8rem;color:#4A5070'>Handmade since 1987</div>`;}
+    h+=`<div style='font-weight:800;font-size:1.5rem;margin:4px 0'>Everyday ceramics</div>`;
+    if(lv<3){h+=`<div style='color:#4A5070;margin-bottom:8px'>Small-batch mugs and bowls for daily use.</div>`;}
+    if(lv<2){h+=`<div style='margin-bottom:8px'>\u2605\u2605\u2605\u2605\u2606 (212 reviews)</div>`;}
+    h+=`<span class='mockbtn' style='margin:0;background:#E8456B;color:#fff'>Shop now</span>`;
+    if(lv<2){h+=` <span class='mockbtn' style='margin:0 0 0 6px;background:transparent;border:2px solid #14213D;color:#14213D'>Learn more</span>`;}
+    h+=`</div>`;
+    $('#mistage').innerHTML=h;
+    $('#mio').textContent=n+' elements on the card. '+(lv===0?'Everything competes for attention.':lv<4?'Better, but there is still more than the card needs.':'Only the headline and one action remain.');
+  }
+  onRng(root,'mil',function(v){lv=v;draw();});
+  draw();
+}
+
+function initMaximalism(root){
+  var m=prep(root),$=m.$,lv=0;
+  function draw(){
+    var bg=lv>=1?'#FF4F8B':'#F4F4F6',h=`<div style='position:relative;width:320px;max-width:100%;height:230px;overflow:hidden;border-radius:14px;background:${bg}'>`;
+    if(lv>=2){h+=`<div style='position:absolute;top:0;left:0;right:0;bottom:0;background-image:radial-gradient(#FFE04D 20%,transparent 21%);background-size:22px 22px;opacity:.7'></div>`;}
+    if(lv>=3){h+=`<div style='position:absolute;top:-30px;right:-20px;width:130px;height:130px;border-radius:50%;background:#2F6FD8'></div><div style='position:absolute;left:-10px;bottom:-12px;width:0;height:0;border-left:90px solid transparent;border-right:90px solid transparent;border-bottom:150px solid #00B8A9;opacity:.9'></div>`;}
+    if(lv>=4){h+=`<div style='position:absolute;top:30px;left:6px;font-size:96px;font-weight:800;line-height:1;color:transparent;-webkit-text-stroke:3px #14213D;opacity:.6'>MORE</div>`;}
+    if(lv>=5){h+=`<div style='position:absolute;top:10px;left:14px;font-size:2rem'>\u2605</div><div style='position:absolute;right:16px;bottom:16px;width:62px;height:62px;border-radius:50%;background:#FFE04D;color:#14213D;display:grid;place-items:center;font-weight:800;transform:rotate(-12deg)'>WOW</div><div style='position:absolute;right:70px;top:90px;font-size:1.6rem'>\u2726</div>`;}
+    h+=`<div style='position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);background:#14213D;color:#FFE04D;padding:10px 18px;border-radius:10px;font-weight:800;font-size:1.5rem;white-space:nowrap'>Night Market</div></div>`;
+    $('#mastage').innerHTML=h;
+    $('#mao').textContent='Layers: '+lv+'. '+(lv<3?'Still simple. Keep adding.':lv<5?'Getting richer, and the headline plate still reads first.':'Full maximalism: busy everywhere, but the headline plate is the clear anchor.');
+  }
+  onRng(root,'mal',function(v){lv=v;draw();});
+  draw();
+}
+
+/* routing between the overview and lessons */
+var homeEl=document.getElementById("home"),lessonEl=document.getElementById("lesson");
+function showLesson(id){
+  var L=LESSONS[id];
+  if(!L)return;
+  homeEl.hidden=true;lessonEl.hidden=false;lessonEl.className='wrap lesson '+(L.g||'');
+  lessonEl.innerHTML=L.html;
+  L.init(lessonEl);
+  window.scrollTo(0,0);
+  try{history.replaceState(null,"","#"+id);}catch(e){}
+}
+function showHome(){
+  lessonEl.hidden=true;lessonEl.innerHTML="";homeEl.hidden=false;
+  window.scrollTo(0,0);
+  try{history.replaceState(null,"",location.pathname+location.search);}catch(e){}
+}
+document.getElementById("groups").addEventListener("click",function(e){
+  var a=e.target.closest("a[data-lesson]");
+  if(a){e.preventDefault();showLesson(a.getAttribute("data-lesson"));}
+});
+lessonEl.addEventListener("click",function(e){
+  if(e.target.closest("[data-back]")){showHome();}
+});
+Array.prototype.slice.call(document.querySelectorAll('.jump a')).forEach(function(a){
+  a.addEventListener('click',function(e){
+    var t=document.getElementById((a.getAttribute('href')||'').slice(1));
+    if(!t){return;}
+    e.preventDefault();
+    var smooth=!(window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+    t.scrollIntoView({behavior:smooth?'smooth':'auto',block:'start'});
+  });
+});
+function copyText(t,btn){
+  function ok(){btn.classList.add('ok');clearTimeout(btn._t);btn._t=setTimeout(function(){btn.classList.remove('ok');},1400);}
+  function fallback(){try{var ta=document.createElement('textarea');ta.value=t;ta.setAttribute('readonly','');ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.select();var r=document.execCommand('copy');document.body.removeChild(ta);if(r){ok();}}catch(e){}}
+  if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(ok,fallback);}else{fallback();}
+}
+function wrapHex(root){
+  var w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,null),nodes=[],n,test=/#[0-9A-Fa-f]{6}(?![0-9A-Fa-f])/;
+  while((n=w.nextNode())){if(test.test(n.nodeValue)&&n.parentNode&&n.parentNode.closest&&!n.parentNode.closest('script,style,textarea,button,svg')){nodes.push(n);}}
+  nodes.forEach(function(n){
+    var frag=document.createDocumentFragment(),s=n.nodeValue,last=0,re=/#[0-9A-Fa-f]{6}(?![0-9A-Fa-f])/g,mm;
+    while((mm=re.exec(s))){
+      if(mm.index>last){frag.appendChild(document.createTextNode(s.slice(last,mm.index)));}
+      var b=document.createElement('button');b.type='button';b.className='hx';b.setAttribute('data-hex',mm[0].toUpperCase());b.setAttribute('aria-label','Copy '+mm[0].toUpperCase());b.textContent=mm[0];frag.appendChild(b);
+      last=mm.index+mm[0].length;
+    }
+    if(last<s.length){frag.appendChild(document.createTextNode(s.slice(last)));}
+    n.parentNode.replaceChild(frag,n);
+  });
+}
+document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('.hx');if(b){e.preventDefault();e.stopPropagation();copyText(b.getAttribute('data-hex'),b);}});
+var hxQueued=false;
+function queueHex(){if(hxQueued){return;}hxQueued=true;requestAnimationFrame(function(){hxQueued=false;wrapHex(document.body);});}
+new MutationObserver(queueHex).observe(document.body,{childList:true,subtree:true,characterData:true});
+queueHex();
+var startId=(location.hash||"").slice(1);
+if(LESSONS[startId]){showLesson(startId);}
+</script>
+</body>
+</html>
