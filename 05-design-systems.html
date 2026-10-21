@@ -1,0 +1,1125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Design Systems | Digital graphic designer knowledge map</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+
+:root{
+  --bg:#F2F4FA; --surface:#FFFFFF; --ink:#1B1F3B; --muted:#4A5070; --line:#D9DDEB;
+  --g1:#D93A62; --g2:#2468D8; --g3:#0E8467; --g4:#A86F00;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#12142A; --surface:#1C2040; --ink:#EEF0FB; --muted:#B4B9D6; --line:#2E3360;
+    --g1:#FF7A9A; --g2:#78A8FF; --g3:#45D1AE; --g4:#F2B93B;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#12142A; --surface:#1C2040; --ink:#EEF0FB; --muted:#B4B9D6; --line:#2E3360;
+  --g1:#FF7A9A; --g2:#78A8FF; --g3:#45D1AE; --g4:#F2B93B;
+  color-scheme:dark;
+}
+html{scroll-padding-top:env(safe-area-inset-top,0px);}
+*,*::before,*::after{box-sizing:inherit;}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"DM Sans",system-ui,-apple-system,"Segoe UI",sans-serif;font-size:17px;line-height:1.55;}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px;}
+h1,h2,h3{font-family:Sora,"DM Sans",system-ui,sans-serif;line-height:1.25;letter-spacing:0.01em;margin:0;}
+
+/* hero */
+.hero{padding:48px 0 40px;}
+.hero-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:36px;align-items:center;}
+.hero h1{font-size:clamp(2.2rem,5.4vw,3.8rem);font-weight:700;letter-spacing:0.01em;line-height:1.2;}
+.hero p.lead{font-size:1.15rem;color:var(--muted);max-width:34ch;margin:18px 0 22px;}
+.jump{display:flex;flex-wrap:wrap;gap:10px;}
+.jump a{color:var(--ink);text-decoration:none;font-weight:700;font-size:.95rem;padding:9px 16px;border-radius:999px;border:2px solid var(--c);background:var(--surface);}
+.jump a:hover{background:var(--c);color:var(--surface);}
+.jump a:focus-visible,input:focus-visible{outline:3px solid var(--ink);outline-offset:3px;}
+.lab{background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:22px;}
+.lab h2{font-size:1.25rem;margin-bottom:4px;}
+.lab p{margin:0 0 16px;color:var(--muted);font-size:.95rem;}
+.sw{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:18px;}
+.sw div{border-radius:12px;padding:30px 8px 8px;font-size:.78rem;font-weight:700;line-height:1.25;}
+.sw div span{display:block;font-weight:500;opacity:.9;}
+.sw div.big{grid-column:span 3;padding:46px 12px 12px;border-radius:16px;font-size:.9rem;}
+label{display:block;font-weight:700;font-size:.9rem;margin-bottom:8px;}
+input[type=range]{width:100%;height:14px;border-radius:99px;appearance:none;-webkit-appearance:none;background:linear-gradient(90deg,hsl(0 80% 55%),hsl(60 80% 55%),hsl(120 80% 45%),hsl(180 80% 45%),hsl(240 80% 60%),hsl(300 80% 55%),hsl(360 80% 55%));margin:0;}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:28px;height:28px;border-radius:50%;background:var(--surface);border:4px solid var(--ink);cursor:grab;}
+input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;background:var(--surface);border:4px solid var(--ink);cursor:grab;}
+
+/* groups */
+.group{padding:36px 0 12px;--c:var(--g1);}
+.group.f{--c:var(--g2);} .group.s{--c:var(--g3);} .group.c{--c:var(--g4);}
+.jump a.j1{--c:var(--g1);} .jump a.j2{--c:var(--g2);} .jump a.j3{--c:var(--g3);} .jump a.j4{--c:var(--g4);}
+.ghead{display:flex;gap:18px;align-items:center;margin-bottom:22px;}
+.gbadge{flex:0 0 72px;height:72px;border-radius:50%;background:var(--c);color:var(--surface);display:grid;place-items:center;}
+.gbadge svg{width:40px;height:40px;}
+.ghead h2{font-size:clamp(1.6rem,3.8vw,2.2rem);font-weight:700;}
+.ghead p{margin:6px 0 0;color:var(--muted);max-width:52ch;}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px;}
+.card{background:var(--surface);border:1px solid var(--line);border-top:5px solid var(--c);border-radius:6px 6px 18px 18px;padding:18px;}
+.tile{width:60px;height:60px;border-radius:16px;display:grid;place-items:center;color:var(--c);background:color-mix(in srgb,var(--c) 14%,var(--surface));margin-bottom:12px;}
+.tile svg{width:38px;height:38px;fill:none;stroke:currentColor;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;}
+.card h3{font-size:1.15rem;font-weight:700;margin-bottom:6px;}
+.card p{margin:0;color:var(--muted);font-size:.97rem;}
+[hidden]{display:none !important;}
+.note{margin:16px 0 0;color:var(--muted);font-size:.92rem;max-width:44ch;}
+.card.has{display:block;text-decoration:none;color:inherit;cursor:pointer;}
+.card.has:hover{border-color:var(--c);}
+.card.has:focus-visible{outline:3px solid var(--ink);outline-offset:3px;}
+.more{display:inline-block;margin-top:12px;font-weight:700;font-size:.92rem;color:var(--ink);padding:6px 12px;border-radius:999px;background:color-mix(in srgb,var(--c) 18%,var(--surface));}
+.lesson{--c:var(--g1);padding-top:20px;padding-bottom:40px;max-width:860px;}
+.btn{font:inherit;font-weight:700;cursor:pointer;border:2px solid var(--ink);background:var(--surface);color:var(--ink);padding:9px 16px;border-radius:999px;}
+.btn:hover{background:var(--ink);color:var(--surface);}
+.btn:focus-visible,.chip:focus-visible,summary:focus-visible{outline:3px solid var(--ink);outline-offset:3px;}
+.lhero{display:flex;gap:18px;align-items:center;margin:26px 0 8px;}
+.lesson h1{font-size:clamp(1.9rem,4.6vw,3rem);font-weight:700;letter-spacing:0.01em;line-height:1.2;}
+.lhero p{margin:6px 0 0;color:var(--muted);}
+.toc{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0 6px;}
+.chip{font:inherit;font-size:.92rem;font-weight:700;cursor:pointer;border:2px solid var(--line);background:var(--surface);color:var(--ink);padding:7px 14px;border-radius:999px;}
+.chip:hover{border-color:var(--c);}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--surface);border-color:var(--ink);}
+.lsec{margin-top:46px;}
+.lsec h2{font-size:clamp(1.45rem,3.3vw,1.9rem);font-weight:700;margin-bottom:14px;}
+.lsec h3{font-size:1.2rem;margin:22px 0 6px;}
+.lsec p,.lsec li{max-width:68ch;}
+.lsec p{margin:0 0 14px;}
+.callout{background:color-mix(in srgb,var(--c) 12%,var(--surface));border-left:6px solid var(--c);border-radius:4px 16px 16px 4px;padding:14px 18px;margin:18px 0;max-width:68ch;}
+.callout p{margin:0 !important;}
+.timeline{list-style:none;margin:16px 0;padding:0 0 0 0;border-left:3px solid var(--line);}
+.timeline li{padding:0 0 18px 22px;position:relative;}
+.timeline li::before{content:"";position:absolute;left:-10px;top:5px;width:17px;height:17px;border-radius:50%;background:var(--c);}
+.timeline b.yr{font-family:Sora,"DM Sans",system-ui,sans-serif;font-size:1.15rem;display:block;}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:20px;margin:18px 0;}
+.wheelrow{display:grid;grid-template-columns:minmax(0,340px) 1fr;gap:24px;align-items:center;}
+.wheelrow svg{width:100%;height:auto;display:block;}
+.wedge{cursor:pointer;stroke:var(--surface);stroke-width:2;}
+.wedge:focus-visible{outline:none;stroke:var(--ink);stroke-width:5;}
+.ctrls{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px;}
+.ctrls .lbl{width:100%;font-weight:700;font-size:.9rem;margin-bottom:-2px;}
+.rswatch{height:90px;border-radius:16px;margin-bottom:12px;}
+.readout h4{font-family:Sora,"DM Sans",system-ui,sans-serif;font-size:1.4rem;margin:0 0 2px;}
+.readout p{margin:0 0 8px !important;color:var(--muted);}
+.pal{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px;}
+.pal div{flex:1 1 90px;border-radius:12px;padding:38px 8px 8px;font-size:.8rem;font-weight:700;line-height:1.3;}
+.pal div span{display:block;font-weight:500;}
+.blend{position:relative;height:190px;border-radius:18px;overflow:hidden;}
+.blend i{position:absolute;width:110px;height:110px;border-radius:50%;display:block;}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.two h3{margin-top:12px;}
+.strip{display:flex;border-radius:12px;overflow:hidden;margin:6px 0 16px;}
+.strip div{flex:1;height:54px;}
+.slab{font-weight:700;font-size:.92rem;margin:12px 0 0;}
+.stack{display:flex;height:70px;border-radius:14px;overflow:hidden;font-weight:700;font-size:.9rem;margin:14px 0;}
+.stack div{display:flex;align-items:center;justify-content:center;text-align:center;padding:0 6px;}
+.albers{display:grid;grid-template-columns:1fr 1fr;border-radius:16px;overflow:hidden;margin:14px 0 8px;}
+.albers div{height:170px;display:grid;place-items:center;}
+.albers span{width:72px;height:72px;background:#B87A4B;display:block;}
+.steps{counter-reset:s;list-style:none;padding:0;margin:14px 0;}
+.steps li{counter-increment:s;position:relative;padding:0 0 16px 50px;min-height:36px;}
+.steps li::before{content:counter(s);position:absolute;left:0;top:-2px;width:34px;height:34px;border-radius:50%;background:var(--c);color:var(--surface);display:grid;place-items:center;font-weight:700;}
+details{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:12px 16px;margin:10px 0;max-width:68ch;}
+summary{cursor:pointer;font-weight:700;}
+details p{margin:10px 0 0 !important;color:var(--muted);}
+.tk li{margin:7px 0;}
+.lsec p b,.lsec li b:not(.yr){background:color-mix(in srgb,var(--c) 20%,transparent);padding:0 .22em;border-radius:5px;-webkit-box-decoration-break:clone;box-decoration-break:clone;}
+.lesson.f{--c:var(--g2);}
+.lesson.s{--c:var(--g3);}
+.lesson.c{--c:var(--g4);}
+.stage{background:var(--bg);border:1px solid var(--line);border-radius:16px;padding:14px;display:grid;place-items:center;min-height:120px;overflow:hidden;}
+.stage svg{max-width:100%;height:auto;}
+.mood{margin:12px 0 0;color:var(--muted);}
+.hx{font:inherit;color:inherit;background:none;border:0;padding:0 .1em;margin:0;cursor:pointer;text-decoration:underline dotted;text-underline-offset:3px;display:inline;}
+.hx::after{content:'';display:inline-block;width:.95em;height:.95em;margin-left:.4em;vertical-align:-.12em;background:currentColor;opacity:.8;-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect x='9' y='9' width='11' height='11' rx='2' fill='none' stroke='black' stroke-width='2'/%3E%3Cpath d='M5 15V6a2 2 0 0 1 2-2h9' fill='none' stroke='black' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E") center/contain no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect x='9' y='9' width='11' height='11' rx='2' fill='none' stroke='black' stroke-width='2'/%3E%3Cpath d='M5 15V6a2 2 0 0 1 2-2h9' fill='none' stroke='black' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E") center/contain no-repeat;}
+.hx:hover::after{opacity:1;}
+.hx.ok::after{opacity:1;-webkit-mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M5 13l4 4L19 7' fill='none' stroke='black' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M5 13l4 4L19 7' fill='none' stroke='black' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");}
+.hx:focus-visible{outline:3px solid currentColor;outline-offset:2px;}
+.swbtns{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:16px;}
+.swbtn{width:46px;height:46px;border-radius:50%;border:3px solid var(--surface);outline:2px solid var(--line);cursor:pointer;padding:0;}
+.swbtn[aria-pressed='true']{outline:4px solid var(--ink);}
+.swbtn:focus-visible{outline:4px solid var(--ink);outline-offset:2px;}
+.rswatch{border:1px solid var(--line);}
+.facts{display:grid;gap:10px;margin-top:10px;}
+.facts p{margin:0 !important;}
+.mockbtn{display:inline-block;padding:10px 18px;border-radius:999px;font-weight:700;margin-top:8px;}
+.mini{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px;margin:14px 0;}
+.mini>div{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:14px;}
+.mini .pair{display:flex;height:46px;border-radius:10px;overflow:hidden;margin-bottom:10px;}
+.mini .pair i{display:block;}
+.mini h3{margin:0 0 4px;font-size:1.05rem;}
+.mini p{margin:0 !important;font-size:.95rem;color:var(--muted);}
+.mock{border-radius:18px;overflow:hidden;border:1px solid rgba(0,0,0,.14);}
+.mock .bar{padding:12px 16px;font-weight:700;}
+.mock .bd{padding:16px;}
+.mock h4{margin:0 0 6px;font-size:1.25rem;}
+.mock p{margin:0 0 12px !important;max-width:none;}
+.tag{display:inline-block;padding:3px 10px;border-radius:999px;font-size:.82rem;font-weight:700;margin-right:6px;}
+.blurme{filter:blur(var(--b,0px));}
+.strip.lab div{display:grid;place-items:center;font-size:.72rem;font-weight:700;}
+canvas{display:block;width:100%;max-width:320px;border-radius:14px;cursor:crosshair;touch-action:none;}
+.sl label{margin:14px 0 6px;}
+table.t{border-collapse:collapse;width:100%;max-width:68ch;margin:12px 0;font-size:.95rem;}
+table.t th,table.t td{border-bottom:1px solid var(--line);padding:8px 10px;text-align:left;}
+.res{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:8px;margin:12px 0;}
+.res div{border:2px solid var(--line);border-radius:12px;padding:8px 12px;font-size:.9rem;}
+.res div b{display:block;}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.row3{display:flex;align-items:center;gap:10px;padding:6px 0;}
+.dot{width:18px;height:18px;border-radius:50%;display:inline-block;flex:0 0 18px;}
+input[type='color']{width:64px;height:40px;padding:0;border:2px solid var(--line);border-radius:10px;background:none;cursor:pointer;}
+@media (max-width:760px){.wheelrow,.two,.cols{grid-template-columns:1fr;}}
+footer{padding:44px 0 56px;color:var(--muted);}
+footer strong{color:var(--ink);}
+@media (max-width:760px){
+  .hero-grid{grid-template-columns:1fr;}
+  .ghead{align-items:flex-start;}
+  .gbadge{flex-basis:56px;height:56px;} .gbadge svg{width:30px;height:30px;}
+}
+@media (prefers-reduced-motion:no-preference){
+  .sw div{transition:background-color .25s;}
+}
+
+.site{max-width:1080px;margin:0 auto;padding:14px 20px 0;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;font-weight:700;font-size:.95rem;}
+.site a{color:var(--ink);text-decoration:none;padding:7px 14px;border-radius:999px;border:2px solid var(--line);background:var(--surface);}
+.site a:hover{border-color:var(--g2);}
+.site a:focus-visible{outline:3px solid var(--ink);outline-offset:3px;}
+.next{display:flex;gap:28px;align-items:center;justify-content:space-between;background:color-mix(in srgb,var(--g2) 11%,var(--surface));border:1px solid var(--line);border-radius:30px;padding:32px 36px;overflow:hidden;}
+.next-text{min-width:0;}
+.next-tag{display:inline-block;font-weight:700;font-size:.9rem;padding:5px 14px;border-radius:999px;background:color-mix(in srgb,var(--g3) 24%,var(--surface));color:var(--ink);}
+.next h2{font-size:clamp(1.9rem,4.4vw,2.8rem);font-weight:700;letter-spacing:.01em;line-height:1.15;margin:12px 0 10px;color:var(--ink);}
+.next p{color:var(--muted);max-width:44ch;margin:0 0 20px;font-size:1.08rem;}
+.next-actions{display:flex;flex-wrap:wrap;gap:10px;}
+.nbtn{display:inline-flex;align-items:center;gap:8px;font-weight:700;font-size:1rem;text-decoration:none;color:var(--ink);padding:12px 22px;border-radius:999px;border:2px solid var(--ink);background:transparent;}
+.nbtn.primary{background:var(--ink);color:var(--surface);}
+.nbtn:hover{background:var(--ink);color:var(--surface);}
+.nbtn.primary:hover{background:transparent;color:var(--ink);}
+.nbtn:focus-visible{outline:3px solid var(--ink);outline-offset:3px;}
+.nbtn svg{width:16px;height:16px;}
+.next-art{flex:0 0 190px;width:190px;height:auto;}
+@media (prefers-reduced-motion:no-preference){.nbtn{transition:background-color .15s,color .15s,transform .15s;}.nbtn:hover{transform:translateY(-2px);}}
+@media (max-width:680px){.next{padding:26px 22px;}.next-art{display:none;}}
+.lfoot{margin-top:80px;padding-top:18px;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center;justify-content:space-between;font-size:.82rem;color:var(--muted);}
+.lfoot div{display:flex;flex-wrap:wrap;gap:8px;}
+.lfoot a{font-size:.82rem;font-weight:600;padding:5px 11px;border:1px solid var(--line);border-radius:999px;background:var(--surface);color:var(--muted);text-decoration:none;}
+.lfoot a:hover{color:var(--ink);border-color:var(--ink);}
+.lfoot a:focus-visible{outline:3px solid var(--ink);outline-offset:2px;}
+
+.f-inter{font-family:'Inter',system-ui,sans-serif;}
+input[type='text']{width:100%;font:inherit;padding:10px 12px;border:2px solid var(--line);border-radius:12px;background:var(--surface);color:var(--ink);margin:2px 0 12px;}
+input[type='text']:focus-visible{outline:3px solid var(--ink);outline-offset:2px;}
+.code{background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:12px;overflow-x:auto;font-family:'JetBrains Mono',ui-monospace,Menlo,monospace;font-size:.85rem;margin:12px 0 0;white-space:pre-wrap;color:var(--ink);}
+code{font-family:'JetBrains Mono',ui-monospace,Menlo,monospace;font-size:.88em;background:var(--bg);padding:1px 6px;border-radius:6px;}
+.fspin{display:inline-block;width:14px;height:14px;border:3px solid var(--line);border-top-color:var(--c);border-radius:50%;vertical-align:-2px;animation:fsp .7s linear infinite;}
+@keyframes fsp{to{transform:rotate(360deg);}}
+@media (prefers-reduced-motion:reduce){.fspin{animation:none;}}
+.cols>div{min-width:0;}
+
+</style>
+</head>
+<body>
+<nav class="site" id="sitenav" aria-label="Site"><a href="04-branding.html">&larr; Branding</a><a href="index.html">All sections</a></nav>
+<div id="home">
+<header class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <h1>Design Systems</h1>
+      <p class="lead">25 ideas about how teams turn design decisions into shared, reusable parts. Each one has a hands-on demo.</p>
+      <nav class="jump" aria-label="Jump to a group">
+        <a class="j1" href="#tokens">Tokens and foundations</a>
+        <a class="j2" href="#layout">Layout</a>
+        <a class="j3" href="#components">Components</a>
+        <a class="j4" href="#running">Running a system</a>
+      </nav>
+      <p class="note">Every card opens an in-depth lesson. Click a card, or the &ldquo;Read the full lesson&rdquo; pill on it, to begin.</p>
+    </div>
+    <div class="lab" id="lab"></div>
+  </div>
+</header>
+<main class="wrap" id="groups"></main>
+<footer>
+  <div class="wrap">
+    <aside class="next" aria-label="What to do next">
+      <div class="next-text">
+        <span class="next-tag">Up next</span>
+        <h2>Layout and Composition</h2>
+        <p>That section isn’t built yet. In the meantime, you can revisit Design Systems or browse all sections.</p>
+        <div class="next-actions"><a class="nbtn primary" href="index.html">See all sections <svg viewBox='0 0 24 24' aria-hidden='true' fill='none' stroke='currentColor' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'><path d='M5 12h14M13 6l6 6-6 6'/></svg></a><a class="nbtn" href="05-design-systems.html">Back to Design Systems</a></div>
+      </div>
+      <svg class='next-art' viewBox='0 0 180 150' aria-hidden='true' focusable='false'><circle cx='50' cy='52' r='34' fill='var(--g1)'/><rect x='82' y='26' width='62' height='62' rx='14' fill='var(--g2)' opacity='.92' transform='rotate(10 113 57)'/><polygon points='40,138 84,70 120,138' fill='var(--g4)' opacity='.95'/><circle cx='142' cy='116' r='20' fill='var(--g3)'/></svg>
+    </aside>
+  </div>
+</footer>
+</div>
+<main class="wrap lesson" id="lesson" hidden></main>
+<script>
+function hslToHex(h,s,l){
+  h=((h%360)+360)%360; s/=100; l/=100;
+  var k=function(n){return (n+h/30)%12;};
+  var a=s*Math.min(l,1-l);
+  var f=function(n){return l-a*Math.max(-1,Math.min(k(n)-3,Math.min(9-k(n),1)));};
+  var x=function(v){return Math.round(v*255).toString(16).padStart(2,"0");};
+  return ("#"+x(f(0))+x(f(8))+x(f(4))).toUpperCase();
+}
+function textOn(hex){
+  var r=parseInt(hex.substr(1,2),16),g=parseInt(hex.substr(3,2),16),b=parseInt(hex.substr(5,2),16);
+  var lin=function(c){c/=255;return c<=0.03928?c/12.92:Math.pow((c+0.055)/1.055,2.4);};
+  var L=0.2126*lin(r)+0.7152*lin(g)+0.0722*lin(b);
+  return L>0.4?"#111111":"#FFFFFF";
+}
+function polar(cx,cy,r,deg){var a=(deg-90)*Math.PI/180;return [cx+r*Math.cos(a),cy+r*Math.sin(a)];}
+function wedge(cx,cy,r0,r1,a0,a1){
+  var p0=polar(cx,cy,r1,a0),p1=polar(cx,cy,r1,a1),p2=polar(cx,cy,r0,a1),p3=polar(cx,cy,r0,a0);
+  return 'M'+p0+'A'+r1+','+r1+' 0 0 1 '+p1+'L'+p2+'A'+r0+','+r0+' 0 0 0 '+p3+'Z';
+}
+function hexRgb(h){return [parseInt(h.substr(1,2),16),parseInt(h.substr(3,2),16),parseInt(h.substr(5,2),16)];}
+function mixHex(a,b,t){
+  var A=hexRgb(a),B=hexRgb(b);
+  return "#"+[0,1,2].map(function(i){return Math.round(A[i]+(B[i]-A[i])*t).toString(16).padStart(2,"0");}).join("").toUpperCase();
+}
+function prep(root){
+  var smooth=!(window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+  Array.prototype.slice.call(root.querySelectorAll('[data-scroll]')).forEach(function(b){
+    b.addEventListener('click',function(){var t=root.querySelector('#'+b.getAttribute('data-scroll'));if(t){t.scrollIntoView({behavior:smooth?'smooth':'auto',block:'start'});}});
+  });
+  return {$:function(s){return root.querySelector(s);},$$:function(s){return Array.prototype.slice.call(root.querySelectorAll(s));}};
+}
+function rgbToHsl(r,g,b){
+  r/=255;g/=255;b/=255;
+  var mx=Math.max(r,g,b),mn=Math.min(r,g,b),l=(mx+mn)/2,h=0,s=0,d=mx-mn;
+  if(d){s=d/(1-Math.abs(2*l-1));if(mx===r){h=((g-b)/d)%6;}else if(mx===g){h=(b-r)/d+2;}else{h=(r-g)/d+4;}h*=60;if(h<0){h+=360;}}
+  return [Math.round(h),Math.round(s*100),Math.round(l*100)];
+}
+function relLum(hex){
+  var c=hexRgb(hex).map(function(v){v/=255;return v<=0.03928?v/12.92:Math.pow((v+0.055)/1.055,2.4);});
+  return 0.2126*c[0]+0.7152*c[1]+0.0722*c[2];
+}
+function contrastRatio(a,b){var A=relLum(a),B=relLum(b);return (Math.max(A,B)+0.05)/(Math.min(A,B)+0.05);}
+function lerpHue(a,b,t){var d=((b-a+540)%360)-180;return (a+d*t+360)%360;}
+function hex2(n){return Math.max(0,Math.min(255,Math.round(n))).toString(16).padStart(2,'0');}
+function shell(title,sub,icon,secs){
+  var svgI='<svg viewBox="0 0 48 48" aria-hidden="true" focusable="false" style="fill:none;stroke:currentColor;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round">'+ICONS[icon]+'</svg>';
+  var back='<button class="btn" data-back type="button">← Back to '+SECTION_NAME+'</button>';
+  return back+'<div class="lhero"><div class="gbadge">'+svgI+'</div><div><h1>'+title+'</h1><p>'+sub+'</p></div></div><nav class="toc" aria-label="In this lesson">'+secs.map(function(s){return '<button class="chip" type="button" data-scroll="'+s[0]+'">'+s[1]+'</button>';}).join('')+'</nav>'+secs.map(function(s){return '<section class="lsec" id="'+s[0]+'">'+s[2]+'</section>';}).join('')+'<p style="margin-top:36px">'+back+'</p>';
+}
+function quick(arr){return `<h2>Quick check</h2><p>Click each question to reveal the answer.</p>`+arr.map(function(q,i){return `<details><summary>${i+1}. ${q[0]}</summary><p>${q[1]}</p></details>`;}).join('');}
+function bigideas(arr){return `<h2>The big ideas</h2><ul class='tk'>`+arr.map(function(x){return '<li>'+x+'</li>';}).join('')+'</ul>';}
+function steps(arr){return `<ol class='steps'>`+arr.map(function(x){return '<li>'+x+'</li>';}).join('')+'</ol>';}
+function chipsHtml(id,items,cur,lab){return `<div class='ctrls' id='${id}' role='group' aria-label='${lab}'>`+items.map(function(x){return `<button class='chip' type='button' data-v='${x[0]}' aria-pressed='${x[0]===cur}'>${x[1]}</button>`;}).join('')+`</div>`;}
+function bindChips(root,id,cb){var c=root.querySelector('#'+id);c.addEventListener('click',function(e){var b=e.target.closest('.chip');if(!b)return;Array.prototype.slice.call(c.querySelectorAll('.chip')).forEach(function(x){x.setAttribute('aria-pressed',x===b?'true':'false');});cb(b.getAttribute('data-v'));});}
+function rng(id,lab,min,max,val,step,unit){return `<label for='${id}'>${lab}: <span id='${id}v'>${val}</span>${unit||''}</label><input id='${id}' type='range' min='${min}' max='${max}' step='${step||1}' value='${val}'>`;}
+function onRng(root,id,cb){var el=root.querySelector('#'+id),sp=root.querySelector('#'+id+'v');el.addEventListener('input',function(){if(sp){sp.textContent=el.value;}cb(parseFloat(el.value));});}
+function pr(i,k){var x=Math.sin(i*127.1+k*311.7)*43758.5453;return x-Math.floor(x);}
+function copyText(t,btn){
+  function ok(){btn.classList.add('ok');clearTimeout(btn._t);btn._t=setTimeout(function(){btn.classList.remove('ok');},1400);}
+  function fallback(){try{var ta=document.createElement('textarea');ta.value=t;ta.setAttribute('readonly','');ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.select();var r=document.execCommand('copy');document.body.removeChild(ta);if(r){ok();}}catch(e){}}
+  if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(ok,fallback);}else{fallback();}
+}
+function wrapHex(root){
+  var w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,null),nodes=[],n,test=/#[0-9A-Fa-f]{6}(?![0-9A-Fa-f])/;
+  while((n=w.nextNode())){if(test.test(n.nodeValue)&&n.parentNode&&n.parentNode.closest&&!n.parentNode.closest('script,style,textarea,button,svg')){nodes.push(n);}}
+  nodes.forEach(function(n){
+    var frag=document.createDocumentFragment(),s=n.nodeValue,last=0,re=/#[0-9A-Fa-f]{6}(?![0-9A-Fa-f])/g,mm;
+    while((mm=re.exec(s))){
+      if(mm.index>last){frag.appendChild(document.createTextNode(s.slice(last,mm.index)));}
+      var b=document.createElement('button');b.type='button';b.className='hx';b.setAttribute('data-hex',mm[0].toUpperCase());b.setAttribute('aria-label','Copy '+mm[0].toUpperCase());b.textContent=mm[0];frag.appendChild(b);
+      last=mm.index+mm[0].length;
+    }
+    if(last<s.length){frag.appendChild(document.createTextNode(s.slice(last)));}
+    n.parentNode.replaceChild(frag,n);
+  });
+}
+function queueHex(){if(hxQueued){return;}hxQueued=true;requestAnimationFrame(function(){hxQueued=false;wrapHex(document.body);});}
+function slug(t){return t.toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"");}
+function svg(name){
+  return '<svg viewBox="0 0 48 48" aria-hidden="true" focusable="false">'+ICONS[name]+'</svg>';
+}
+var hxQueued=false;
+
+function siteFoot(){
+  var S=window.SITE||{},a='';
+  if(S.prev){a+='<a href="'+S.prev[1]+'">&larr; '+S.prev[0]+'</a>';}
+  a+='<a href="index.html">All sections</a>';
+  if(S.next){a+='<a href="'+S.next[1]+'">'+S.next[0]+' &rarr;</a>';}
+  return '<nav class="lfoot" aria-label="Other sections"><span>Explore other sections</span><div>'+a+'</div></nav>';
+}
+
+function startSite(){
+  var out='';
+  GROUPS.forEach(function(g){
+    out+='<section class="group '+g.cls+'" id="'+g.id+'"><div class="ghead"><div class="gbadge"><svg viewBox="0 0 48 48" aria-hidden="true" focusable="false" style="fill:none;stroke:currentColor;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round">'+ICONS[g.icon]+'</svg></div><div><h2>'+g.title+'</h2><p>'+g.intro+'</p></div></div><div class="grid">';
+    g.items.forEach(function(it){
+      var sl=slug(it[1]);
+      if(LESSONS[sl]){
+        out+='<a class="card has" href="#'+sl+'" data-lesson="'+sl+'"><div class="tile">'+svg(it[0])+'</div><h3>'+it[1]+'</h3><p>'+it[2]+'</p><span class="more">Read the full lesson</span></a>';
+      } else {
+        out+='<article class="card"><div class="tile">'+svg(it[0])+'</div><h3>'+it[1]+'</h3><p>'+it[2]+'</p></article>';
+      }
+    });
+    out+='</div></section>';
+  });
+  document.getElementById('groups').innerHTML=out;
+
+  var homeEl=document.getElementById('home'),lessonEl=document.getElementById('lesson');
+  function showLesson(id){
+    var L=LESSONS[id];
+    if(!L){return;}
+    homeEl.hidden=true;lessonEl.hidden=false;lessonEl.className='wrap lesson '+(L.g||'');
+    var sn=document.getElementById('sitenav');if(sn){sn.hidden=true;}
+    lessonEl.innerHTML=L.html+siteFoot();
+    L.init(lessonEl);
+    window.scrollTo(0,0);
+    try{history.replaceState(null,'','#'+id);}catch(e){}
+  }
+  function showHome(){
+    lessonEl.hidden=true;lessonEl.innerHTML='';homeEl.hidden=false;
+    var sn=document.getElementById('sitenav');if(sn){sn.hidden=false;}
+    window.scrollTo(0,0);
+    try{history.replaceState(null,'',location.pathname+location.search);}catch(e){}
+  }
+  document.getElementById('groups').addEventListener('click',function(e){
+    var a=e.target.closest('a[data-lesson]');
+    if(a){e.preventDefault();showLesson(a.getAttribute('data-lesson'));}
+  });
+  lessonEl.addEventListener('click',function(e){
+    if(e.target.closest('[data-back]')){showHome();}
+  });
+  Array.prototype.slice.call(document.querySelectorAll('.jump a')).forEach(function(a){
+    a.addEventListener('click',function(e){
+      var t=document.getElementById((a.getAttribute('href')||'').slice(1));
+      if(!t){return;}
+      e.preventDefault();
+      var smooth=!(window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+      t.scrollIntoView({behavior:smooth?'smooth':'auto',block:'start'});
+    });
+  });
+  document.addEventListener('click',function(e){
+    var b=e.target.closest&&e.target.closest('.hx');
+    if(b){e.preventDefault();e.stopPropagation();copyText(b.getAttribute('data-hex'),b);}
+  });
+  new MutationObserver(queueHex).observe(document.body,{childList:true,subtree:true,characterData:true});
+  queueHex();
+  var startId=(location.hash||'').slice(1);
+  if(LESSONS[startId]){showLesson(startId);}
+}
+
+var SECTION_NAME='Design Systems';
+var SITE={prev:['Branding','04-branding.html']};
+
+function GT(t,o){o=o||{};return `<text x='${o.x||24}' y='${o.y||33}' text-anchor='middle' font-size='${o.s||24}' font-weight='${o.w||700}' font-family='${o.f||'Georgia,serif'}' fill='currentColor' stroke='none'>${t}</text>`;}
+var ICONS={
+  dsystem:`<path d='M24 8l18 9-18 9-18-9z'/><path d='M6 25l18 9 18-9M6 33l18 9 18-9'/>`,
+  brandsys:`<circle cx='24' cy='24' r='16'/><path d='M24 8v32M8 24h32'/>`,
+  tokens:`<rect x='7' y='14' width='34' height='20' rx='10'/><circle cx='31' cy='24' r='5' fill='currentColor'/>`,
+  colourtok:`<circle cx='17' cy='19' r='9'/><circle cx='31' cy='19' r='9'/><circle cx='24' cy='31' r='9'/>`,
+  typetok:GT('Aa',{s:26,f:'Arial,sans-serif'}),
+  spacetok:`<rect x='5' y='17' width='10' height='14'/><rect x='33' y='17' width='10' height='14'/><path d='M18 24h12M20 21l-3 3 3 3M28 21l3 3-3 3'/>`,
+  layouttok:`<rect x='6' y='8' width='36' height='32' rx='3'/><path d='M18 8v32M30 8v32'/>`,
+  naming:`<path d='M6 24V8h16l20 20-14 14z'/><circle cx='14' cy='16' r='2' fill='currentColor'/>`,
+  grids:`<g fill='currentColor' fill-opacity='.25'><rect x='5' y='5' width='10' height='10' rx='2'/><rect x='19' y='5' width='10' height='10' rx='2'/><rect x='33' y='5' width='10' height='10' rx='2'/><rect x='5' y='19' width='10' height='10' rx='2'/><rect x='19' y='19' width='10' height='10' rx='2'/><rect x='33' y='19' width='10' height='10' rx='2'/><rect x='5' y='33' width='10' height='10' rx='2'/><rect x='19' y='33' width='10' height='10' rx='2'/><rect x='33' y='33' width='10' height='10' rx='2'/></g>`,
+  spacing:`<path d='M6 8v32M42 8v32M12 24h24M16 20l-4 4 4 4M32 20l4 4-4 4'/>`,
+  breakpoints:`<rect x='4' y='12' width='26' height='20' rx='2'/><rect x='34' y='18' width='10' height='18' rx='2'/>`,
+  library:`<rect x='7' y='8' width='9' height='32' rx='1'/><rect x='19' y='8' width='9' height='32' rx='1'/><path d='M31 12l8-2 6 30-8 2z'/>`,
+  components:`<rect x='6' y='6' width='16' height='16' rx='3'/><rect x='26' y='6' width='16' height='16' rx='3'/><rect x='6' y='26' width='16' height='16' rx='3'/><rect x='26' y='26' width='16' height='16' rx='3' fill='currentColor' fill-opacity='.3'/>`,
+  variants:`<rect x='5' y='14' width='12' height='20' rx='3'/><rect x='18' y='14' width='12' height='20' rx='3' fill='currentColor' fill-opacity='.3'/><rect x='31' y='14' width='12' height='20' rx='3' fill='currentColor'/>`,
+  states:`<rect x='6' y='14' width='36' height='20' rx='10'/><circle cx='32' cy='24' r='6' fill='currentColor'/>`,
+  properties:`<path d='M8 14h32M8 24h32M8 34h32'/><circle cx='18' cy='14' r='4' fill='currentColor'/><circle cx='32' cy='24' r='4' fill='currentColor'/><circle cx='22' cy='34' r='4' fill='currentColor'/>`,
+  rules:`<path d='M6 12l4 4 7-8M6 24l4 4 7-8M6 36l4 4 7-8M24 14h18M24 26h18M24 38h18'/>`,
+  patterns:`<rect x='6' y='6' width='36' height='10' rx='2'/><rect x='6' y='20' width='16' height='22' rx='2'/><rect x='26' y='20' width='16' height='22' rx='2'/>`,
+  templates:`<rect x='6' y='6' width='36' height='36' rx='3'/><path d='M6 16h36M16 16v26'/>`,
+  docs:`<path d='M12 6h18l8 8v28H12z'/><path d='M30 6v8h8M18 24h14M18 31h14'/>`,
+  version:`<circle cx='14' cy='12' r='4'/><circle cx='14' cy='36' r='4'/><circle cx='34' cy='20' r='4'/><path d='M14 16v16M34 24c0 8-8 6-20 8'/>`,
+  contribute:`<circle cx='24' cy='24' r='16'/><path d='M24 16v16M16 24h16'/>`,
+  governance:`<rect x='17' y='6' width='14' height='9' rx='2'/><rect x='4' y='33' width='14' height='9' rx='2'/><rect x='30' y='33' width='14' height='9' rx='2'/><path d='M24 15v9M11 33v-9h26v9'/>`,
+  scalability:`<g fill='currentColor' stroke='none'><rect x='5' y='32' width='7' height='8' rx='1'/><rect x='15' y='26' width='7' height='14' rx='1'/><rect x='25' y='17' width='7' height='23' rx='1'/><rect x='35' y='6' width='8' height='34' rx='1'/></g>`,
+  handoff:`<rect x='4' y='14' width='14' height='20' rx='2'/><rect x='30' y='14' width='14' height='20' rx='2'/><path d='M20 24h8M25 20l4 4-4 4'/>`
+};
+
+var GROUPS=[
+ {cls:'',id:'tokens',title:'Tokens and foundations',icon:'tokens',intro:'The named values at the base of a system, and the thinking that holds them together.',items:[
+  ['dsystem','Design system','A shared set of rules, values and reusable parts that keeps products consistent.'],
+  ['brandsys','Brand system','The brand\u2019s own rules, and how they feed into the design system.'],
+  ['tokens','Design tokens','Named values for colour, type, spacing and more, stored once and used everywhere.'],
+  ['colourtok','Colour tokens','Colours named by purpose, so themes like dark mode are easy to swap.'],
+  ['typetok','Typography tokens','Named font sizes, weights and line heights, grouped into text styles.'],
+  ['spacetok','Spacing tokens','A short ladder of named gaps and paddings.'],
+  ['layouttok','Layout tokens','Named values for page width, columns, gutters and margins.'],
+  ['naming','Naming conventions','A predictable way to name things so people can find and understand them.']
+ ]},
+ {cls:'f',id:'layout',title:'Layout',icon:'grids',intro:'How a system organises space and adapts to different screens.',items:[
+  ['grids','Grids','Column structures that change with screen size and give layouts a shared skeleton.'],
+  ['spacing','Spacing systems','A base unit and its multiples, so gaps are never arbitrary.'],
+  ['breakpoints','Breakpoints','The screen widths at which a layout changes shape.']
+ ]},
+ {cls:'s',id:'components',title:'Components',icon:'components',intro:'The reusable parts of an interface, and the ways they flex.',items:[
+  ['library','Component library','The collection of ready-made components, designed and coded.'],
+  ['components','Components','Self-contained interface parts with a defined anatomy.'],
+  ['variants','Variants','Different versions of one component, such as primary and secondary.'],
+  ['states','States','How a component looks as people interact with it.'],
+  ['properties','Properties','The settings you change on a component, such as label, size and icon.'],
+  ['rules','Rules','Guidance on when and how to use each component.'],
+  ['patterns','Patterns','Components combined to solve a common problem.'],
+  ['templates','Templates','Ready-made page layouts built from components and patterns.']
+ ]},
+ {cls:'c',id:'running',title:'Running a system',icon:'governance',intro:'How a system is documented, changed, shared and kept healthy over time.',items:[
+  ['docs','Documentation','Clear written guidance, with examples, for every part of the system.'],
+  ['version','Version control','Tracking changes with version numbers so teams know what changed.'],
+  ['contribute','Contribution guidelines','How anyone can suggest or add something to the system.'],
+  ['governance','Governance','Who decides what goes into the system, and how.'],
+  ['scalability','Scalability','Making a system that keeps working as products and teams multiply.'],
+  ['handoff','Design-to-development handoff','Passing designs to engineers with everything they need.']
+ ]}
+];
+
+/* ===== helpers ===== */
+function tk(o){
+  o=o||{};var h=o.hue==null?215:o.hue;
+  return {h:h,c:hslToHex(h,70,46),cd:hslToHex(h,70,34),cl:hslToHex(h,70,94),r:o.r==null?10:o.r,s:o.s==null?16:o.s};
+}
+function dsBtn(t,o){
+  o=o||{};
+  var v=o.v||'primary',sz=o.sz||'M',st=o.state||'default';
+  var pad={S:'6px 12px',M:'10px 18px',L:'14px 26px'}[sz],fs={S:'.85rem',M:'1rem',L:'1.15rem'}[sz];
+  var hov=(st==='hover'||st==='active'),bg,col,bd='2px solid transparent',ex='';
+  if(v==='primary'){bg=hov?t.cd:t.c;col='#fff';}
+  else if(v==='secondary'){bg=hov?t.cl:'transparent';col=t.c;bd='2px solid '+t.c;}
+  else if(v==='ghost'){bg=hov?t.cl:'transparent';col=t.c;}
+  else{bg=hov?'#B01E2D':'#D62839';col='#fff';}
+  if(st==='disabled'){bg=(v==='secondary'||v==='ghost')?'transparent':'#D8DBE8';col='#8A90AA';bd=v==='secondary'?'2px solid #D8DBE8':bd;ex+='cursor:not-allowed;';}
+  if(st==='focus'){ex+='outline:3px solid #14213D;outline-offset:3px;';}
+  if(st==='active'){ex+='transform:scale(.97);';}
+  var lab=st==='loading'?`<span class='fspin' style='border-color:rgba(255,255,255,.4);border-top-color:#fff'></span> Loading`:(o.icon==='left'?'\u2605 ':'')+(o.label||'Button')+(o.icon==='right'?' \u203A':'');
+  return `<span style='display:${o.full?'flex':'inline-flex'};justify-content:center;align-items:center;gap:6px;background:${bg};color:${col};border:${bd};border-radius:${t.r}px;padding:${pad};font-size:${fs};font-weight:700;font-family:Inter,sans-serif;${ex}'>${lab}</span>`;
+}
+function dsInput(t,o){
+  o=o||{};var st=o.state||'default',bd='2px solid #9AA0BC',ex='',bg='#fff',col='#14213D';
+  if(st==='hover'){bd='2px solid #5A6180';}
+  if(st==='focus'){bd='2px solid '+t.c;ex='box-shadow:0 0 0 4px '+t.cl+';';}
+  if(st==='error'){bd='2px solid #D62839';}
+  if(st==='disabled'){bg='#EEF0F6';col='#8A90AA';bd='2px solid #D8DBE8';}
+  return `<div style='font-family:Inter,sans-serif;max-width:280px'><div style='font-size:.85rem;font-weight:700;color:#14213D;margin-bottom:4px'>${o.label||'Email'}</div><div style='background:${bg};border:${bd};border-radius:${t.r}px;padding:10px 12px;color:${col};${ex}'>${o.value||'name@example.com'}</div><div style='font-size:.8rem;margin-top:4px;color:${st==='error'?'#D62839':'#5A6180'}'>${st==='error'?'Enter a valid email address.':(o.help||'We will never share it.')}</div></div>`;
+}
+function togg(id,items,state){return `<div class='ctrls' id='${id}' role='group' aria-label='Options'>`+items.map(function(x){return `<button class='chip' type='button' data-v='${x[0]}' aria-pressed='${!!state[x[0]]}'>${x[1]}</button>`;}).join('')+`</div>`;}
+function bindTogg(root,id,state,cb){var c=root.querySelector('#'+id);c.addEventListener('click',function(e){var b=e.target.closest('.chip');if(!b)return;var k=b.getAttribute('data-v');state[k]=!state[k];b.setAttribute('aria-pressed',state[k]?'true':'false');cb();});}
+function codebox(id){return `<pre id='${id}' class='code' tabindex='0'></pre>`;}
+function copyBtn(id,label,src){return `<button class='btn' id='${id}' type='button' data-src='${src}'>${label}</button>`;}
+function bindCopy(root,id){var b=root.querySelector('#'+id);if(!b)return;b.addEventListener('click',function(){var t=root.querySelector('#'+b.getAttribute('data-src')).textContent,l=b.textContent;copyText(t,b);b.textContent='Copied!';setTimeout(function(){b.textContent=l;},1400);});}
+
+/* ===== lessons: Tokens and foundations ===== */
+var L_DSYS=shell('Design system','A shared set of rules and reusable parts.','dsystem',[
+['ds-what','What it is',`<h2>What a design system is</h2><p>A design system is the <b>single source of truth</b> for how a product looks, behaves and is built. It brings together <b>principles</b>, <b>design tokens</b> (named values), <b>components</b>, <b>patterns</b> and <b>documentation</b>, in a form that designers and developers can both use.</p><p>Without one, every team reinvents buttons and forms a little differently. With one, products feel consistent, and work is faster because the common parts already exist.</p>`],
+['ds-explore','With and without',`<h2>With and without a system</h2><p>The same set of buttons and inputs, built by six different people. Toggle the system on.</p><div class='panel'>${chipsHtml('dsc',[['no','Without a system'],['yes','With a system']],'no','System')}<div id='dso' style='margin-top:14px'></div><p class='mood' id='dsn' aria-live='polite'></p></div>`],
+['ds-use','Use it well',`<h2>Using a design system well</h2><ul class='tk'><li><b>Start small.</b> Begin with the most-used parts: colour, type, spacing, buttons and forms.</li><li><b>Design for designers and developers.</b> Both must be able to use it.</li><li><b>Treat it as a product.</b> It needs owners, a roadmap and users to listen to.</li><li><b>Measure use.</b> A system nobody uses has failed, however good it looks.</li></ul>`],
+['ds-check','Quick check',quick([['What does a design system bring together?','Principles, tokens, components, patterns and documentation.'],['What problem does it solve?','Teams building the same parts differently, causing inconsistency and wasted effort.'],['Why treat it as a product?','It needs owners, a roadmap and feedback from the people who use it.']])],
+['ds-recap','Big ideas',bigideas(['A design system is a shared source of truth.','It combines tokens, components, patterns and docs.','Start small and treat it as a product.'])]
+]);
+
+var BSYS={
+ logo:['Logo usage rules','brand','The logo and its rules belong to the brand. The design system may link to them, but does not own them.'],
+ colour:['Primary brand colour','both','The brand picks the colour. The design system turns it into tokens such as color-action-primary.'],
+ voice:['Tone of voice','brand','Voice is part of the brand, though UI writing guidance in the design system should follow it.'],
+ button:['Button component','design','Buttons are interface parts, so they live in the design system, styled with brand tokens.'],
+ space:['Spacing scale','design','Spacing is a layout decision for interfaces, owned by the design system.'],
+ illus:['Illustration style','brand','The way the brand draws is a brand decision. Illustrations may be used inside components.'],
+ valid:['Form validation pattern','design','How errors are shown in a form is an interaction pattern for the design system.'],
+ type:['Type scale','both','The brand chooses the typefaces. The design system defines sizes and styles for screens.']
+};
+var L_BSYS=shell('Brand system','The brand\u2019s own rules, and how they feed a design system.','brandsys',[
+['bs-what','What it is',`<h2>What a brand system is</h2><p>A <b>brand system</b> describes how the brand looks and sounds everywhere: logo, colours, typefaces, imagery, voice. A <b>design system</b> is more specific: it covers the digital product, with tokens and components.</p><p>The two overlap. The brand system makes the creative choices (<b>what is our blue?</b>). The design system turns them into reusable parts (<b>how does the blue behave on a button, a link, a disabled state?</b>).</p>`],
+['bs-explore','What belongs where',`<h2>What belongs where?</h2><p>Pick an item to see which system owns it.</p><div class='panel'>${chipsHtml('bsc',Object.keys(BSYS).map(function(k){return [k,BSYS[k][0]];}),'logo','Item')}<div id='bso' style='margin-top:14px' aria-live='polite'></div></div>`],
+['bs-use','Use it well',`<h2>Using the two systems well</h2><ul class='tk'><li><b>Make the brand system the source,</b> and derive tokens from it.</li><li><b>Link the two.</b> Each should point to the other.</li><li><b>Agree who owns what.</b> Duplicated decisions drift apart.</li></ul>`],
+['bs-check','Quick check',quick([['Which system decides what the brand blue is?','The brand system.'],['Which system defines how a button behaves?','The design system.'],['Why should the systems link to each other?','So decisions are not duplicated and drift apart.']])],
+['bs-recap','Big ideas',bigideas(['Brand system makes creative choices; design system makes them usable.','They overlap, so agree ownership.','Derive tokens from the brand.'])]
+]);
+
+var L_TOKENS=shell('Design tokens','Named values stored once and used everywhere.','tokens',[
+['dt-what','What they are',`<h2>What design tokens are</h2><p>A design token is a <b>named value</b>: instead of writing <code>#2F6FD8</code> in fifty places, you define <code>color-action-primary</code> once and refer to it by name. Change the token and everything that uses it changes together.</p><p>Tokens carry design decisions into code. They cover <b>colour, typography, spacing, radius, shadow, motion</b> and more. The term was popularised by Salesforce\u2019s design system team.</p>`],
+['dt-explore','Edit the tokens',`<h2>Edit the tokens</h2><p>Change three tokens and watch every component update at once.</p><div class='panel'>${rng('dth','color-action-primary (hue)',0,359,215,1,'\u00b0')}${rng('dtr','radius-medium (px)',0,28,10)}${rng('dts','space-4 (px)',8,32,16)}<div id='dto' style='margin-top:14px'></div>${codebox('dtc')}<div class='ctrls'>${copyBtn('dtb','Copy CSS','dtc')}</div></div>`],
+['dt-figma','In Figma',`<h2>Tokens in Figma</h2><p>Figma calls tokens <b>variables</b>. Menus change between versions, so look for the nearest match.</p>`+steps(['Click on an empty part of the canvas so that nothing is selected.','In the <b>right-hand sidebar</b>, under the <b>Design</b> tab, look for the <b>Variables</b> section and click its <b>Open variables</b> icon.','A panel opens. Click the <b>+ Create variable</b> button and choose <b>Color</b> or <b>Number</b>.','Name it using a convention such as <b>color/action/primary</b> and set its value.','Select a layer, click the small <b>colour square</b> in its fill, and choose the variable from the list of variables in the picker.'])],
+['dt-use','Use it well',`<h2>Using tokens well</h2><ul class='tk'><li><b>Name by purpose, not value.</b> <code>color-danger</code> survives a redesign; <code>red-500</code> may not.</li><li><b>Use layers.</b> Raw values at the bottom, meaning on top (see Colour tokens).</li><li><b>Keep the set small.</b> Fewer tokens are easier to remember and use.</li></ul>`],
+['dt-check','Quick check',quick([['What is a design token?','A named value, such as a colour or spacing size, stored once and reused.'],['What happens if you change a token?','Everything that uses it updates together.'],['Why name tokens by purpose?','Purpose names stay meaningful even if the value changes.']])],
+['dt-recap','Big ideas',bigideas(['Tokens are named design decisions.','Change once, update everywhere.','Name by purpose and keep the set small.'])]
+]);
+
+var L_COLTOK=shell('Colour tokens','Colours named by purpose, so themes are easy to swap.','colourtok',[
+['ct-what','What they are',`<h2>What colour tokens are</h2><p>Colour tokens work in <b>layers</b>. <b>Primitive tokens</b> hold raw colours (<code>blue-500</code>). <b>Semantic tokens</b> give them a meaning (<code>color-action-primary</code>). Components use only the semantic ones.</p><p>That is why <b>dark mode</b> is easy: the semantic token points at a different primitive, and every component follows.</p>`],
+['ct-explore','Switch the theme',`<h2>Switch the theme</h2><div class='panel'>${chipsHtml('ctt',[['light','Light theme'],['dark','Dark theme']],'light','Theme')}<div class='wheelrow' style='margin-top:14px'><div id='cto'></div><div id='ctr' style='overflow-x:auto'></div></div></div>`],
+['ct-use','Use it well',`<h2>Using colour tokens well</h2><ul class='tk'><li><b>Never use primitives inside components.</b> Use semantic tokens only.</li><li><b>Name by role:</b> background, text, border, action, feedback.</li><li><b>Test every theme for contrast,</b> not just the default.</li></ul>`],
+['ct-check','Quick check',quick([['What is a semantic token?','A token named for its purpose, such as color-action-primary.'],['Why does dark mode become easier with tokens?','Semantic tokens can point to different primitives per theme.'],['What should components use?','Semantic tokens, not primitives.']])],
+['ct-recap','Big ideas',bigideas(['Primitives hold values; semantic tokens hold meaning.','Themes remap semantic tokens.','Test contrast in every theme.'])]
+]);
+
+var TYSTY={display:['Display',4,800,1.1,'Big, short, expressive text.'],heading:['Heading',2,700,1.2,'Section titles.'],body:['Body',0,400,1.5,'Paragraphs and long reading.'],label:['Label',-1,600,1.3,'Form labels and buttons.'],caption:['Caption',-1,400,1.4,'Small supporting notes.']};
+var L_TYTOK=shell('Typography tokens','Named sizes, weights and line heights, grouped into text styles.','typetok',[
+['tt-what','What they are',`<h2>What typography tokens are</h2><p>Typography tokens name the pieces of type: <b>font family</b>, <b>font size</b>, <b>weight</b>, <b>line height</b> and <b>letter spacing</b>. Designers then bundle them into <b>text styles</b> like <code>heading</code> or <code>body</code>, so nobody picks sizes by hand.</p>`],
+['tt-explore','Compose a text style',`<h2>Compose a text style</h2><p>Pick a style, then change the base size and every style scales with it.</p><div class='panel'>${chipsHtml('tyt',Object.keys(TYSTY).map(function(k){return [k,TYSTY[k][0]];}),'heading','Text style')}${rng('tyb','Base size (px)',14,20,16)}<div id='tyo' style='margin-top:14px;overflow-x:auto'></div>${codebox('tyc')}</div>`],
+['tt-use','Use it well',`<h2>Using typography tokens well</h2><ul class='tk'><li><b>Offer text styles, not raw sizes.</b> Fewer choices, more consistency.</li><li><b>Derive sizes from a scale</b> so they relate.</li><li><b>Use relative units (rem)</b> so text respects user settings.</li></ul>`],
+['tt-check','Quick check',quick([['What does a text style bundle?','Font family, size, weight, line height and letter spacing.'],['Why use text styles instead of raw sizes?','Fewer choices and more consistency.'],['Why prefer rem?','It respects the user\u2019s own text-size settings.']])],
+['tt-recap','Big ideas',bigideas(['Typography tokens name the parts of type.','Text styles bundle them.','Derive from a scale and use rem.'])]
+]);
+
+var SPT={1:4,2:8,3:12,4:16,5:24,6:32,7:48,8:64};
+var L_SPTOK=shell('Spacing tokens','A short ladder of named gaps and paddings.','spacetok',[
+['sk-what','What they are',`<h2>What spacing tokens are</h2><p>Spacing tokens are a <b>short ladder of named sizes</b>, such as <code>space-1</code> (4px), <code>space-2</code> (8px), <code>space-4</code> (16px). Designers use them for padding, margins and gaps, so spacing is always one of a few approved values.</p>`],
+['sk-explore','Pick the tokens',`<h2>Pick the tokens</h2><p>Choose a token for the card\u2019s padding and another for the gap between its items.</p><div class='panel'><p class='slab'>Padding</p>${chipsHtml('ski',Object.keys(SPT).map(function(k){return [k,'space-'+k+' ('+SPT[k]+')'];}),'4','Padding token')}<p class='slab'>Gap</p>${chipsHtml('skg',Object.keys(SPT).map(function(k){return [k,'space-'+k+' ('+SPT[k]+')'];}),'3','Gap token')}<div id='sko' style='margin-top:14px;max-width:360px'></div><p class='mood' id='skn' aria-live='polite'></p></div>`],
+['sk-use','Use it well',`<h2>Using spacing tokens well</h2><ul class='tk'><li><b>Use only tokens.</b> If you need 13px, ask why.</li><li><b>Grow the ladder non-linearly.</b> Small steps for small gaps, bigger jumps for big ones.</li><li><b>Pair tokens with meaning,</b> for example tighter inside a group and looser between groups.</li></ul>`],
+['sk-check','Quick check',quick([['What are spacing tokens?','A short ladder of named gap and padding sizes.'],['Why grow the ladder in uneven steps?','Small gaps need fine steps; large gaps need bigger jumps.'],['What should you do if you need a size that is not on the ladder?','Question it, and if justified, extend the ladder.']])],
+['sk-recap','Big ideas',bigideas(['Spacing tokens limit choices to a short ladder.','Use only tokens.','Looser between groups, tighter inside them.'])]
+]);
+
+var L_LATOK=shell('Layout tokens','Named values for page width, columns, gutters and margins.','layouttok',[
+['lk-what','What they are',`<h2>What layout tokens are</h2><p>Layout tokens set the <b>skeleton</b> of a page: the maximum <b>container width</b>, the number of <b>columns</b>, the <b>gutter</b> between them and the <b>margin</b> at the edges. They can differ by breakpoint.</p>`],
+['lk-explore','Shape the layout',`<h2>Shape the layout</h2><p>The wide grey box is a 1280px screen. See how the tokens shape the content area.</p><div class='panel'>${rng('lac','container-max (px)',560,1280,1080,20)}${rng('lag','gutter (px)',8,40,24)}${rng('lam','page-margin (px)',8,64,32)}<div class='stage' id='lao' style='margin-top:14px'></div>${codebox('lat')}</div>`],
+['lk-use','Use it well',`<h2>Using layout tokens well</h2><ul class='tk'><li><b>Cap the container width</b> so lines of text do not get too long on big screens.</li><li><b>Reduce margins and gutters on small screens.</b></li><li><b>Keep to a 12 or 4-8-12 column logic</b> that divides easily.</li></ul>`],
+['lk-check','Quick check',quick([['What do layout tokens define?','Container width, columns, gutters and margins.'],['Why cap the container width?','To stop text lines becoming too long on large screens.'],['What usually changes on small screens?','Fewer columns, smaller gutters and margins.']])],
+['lk-recap','Big ideas',bigideas(['Layout tokens define the page skeleton.','Cap the width; shrink margins on small screens.','Keep columns divisible.'])]
+]);
+
+var L_NAMING=shell('Naming conventions','A predictable way to name things.','naming',[
+['nc-what','What they are',`<h2>What naming conventions are</h2><p>A naming convention is a <b>consistent pattern</b> for naming tokens, components, layers and files, so people can guess names correctly and find things quickly.</p><p>A common token pattern is <b>category, property, role, state</b>, for example <code>color-background-primary-hover</code>. Common formats are <b>kebab-case</b> (<code>color-text-muted</code>), <b>camelCase</b> (<code>colorTextMuted</code>) and <b>dot.notation</b> (<code>color.text.muted</code>).</p>`],
+['nc-explore','Build a name',`<h2>Build a token name</h2><div class='panel'>${chipsHtml('nmp',[['background','background'],['text','text'],['border','border']],'background','Property')}${chipsHtml('nmr',[['primary','primary'],['danger','danger'],['success','success']],'primary','Role')}${chipsHtml('nms',[['','default'],['hover','hover'],['disabled','disabled']],'','State')}${chipsHtml('nmf',[['kebab','kebab-case'],['camel','camelCase'],['dot','dot.notation']],'kebab','Format')}<div id='nmo' style='margin-top:14px'></div></div><h3>Good and bad names</h3><table class='t'><tr><th>Avoid</th><th>Why</th><th>Better</th></tr><tr><td>blue-button-1</td><td>Names a colour and a count, not a purpose</td><td>color-background-primary</td></tr><tr><td>grey2</td><td>Says nothing about use</td><td>color-text-muted</td></tr><tr><td>big-padding</td><td>Relative and vague</td><td>space-6</td></tr></table>`],
+['nc-use','Use it well',`<h2>Naming well</h2><ul class='tk'><li><b>Name by purpose,</b> not appearance.</li><li><b>Keep the pattern the same everywhere.</b></li><li><b>Match design and code names</b> so everyone says the same thing.</li><li><b>Write it down</b> and give examples.</li></ul>`],
+['nc-check','Quick check',quick([['What is a common token pattern?','Category, property, role and state.'],['Why name by purpose?','Appearance names become wrong when the design changes.'],['Why match design and code names?','Everyone then uses the same words.']])],
+['nc-recap','Big ideas',bigideas(['Names follow a predictable pattern.','Name by purpose.','Match design and code.'])]
+]);
+
+/* ===== lessons: Layout ===== */
+var GRIDD={mobile:['Mobile',4,16,16,320],tablet:['Tablet',8,24,32,768],desktop:['Desktop',12,24,64,1280]};
+var L_GRIDS=shell('Grids','Column structures that change with screen size.','grids',[
+['gr-what','What it is',`<h2>What grids are in a design system</h2><p>A grid is a repeating structure of <b>columns</b>, <b>gutters</b> and <b>margins</b>. In a design system, the grid changes with screen size: a common pattern is <b>4 columns on phones, 8 on tablets and 12 on desktops</b>. Components then span a set number of columns.</p>`],
+['gr-explore','Change the device',`<h2>Change the device</h2><div class='panel'>${chipsHtml('grc',Object.keys(GRIDD).map(function(k){return [k,GRIDD[k][0]];}),'desktop','Device')}<div class='stage' id='gro' style='margin-top:6px'></div><p class='mood' id='grn' aria-live='polite'></p></div>`],
+['gr-use','Use it well',`<h2>Using grids well</h2><ul class='tk'><li><b>Snap components to columns,</b> not to arbitrary pixels.</li><li><b>Let components span different numbers of columns</b> per device.</li><li><b>Break the grid sparingly,</b> for deliberate emphasis.</li></ul>`],
+['gr-check','Quick check',quick([['How many columns are common on desktop?','Twelve.'],['What changes between devices?','Number of columns, gutters and margins.'],['What do components snap to?','Columns.']])],
+['gr-recap','Big ideas',bigideas(['A grid has columns, gutters and margins.','It changes with screen size.','Components snap to columns.'])]
+]);
+
+var L_SPSYS=shell('Spacing systems','A base unit and its multiples.','spacing',[
+['ss-what','What it is',`<h2>What a spacing system is</h2><p>A spacing system picks a <b>base unit</b>, usually 4 or 8 pixels, and builds all spacing from multiples of it. Everything aligns, decisions are faster, and developers and designers use the same numbers.</p><p>The <b>8-point grid</b> is the best known. Many teams add a 4-point half step for small details.</p>`],
+['ss-explore','Compare',`<h2>Random versus a system</h2><div class='panel'>${chipsHtml('ssc',[['rand','Random gaps'],['four','4-point system'],['eight','8-point system']],'rand','Spacing')}<div id='sso' style='margin-top:14px;max-width:360px'></div><p class='mood' id='ssn' aria-live='polite'></p></div>`],
+['ss-use','Use it well',`<h2>Using a spacing system well</h2><ul class='tk'><li><b>Choose 8 for most interfaces,</b> and 4 for dense ones.</li><li><b>Make component heights multiples of the unit,</b> so rows align.</li><li><b>Use the same gap between similar things.</b></li></ul>`],
+['ss-check','Quick check',quick([['What is the base unit of the best-known system?','8 pixels.'],['Why use multiples of a base unit?','Everything aligns and decisions are faster.'],['When might you use 4 instead?','For dense interfaces that need smaller steps.']])],
+['ss-recap','Big ideas',bigideas(['Spacing comes from multiples of a base unit.','8 is the common default; 4 adds fine control.','Consistent gaps look professional.'])]
+]);
+
+var L_BREAK=shell('Breakpoints','The screen widths where a layout changes shape.','breakpoints',[
+['bp-what','What they are',`<h2>What breakpoints are</h2><p>A breakpoint is a <b>screen width at which the layout changes</b>: columns stack, menus collapse, images resize. Systems name a few, for example <b>small</b>, <b>medium</b>, <b>large</b> and <b>extra large</b>, and every component knows how to respond to them.</p><p>Choose breakpoints where <b>your content</b> breaks, not where particular devices happen to be.</p>`],
+['bp-explore','Resize the screen',`<h2>Resize the screen</h2><div class='panel'>${rng('bpw','Screen width (px)',320,1440,700,10)}<div class='stage' id='bpo' style='margin-top:14px'></div><p class='mood' id='bpn' aria-live='polite'></p></div><table class='t'><tr><th>Name</th><th>From</th><th>Typical layout</th></tr><tr><td>Small</td><td>0</td><td>One column</td></tr><tr><td>Medium</td><td>600px</td><td>Two columns</td></tr><tr><td>Large</td><td>1024px</td><td>Three columns, full navigation</td></tr><tr><td>Extra large</td><td>1440px</td><td>Same as large, capped width</td></tr></table>`],
+['bp-use','Use it well',`<h2>Using breakpoints well</h2><ul class='tk'><li><b>Start with the smallest screen</b> and add complexity (mobile-first).</li><li><b>Use a handful of breakpoints,</b> not twenty.</li><li><b>Test between breakpoints too.</b> Layouts must also work at in-between widths.</li></ul>`],
+['bp-check','Quick check',quick([['What is a breakpoint?','A screen width at which the layout changes.'],['What does mobile-first mean?','Designing the small layout first and adding to it for larger screens.'],['Where should breakpoints be placed?','Where the content breaks, not at particular device widths.']])],
+['bp-recap','Big ideas',bigideas(['Breakpoints are where layouts change.','Name a few, and design mobile-first.','Let the content decide.'])]
+]);
+
+/* ===== lessons: Components ===== */
+var LIBC={
+ button:['Button','<Button variant="primary" size="md">Save</Button>','Starts an action. Use one primary button per area.'],
+ input:['Text input','<TextField label="Email" helper="We never share it" />','Collects a short piece of text. Always give it a label.'],
+ badge:['Badge','<Badge tone="success">Paid</Badge>','Shows a short status. Keep it to one or two words.'],
+ alert:['Alert','<Alert tone="warning" title="Heads up">Your trial ends soon.</Alert>','Tells people something important without blocking them.'],
+ card:['Card','<Card><Card.Title>Plan</Card.Title>...</Card>','Groups related content and actions in one container.']
+};
+var L_LIB=shell('Component library','The collection of ready-made components.','library',[
+['cl-what','What it is',`<h2>What a component library is</h2><p>A component library is the <b>collection of ready-made interface parts</b>: buttons, inputs, cards, menus, dialogs. Each exists twice, in the design tool for designers and as code for developers, and the two stay in sync.</p><p>Teams assemble screens from the library instead of drawing or coding each part again.</p>`],
+['cl-explore','Browse the library',`<h2>Browse the library</h2><div class='panel'>${chipsHtml('lbc',Object.keys(LIBC).map(function(k){return [k,LIBC[k][0]];}),'button','Component')}<div id='lbo' style='margin-top:14px'></div>${codebox('lbk')}<p class='mood' id='lbn' aria-live='polite'></p></div>`],
+['cl-use','Use it well',`<h2>Using a component library well</h2><ul class='tk'><li><b>Reuse before you create.</b> Check the library first.</li><li><b>Keep design and code in step.</b> A mismatch erodes trust.</li><li><b>Make it searchable and visual.</b> People should see the component, not just read its name.</li></ul>`],
+['cl-check','Quick check',quick([['What does a component library contain?','Ready-made interface parts, in both design and code.'],['Why must design and code stay in sync?','A mismatch makes people stop trusting the library.'],['What should you do before creating a new component?','Check whether the library already has one.']])],
+['cl-recap','Big ideas',bigideas(['The library holds ready-made parts in design and code.','Reuse first.','Keep both sides in sync.'])]
+]);
+
+var ANAT={container:['Container','The outer box that holds everything and sets the width.'],label:['Label','Tells people what to enter. It stays visible and is read aloud by screen readers.'],field:['Field','The area where people type. Its border shows the state.'],value:['Value or placeholder','The text inside the field. A placeholder is only a hint, never a replacement for the label.'],helper:['Helper text','Extra guidance or an error message below the field.']};
+var L_COMP=shell('Components','Self-contained interface parts with a clear anatomy.','components',[
+['cm-what','What it is',`<h2>What a component is</h2><p>A component is a <b>reusable, self-contained piece of interface</b> with a defined job and structure. Small ones (button, icon) are sometimes called <b>atoms</b>. Bigger ones made from them (search bar, card) are <b>molecules</b>. This vocabulary comes from Brad Frost\u2019s <i>Atomic Design</i>.</p><p>Every component has an <b>anatomy</b>: named parts, each with a purpose.</p>`],
+['cm-explore','Explore the anatomy',`<h2>Explore the anatomy</h2><p>Pick a part of this text input to highlight it.</p><div class='panel'>${chipsHtml('cmc',Object.keys(ANAT).map(function(k){return [k,ANAT[k][0]];}),'label','Part')}<div id='cmo' style='margin-top:14px;max-width:340px'></div><p class='mood' id='cmn' aria-live='polite'></p></div>`],
+['cm-use','Use it well',`<h2>Using components well</h2><ul class='tk'><li><b>One job per component.</b> If it does three things, split it.</li><li><b>Name the parts.</b> Shared names help designers and developers talk.</li><li><b>Build from small parts.</b> Compose bigger components out of smaller ones.</li></ul>`],
+['cm-check','Quick check',quick([['What is a component?','A reusable, self-contained interface part with a defined job.'],['What is anatomy?','The named parts that make up a component.'],['Is a placeholder a substitute for a label?','No. A placeholder disappears and is only a hint.']])],
+['cm-recap','Big ideas',bigideas(['Components are reusable parts with one job.','Anatomy names the pieces.','Build bigger parts from smaller ones.'])]
+]);
+
+var L_VARI=shell('Variants','Different versions of one component.','variants',[
+['vr-what','What they are',`<h2>What variants are</h2><p>A <b>variant</b> is a version of a component that changes one dimension: <b>type</b> (primary, secondary, ghost, danger), <b>size</b> (small, medium, large), or <b>shape</b>. Together they form a <b>matrix</b> that covers the needs of most screens without anyone inventing a new button.</p>`],
+['vr-explore','Combine variants',`<h2>Combine variants</h2><div class='panel'>${chipsHtml('vrv',[['primary','Primary'],['secondary','Secondary'],['ghost','Ghost'],['danger','Danger']],'primary','Type')}${chipsHtml('vrs',[['S','Small'],['M','Medium'],['L','Large']],'M','Size')}<div id='vro' style='margin-top:14px'></div><p class='slab'>The whole matrix</p><div id='vrm' style='overflow-x:auto'></div></div>`],
+['vr-use','Use it well',`<h2>Using variants well</h2><ul class='tk'><li><b>Make each variant earn its place.</b> Too many cause confusion.</li><li><b>Give each a clear purpose:</b> primary for the main action, secondary for alternatives, danger for destructive acts.</li><li><b>Keep dimensions independent,</b> so every size works with every type.</li></ul>`],
+['vr-check','Quick check',quick([['What is a variant?','A version of a component that changes one dimension, such as type or size.'],['When use the danger variant?','For destructive actions such as delete.'],['Why keep dimensions independent?','Every combination then works without special cases.']])],
+['vr-recap','Big ideas',bigideas(['Variants vary type, size or shape.','Each has a clear purpose.','Keep dimensions independent.'])]
+]);
+
+var L_STATES=shell('States','How a component looks as people interact.','states',[
+['sa-what','What they are',`<h2>What states are</h2><p>A component does not look the same all the time. Its <b>state</b> tells people what is happening. The usual ones: <b>default</b>, <b>hover</b> (pointer over it), <b>focus</b> (selected by keyboard), <b>active</b> or pressed, <b>disabled</b>, <b>loading</b> and <b>error</b>.</p><p>States are a big part of <b>accessibility</b>. A visible focus state, for example, is how keyboard users know where they are.</p>`],
+['sa-explore','Force a state',`<h2>Force a state</h2><div class='panel'>${chipsHtml('stc',[['default','Default'],['hover','Hover'],['focus','Focus'],['active','Active'],['disabled','Disabled'],['loading','Loading'],['error','Error']],'default','State')}<div id='sto' style='margin-top:14px;display:flex;gap:24px;flex-wrap:wrap;align-items:flex-start'></div><p class='mood' id='stn' aria-live='polite'></p></div>`],
+['sa-use','Use it well',`<h2>Using states well</h2><ul class='tk'><li><b>Design every state,</b> not only the default.</li><li><b>Never remove the focus outline</b> without replacing it with something equally visible.</li><li><b>Do not rely on colour alone.</b> Disabled and error need more than a colour change.</li><li><b>Explain errors in words.</b></li></ul>`],
+['sa-check','Quick check',quick([['What is the focus state for?','It shows keyboard users which element is selected.'],['Why not use colour alone for error?','Some people cannot see the colour change. Add text or an icon.'],['Which states should you design?','All of them, not just the default.']])],
+['sa-recap','Big ideas',bigideas(['States show what is happening.','Focus is essential for keyboard users.','Design every state, and do not rely on colour alone.'])]
+]);
+
+var L_PROPS=shell('Properties','The settings you change on a component.','properties',[
+['pp-what','What they are',`<h2>What properties are</h2><p>Properties are the <b>settings</b> exposed on a component, such as its <b>label text</b>, <b>size</b>, <b>variant</b>, <b>icon</b> and whether it is <b>disabled</b>. In design tools they appear in a properties panel, and in code they are called <b>props</b> or attributes.</p><p>Well-chosen properties let people customise a component without breaking it.</p>`],
+['pp-explore','Set the properties',`<h2>Set the properties</h2><div class='panel'><label for='prl'>Label</label><input id='prl' type='text' value='Save changes' maxlength='24'>${chipsHtml('pri',[['none','No icon'],['left','Icon left'],['right','Icon right']],'none','Icon')}${chipsHtml('prs',[['S','Small'],['M','Medium'],['L','Large']],'M','Size')}${chipsHtml('prv',[['primary','Primary'],['secondary','Secondary'],['danger','Danger']],'primary','Variant')}${chipsHtml('prd',[['off','Enabled'],['on','Disabled']],'off','Disabled')}${chipsHtml('prw',[['auto','Auto width'],['full','Full width']],'auto','Width')}<div id='pro' style='margin-top:14px;max-width:360px'></div>${codebox('prc')}</div>`],
+['pp-use','Use it well',`<h2>Using properties well</h2><ul class='tk'><li><b>Expose what should change, lock what should not.</b> Colours should come from the variant, not be set by hand.</li><li><b>Use clear names and sensible defaults.</b></li><li><b>Prefer a few properties over many.</b></li></ul>`],
+['pp-check','Quick check',quick([['What are properties?','Settings exposed on a component, such as label, size and variant.'],['What are they called in code?','Props or attributes.'],['Why lock some things?','To stop people customising a component into something off-system.']])],
+['pp-recap','Big ideas',bigideas(['Properties are a component\u2019s settings.','Expose what should change; lock the rest.','Use clear names and good defaults.'])]
+]);
+
+var RULESD={
+ one:['One primary button per area','A single primary button makes the main action obvious.','Three primary buttons side by side: nothing stands out.'],
+ label:['Short, clear labels','\u201cSave changes\u201d says exactly what will happen.','\u201cClick here to save all of your changes now\u201d is wordy and unclear.'],
+ icon:['Icon-only buttons need a name','An icon button with an accessible label (\u201cDelete\u201d) works for screen readers.','An unlabelled icon button is invisible to screen readers.'],
+ gap:['Consistent gaps between buttons','Buttons separated by one spacing token (8px).','Gaps of 0 and 40px: looks accidental.']
+};
+var L_RULES=shell('Rules','Guidance on when and how to use each component.','rules',[
+['ru-what','What they are',`<h2>What rules are</h2><p>A component alone does not say <b>when</b> to use it. <b>Usage rules</b> fill that gap: how many, how to label, where to place, what to avoid. They are usually shown as <b>do</b> and <b>do not</b> pairs.</p><p>Good rules reflect real mistakes the team has seen.</p>`],
+['ru-explore','Do and do not',`<h2>Do and do not</h2><div class='panel'>${chipsHtml('rlc',Object.keys(RULESD).map(function(k){return [k,RULESD[k][0]];}),'one','Rule')}<div id='rlo' style='margin-top:14px'></div></div>`],
+['ru-use','Use it well',`<h2>Writing rules well</h2><ul class='tk'><li><b>Show, then explain.</b> Pictures of do and do not beat paragraphs.</li><li><b>Say why.</b> A reason makes the rule stick.</li><li><b>Keep the list short.</b> Few rules get read.</li></ul>`],
+['ru-check','Quick check',quick([['What is a usage rule?','Guidance on when and how to use a component.'],['How are rules usually shown?','As do and do not pairs.'],['Why give the reason?','It makes the rule easier to remember and follow.']])],
+['ru-recap','Big ideas',bigideas(['Rules say when and how to use components.','Show do and do not examples.','Keep rules short and explain why.'])]
+]);
+
+var L_PATTERNS=shell('Patterns','Components combined to solve a common problem.','patterns',[
+['pt-what','What they are',`<h2>What patterns are</h2><p>A pattern is a <b>proven solution to a recurring design problem</b>, made by combining components: an empty state, form validation, a confirmation dialog, search and filter. Components are the parts; patterns are the recipes.</p>`],
+['pt-explore','See three patterns',`<h2>See three patterns</h2><div class='panel'>${chipsHtml('ptc',[['empty','Empty state'],['valid','Form validation'],['confirm','Confirm a destructive action']],'empty','Pattern')}<div id='pto' style='margin-top:14px'></div><p class='mood' id='ptn' aria-live='polite'></p></div>`],
+['pt-use','Use it well',`<h2>Using patterns well</h2><ul class='tk'><li><b>Describe the problem first,</b> then the solution.</li><li><b>Reuse patterns across the product.</b> Users learn them once.</li><li><b>Test them.</b> A pattern is only good if it works for people.</li></ul>`],
+['pt-check','Quick check',quick([['How do patterns differ from components?','Components are parts; patterns combine them to solve a problem.'],['Name a common pattern.','Empty state, form validation, confirmation dialog, search and filter.'],['Why reuse patterns?','People learn them once and recognise them elsewhere.']])],
+['pt-recap','Big ideas',bigideas(['Patterns are recipes made from components.','Start with the problem.','Reuse and test them.'])]
+]);
+
+var TEMPD={dash:['Dashboard',[['Header',0,0,12,1],['Sidebar',0,1,3,5],['Metric',3,1,3,1],['Metric',6,1,3,1],['Metric',9,1,3,1],['Chart',3,2,6,3],['Activity list',9,2,3,3]]],article:['Article',[['Header',0,0,12,1],['Headline and byline',2,1,8,1],['Hero image',2,2,8,2],['Body text',3,4,6,3]]],form:['Form page',[['Header',0,0,12,1],['Title',3,1,6,1],['Form fields',3,2,6,3],['Primary action',3,5,6,1]]]};
+var L_TEMPL=shell('Templates','Ready-made page layouts.','templates',[
+['tm-what','What they are',`<h2>What templates are</h2><p>A template is a <b>page layout with slots</b>: header here, content there, actions at the bottom. Teams fill the slots with components and patterns, and the page is consistent from the start.</p>`],
+['tm-explore','Fill the slots',`<h2>Fill the slots</h2><div class='panel'>${chipsHtml('tmc',Object.keys(TEMPD).map(function(k){return [k,TEMPD[k][0]];}),'dash','Template')}${chipsHtml('tmf',[['wire','Empty slots'],['fill','Filled']],'wire','Content')}<div id='tmo' style='margin-top:14px'></div></div>`],
+['tm-use','Use it well',`<h2>Using templates well</h2><ul class='tk'><li><b>Cover the common jobs:</b> list, detail, form, dashboard, article.</li><li><b>Show the responsive behaviour,</b> not only the desktop layout.</li><li><b>Keep slots flexible,</b> so templates guide without restricting.</li></ul>`],
+['tm-check','Quick check',quick([['What is a template?','A page layout with slots for components and patterns.'],['What jobs should templates cover?','Common ones: list, detail, form, dashboard and article pages.'],['Why show responsive behaviour?','Templates need to work on every screen size.']])],
+['tm-recap','Big ideas',bigideas(['Templates are page layouts with slots.','They start pages consistent.','Cover common jobs and show responsive behaviour.'])]
+]);
+
+/* ===== lessons: Running a system ===== */
+var DOCSEC={overview:['Overview','What it is and when to use it.'],anatomy:['Anatomy','The named parts of the component.'],variants:['Variants and states','Every type, size and state.'],usage:['Usage: do and do not','Examples of right and wrong use.'],a11y:['Accessibility','Keyboard, screen reader and contrast notes.'],code:['Code','Install and usage snippet.']};
+var L_DOCS=shell('Documentation','Clear written guidance with examples.','docs',[
+['dc-what','What it is',`<h2>What design system documentation is</h2><p>Documentation is how a system <b>teaches itself</b>. Each component gets a page explaining what it is, when to use it, how it behaves and how to build it. Without documentation, people guess, and guessing leads to inconsistency.</p>`],
+['dc-explore','Build a doc page',`<h2>Build a component doc page</h2><p>Turn sections on and off for the Button page, and watch the completeness meter.</p><div class='panel'>${togg('dcs',Object.keys(DOCSEC).map(function(k){return [k,DOCSEC[k][0]];}),{overview:1})}<div id='dco' style='margin-top:14px;max-width:520px'></div><p class='mood' id='dcn' aria-live='polite'></p></div>`],
+['dc-use','Use it well',`<h2>Writing good documentation</h2><ul class='tk'><li><b>Lead with examples.</b> People copy before they read.</li><li><b>Write for both designers and developers.</b></li><li><b>Keep it current.</b> Out-of-date docs are worse than none.</li><li><b>Make it findable.</b> Search, tags and a clear structure.</li></ul>`],
+['dc-check','Quick check',quick([['What should a component page explain?','What it is, when to use it, how it behaves and how to build it.'],['Why are out-of-date docs a problem?','They mislead people, which is worse than no documentation.'],['What should documentation lead with?','Examples.']])],
+['dc-recap','Big ideas',bigideas(['Documentation lets the system teach itself.','Lead with examples and keep it current.','Write for designers and developers.'])]
+]);
+
+var L_VERSION=shell('Version control','Tracking changes with version numbers.','version',[
+['vc-what','What it is',`<h2>What version control is</h2><p>When a system changes, teams that use it need to know <b>what changed and whether it will break their work</b>. Version control tracks every change, and <b>semantic versioning</b> (semver) puts the answer in the version number: <b>MAJOR.MINOR.PATCH</b>.</p><ul class='tk'><li><b>Patch</b> (2.3.1 to 2.3.2): a fix that changes nothing visible.</li><li><b>Minor</b> (2.3.1 to 2.4.0): new features that do not break anything.</li><li><b>Major</b> (2.3.1 to 3.0.0): breaking changes that need action.</li></ul>`],
+['vc-explore','Release changes',`<h2>Release some changes</h2><p>Click a change to release it and watch the version number and the changelog.</p><div class='panel'><div class='ctrls'><button class='chip' type='button' data-a='patch'>Fix a typo in the docs</button><button class='chip' type='button' data-a='minor'>Add a new Button variant</button><button class='chip' type='button' data-a='major'>Rename a component</button><button class='btn' id='vcr' type='button'>Reset</button></div><div id='vco' style='margin-top:14px' aria-live='polite'></div></div>`],
+['vc-use','Use it well',`<h2>Using versions well</h2><ul class='tk'><li><b>Keep a changelog,</b> a plain list of what changed in each release.</li><li><b>Deprecate before you delete.</b> Warn first, then remove in a major version.</li><li><b>Let teams pin a version,</b> so upgrades happen when they are ready.</li></ul>`],
+['vc-check','Quick check',quick([['What does a major version bump signal?','A breaking change that teams must act on.'],['What is a changelog?','A list of what changed in each release.'],['What does deprecating mean?','Warning that something will be removed later, before actually removing it.']])],
+['vc-recap','Big ideas',bigideas(['Semver is MAJOR.MINOR.PATCH.','Major means breaking; minor adds; patch fixes.','Keep a changelog and deprecate before deleting.'])]
+]);
+
+var CHK={reuse:'I checked that nothing similar already exists',two:'It is needed in two or more places',a11y:'It is accessible and works with a keyboard',docs:'It is documented, with examples',tokens:'It uses tokens, with no hard-coded values'};
+var L_CONTRIB=shell('Contribution guidelines','How anyone can suggest or add something.','contribute',[
+['cg-what','What they are',`<h2>What contribution guidelines are</h2><p>A design system is better when <b>many people can improve it</b>. Contribution guidelines explain how: how to suggest a change, what a good proposal contains, who reviews it and how it gets released.</p><p>Without them, teams either work around the system or bolt on their own unreviewed parts.</p>`],
+['cg-explore','Is it ready?',`<h2>Is your idea ready to contribute?</h2><p>Tick everything that is true.</p><div class='panel'>${togg('cgt',Object.keys(CHK).map(function(k){return [k,CHK[k]];}),{})}<div id='cgo' style='margin-top:14px' aria-live='polite'></div></div><h3>The usual route</h3><ol class='steps'><li><b>Idea.</b> Check the library for something that already does the job.</li><li><b>Proposal.</b> Describe the problem, show examples and sketches.</li><li><b>Review.</b> The core team and others give feedback.</li><li><b>Build.</b> Design, code, document and test.</li><li><b>Release.</b> Merge, update the changelog and announce it.</li></ol>`],
+['cg-use','Use it well',`<h2>Making contribution easy</h2><ul class='tk'><li><b>Provide templates</b> for proposals and bug reports.</li><li><b>Reply quickly,</b> even if the answer is no, with reasons.</li><li><b>Credit contributors.</b> It encourages more.</li></ul>`],
+['cg-check','Quick check',quick([['Why have contribution guidelines?','So many people can improve the system in a consistent, reviewed way.'],['What is a good first step before proposing a component?','Check whether something similar already exists.'],['Why credit contributors?','It encourages more people to contribute.']])],
+['cg-recap','Big ideas',bigideas(['Guidelines let many people improve the system.','Proposals follow a clear route.','Be quick, kind and clear in reviews.'])]
+]);
+
+var GOV={
+ central:['Centralised','One core team owns the system and everyone else requests changes.','Very consistent and easy to control.','Can become a bottleneck, so teams wait or work around it.'],
+ federated:['Federated','Representatives from each product team share ownership.','Fast, with buy-in from every team.','Risk of drift if people pull in different directions.'],
+ hybrid:['Hybrid','A core team owns the foundations; product teams contribute through a clear process.','A good balance of consistency and speed.','Needs a clear process and strong communication.']
+};
+var L_GOV=shell('Governance','Who decides what goes into the system.','governance',[
+['gv-what','What it is',`<h2>What governance is</h2><p>Governance is the <b>set of decisions about decisions</b>: who owns the system, who can change it, how requests are handled and how conflicts are resolved. Good governance keeps the system trustworthy without slowing everyone down.</p>`],
+['gv-explore','Compare the models',`<h2>Compare the models</h2><div class='panel'>${chipsHtml('gvc',Object.keys(GOV).map(function(k){return [k,GOV[k][0]];}),'hybrid','Model')}<div id='gvo' style='margin-top:14px' aria-live='polite'></div></div>`],
+['gv-use','Use it well',`<h2>Governing well</h2><ul class='tk'><li><b>Name an owner.</b> A shared system with no owner decays.</li><li><b>Publish the process and the roadmap.</b></li><li><b>Review regularly.</b> Remove what nobody uses and fix what hurts.</li></ul>`],
+['gv-check','Quick check',quick([['What does governance decide?','Who owns the system, who can change it and how requests are handled.'],['What is the risk of a centralised model?','The core team becomes a bottleneck.'],['Why name an owner?','Without one, a shared system decays.']])],
+['gv-recap','Big ideas',bigideas(['Governance sets who decides and how.','Centralised, federated or hybrid.','Name an owner and publish the process.'])]
+]);
+
+var L_SCALE=shell('Scalability','Keeping a system useful as products and teams multiply.','scalability',[
+['sc-what','What it is',`<h2>What scalability is</h2><p>A scalable system keeps working as <b>more products, teams and platforms</b> adopt it. Tokens, components and clear rules mean that adding a new product costs a fraction of the effort of building from scratch.</p><p>The other side of scale is <b>rigidity</b>. A system that is too strict gets ignored. It needs room for different products to flex.</p>`],
+['sc-explore','See the effect',`<h2>See the effect of scale</h2><p>This is an illustrative model, not real data. It assumes each team must build common parts from scratch without a system, but reuses them with one.</p><div class='panel'>${rng('sct','Number of product teams',1,20,6)}<div id='sco' style='margin-top:14px'></div><p class='mood' id='scn' aria-live='polite'></p></div>`],
+['sc-use','Use it well',`<h2>Designing for scale</h2><ul class='tk'><li><b>Use tokens and themes,</b> so one system supports many brands.</li><li><b>Make components flexible,</b> with variants and slots, not one-offs.</li><li><b>Plan for several platforms:</b> web, iOS, Android.</li><li><b>Measure adoption,</b> and ask teams where the system gets in their way.</li></ul>`],
+['sc-check','Quick check',quick([['What does scalability mean for a system?','It keeps working as more products, teams and platforms adopt it.'],['What is the risk of too much strictness?','Teams ignore the system.'],['What lets one system support many brands?','Tokens and themes.']])],
+['sc-recap','Big ideas',bigideas(['A scalable system gets cheaper per product.','Tokens and themes support many brands.','Stay flexible, and measure adoption.'])]
+]);
+
+var HOFF={card:['Card','Container','Width: fill (max 360px). Padding: space-4 (16px). Radius: radius-medium (12px). Background: color-surface. Shadow: elevation-1.'],title:['Title','Text','Style: heading (20px, weight 700, line height 1.2). Colour: color-text-primary. Margin below: space-2 (8px).'],button:['Button','Component','Component: Button, variant primary, size medium. Padding: 10px 18px. Radius: radius-medium. Background: color-action-primary. Label: label style.']};
+var L_HANDOFF=shell('Design-to-development handoff','Passing designs to engineers with everything they need.','handoff',[
+['hd-what','What it is',`<h2>What handoff is</h2><p>Handoff is the moment a design passes from designers to developers. Good handoff means engineers can build it <b>without guessing</b>: they have the layout, the tokens, the component names, the states, the behaviour and the edge cases.</p><p>A design system helps hugely. When designers use <b>real components and tokens</b>, the design already speaks the developers\u2019 language.</p>`],
+['hd-explore','Inspect a design',`<h2>Inspect a design</h2><p>Pick an element to see the specs a developer would read, using token names rather than raw numbers.</p><div class='panel'>${chipsHtml('hdc',Object.keys(HOFF).map(function(k){return [k,HOFF[k][0]];}),'card','Element')}<div class='wheelrow' style='margin-top:14px'><div id='hds'></div><div id='hdo' class='readout' aria-live='polite'></div></div></div>`],
+['hd-figma','In Figma',`<h2>Handing off in Figma</h2><p>Figma has a view made for developers, called <b>Dev Mode</b>. Menus change between versions, so look for the nearest match.</p>`+steps(['Open the design file and press <b>Shift+D</b> on your keyboard, or use the <b>Dev Mode</b> toggle in the toolbar, to switch into Dev Mode.','Click any layer on the canvas. The <b>right-hand sidebar</b> now shows its measurements, colours, text styles and code.','Look for token or variable names next to values (for example <b>color-action-primary</b>). These tell the developer which token to use.','Use the <b>Copy</b> options beside a value or code snippet to copy it.','Add notes for behaviour that is not visible, such as animations and error cases.'])],
+['hd-use','Use it well',`<h2>Handing off well</h2><ul class='tk'><li><b>Use components and tokens,</b> not hand-picked values.</li><li><b>Show every state:</b> hover, focus, error, empty, loading.</li><li><b>Show responsive behaviour,</b> at each breakpoint.</li><li><b>Talk early and often.</b> A conversation beats a perfect file.</li></ul>`],
+['hd-check','Quick check',quick([['What do developers need in a good handoff?','Layout, tokens, component names, states, behaviour and edge cases.'],['How does a design system help handoff?','Designs use the same components and tokens developers build with.'],['What is better than a perfect file?','An early, ongoing conversation.']])],
+['hd-recap','Big ideas',bigideas(['Handoff should leave nothing to guess.','Components and tokens speak the developers\u2019 language.','Show states and responsive behaviour, and talk early.'])]
+]);
+
+/* ===== inits: Tokens and foundations ===== */
+function initDSystem(root){
+  var m=prep(root),$=m.$;
+  function draw(k){
+    var yes=k==='yes',h='',i,radii={},hues={};
+    for(i=0;i<6;i++){
+      var t=yes?tk({hue:215,r:10}):tk({hue:[215,160,340,30,260,190][i],r:[0,4,14,24,8,999][i]%100});
+      var sz=yes?'M':['S','L','M','S','L','M'][i],v=yes?(i<3?'primary':'secondary'):['primary','primary','secondary','ghost','danger','primary'][i];
+      radii[t.r]=1;hues[t.h]=1;
+      h+=`<div style='display:inline-block;margin:0 10px 10px 0'>${dsBtn(t,{v:v,sz:sz,label:['Save','Send','Next','Buy','Done','Go'][i]})}</div>`;
+    }
+    var f=yes?`<div style='display:flex;gap:12px;flex-wrap:wrap'>${dsInput(tk({}),{label:'Name',value:'Ada'})}${dsInput(tk({}),{label:'Email'})}</div>`:`<div style='display:flex;gap:12px;flex-wrap:wrap'>${dsInput(tk({r:0}),{label:'name',value:'Ada',help:''})}${dsInput(tk({r:20}),{label:'Email address:'})}</div>`;
+    $('#dso').innerHTML=`<div style='background:#fff;border-radius:14px;padding:16px'>${h}<div style='margin-top:6px'>${f}</div></div>`;
+    $('#dsn').textContent=yes?'With a system: one colour, one corner radius, a clear set of button types. It all feels like one product.':'Without a system: '+Object.keys(hues).length+' colours and '+Object.keys(radii).length+' corner radii across six buttons. Labels and sizes drift too.';
+  }
+  bindChips(root,'dsc',draw);draw('no');
+}
+
+function initBrandSys(root){
+  var m=prep(root),$=m.$;
+  function draw(k){var b=BSYS[k],lab=b[1]==='brand'?'Brand system':b[1]==='design'?'Design system':'Shared by both';$('#bso').innerHTML=`<div class='callout' style='margin:0'><p><b>${b[0]} belongs to: ${lab}.</b></p><p style='margin-top:6px !important'>${b[2]}</p></div>`;}
+  bindChips(root,'bsc',draw);draw('logo');
+}
+
+function initTokens(root){
+  var m=prep(root),$=m.$,h=215,r=10,s=16;
+  function draw(){
+    var t=tk({hue:h,r:r,s:s});
+    $('#dto').innerHTML=`<div class='mock' style='background:#fff;color:#14213D;max-width:380px;border-radius:${r+4}px'><div style='padding:${s}px;display:flex;flex-direction:column;gap:${s}px'><div style='font-weight:800;font-size:1.2rem;font-family:Inter,sans-serif'>Project settings</div>${dsInput(t,{label:'Project name',value:'Orbit',help:'Shown to your team.'})}<div style='display:flex;gap:${s/2}px;flex-wrap:wrap'>${dsBtn(t,{label:'Save'})}${dsBtn(t,{v:'secondary',label:'Cancel'})}</div></div></div>`;
+    $('#dtc').textContent=':root {\n  --color-action-primary: '+t.c+';\n  --radius-medium: '+r+'px;\n  --space-4: '+s+'px;\n}';
+  }
+  onRng(root,'dth',function(v){h=v;draw();});onRng(root,'dtr',function(v){r=v;draw();});onRng(root,'dts',function(v){s=v;draw();});
+  bindCopy(root,'dtb');draw();
+}
+
+function initColourTokens(root){
+  var m=prep(root),$=m.$;
+  var P={'white':'#FFFFFF','gray-50':'#F4F6FB','gray-100':'#E4E8F2','gray-700':'#2E3A63','gray-800':'#1E2745','gray-900':'#12182E','blue-300':'#86A9EE','blue-500':'#2F6FD8'};
+  var S={light:[['color-bg-page','gray-50'],['color-surface','white'],['color-text-primary','gray-900'],['color-border','gray-100'],['color-action-primary','blue-500']],dark:[['color-bg-page','gray-900'],['color-surface','gray-800'],['color-text-primary','gray-50'],['color-border','gray-700'],['color-action-primary','blue-300']]};
+  function draw(k){
+    var T={};S[k].forEach(function(x){T[x[0]]=P[x[1]];});
+    var act=T['color-action-primary'];
+    $('#cto').innerHTML=`<div style='background:${T['color-bg-page']};padding:16px;border-radius:14px'><div style='background:${T['color-surface']};border:1px solid ${T['color-border']};border-radius:12px;padding:16px;color:${T['color-text-primary']};font-family:Inter,sans-serif'><div style='font-weight:800;font-size:1.15rem;margin-bottom:6px'>Your plan</div><div style='margin-bottom:12px'>Renews on 1 March.</div><span style='display:inline-block;background:${act};color:${textOn(act)};padding:9px 16px;border-radius:10px;font-weight:700'>Manage plan</span></div></div>`;
+    $('#ctr').innerHTML=`<table class='t'><tr><th>Semantic token</th><th>Points to</th><th>Value</th></tr>`+S[k].map(function(x){return `<tr><td><code>${x[0]}</code></td><td>${x[1]}</td><td>${P[x[1]]}</td></tr>`;}).join('')+`</table>`;
+  }
+  bindChips(root,'ctt',draw);draw('light');
+}
+
+function initTypeTokens(root){
+  var m=prep(root),$=m.$,k='heading',b=16;
+  function draw(){
+    var d=TYSTY[k],px=b*Math.pow(1.25,d[1]),rem=(px/16).toFixed(3).replace(/0+$/,'').replace(/\.$/,'');
+    $('#tyo').innerHTML=`<div class='f-inter' style='font-size:${px}px;font-weight:${d[2]};line-height:${d[3]};white-space:nowrap'>${d[0]}: The quick brown fox</div><p class='mood'>${d[4]}</p>`;
+    $('#tyc').textContent='--text-'+k+'-font-family: Inter, sans-serif;\n--text-'+k+'-font-size: '+rem+'rem; /* '+px.toFixed(1)+'px */\n--text-'+k+'-font-weight: '+d[2]+';\n--text-'+k+'-line-height: '+d[3]+';';
+  }
+  bindChips(root,'tyt',function(v){k=v;draw();});onRng(root,'tyb',function(v){b=v;draw();});draw();
+}
+
+function initSpaceTokens(root){
+  var m=prep(root),$=m.$,pi='4',gi='3';
+  function draw(){
+    var p=SPT[pi],g=SPT[gi],t=tk({});
+    $('#sko').innerHTML=`<div class='mock' style='background:#fff;color:#14213D'><div style='padding:${p}px;display:flex;flex-direction:column;gap:${g}px;font-family:Inter,sans-serif'><div style='font-weight:800;font-size:1.1rem'>Weekly report</div><div style='color:#4A5070'>Sales are up 12% on last week.</div><div>${dsBtn(t,{label:'View report',sz:'S'})}</div></div></div>`;
+    $('#skn').textContent='Padding uses space-'+pi+' ('+p+'px) and the gap uses space-'+gi+' ('+g+'px). '+(p<12?'Tight: feels dense.':p>32?'Very roomy: feels premium but costs screen space.':'Comfortable padding.');
+  }
+  bindChips(root,'ski',function(v){pi=v;draw();});bindChips(root,'skg',function(v){gi=v;draw();});draw();
+}
+
+function initLayoutTokens(root){
+  var m=prep(root),$=m.$,C=1080,g=24,mg=32;
+  function draw(){
+    var W=Math.min(C,1280-2*mg),x0=(1280-W)/2,cw=(W-11*g)/12,sc=0.5,h='',i;
+    h+=`<rect width='640' height='140' fill='#DDE2F0'/><rect x='${x0*sc}' y='8' width='${W*sc}' height='124' fill='#fff' stroke='#9AA0BC'/>`;
+    for(i=0;i<12;i++){h+=`<rect x='${((x0+i*(cw+g))*sc).toFixed(1)}' y='8' width='${(cw*sc).toFixed(1)}' height='124' fill='rgba(232,69,107,.28)'/>`;}
+    $('#lao').innerHTML=`<svg viewBox='0 0 640 140' width='100%' style='max-width:600px' role='img' aria-label='A 1280 pixel screen with the content container and twelve columns'>${h}</svg>`;
+    $('#lat').textContent=':root {\n  --container-max: '+C+'px;\n  --grid-columns: 12;\n  --grid-gutter: '+g+'px;\n  --page-margin: '+mg+'px;\n}\n/* container is '+Math.round(W)+'px wide, each column '+cw.toFixed(1)+'px */';
+  }
+  onRng(root,'lac',function(v){C=v;draw();});onRng(root,'lag',function(v){g=v;draw();});onRng(root,'lam',function(v){mg=v;draw();});draw();
+}
+
+function initNaming(root){
+  var m=prep(root),$=m.$,pp='background',rl='primary',st='',fm='kebab';
+  function draw(){
+    var parts=['color',pp,rl].concat(st?[st]:[]),name;
+    if(fm==='kebab'){name=parts.join('-');}else if(fm==='dot'){name=parts.join('.');}else{name=parts[0]+parts.slice(1).map(function(x){return x.charAt(0).toUpperCase()+x.slice(1);}).join('');}
+    var base={primary:'#2F6FD8',danger:'#D62839',success:'#1F9D55'}[rl],col=st==='hover'?mixHex(base,'#000000',0.25):st==='disabled'?'#B8BDD0':base;
+    var sample=pp==='background'?`<span style='display:inline-block;background:${col};color:#fff;padding:8px 16px;border-radius:10px;font-weight:700'>Sample</span>`:pp==='text'?`<span style='color:${col};font-weight:800;font-size:1.3rem'>Sample text</span>`:`<span style='display:inline-block;border:3px solid ${col};padding:8px 16px;border-radius:10px;font-weight:700;color:#14213D'>Sample</span>`;
+    $('#nmo').innerHTML=`<div style='display:flex;gap:20px;align-items:center;flex-wrap:wrap'><code style='font-size:1.1rem;font-weight:700'>${name}</code>${sample}</div><p class='mood'>Pattern: category, property, role, state. The state is left out for the default.</p>`;
+  }
+  bindChips(root,'nmp',function(v){pp=v;draw();});bindChips(root,'nmr',function(v){rl=v;draw();});bindChips(root,'nms',function(v){st=v;draw();});bindChips(root,'nmf',function(v){fm=v;draw();});draw();
+}
+
+/* ===== inits: Layout ===== */
+function initGrids(root){
+  var m=prep(root),$=m.$;
+  function draw(k){
+    var d=GRIDD[k],n=d[1],sc=320/d[4],g=d[2]*sc,mg=d[3]*sc,cw=(320-2*mg-(n-1)*g)/n,h='',i;
+    function span(c){return c*cw+(c-1)*g;}
+    function X(col){return mg+col*(cw+g);}
+    h+=`<rect width='320' height='260' fill='#fff' stroke='#9AA0BC'/>`;
+    for(i=0;i<n;i++){h+=`<rect x='${X(i).toFixed(1)}' y='0' width='${cw.toFixed(1)}' height='260' fill='rgba(232,69,107,.2)'/>`;}
+    h+=`<rect x='${X(0)}' y='10' width='${span(n).toFixed(1)}' height='22' rx='3' fill='#14213D'/><rect x='${X(0)}' y='40' width='${span(n).toFixed(1)}' height='50' rx='3' fill='#2F6FD8'/>`;
+    var per=n===4?1:n===8?2:3,cs=n/per,row=0,col=0,idx;
+    for(idx=0;idx<(n===4?3:6);idx++){var y=98+row*50;h+=`<rect x='${X(col*cs).toFixed(1)}' y='${y}' width='${span(cs).toFixed(1)}' height='42' rx='3' fill='#9AA0BC'/>`;col++;if(col>=per){col=0;row++;}}
+    $('#gro').innerHTML=`<svg viewBox='0 0 320 260' width='100%' style='max-width:340px' role='img' aria-label='${d[0]} layout with ${n} columns'>${h}</svg>`;
+    $('#grn').textContent=d[0]+': '+n+' columns, '+d[2]+'px gutters, '+d[3]+'px margins (at '+d[4]+'px wide). The cards each span '+cs+' column'+(cs>1?'s':'')+'.';
+  }
+  bindChips(root,'grc',draw);draw('desktop');
+}
+
+function initSpacingSys(root){
+  var m=prep(root),$=m.$;
+  var G={rand:[13,22,9,31,17],four:[12,20,8,32,16],eight:[8,24,8,32,16]};
+  var N={rand:'Random gaps: each one is a different, arbitrary size. Nothing lines up and nobody can remember the numbers.',four:'A 4-point system: every gap is a multiple of 4. Fine control with a consistent rhythm.',eight:'An 8-point system: every gap is a multiple of 8. Fewer choices and an even stronger rhythm.'};
+  function draw(k){
+    var g=G[k],h='',i;
+    for(i=0;i<5;i++){
+      h+=`<div style='background:var(--surface);border:2px solid var(--c);border-radius:8px;height:32px;display:flex;align-items:center;padding:0 12px;font-weight:700'>Card ${i+1}</div>`;
+      if(i<4){h+=`<div style='height:${g[i]}px;display:flex;align-items:center;font-size:.75rem;color:var(--muted)'>${g[i]}px</div>`;}
+    }
+    $('#sso').innerHTML=h;$('#ssn').textContent=N[k];
+  }
+  bindChips(root,'ssc',draw);draw('rand');
+}
+
+function initBreakpoints(root){
+  var m=prep(root),$=m.$;
+  function draw(w){
+    var name=w<600?'Small':w<1024?'Medium':w<1440?'Large':'Extra large',cols=w<600?1:w<1024?2:3,h=`<rect width='320' height='200' fill='#fff' stroke='#9AA0BC'/>`;
+    h+=`<rect x='8' y='8' width='304' height='20' rx='3' fill='#14213D'/>`;
+    if(w<1024){h+=`<g fill='#fff'><rect x='16' y='14' width='16' height='2'/><rect x='16' y='18' width='16' height='2'/><rect x='16' y='22' width='16' height='2'/></g>`;}
+    else{h+=`<g fill='#fff'><rect x='200' y='16' width='24' height='4' rx='2'/><rect x='232' y='16' width='24' height='4' rx='2'/><rect x='264' y='16' width='24' height='4' rx='2'/></g>`;}
+    var cw=(304-(cols-1)*8)/cols,rows=cols===1?4:cols===2?3:2,i,j;
+    for(j=0;j<rows;j++){for(i=0;i<cols;i++){h+=`<rect x='${8+i*(cw+8)}' y='${36+j*(cols===1?38:cols===2?50:78)}' width='${cw}' height='${cols===1?30:cols===2?42:70}' rx='4' fill='${(i+j)%2?'#9AA0BC':'#2F6FD8'}'/>`;}}
+    $('#bpo').innerHTML=`<svg viewBox='0 0 320 200' width='100%' style='max-width:340px' role='img' aria-label='Layout at ${w} pixels'>${h}</svg>`;
+    $('#bpn').textContent=w+'px: '+name+' breakpoint. '+(cols===1?'One column, with the menu collapsed behind an icon.':cols===2?'Two columns. The menu is still collapsed.':'Three columns and the full navigation shown in the header.');
+  }
+  onRng(root,'bpw',draw);draw(700);
+}
+
+/* ===== inits: Components ===== */
+function initLibrary(root){
+  var m=prep(root),$=m.$,t=tk({});
+  function draw(k){
+    var h='';
+    if(k==='button'){h=['primary','secondary','ghost','danger'].map(function(v){return dsBtn(t,{v:v,label:v.charAt(0).toUpperCase()+v.slice(1)});}).join(' &nbsp; ');}
+    if(k==='input'){h=`<div style='display:flex;gap:16px;flex-wrap:wrap'>${dsInput(t,{})}${dsInput(t,{state:'error',value:'name@'})}</div>`;}
+    if(k==='badge'){h=[['Paid','#1F9D55'],['Pending','#B7791F'],['Failed','#D62839']].map(function(b){return `<span style='display:inline-block;background:${b[1]};color:#fff;font-family:Inter,sans-serif;font-weight:700;font-size:.8rem;padding:3px 12px;border-radius:999px;margin-right:8px'>${b[0]}</span>`;}).join('');}
+    if(k==='alert'){h=`<div style='background:#FFF4D6;border-left:6px solid #B7791F;border-radius:8px;padding:12px 14px;color:#4A3300;font-family:Inter,sans-serif;max-width:360px'><b>Heads up</b><div>Your trial ends in 3 days.</div></div>`;}
+    if(k==='card'){h=`<div style='background:#fff;border:1px solid #D9DDEB;border-radius:${t.r+4}px;padding:16px;max-width:260px;font-family:Inter,sans-serif;color:#14213D'><div style='font-weight:800;margin-bottom:4px'>Pro plan</div><div style='color:#4A5070;margin-bottom:10px'>10 projects, priority support.</div>${dsBtn(t,{label:'Choose',sz:'S'})}</div>`;}
+    $('#lbo').innerHTML=`<div style='background:#fff;border-radius:14px;padding:18px;overflow-x:auto'>${h}</div>`;
+    $('#lbk').textContent=LIBC[k][1];$('#lbn').textContent=LIBC[k][2];
+  }
+  bindChips(root,'lbc',draw);draw('button');
+}
+
+function initComponentsAnat(root){
+  var m=prep(root),$=m.$,t=tk({});
+  function draw(k){
+    var hl=function(p){return k===p?'outline:2px dashed #E8456B;outline-offset:3px;background:rgba(232,69,107,.1);':'';};
+    $('#cmo').innerHTML=`<div style='background:#fff;padding:18px;border-radius:14px;font-family:Inter,sans-serif;color:#14213D'><div style='padding:10px;border-radius:10px;${hl('container')}'><div style='font-size:.85rem;font-weight:700;margin-bottom:4px;display:inline-block;${hl('label')}'>Email</div><div style='border:2px solid #9AA0BC;border-radius:${t.r}px;padding:10px 12px;${hl('field')}'><span style='color:#7A809C;display:inline-block;${hl('value')}'>name@example.com</span></div><div style='font-size:.8rem;margin-top:6px;color:#5A6180;display:inline-block;${hl('helper')}'>We will never share it.</div></div></div>`;
+    $('#cmn').textContent=ANAT[k][0]+': '+ANAT[k][1];
+  }
+  bindChips(root,'cmc',draw);draw('label');
+}
+
+function initVariants(root){
+  var m=prep(root),$=m.$,v='primary',s='M',t=tk({});
+  function draw(){
+    $('#vro').innerHTML=`<div style='background:#fff;padding:20px;border-radius:14px;text-align:center'>${dsBtn(t,{v:v,sz:s,label:'Variant'})}</div>`;
+    var rows=['primary','secondary','ghost','danger'].map(function(a){return `<tr><td>${a}</td>`+['S','M','L'].map(function(b){return `<td style='padding:6px 10px'>${dsBtn(t,{v:a,sz:b,label:b})}</td>`;}).join('')+`</tr>`;}).join('');
+    $('#vrm').innerHTML=`<table class='t' style='background:#fff;color:#14213D'>${rows}</table>`;
+  }
+  bindChips(root,'vrv',function(x){v=x;draw();});bindChips(root,'vrs',function(x){s=x;draw();});draw();
+}
+
+function initStatesL(root){
+  var m=prep(root),$=m.$,t=tk({});
+  var N={default:'Default: the resting appearance.',hover:'Hover: a subtle change when the pointer is over it. It signals that the element is interactive.',focus:'Focus: a clear outline for keyboard users. Never remove it without a replacement.',active:'Active: a pressed look, confirming the click.',disabled:'Disabled: muted and not interactive. Add text to explain why if it is not obvious.',loading:'Loading: shows the action is in progress. The button stays the same size so the layout does not jump.',error:'Error: a red border plus a message in words. Never rely on colour alone.'};
+  function draw(k){
+    var is=(k==='hover'||k==='focus'||k==='disabled'||k==='error')?k:'default';
+    $('#sto').innerHTML=`<div style='background:#fff;padding:18px;border-radius:14px'>${dsBtn(t,{state:k==='error'?'default':k,label:'Submit'})}</div><div style='background:#fff;padding:18px;border-radius:14px'>${dsInput(t,{state:is})}</div>`;
+    $('#stn').textContent=N[k];
+  }
+  bindChips(root,'stc',draw);draw('default');
+}
+
+function initProperties(root){
+  var m=prep(root),$=m.$,lb='Save changes',ic='none',sz='M',v='primary',ds='off',w='auto',t=tk({});
+  function draw(){
+    var label=lb||'Button';
+    $('#pro').innerHTML=`<div style='background:#fff;padding:18px;border-radius:14px'>${dsBtn(t,{v:v,sz:sz,icon:ic==='none'?null:ic,label:label,state:ds==='on'?'disabled':'default',full:w==='full'})}</div>`;
+    $('#prc').textContent='<Button variant="'+v+'" size="'+sz+'"'+(ic!=='none'?' icon="'+ic+'"':'')+(ds==='on'?' disabled':'')+(w==='full'?' fullWidth':'')+'>'+label.replace(/</g,'')+'</Button>';
+  }
+  $('#prl').addEventListener('input',function(e){lb=e.target.value;draw();});
+  bindChips(root,'pri',function(x){ic=x;draw();});bindChips(root,'prs',function(x){sz=x;draw();});bindChips(root,'prv',function(x){v=x;draw();});bindChips(root,'prd',function(x){ds=x;draw();});bindChips(root,'prw',function(x){w=x;draw();});draw();
+}
+
+function initRulesL(root){
+  var m=prep(root),$=m.$,t=tk({});
+  function vis(k,good){
+    if(k==='one'){return good?dsBtn(t,{label:'Save'})+' '+dsBtn(t,{v:'secondary',label:'Cancel'}):dsBtn(t,{label:'Save'})+' '+dsBtn(t,{label:'Share'})+' '+dsBtn(t,{label:'Delete'});}
+    if(k==='label'){return dsBtn(t,{label:good?'Save changes':'Click here to save all of your changes now'});}
+    if(k==='icon'){return `<span style='display:inline-flex;width:40px;height:40px;border-radius:${t.r}px;background:${t.c};color:#fff;align-items:center;justify-content:center;font-weight:700'>\u00d7</span><div style='font-size:.8rem;margin-top:6px;color:#5A6180'>${good?'Accessible name: "Delete"':'No accessible name'}</div>`;}
+    var gap=good?8:(0);return `<div style='display:flex;gap:${gap}px'>${dsBtn(t,{label:'One'})}${dsBtn(t,{v:'secondary',label:'Two'})}</div>`+(good?'':`<div style='height:8px'></div><div style='display:flex;gap:40px'>${dsBtn(t,{label:'One'})}${dsBtn(t,{v:'secondary',label:'Two'})}</div>`);
+  }
+  function draw(k){
+    var r=RULESD[k];
+    $('#rlo').innerHTML=`<div class='cols'><div style='border:2px solid #1F9D55;border-radius:14px;padding:14px;background:var(--surface)'><b>\u2713 Do</b><div style='background:#fff;border-radius:10px;padding:14px;margin:8px 0'>${vis(k,true)}</div><p style='margin:0;color:var(--muted)'>${r[1]}</p></div><div style='border:2px solid #D62839;border-radius:14px;padding:14px;background:var(--surface)'><b>\u2717 Do not</b><div style='background:#fff;border-radius:10px;padding:14px;margin:8px 0'>${vis(k,false)}</div><p style='margin:0;color:var(--muted)'>${r[2]}</p></div></div>`;
+  }
+  bindChips(root,'rlc',draw);draw('one');
+}
+
+function initPatternsDS(root){
+  var m=prep(root),$=m.$,t=tk({});
+  var N={empty:'Empty state: explains why the space is empty and offers one clear next step.',valid:'Form validation: the error appears next to the field, in words, and the main action stays disabled until it is fixed.',confirm:'Confirmation dialog: names what will be lost and gives a safe way out. The destructive button uses the danger variant.'};
+  function draw(k){
+    var h='';
+    if(k==='empty'){h=`<div style='text-align:center;padding:20px;font-family:Inter,sans-serif;color:#14213D'><div style='width:70px;height:70px;border-radius:50%;background:${t.cl};margin:0 auto 12px'></div><div style='font-weight:800;font-size:1.15rem'>No projects yet</div><div style='color:#4A5070;margin:4px 0 14px'>Create your first project to get started.</div>${dsBtn(t,{label:'New project'})}</div>`;}
+    if(k==='valid'){h=`<div style='display:flex;flex-direction:column;gap:14px'>${dsInput(t,{state:'error',value:'name@',label:'Email'})}${dsBtn(t,{state:'disabled',label:'Create account'})}</div>`;}
+    if(k==='confirm'){h=`<div style='max-width:320px;border:1px solid #D9DDEB;border-radius:${t.r+6}px;padding:18px;font-family:Inter,sans-serif;color:#14213D;box-shadow:0 10px 30px rgba(0,0,0,.18);margin:auto'><div style='font-weight:800;font-size:1.1rem;margin-bottom:6px'>Delete project?</div><div style='color:#4A5070;margin-bottom:14px'>This removes all 24 files. You cannot undo this.</div><div style='display:flex;gap:8px;justify-content:flex-end'>${dsBtn(t,{v:'secondary',label:'Cancel'})}${dsBtn(t,{v:'danger',label:'Delete'})}</div></div>`;}
+    $('#pto').innerHTML=`<div style='background:#fff;padding:18px;border-radius:14px'>${h}</div>`;$('#ptn').textContent=N[k];
+  }
+  bindChips(root,'ptc',draw);draw('empty');
+}
+
+function initTemplatesL(root){
+  var m=prep(root),$=m.$,k='dash',f='wire';
+  function draw(){
+    var T=TEMPD[k][1],maxr=0;T.forEach(function(s){maxr=Math.max(maxr,s[2]+s[4]);});
+    var h=`<div style='display:grid;grid-template-columns:repeat(12,1fr);grid-auto-rows:34px;gap:6px;background:#fff;padding:10px;border-radius:14px'>`;
+    T.forEach(function(s,i){
+      var head=s[0]==='Header';
+      var st=f==='wire'?`background:#E8EBF5;border:2px dashed #9AA0BC;color:#5A6180;`:head?`background:#14213D;color:#fff;`:i%2?`background:${hslToHex(215,70,94)};color:#14213D;border:1px solid #CFD6EE;`:`background:#FFF4D6;color:#4A3300;border:1px solid #F0DDA0;`;
+      h+=`<div style='grid-column:${s[1]+1} / span ${s[3]};grid-row:${s[2]+1} / span ${s[4]};${st}border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:700;font-family:Inter,sans-serif;text-align:center;padding:2px'>${s[0]}</div>`;
+    });
+    $('#tmo').innerHTML=h+'</div>';
+  }
+  bindChips(root,'tmc',function(v){k=v;draw();});bindChips(root,'tmf',function(v){f=v;draw();});draw();
+}
+
+/* ===== inits: Running a system ===== */
+function initDocsL(root){
+  var m=prep(root),$=m.$,on={overview:1};
+  function draw(){
+    var keys=Object.keys(DOCSEC),n=keys.filter(function(k){return on[k];}).length;
+    var h=`<div style='background:#fff;color:#14213D;border-radius:14px;padding:18px;font-family:Inter,sans-serif'><div style='font-weight:800;font-size:1.4rem;margin-bottom:10px'>Button</div>`;
+    keys.forEach(function(k){if(on[k]){h+=`<div style='border-top:1px solid #E1E5F2;padding:8px 0'><div style='font-weight:700'>${DOCSEC[k][0]}</div><div style='color:#4A5070;font-size:.9rem'>${DOCSEC[k][1]}</div></div>`;}});
+    if(n===0){h+=`<div style='color:#7A809C'>An empty page.</div>`;}
+    h+='</div>';
+    $('#dco').innerHTML=h+`<div style='background:var(--line);border-radius:99px;height:12px;margin-top:12px'><div style='width:${n/6*100}%;height:100%;background:var(--c);border-radius:99px'></div></div>`;
+    $('#dcn').textContent=n+' of 6 sections. '+(n<=2?'Thin: people will have to guess.':n<=4?'Getting there, but gaps remain.':'Thorough: designers and developers can both work from this.');
+  }
+  bindTogg(root,'dcs',on,draw);draw();
+}
+
+function initVersionL(root){
+  var m=prep(root),$=m.$,v=[2,3,1],log=[];
+  function draw(){
+    $('#vco').innerHTML=`<div style='font-family:JetBrains Mono,monospace;font-size:2rem;font-weight:700'>v${v.join('.')}</div>`+(log.length?`<ul class='tk' style='margin-top:8px'>`+log.slice().reverse().map(function(l){return `<li><code>${l[0]}</code> ${l[1]}</li>`;}).join('')+`</ul>`:`<p class='mood'>No releases yet. Click a change above.</p>`);
+  }
+  var A={patch:'Fixed a typo in the docs',minor:'Added a new Button variant',major:'Renamed Button to Action (breaking)'};
+  Array.prototype.slice.call(root.querySelectorAll('[data-a]')).forEach(function(b){b.addEventListener('click',function(){
+    var a=b.getAttribute('data-a');
+    if(a==='patch'){v[2]++;}else if(a==='minor'){v[1]++;v[2]=0;}else{v[0]++;v[1]=0;v[2]=0;}
+    log.push(['v'+v.join('.'),A[a]+(a==='major'?'. Teams must update their code.':a==='minor'?'. Nothing breaks.':'.')]);draw();
+  });});
+  $('#vcr').addEventListener('click',function(){v=[2,3,1];log=[];draw();});
+  draw();
+}
+
+function initContribL(root){
+  var m=prep(root),$=m.$,on={};
+  function draw(){
+    var keys=Object.keys(CHK),n=keys.filter(function(k){return on[k];}).length;
+    $('#cgo').innerHTML=`<div style='background:var(--line);border-radius:99px;height:12px'><div style='width:${n/5*100}%;height:100%;background:var(--c);border-radius:99px'></div></div><p class='mood'>${n} of 5 ticked. ${n===5?'Ready to propose. Open a proposal with examples and sketches.':n>=3?'Nearly there. Finish the remaining items before proposing.':'Not yet. Check the library for similar parts and gather examples first.'}</p>`;
+  }
+  bindTogg(root,'cgt',on,draw);draw();
+}
+
+function initGovL(root){
+  var m=prep(root),$=m.$;
+  function box(txt,strong){return `<div style='background:${strong?'var(--ink)':'var(--surface)'};color:${strong?'var(--surface)':'var(--ink)'};border:2px solid ${strong?'var(--ink)':'var(--c)'};border-radius:12px;padding:8px 14px;font-weight:700;text-align:center'>${txt}</div>`;}
+  function draw(k){
+    var g=GOV[k],teams=['Team A','Team B','Team C','Team D'].map(function(t){return box(t,false);}).join('');
+    var d=k==='central'?`<div style='display:flex;flex-direction:column;align-items:center;gap:8px'>${box('Core team owns everything',true)}<div style='font-size:.8rem;color:var(--muted)'>All requests flow in; all changes flow out</div><div style='display:flex;gap:8px;flex-wrap:wrap;justify-content:center'>${teams}</div></div>`:k==='federated'?`<div style='display:flex;flex-direction:column;align-items:center;gap:8px'><div style='font-size:.8rem;color:var(--muted)'>No single owner: teams share the work</div><div style='display:flex;gap:8px;flex-wrap:wrap;justify-content:center'>${teams}</div></div>`:`<div style='display:flex;flex-direction:column;align-items:center;gap:8px'>${box('Core team owns the foundations',true)}<div style='font-size:.8rem;color:var(--muted)'>Teams contribute through a clear process</div><div style='display:flex;gap:8px;flex-wrap:wrap;justify-content:center'>${teams}</div></div>`;
+    $('#gvo').innerHTML=d+`<div class='facts' style='margin-top:14px'><p><b>${g[0]}:</b> ${g[1]}</p><p><b>Strength:</b> ${g[2]}</p><p><b>Risk:</b> ${g[3]}</p></div>`;
+  }
+  bindChips(root,'gvc',draw);draw('hybrid');
+}
+
+function initScalabilityL(root){
+  var m=prep(root),$=m.$;
+  function bar(l,v,col){return `<div style='margin-bottom:10px'><div style='font-weight:700;font-size:.9rem;margin-bottom:4px'>${l} (${v} units)</div><div style='background:var(--line);border-radius:99px;height:16px'><div style='width:${Math.min(100,v/210*100).toFixed(1)}%;height:100%;border-radius:99px;background:${col}'></div></div></div>`;}
+  function draw(n){
+    var no=n*10,yes=12+n*2;
+    $('#sco').innerHTML=bar('Without a system',no,'var(--g1)')+bar('With a system',yes,'var(--g3)');
+    $('#scn').textContent=n<=1?'With one team the system costs more than it saves. It pays off as teams are added.':n<=3?'Close to break-even: the system starts paying for itself.':'With '+n+' teams the system saves roughly '+(no-yes)+' units of effort in this simple model.';
+  }
+  onRng(root,'sct',draw);draw(6);
+}
+
+function initHandoffL(root){
+  var m=prep(root),$=m.$,t=tk({});
+  function draw(k){
+    var hl=function(p){return k===p?'outline:3px solid #E8456B;outline-offset:3px;':'';};
+    $('#hds').innerHTML=`<div style='background:#E8EBF5;padding:18px;border-radius:14px'><div style='background:#fff;border:1px solid #D9DDEB;border-radius:12px;padding:16px;font-family:Inter,sans-serif;color:#14213D;max-width:300px;${hl('card')}'><div style='font-weight:700;font-size:1.25rem;line-height:1.2;margin-bottom:8px;display:inline-block;${hl('title')}'>Team plan</div><div style='color:#4A5070;margin-bottom:12px'>Unlimited projects for your whole team.</div><span style='display:inline-block;${hl('button')}border-radius:${t.r}px'>${dsBtn(t,{label:'Upgrade'})}</span></div></div>`;
+    $('#hdo').innerHTML=`<h4>${HOFF[k][0]}</h4><div class='facts'><p><b>Type:</b> ${HOFF[k][1]}</p><p><b>Specs:</b> ${HOFF[k][2]}</p></div>`;
+  }
+  bindChips(root,'hdc',draw);draw('card');
+}
+
+/* ===== registration, hero, start ===== */
+var LESSONS={
+ 'design-system':{html:L_DSYS,init:initDSystem,g:''},'brand-system':{html:L_BSYS,init:initBrandSys,g:''},'design-tokens':{html:L_TOKENS,init:initTokens,g:''},
+ 'colour-tokens':{html:L_COLTOK,init:initColourTokens,g:''},'typography-tokens':{html:L_TYTOK,init:initTypeTokens,g:''},'spacing-tokens':{html:L_SPTOK,init:initSpaceTokens,g:''},
+ 'layout-tokens':{html:L_LATOK,init:initLayoutTokens,g:''},'naming-conventions':{html:L_NAMING,init:initNaming,g:''},
+ 'grids':{html:L_GRIDS,init:initGrids,g:'f'},'spacing-systems':{html:L_SPSYS,init:initSpacingSys,g:'f'},'breakpoints':{html:L_BREAK,init:initBreakpoints,g:'f'},
+ 'component-library':{html:L_LIB,init:initLibrary,g:'s'},'components':{html:L_COMP,init:initComponentsAnat,g:'s'},'variants':{html:L_VARI,init:initVariants,g:'s'},
+ 'states':{html:L_STATES,init:initStatesL,g:'s'},'properties':{html:L_PROPS,init:initProperties,g:'s'},'rules':{html:L_RULES,init:initRulesL,g:'s'},
+ 'patterns':{html:L_PATTERNS,init:initPatternsDS,g:'s'},'templates':{html:L_TEMPL,init:initTemplatesL,g:'s'},
+ 'documentation':{html:L_DOCS,init:initDocsL,g:'c'},'version-control':{html:L_VERSION,init:initVersionL,g:'c'},'contribution-guidelines':{html:L_CONTRIB,init:initContribL,g:'c'},
+ 'governance':{html:L_GOV,init:initGovL,g:'c'},'scalability':{html:L_SCALE,init:initScalabilityL,g:'c'},'design-to-development-handoff':{html:L_HANDOFF,init:initHandoffL,g:'c'}
+};
+
+(function(){
+  var lab=document.getElementById('lab'),cur='button';
+  var D0={button:{h:215,r:10,p:10},input:{r:10,bw:2,h:215},badge:{h:150,r:16,t:13}};
+  var D=JSON.parse(JSON.stringify(D0));
+  var NAMES={button:'Button',input:'Input',badge:'Badge'};
+  var COPIES={button:3,input:3,badge:2};
+  var SL={
+    button:[['h','Colour (hue)',0,359,'\u00b0'],['r','Corner radius',0,28,'px'],['p','Padding',4,18,'px']],
+    input:[['r','Corner radius',0,24,'px'],['bw','Border width',1,5,'px'],['h','Focus colour (hue)',0,359,'\u00b0']],
+    badge:[['h','Colour (hue)',0,359,'\u00b0'],['r','Corner radius',0,16,'px'],['t','Text size',11,17,'px']]
+  };
+  function hl(c){return cur===c?'outline:2px dashed #E8456B;outline-offset:3px;':'';}
+  function B(label,v){var d=D.button,c=hslToHex(d.h,70,46),st=v==='primary'?'background:'+c+';color:#fff;border:2px solid '+c+';':'background:transparent;color:'+c+';border:2px solid '+c+';';return "<span style='display:inline-block;"+st+"border-radius:"+d.r+"px;padding:"+d.p+"px "+(d.p*1.8)+"px;font-weight:700;font-size:.9rem;font-family:Inter,sans-serif;"+hl('button')+"'>"+label+"</span>";}
+  function I(label,val,focus){var d=D.input,f=hslToHex(d.h,70,46);return "<div style='margin-bottom:12px;font-family:Inter,sans-serif'><div style='font-size:.78rem;font-weight:700;margin-bottom:4px'>"+label+"</div><div style='border:"+d.bw+"px solid "+(focus?f:'#9AA0BC')+";border-radius:"+d.r+"px;padding:9px 12px;font-size:.88rem;background:#fff;"+(focus?'box-shadow:0 0 0 3px '+hslToHex(d.h,70,90)+';':'')+hl('input')+"'>"+val+"</div></div>";}
+  function Bd(t){var d=D.badge;return "<span style='display:inline-block;background:"+hslToHex(d.h,65,90)+";color:"+hslToHex(d.h,60,26)+";border-radius:"+d.r+"px;padding:3px 10px;font-size:"+d.t+"px;font-weight:700;font-family:Inter,sans-serif;"+hl('badge')+"'>"+t+"</span>";}
+  function tile(name,inner){return "<div style='background:#F1F3FA;border-radius:12px;padding:10px 10px 12px;text-align:center'><div style='font-size:.72rem;font-weight:700;color:#5A6180;margin-bottom:8px;font-family:Inter,sans-serif'>"+name+"</div>"+inner+"</div>";}
+  function lbl(t){return "<div style='font-size:.8rem;font-weight:700;margin:16px 0 8px'>"+t+"</div>";}
+  function board(){
+    var master="<div style='display:grid;grid-template-columns:repeat(3,1fr);gap:8px;align-items:start'>"+tile('Button',B('Save','primary'))+tile('Input',"<div style='text-align:left'>"+I('Name','Ada')+"</div>".replace('margin-bottom:12px','margin-bottom:0'))+tile('Badge',Bd('New'))+"</div>";
+    var card="<div style='background:#fff;border-radius:16px;padding:18px;box-shadow:0 8px 22px rgba(20,33,61,.2);color:#14213D;font-family:Inter,sans-serif'><div style='display:flex;align-items:center;gap:8px;margin-bottom:14px;flex-wrap:wrap'><div style='font-weight:800;font-size:1.15rem'>Create your account</div>"+Bd('New')+Bd('Free')+"</div>"+I('Full name','Ada Lovelace')+I('Email address','ada@example.com',true)+I('Password','\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022')+"<div style='display:flex;gap:8px;flex-wrap:wrap;margin-top:4px'>"+B('Create account','primary')+B('Sign in instead','secondary')+B('Cancel','secondary')+"</div></div>";
+    document.getElementById('hbd').innerHTML=lbl('The three components')+master+lbl('One card that reuses them')+card;
+    var n=COPIES[cur];
+    document.getElementById('hin').textContent='Editing '+NAMES[cur]+': the single one above and the '+n+' copies in the card (dashed outlines) change together.';
+  }
+  function sliders(){
+    var h='';
+    SL[cur].forEach(function(s,i){h+=rng('hs'+i,s[1],s[2],s[3],D[cur][s[0]],1,s[4]);});
+    document.getElementById('hsl').innerHTML=h;
+    SL[cur].forEach(function(s,i){onRng(document,'hs'+i,function(v){D[cur][s[0]]=v;board();});});
+  }
+  lab.innerHTML="<h2>Try it: edit one component, update every instance</h2><p>Pick a component and drag its sliders. The single master above and every copy inside the card change together, just as in a real design system.</p>"+chipsHtml('htc',[['button','Button'],['input','Input'],['badge','Badge']],cur,'Component to edit')+"<div id='hsl'></div><p class='mood' id='hin' aria-live='polite' style='margin:8px 0 0'></p><div id='hbd'></div><div class='ctrls' style='margin-top:14px'><button class='btn' id='hrs' type='button'>Reset all components</button></div>";
+  bindChips(document,'htc',function(v){cur=v;sliders();board();});
+  document.getElementById('hrs').addEventListener('click',function(){D=JSON.parse(JSON.stringify(D0));sliders();board();});
+  sliders();board();
+})();
+
+startSite();
+
+</script>
+</body>
+</html>

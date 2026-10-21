@@ -232,7 +232,7 @@ input[type='text']:focus-visible{outline:3px solid var(--ink);outline-offset:2px
 </style>
 </head>
 <body>
-<nav class="site" id="sitenav" aria-label="Site"><a href="03-design-principles.html">&larr; Design Principles</a><a href="index.html">All sections</a></nav>
+<nav class="site" id="sitenav" aria-label="Site"><a href="03-design-principles.html">&larr; Design Principles</a><a href="index.html">All sections</a><a href="05-design-systems.html">Next: Design Systems &rarr;</a></nav>
 <div id="home">
 <header class="hero">
   <div class="wrap hero-grid">
@@ -257,8 +257,8 @@ input[type='text']:focus-visible{outline:3px solid var(--ink);outline-offset:2px
       <div class="next-text">
         <span class="next-tag">Up next</span>
         <h2>Design Systems</h2>
-        <p>That section isn’t built yet. In the meantime, you can revisit Branding or browse all sections.</p>
-        <div class="next-actions"><a class="nbtn primary" href="index.html">See all sections <svg viewBox='0 0 24 24' aria-hidden='true' fill='none' stroke='currentColor' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'><path d='M5 12h14M13 6l6 6-6 6'/></svg></a><a class="nbtn" href="04-branding.html">Back to Branding</a></div>
+        <p>Now that you know how a brand is built, the next section shows how to turn it into a system of reusable parts.</p>
+        <div class="next-actions"><a class="nbtn primary" href="05-design-systems.html">Start Design Systems <svg viewBox='0 0 24 24' aria-hidden='true' fill='none' stroke='currentColor' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'><path d='M5 12h14M13 6l6 6-6 6'/></svg></a><a class="nbtn" href="index.html">See all sections</a></div>
       </div>
       <svg class='next-art' viewBox='0 0 180 150' aria-hidden='true' focusable='false'><circle cx='50' cy='52' r='34' fill='var(--g1)'/><rect x='82' y='26' width='62' height='62' rx='14' fill='var(--g2)' opacity='.92' transform='rotate(10 113 57)'/><polygon points='40,138 84,70 120,138' fill='var(--g4)' opacity='.95'/><circle cx='142' cy='116' r='20' fill='var(--g3)'/></svg>
     </aside>
@@ -418,7 +418,7 @@ function startSite(){
 }
 
 var SECTION_NAME='Branding';
-var SITE={prev:['Design Principles','03-design-principles.html']};
+var SITE={prev:['Design Principles','03-design-principles.html'],next:['Design Systems','05-design-systems.html']};
 
 function GT(t,o){o=o||{};return `<text x='${o.x||24}' y='${o.y||33}' text-anchor='middle' font-size='${o.s||24}' font-weight='${o.w||700}' font-family='${o.f||'Georgia,serif'}' fill='currentColor' stroke='none'>${t}</text>`;}
 var ICONS={
