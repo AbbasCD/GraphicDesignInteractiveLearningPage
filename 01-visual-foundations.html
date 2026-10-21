@@ -189,6 +189,21 @@ footer strong{color:var(--ink);}
 .site a{color:var(--ink);text-decoration:none;padding:7px 14px;border-radius:999px;border:2px solid var(--line);background:var(--surface);}
 .site a:hover{border-color:var(--g2);}
 .site a:focus-visible{outline:3px solid var(--ink);outline-offset:3px;}
+.next{display:flex;gap:28px;align-items:center;justify-content:space-between;background:color-mix(in srgb,var(--g2) 11%,var(--surface));border:1px solid var(--line);border-radius:30px;padding:32px 36px;overflow:hidden;}
+.next-text{min-width:0;}
+.next-tag{display:inline-block;font-weight:700;font-size:.9rem;padding:5px 14px;border-radius:999px;background:color-mix(in srgb,var(--g3) 24%,var(--surface));color:var(--ink);}
+.next h2{font-size:clamp(1.9rem,4.4vw,2.8rem);font-weight:700;letter-spacing:.01em;line-height:1.15;margin:12px 0 10px;color:var(--ink);}
+.next p{color:var(--muted);max-width:44ch;margin:0 0 20px;font-size:1.08rem;}
+.next-actions{display:flex;flex-wrap:wrap;gap:10px;}
+.nbtn{display:inline-flex;align-items:center;gap:8px;font-weight:700;font-size:1rem;text-decoration:none;color:var(--ink);padding:12px 22px;border-radius:999px;border:2px solid var(--ink);background:transparent;}
+.nbtn.primary{background:var(--ink);color:var(--surface);}
+.nbtn:hover{background:var(--ink);color:var(--surface);}
+.nbtn.primary:hover{background:transparent;color:var(--ink);}
+.nbtn:focus-visible{outline:3px solid var(--ink);outline-offset:3px;}
+.nbtn svg{width:16px;height:16px;}
+.next-art{flex:0 0 190px;width:190px;height:auto;}
+@media (prefers-reduced-motion:no-preference){.nbtn{transition:background-color .15s,color .15s,transform .15s;}.nbtn:hover{transform:translateY(-2px);}}
+@media (max-width:680px){.next{padding:26px 22px;}.next-art{display:none;}}
 </style>
 </head>
 <body>
@@ -221,7 +236,15 @@ footer strong{color:var(--ink);}
 
 <footer>
   <div class="wrap">
-    <p><strong>Up next: <a href="02-typography.html">Typography</a>.</strong> Now that you know how colour, shape and space behave, the next set of ideas covers how type works. Or <a href="index.html">see all sections</a>.</p>
+    <aside class="next" aria-label="What to do next">
+      <div class="next-text">
+        <span class="next-tag">Up next</span>
+        <h2>Typography</h2>
+        <p>Now that you know how colour, shape and space behave, the next set of ideas covers how type works.</p>
+        <div class="next-actions"><a class="nbtn primary" href="02-typography.html">Start Typography <svg viewBox='0 0 24 24' aria-hidden='true' fill='none' stroke='currentColor' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'><path d='M5 12h14M13 6l6 6-6 6'/></svg></a><a class="nbtn" href="index.html">See all sections</a></div>
+      </div>
+      <svg class='next-art' viewBox='0 0 180 150' aria-hidden='true' focusable='false'><circle cx='50' cy='52' r='34' fill='var(--g1)'/><text x='50' y='64' text-anchor='middle' font-size='34' font-weight='700' fill='#fff' font-family='Georgia,serif'>Aa</text><rect x='82' y='26' width='62' height='62' rx='14' fill='var(--g2)' opacity='.92' transform='rotate(10 113 57)'/><polygon points='40,138 84,70 120,138' fill='var(--g4)' opacity='.95'/><circle cx='142' cy='116' r='20' fill='var(--g3)'/></svg>
+    </aside>
   </div>
 </footer>
 </div>

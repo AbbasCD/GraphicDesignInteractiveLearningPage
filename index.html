@@ -192,6 +192,21 @@ footer strong{color:var(--ink);}
 .site a{color:var(--ink);text-decoration:none;padding:7px 14px;border-radius:999px;border:2px solid var(--line);background:var(--surface);}
 .site a:hover{border-color:var(--g2);}
 .site a:focus-visible{outline:3px solid var(--ink);outline-offset:3px;}
+.next{display:flex;gap:28px;align-items:center;justify-content:space-between;background:color-mix(in srgb,var(--g2) 11%,var(--surface));border:1px solid var(--line);border-radius:30px;padding:32px 36px;overflow:hidden;}
+.next-text{min-width:0;}
+.next-tag{display:inline-block;font-weight:700;font-size:.9rem;padding:5px 14px;border-radius:999px;background:color-mix(in srgb,var(--g3) 24%,var(--surface));color:var(--ink);}
+.next h2{font-size:clamp(1.9rem,4.4vw,2.8rem);font-weight:700;letter-spacing:.01em;line-height:1.15;margin:12px 0 10px;color:var(--ink);}
+.next p{color:var(--muted);max-width:44ch;margin:0 0 20px;font-size:1.08rem;}
+.next-actions{display:flex;flex-wrap:wrap;gap:10px;}
+.nbtn{display:inline-flex;align-items:center;gap:8px;font-weight:700;font-size:1rem;text-decoration:none;color:var(--ink);padding:12px 22px;border-radius:999px;border:2px solid var(--ink);background:transparent;}
+.nbtn.primary{background:var(--ink);color:var(--surface);}
+.nbtn:hover{background:var(--ink);color:var(--surface);}
+.nbtn.primary:hover{background:transparent;color:var(--ink);}
+.nbtn:focus-visible{outline:3px solid var(--ink);outline-offset:3px;}
+.nbtn svg{width:16px;height:16px;}
+.next-art{flex:0 0 190px;width:190px;height:auto;}
+@media (prefers-reduced-motion:no-preference){.nbtn{transition:background-color .15s,color .15s,transform .15s;}.nbtn:hover{transform:translateY(-2px);}}
+@media (max-width:680px){.next{padding:26px 22px;}.next-art{display:none;}}
 
 .hubhero{padding:44px 0 18px;}
 .hubhero h1{font-size:clamp(2.1rem,5.4vw,3.6rem);font-weight:700;letter-spacing:.01em;line-height:1.2;max-width:18ch;}
@@ -201,17 +216,24 @@ footer strong{color:var(--ink);}
 .prog .bar i{display:block;height:100%;background:var(--g2);border-radius:99px;}
 .prog p{margin:8px 0 0;font-weight:700;font-size:.95rem;}
 .sgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px;padding:22px 0 10px;}
-.sc{--c:var(--g1);display:block;text-decoration:none;color:inherit;background:var(--surface);border:1px solid var(--line);border-top:5px solid var(--c);border-radius:6px 6px 18px 18px;padding:16px 18px 18px;}
+.sc{--c:var(--g1);display:flex;flex-direction:column;min-height:236px;text-decoration:none;color:inherit;background:var(--surface);border:1px solid var(--line);border-top:5px solid var(--c);border-radius:8px 8px 22px 22px;padding:18px 20px 20px;}
 .sc.c1{--c:var(--g2);} .sc.c2{--c:var(--g3);} .sc.c3{--c:var(--g4);}
-.sc .top{display:flex;align-items:center;gap:12px;margin-bottom:10px;}
-.sc .num{flex:0 0 40px;height:40px;border-radius:50%;background:var(--c);color:var(--surface);display:grid;place-items:center;font-weight:700;}
-.sc h2{font-size:1.15rem;font-weight:700;}
-.sc .tag{margin:0 0 10px;color:var(--muted);font-size:.95rem;}
-.sc .pill{display:inline-block;font-weight:700;font-size:.9rem;padding:6px 12px;border-radius:999px;background:color-mix(in srgb,var(--c) 18%,var(--surface));}
+.sc .row{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:16px;}
+.sc .num{flex:0 0 46px;height:46px;border-radius:50%;background:var(--c);color:var(--surface);display:grid;place-items:center;font-weight:700;font-size:1.1rem;}
+.sc .count{font-weight:700;font-size:.85rem;padding:6px 13px;border-radius:999px;background:color-mix(in srgb,var(--c) 18%,var(--surface));}
+.sc .cat{margin:0;color:var(--muted);font-weight:700;font-size:.95rem;}
+.sc .cat::before{content:'';display:inline-block;width:.6em;height:.6em;border-radius:50%;background:var(--c);margin-right:.5em;}
+.sc h2{font-size:1.35rem;font-weight:700;line-height:1.2;margin:4px 0 8px;}
+.sc .tag{margin:0 0 20px;color:var(--muted);font-size:1rem;}
+.sc .go{margin-top:auto;align-self:flex-start;display:inline-flex;align-items:center;gap:8px;font-weight:700;font-size:.95rem;padding:10px 18px;border-radius:999px;background:var(--ink);color:var(--surface);}
+.sc .go svg{width:16px;height:16px;}
 .sc.built:hover{border-color:var(--c);}
+.sc.built:hover .go svg{transform:translateX(3px);}
 .sc.built:focus-visible{outline:3px solid var(--ink);outline-offset:3px;}
-.sc.soon{opacity:.72;}
-.sc.soon .pill{background:var(--bg);border:1px dashed var(--line);}
+.sc .go svg{transition:transform .15s;}
+.sc.soon{opacity:.74;}
+.sc.soon .go{background:transparent;color:var(--muted);border:2px dashed var(--line);padding:8px 16px;}
+@media (prefers-reduced-motion:reduce){.sc .go svg{transition:none;}}
 </style>
 </head>
 <body>
@@ -226,41 +248,43 @@ footer strong{color:var(--ink);}
 </div>
 <script>
 var SECTIONS=[
- ['Visual Foundations','Art','01-visual-foundations.html',34],
- ['Typography','Art and Communication','02-typography.html',30],
- ['Design Principles','Theory'],
- ['Branding','Identity'],
- ['Design Systems','Technical'],
- ['Layout and Composition','Production'],
- ['Digital Interface Design','UI'],
- ['User Experience','UX'],
- ['Accessibility','Inclusive Design'],
- ['Digital Marketing Design','Marketing'],
- ['Content Design','Communication'],
- ['Image and Illustration','Visual Assets'],
- ['Motion and Animation','Motion Design'],
- ['Graphic Design Software','Tools'],
- ['Technical Design Knowledge','Digital Production'],
- ['Web and Product Basics','Technical'],
- ['Print Awareness','Cross-Media'],
- ['Research and Strategy','Thinking'],
- ['Creative Process','Workflow'],
- ['Presentation and Communication','Professional Practice'],
- ['Project Management','Professional Practice'],
- ['Business and Freelancing','Career'],
- ['Copyright and Legal Knowledge','Protection'],
- ['Cultural and Ethical Design','Responsibility'],
- ['Measurement and Optimisation','Performance'],
- ['Industry Terminology','Vocabulary'],
- ['Specialisations to Explore','Career Direction'],
- ['Core Mindsets','Professional Judgement']
+ ['Visual Foundations','Art','Colour, shape, space and composition','01-visual-foundations.html',34],
+ ['Typography','Art and Communication','How letters look, fit and read','02-typography.html',30],
+ ['Design Principles','Theory','The rules behind good design'],
+ ['Branding','Identity','Building a recognisable identity'],
+ ['Design Systems','Technical','Reusable parts that scale'],
+ ['Layout and Composition','Production','Arranging content on the page'],
+ ['Digital Interface Design','UI','Designing screens people can use'],
+ ['User Experience','UX','How people think and act'],
+ ['Accessibility','Inclusive Design','Design that works for everyone'],
+ ['Digital Marketing Design','Marketing','Creative that gets results'],
+ ['Content Design','Communication','Words and visuals working together'],
+ ['Image and Illustration','Visual Assets','Choosing and making visuals'],
+ ['Motion and Animation','Motion Design','Bringing designs to life'],
+ ['Graphic Design Software','Tools','The tools of the trade'],
+ ['Technical Design Knowledge','Digital Production','Files, formats and export settings'],
+ ['Web and Product Basics','Technical','How designs become websites'],
+ ['Print Awareness','Cross-Media','Designing for paper and ink'],
+ ['Research and Strategy','Thinking','Finding the problem first'],
+ ['Creative Process','Workflow','From brief to final delivery'],
+ ['Presentation and Communication','Professional Practice','Explaining and defending your work'],
+ ['Project Management','Professional Practice','Keeping projects on time'],
+ ['Business and Freelancing','Career','Pricing, contracts and clients'],
+ ['Copyright and Legal Knowledge','Protection','Protecting your work and others\u2019'],
+ ['Cultural and Ethical Design','Responsibility','Designing responsibly for everyone'],
+ ['Measurement and Optimisation','Performance','Testing what actually works'],
+ ['Industry Terminology','Vocabulary','Speaking the designer\u2019s language'],
+ ['Specialisations to Explore','Career Direction','Find your path in design'],
+ ['Core Mindsets','Professional Judgement','Think like a designer']
 ];
-var built=SECTIONS.filter(function(s){return s[2];}).length;
+var ARROW="<svg viewBox='0 0 24 24' aria-hidden='true' fill='none' stroke='currentColor' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'><path d='M5 12h14M13 6l6 6-6 6'/></svg>";
+var built=SECTIONS.filter(function(s){return s[3];}).length;
 document.getElementById('prog').innerHTML='<div class="bar" role="img" aria-label="'+built+' of '+SECTIONS.length+' sections ready"><i style="width:'+(built/SECTIONS.length*100).toFixed(1)+'%"></i></div><p>'+built+' of '+SECTIONS.length+' sections ready</p>';
 document.getElementById('sg').innerHTML=SECTIONS.map(function(s,i){
-  var c='c'+(i%4),inner='<div class="top"><span class="num">'+(i+1)+'</span><h2>'+s[0]+'</h2></div><p class="tag">'+s[1]+'</p>';
-  if(s[2]){return '<a class="sc built '+c+'" href="'+s[2]+'">'+inner+'<span class="pill">'+s[3]+' lessons. Open section</span></a>';}
-  return '<div class="sc soon '+c+'">'+inner+'<span class="pill">Coming soon</span></div>';
+  var c='c'+(i%4);
+  var head='<div class="row"><span class="num">'+(i+1)+'</span>'+(s[3]?'<span class="count">'+s[4]+' lessons</span>':'')+'</div><p class="cat">'+s[1]+'</p><h2>'+s[0]+'</h2><p class="tag">'+s[2]+'</p>';
+  if(s[3]){return '<a class="sc built '+c+'" href="'+s[3]+'">'+head+'<span class="go">Open section '+ARROW+'</span></a>';}
+  return '<div class="sc soon '+c+'">'+head+'<span class="go">Coming soon</span></div>';
 }).join('');
 </script>
 </body>
