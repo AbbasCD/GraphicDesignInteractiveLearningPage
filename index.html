@@ -6,7 +6,7 @@
 <title>Digital graphic designer knowledge map</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
 
@@ -33,7 +33,7 @@ html{scroll-padding-top:env(safe-area-inset-top,0px);}
 *,*::before,*::after{box-sizing:inherit;}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:"DM Sans",system-ui,-apple-system,"Segoe UI",sans-serif;font-size:17px;line-height:1.55;}
 .wrap{max-width:1080px;margin:0 auto;padding:0 20px;}
-h1,h2,h3{font-family:Syne,"DM Sans",system-ui,sans-serif;line-height:1.25;letter-spacing:0.01em;margin:0;}
+h1,h2,h3{font-family:Sora,"DM Sans",system-ui,sans-serif;line-height:1.25;letter-spacing:0.01em;margin:0;}
 
 /* hero */
 .hero{padding:48px 0 40px;}
@@ -98,7 +98,7 @@ input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;bac
 .timeline{list-style:none;margin:16px 0;padding:0 0 0 0;border-left:3px solid var(--line);}
 .timeline li{padding:0 0 18px 22px;position:relative;}
 .timeline li::before{content:"";position:absolute;left:-10px;top:5px;width:17px;height:17px;border-radius:50%;background:var(--c);}
-.timeline b.yr{font-family:Syne,"DM Sans",system-ui,sans-serif;font-size:1.15rem;display:block;}
+.timeline b.yr{font-family:Sora,"DM Sans",system-ui,sans-serif;font-size:1.15rem;display:block;}
 .panel{background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:20px;margin:18px 0;}
 .wheelrow{display:grid;grid-template-columns:minmax(0,340px) 1fr;gap:24px;align-items:center;}
 .wheelrow svg{width:100%;height:auto;display:block;}
@@ -107,7 +107,7 @@ input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;bac
 .ctrls{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px;}
 .ctrls .lbl{width:100%;font-weight:700;font-size:.9rem;margin-bottom:-2px;}
 .rswatch{height:90px;border-radius:16px;margin-bottom:12px;}
-.readout h4{font-family:Syne,"DM Sans",system-ui,sans-serif;font-size:1.4rem;margin:0 0 2px;}
+.readout h4{font-family:Sora,"DM Sans",system-ui,sans-serif;font-size:1.4rem;margin:0 0 2px;}
 .readout p{margin:0 0 8px !important;color:var(--muted);}
 .pal{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px;}
 .pal div{flex:1 1 90px;border-radius:12px;padding:38px 8px 8px;font-size:.8rem;font-weight:700;line-height:1.3;}
@@ -207,6 +207,11 @@ footer strong{color:var(--ink);}
 .next-art{flex:0 0 190px;width:190px;height:auto;}
 @media (prefers-reduced-motion:no-preference){.nbtn{transition:background-color .15s,color .15s,transform .15s;}.nbtn:hover{transform:translateY(-2px);}}
 @media (max-width:680px){.next{padding:26px 22px;}.next-art{display:none;}}
+.lfoot{margin-top:80px;padding-top:18px;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center;justify-content:space-between;font-size:.82rem;color:var(--muted);}
+.lfoot div{display:flex;flex-wrap:wrap;gap:8px;}
+.lfoot a{font-size:.82rem;font-weight:600;padding:5px 11px;border:1px solid var(--line);border-radius:999px;background:var(--surface);color:var(--muted);text-decoration:none;}
+.lfoot a:hover{color:var(--ink);border-color:var(--ink);}
+.lfoot a:focus-visible{outline:3px solid var(--ink);outline-offset:2px;}
 
 .hubhero{padding:44px 0 18px;}
 .hubhero h1{font-size:clamp(2.1rem,5.4vw,3.6rem);font-weight:700;letter-spacing:.01em;line-height:1.2;max-width:18ch;}
@@ -250,7 +255,7 @@ footer strong{color:var(--ink);}
 var SECTIONS=[
  ['Visual Foundations','Art','Colour, shape, space and composition','01-visual-foundations.html',34],
  ['Typography','Art and Communication','How letters look, fit and read','02-typography.html',30],
- ['Design Principles','Theory','The rules behind good design'],
+ ['Design Principles','Theory','The rules behind good design','03-design-principles.html',19],
  ['Branding','Identity','Building a recognisable identity'],
  ['Design Systems','Technical','Reusable parts that scale'],
  ['Layout and Composition','Production','Arranging content on the page'],

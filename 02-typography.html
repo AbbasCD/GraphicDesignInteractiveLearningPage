@@ -6,6 +6,7 @@
 <title>Typography | Digital graphic designer knowledge map</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;800&display=swap" rel="stylesheet">
@@ -47,7 +48,7 @@ html{scroll-padding-top:env(safe-area-inset-top,0px);}
 *,*::before,*::after{box-sizing:inherit;}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:"DM Sans",system-ui,-apple-system,"Segoe UI",sans-serif;font-size:17px;line-height:1.55;}
 .wrap{max-width:1080px;margin:0 auto;padding:0 20px;}
-h1,h2,h3{font-family:Syne,"DM Sans",system-ui,sans-serif;line-height:1.25;letter-spacing:0.01em;margin:0;}
+h1,h2,h3{font-family:Sora,"DM Sans",system-ui,sans-serif;line-height:1.25;letter-spacing:0.01em;margin:0;}
 
 /* hero */
 .hero{padding:48px 0 40px;}
@@ -112,7 +113,7 @@ input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;bac
 .timeline{list-style:none;margin:16px 0;padding:0 0 0 0;border-left:3px solid var(--line);}
 .timeline li{padding:0 0 18px 22px;position:relative;}
 .timeline li::before{content:"";position:absolute;left:-10px;top:5px;width:17px;height:17px;border-radius:50%;background:var(--c);}
-.timeline b.yr{font-family:Syne,"DM Sans",system-ui,sans-serif;font-size:1.15rem;display:block;}
+.timeline b.yr{font-family:Sora,"DM Sans",system-ui,sans-serif;font-size:1.15rem;display:block;}
 .panel{background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:20px;margin:18px 0;}
 .wheelrow{display:grid;grid-template-columns:minmax(0,340px) 1fr;gap:24px;align-items:center;}
 .wheelrow svg{width:100%;height:auto;display:block;}
@@ -121,7 +122,7 @@ input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;bac
 .ctrls{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px;}
 .ctrls .lbl{width:100%;font-weight:700;font-size:.9rem;margin-bottom:-2px;}
 .rswatch{height:90px;border-radius:16px;margin-bottom:12px;}
-.readout h4{font-family:Syne,"DM Sans",system-ui,sans-serif;font-size:1.4rem;margin:0 0 2px;}
+.readout h4{font-family:Sora,"DM Sans",system-ui,sans-serif;font-size:1.4rem;margin:0 0 2px;}
 .readout p{margin:0 0 8px !important;color:var(--muted);}
 .pal{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px;}
 .pal div{flex:1 1 90px;border-radius:12px;padding:38px 8px 8px;font-size:.8rem;font-weight:700;line-height:1.3;}
@@ -221,6 +222,11 @@ footer strong{color:var(--ink);}
 .next-art{flex:0 0 190px;width:190px;height:auto;}
 @media (prefers-reduced-motion:no-preference){.nbtn{transition:background-color .15s,color .15s,transform .15s;}.nbtn:hover{transform:translateY(-2px);}}
 @media (max-width:680px){.next{padding:26px 22px;}.next-art{display:none;}}
+.lfoot{margin-top:80px;padding-top:18px;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center;justify-content:space-between;font-size:.82rem;color:var(--muted);}
+.lfoot div{display:flex;flex-wrap:wrap;gap:8px;}
+.lfoot a{font-size:.82rem;font-weight:600;padding:5px 11px;border:1px solid var(--line);border-radius:999px;background:var(--surface);color:var(--muted);text-decoration:none;}
+.lfoot a:hover{color:var(--ink);border-color:var(--ink);}
+.lfoot a:focus-visible{outline:3px solid var(--ink);outline-offset:2px;}
 
 .f-playfair{font-family:'Playfair Display',Georgia,serif;}
 .f-garamond{font-family:'EB Garamond',Georgia,serif;}
@@ -243,7 +249,7 @@ input[type='text']:focus-visible{outline:3px solid var(--ink);outline-offset:2px
 </style>
 </head>
 <body>
-<nav class="site" aria-label="Site"><a href="01-visual-foundations.html">&larr; Visual foundations</a><a href="index.html">All sections</a></nav>
+<nav class="site" id="sitenav" aria-label="Site"><a href="01-visual-foundations.html">&larr; Visual foundations</a><a href="index.html">All sections</a><a href="03-design-principles.html">Next: Design Principles &rarr;</a></nav>
 <div id="home">
 <header class="hero">
   <div class="wrap hero-grid">
@@ -268,8 +274,8 @@ input[type='text']:focus-visible{outline:3px solid var(--ink);outline-offset:2px
       <div class="next-text">
         <span class="next-tag">Up next</span>
         <h2>Design Principles</h2>
-        <p>That section isn’t built yet. In the meantime, you can revisit Visual foundations or browse all sections.</p>
-        <div class="next-actions"><a class="nbtn primary" href="index.html">See all sections <svg viewBox='0 0 24 24' aria-hidden='true' fill='none' stroke='currentColor' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'><path d='M5 12h14M13 6l6 6-6 6'/></svg></a><a class="nbtn" href="01-visual-foundations.html">Back to Visual foundations</a></div>
+        <p>Now that you can set type with care, the next section looks at the principles behind every good design decision.</p>
+        <div class="next-actions"><a class="nbtn primary" href="03-design-principles.html">Start Design Principles <svg viewBox='0 0 24 24' aria-hidden='true' fill='none' stroke='currentColor' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'><path d='M5 12h14M13 6l6 6-6 6'/></svg></a><a class="nbtn" href="index.html">See all sections</a></div>
       </div>
       <svg class='next-art' viewBox='0 0 180 150' aria-hidden='true' focusable='false'><circle cx='50' cy='52' r='34' fill='var(--g1)'/><rect x='82' y='26' width='62' height='62' rx='14' fill='var(--g2)' opacity='.92' transform='rotate(10 113 57)'/><polygon points='40,138 84,70 120,138' fill='var(--g4)' opacity='.95'/><circle cx='142' cy='116' r='20' fill='var(--g3)'/></svg>
     </aside>
@@ -324,7 +330,7 @@ function lerpHue(a,b,t){var d=((b-a+540)%360)-180;return (a+d*t+360)%360;}
 function hex2(n){return Math.max(0,Math.min(255,Math.round(n))).toString(16).padStart(2,'0');}
 function shell(title,sub,icon,secs){
   var svgI='<svg viewBox="0 0 48 48" aria-hidden="true" focusable="false" style="fill:none;stroke:currentColor;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round">'+ICONS[icon]+'</svg>';
-  var back='<button class="btn" data-back type="button">← Back to Visual foundations</button>';
+  var back='<button class="btn" data-back type="button">← Back to '+SECTION_NAME+'</button>';
   return back+'<div class="lhero"><div class="gbadge">'+svgI+'</div><div><h1>'+title+'</h1><p>'+sub+'</p></div></div><nav class="toc" aria-label="In this lesson">'+secs.map(function(s){return '<button class="chip" type="button" data-scroll="'+s[0]+'">'+s[1]+'</button>';}).join('')+'</nav>'+secs.map(function(s){return '<section class="lsec" id="'+s[0]+'">'+s[2]+'</section>';}).join('')+'<p style="margin-top:36px">'+back+'</p>';
 }
 function quick(arr){return `<h2>Quick check</h2><p>Click each question to reveal the answer.</p>`+arr.map(function(q,i){return `<details><summary>${i+1}. ${q[0]}</summary><p>${q[1]}</p></details>`;}).join('');}
@@ -361,6 +367,14 @@ function svg(name){
 }
 var hxQueued=false;
 
+function siteFoot(){
+  var S=window.SITE||{},a='';
+  if(S.prev){a+='<a href="'+S.prev[1]+'">&larr; '+S.prev[0]+'</a>';}
+  a+='<a href="index.html">All sections</a>';
+  if(S.next){a+='<a href="'+S.next[1]+'">'+S.next[0]+' &rarr;</a>';}
+  return '<nav class="lfoot" aria-label="Other sections"><span>Explore other sections</span><div>'+a+'</div></nav>';
+}
+
 function startSite(){
   var out='';
   GROUPS.forEach(function(g){
@@ -382,13 +396,15 @@ function startSite(){
     var L=LESSONS[id];
     if(!L){return;}
     homeEl.hidden=true;lessonEl.hidden=false;lessonEl.className='wrap lesson '+(L.g||'');
-    lessonEl.innerHTML=L.html;
+    var sn=document.getElementById('sitenav');if(sn){sn.hidden=true;}
+    lessonEl.innerHTML=L.html+siteFoot();
     L.init(lessonEl);
     window.scrollTo(0,0);
     try{history.replaceState(null,'','#'+id);}catch(e){}
   }
   function showHome(){
     lessonEl.hidden=true;lessonEl.innerHTML='';homeEl.hidden=false;
+    var sn=document.getElementById('sitenav');if(sn){sn.hidden=false;}
     window.scrollTo(0,0);
     try{history.replaceState(null,'',location.pathname+location.search);}catch(e){}
   }
@@ -418,6 +434,8 @@ function startSite(){
   if(LESSONS[startId]){showLesson(startId);}
 }
 
+var SECTION_NAME='Typography';
+var SITE={prev:['Visual Foundations','01-visual-foundations.html'],next:['Design Principles','03-design-principles.html']};
 /* ===== Typography: icons ===== */
 function G(t,o){o=o||{};return `<text x='${o.x||24}' y='${o.y||33}' text-anchor='middle' font-size='${o.s||26}' font-weight='${o.w||700}' font-family='${o.f||'Georgia,serif'}' ${o.i?"font-style='italic'":''} fill='currentColor' stroke='none'>${t}</text>`;}
 var ICONS={
