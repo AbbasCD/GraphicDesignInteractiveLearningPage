@@ -1,0 +1,961 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Layout and Composition | Digital graphic designer knowledge map</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+<style>
+
+:root{
+  --bg:#F2F4FA; --surface:#FFFFFF; --ink:#1B1F3B; --muted:#4A5070; --line:#D9DDEB;
+  --g1:#D93A62; --g2:#2468D8; --g3:#0E8467; --g4:#A86F00;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#12142A; --surface:#1C2040; --ink:#EEF0FB; --muted:#B4B9D6; --line:#2E3360;
+    --g1:#FF7A9A; --g2:#78A8FF; --g3:#45D1AE; --g4:#F2B93B;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#12142A; --surface:#1C2040; --ink:#EEF0FB; --muted:#B4B9D6; --line:#2E3360;
+  --g1:#FF7A9A; --g2:#78A8FF; --g3:#45D1AE; --g4:#F2B93B;
+  color-scheme:dark;
+}
+html{scroll-padding-top:env(safe-area-inset-top,0px);}
+*,*::before,*::after{box-sizing:inherit;}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"DM Sans",system-ui,-apple-system,"Segoe UI",sans-serif;font-size:17px;line-height:1.55;}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px;}
+h1,h2,h3{font-family:Sora,"DM Sans",system-ui,sans-serif;line-height:1.25;letter-spacing:0.01em;margin:0;}
+
+/* hero */
+.hero{padding:48px 0 40px;}
+.hero-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:36px;align-items:center;}
+.hero h1{font-size:clamp(2.2rem,5.4vw,3.8rem);font-weight:700;letter-spacing:0.01em;line-height:1.2;}
+.hero p.lead{font-size:1.15rem;color:var(--muted);max-width:34ch;margin:18px 0 22px;}
+.jump{display:flex;flex-wrap:wrap;gap:10px;}
+.jump a{color:var(--ink);text-decoration:none;font-weight:700;font-size:.95rem;padding:9px 16px;border-radius:999px;border:2px solid var(--c);background:var(--surface);}
+.jump a:hover{background:var(--c);color:var(--surface);}
+.jump a:focus-visible,input:focus-visible{outline:3px solid var(--ink);outline-offset:3px;}
+.lab{background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:22px;}
+.lab h2{font-size:1.25rem;margin-bottom:4px;}
+.lab p{margin:0 0 16px;color:var(--muted);font-size:.95rem;}
+.sw{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:18px;}
+.sw div{border-radius:12px;padding:30px 8px 8px;font-size:.78rem;font-weight:700;line-height:1.25;}
+.sw div span{display:block;font-weight:500;opacity:.9;}
+.sw div.big{grid-column:span 3;padding:46px 12px 12px;border-radius:16px;font-size:.9rem;}
+label{display:block;font-weight:700;font-size:.9rem;margin-bottom:8px;}
+input[type=range]{width:100%;height:14px;border-radius:99px;appearance:none;-webkit-appearance:none;background:linear-gradient(90deg,hsl(0 80% 55%),hsl(60 80% 55%),hsl(120 80% 45%),hsl(180 80% 45%),hsl(240 80% 60%),hsl(300 80% 55%),hsl(360 80% 55%));margin:0;}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:28px;height:28px;border-radius:50%;background:var(--surface);border:4px solid var(--ink);cursor:grab;}
+input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;background:var(--surface);border:4px solid var(--ink);cursor:grab;}
+
+/* groups */
+.group{padding:36px 0 12px;--c:var(--g1);}
+.group.f{--c:var(--g2);} .group.s{--c:var(--g3);} .group.c{--c:var(--g4);}
+.jump a.j1{--c:var(--g1);} .jump a.j2{--c:var(--g2);} .jump a.j3{--c:var(--g3);} .jump a.j4{--c:var(--g4);}
+.ghead{display:flex;gap:18px;align-items:center;margin-bottom:22px;}
+.gbadge{flex:0 0 72px;height:72px;border-radius:50%;background:var(--c);color:var(--surface);display:grid;place-items:center;}
+.gbadge svg{width:40px;height:40px;}
+.ghead h2{font-size:clamp(1.6rem,3.8vw,2.2rem);font-weight:700;}
+.ghead p{margin:6px 0 0;color:var(--muted);max-width:52ch;}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px;}
+.card{background:var(--surface);border:1px solid var(--line);border-top:5px solid var(--c);border-radius:6px 6px 18px 18px;padding:18px;}
+.tile{width:60px;height:60px;border-radius:16px;display:grid;place-items:center;color:var(--c);background:color-mix(in srgb,var(--c) 14%,var(--surface));margin-bottom:12px;}
+.tile svg{width:38px;height:38px;fill:none;stroke:currentColor;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;}
+.card h3{font-size:1.15rem;font-weight:700;margin-bottom:6px;}
+.card p{margin:0;color:var(--muted);font-size:.97rem;}
+[hidden]{display:none !important;}
+.note{margin:16px 0 0;color:var(--muted);font-size:.92rem;max-width:44ch;}
+.card.has{display:block;text-decoration:none;color:inherit;cursor:pointer;}
+.card.has:hover{border-color:var(--c);}
+.card.has:focus-visible{outline:3px solid var(--ink);outline-offset:3px;}
+.more{display:inline-block;margin-top:12px;font-weight:700;font-size:.92rem;color:var(--ink);padding:6px 12px;border-radius:999px;background:color-mix(in srgb,var(--c) 18%,var(--surface));}
+.lesson{--c:var(--g1);padding-top:20px;padding-bottom:40px;max-width:860px;}
+.btn{font:inherit;font-weight:700;cursor:pointer;border:2px solid var(--ink);background:var(--surface);color:var(--ink);padding:9px 16px;border-radius:999px;}
+.btn:hover{background:var(--ink);color:var(--surface);}
+.btn:focus-visible,.chip:focus-visible,summary:focus-visible{outline:3px solid var(--ink);outline-offset:3px;}
+.lhero{display:flex;gap:18px;align-items:center;margin:26px 0 8px;}
+.lesson h1{font-size:clamp(1.9rem,4.6vw,3rem);font-weight:700;letter-spacing:0.01em;line-height:1.2;}
+.lhero p{margin:6px 0 0;color:var(--muted);}
+.toc{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0 6px;}
+.chip{font:inherit;font-size:.92rem;font-weight:700;cursor:pointer;border:2px solid var(--line);background:var(--surface);color:var(--ink);padding:7px 14px;border-radius:999px;}
+.chip:hover{border-color:var(--c);}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--surface);border-color:var(--ink);}
+.lsec{margin-top:46px;}
+.lsec h2{font-size:clamp(1.45rem,3.3vw,1.9rem);font-weight:700;margin-bottom:14px;}
+.lsec h3{font-size:1.2rem;margin:22px 0 6px;}
+.lsec p,.lsec li{max-width:68ch;}
+.lsec p{margin:0 0 14px;}
+.callout{background:color-mix(in srgb,var(--c) 12%,var(--surface));border-left:6px solid var(--c);border-radius:4px 16px 16px 4px;padding:14px 18px;margin:18px 0;max-width:68ch;}
+.callout p{margin:0 !important;}
+.timeline{list-style:none;margin:16px 0;padding:0 0 0 0;border-left:3px solid var(--line);}
+.timeline li{padding:0 0 18px 22px;position:relative;}
+.timeline li::before{content:"";position:absolute;left:-10px;top:5px;width:17px;height:17px;border-radius:50%;background:var(--c);}
+.timeline b.yr{font-family:Sora,"DM Sans",system-ui,sans-serif;font-size:1.15rem;display:block;}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:20px;margin:18px 0;}
+.wheelrow{display:grid;grid-template-columns:minmax(0,340px) 1fr;gap:24px;align-items:center;}
+.wheelrow svg{width:100%;height:auto;display:block;}
+.wedge{cursor:pointer;stroke:var(--surface);stroke-width:2;}
+.wedge:focus-visible{outline:none;stroke:var(--ink);stroke-width:5;}
+.ctrls{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px;}
+.ctrls .lbl{width:100%;font-weight:700;font-size:.9rem;margin-bottom:-2px;}
+.rswatch{height:90px;border-radius:16px;margin-bottom:12px;}
+.readout h4{font-family:Sora,"DM Sans",system-ui,sans-serif;font-size:1.4rem;margin:0 0 2px;}
+.readout p{margin:0 0 8px !important;color:var(--muted);}
+.pal{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px;}
+.pal div{flex:1 1 90px;border-radius:12px;padding:38px 8px 8px;font-size:.8rem;font-weight:700;line-height:1.3;}
+.pal div span{display:block;font-weight:500;}
+.blend{position:relative;height:190px;border-radius:18px;overflow:hidden;}
+.blend i{position:absolute;width:110px;height:110px;border-radius:50%;display:block;}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.two h3{margin-top:12px;}
+.strip{display:flex;border-radius:12px;overflow:hidden;margin:6px 0 16px;}
+.strip div{flex:1;height:54px;}
+.slab{font-weight:700;font-size:.92rem;margin:12px 0 0;}
+.stack{display:flex;height:70px;border-radius:14px;overflow:hidden;font-weight:700;font-size:.9rem;margin:14px 0;}
+.stack div{display:flex;align-items:center;justify-content:center;text-align:center;padding:0 6px;}
+.albers{display:grid;grid-template-columns:1fr 1fr;border-radius:16px;overflow:hidden;margin:14px 0 8px;}
+.albers div{height:170px;display:grid;place-items:center;}
+.albers span{width:72px;height:72px;background:#B87A4B;display:block;}
+.steps{counter-reset:s;list-style:none;padding:0;margin:14px 0;}
+.steps li{counter-increment:s;position:relative;padding:0 0 16px 50px;min-height:36px;}
+.steps li::before{content:counter(s);position:absolute;left:0;top:-2px;width:34px;height:34px;border-radius:50%;background:var(--c);color:var(--surface);display:grid;place-items:center;font-weight:700;}
+details{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:12px 16px;margin:10px 0;max-width:68ch;}
+summary{cursor:pointer;font-weight:700;}
+details p{margin:10px 0 0 !important;color:var(--muted);}
+.tk li{margin:7px 0;}
+.lsec p b,.lsec li b:not(.yr){background:color-mix(in srgb,var(--c) 20%,transparent);padding:0 .22em;border-radius:5px;-webkit-box-decoration-break:clone;box-decoration-break:clone;}
+.lesson.f{--c:var(--g2);}
+.lesson.s{--c:var(--g3);}
+.lesson.c{--c:var(--g4);}
+.stage{background:var(--bg);border:1px solid var(--line);border-radius:16px;padding:14px;display:grid;place-items:center;min-height:120px;overflow:hidden;}
+.stage svg{max-width:100%;height:auto;}
+.mood{margin:12px 0 0;color:var(--muted);}
+.hx{font:inherit;color:inherit;background:none;border:0;padding:0 .1em;margin:0;cursor:pointer;text-decoration:underline dotted;text-underline-offset:3px;display:inline;}
+.hx::after{content:'';display:inline-block;width:.95em;height:.95em;margin-left:.4em;vertical-align:-.12em;background:currentColor;opacity:.8;-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect x='9' y='9' width='11' height='11' rx='2' fill='none' stroke='black' stroke-width='2'/%3E%3Cpath d='M5 15V6a2 2 0 0 1 2-2h9' fill='none' stroke='black' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E") center/contain no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect x='9' y='9' width='11' height='11' rx='2' fill='none' stroke='black' stroke-width='2'/%3E%3Cpath d='M5 15V6a2 2 0 0 1 2-2h9' fill='none' stroke='black' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E") center/contain no-repeat;}
+.hx:hover::after{opacity:1;}
+.hx.ok::after{opacity:1;-webkit-mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M5 13l4 4L19 7' fill='none' stroke='black' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M5 13l4 4L19 7' fill='none' stroke='black' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");}
+.hx:focus-visible{outline:3px solid currentColor;outline-offset:2px;}
+.swbtns{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:16px;}
+.swbtn{width:46px;height:46px;border-radius:50%;border:3px solid var(--surface);outline:2px solid var(--line);cursor:pointer;padding:0;}
+.swbtn[aria-pressed='true']{outline:4px solid var(--ink);}
+.swbtn:focus-visible{outline:4px solid var(--ink);outline-offset:2px;}
+.rswatch{border:1px solid var(--line);}
+.facts{display:grid;gap:10px;margin-top:10px;}
+.facts p{margin:0 !important;}
+.mockbtn{display:inline-block;padding:10px 18px;border-radius:999px;font-weight:700;margin-top:8px;}
+.mini{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px;margin:14px 0;}
+.mini>div{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:14px;}
+.mini .pair{display:flex;height:46px;border-radius:10px;overflow:hidden;margin-bottom:10px;}
+.mini .pair i{display:block;}
+.mini h3{margin:0 0 4px;font-size:1.05rem;}
+.mini p{margin:0 !important;font-size:.95rem;color:var(--muted);}
+.mock{border-radius:18px;overflow:hidden;border:1px solid rgba(0,0,0,.14);}
+.mock .bar{padding:12px 16px;font-weight:700;}
+.mock .bd{padding:16px;}
+.mock h4{margin:0 0 6px;font-size:1.25rem;}
+.mock p{margin:0 0 12px !important;max-width:none;}
+.tag{display:inline-block;padding:3px 10px;border-radius:999px;font-size:.82rem;font-weight:700;margin-right:6px;}
+.blurme{filter:blur(var(--b,0px));}
+.strip.lab div{display:grid;place-items:center;font-size:.72rem;font-weight:700;}
+canvas{display:block;width:100%;max-width:320px;border-radius:14px;cursor:crosshair;touch-action:none;}
+.sl label{margin:14px 0 6px;}
+table.t{border-collapse:collapse;width:100%;max-width:68ch;margin:12px 0;font-size:.95rem;}
+table.t th,table.t td{border-bottom:1px solid var(--line);padding:8px 10px;text-align:left;}
+.res{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:8px;margin:12px 0;}
+.res div{border:2px solid var(--line);border-radius:12px;padding:8px 12px;font-size:.9rem;}
+.res div b{display:block;}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.row3{display:flex;align-items:center;gap:10px;padding:6px 0;}
+.dot{width:18px;height:18px;border-radius:50%;display:inline-block;flex:0 0 18px;}
+input[type='color']{width:64px;height:40px;padding:0;border:2px solid var(--line);border-radius:10px;background:none;cursor:pointer;}
+@media (max-width:760px){.wheelrow,.two,.cols{grid-template-columns:1fr;}}
+footer{padding:44px 0 56px;color:var(--muted);}
+footer strong{color:var(--ink);}
+@media (max-width:760px){
+  .hero-grid{grid-template-columns:1fr;}
+  .ghead{align-items:flex-start;}
+  .gbadge{flex-basis:56px;height:56px;} .gbadge svg{width:30px;height:30px;}
+}
+@media (prefers-reduced-motion:no-preference){
+  .sw div{transition:background-color .25s;}
+}
+
+.site{max-width:1080px;margin:0 auto;padding:14px 20px 0;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;font-weight:700;font-size:.95rem;}
+.site a{color:var(--ink);text-decoration:none;padding:7px 14px;border-radius:999px;border:2px solid var(--line);background:var(--surface);}
+.site a:hover{border-color:var(--g2);}
+.site a:focus-visible{outline:3px solid var(--ink);outline-offset:3px;}
+.next{display:flex;gap:28px;align-items:center;justify-content:space-between;background:color-mix(in srgb,var(--g2) 11%,var(--surface));border:1px solid var(--line);border-radius:30px;padding:32px 36px;overflow:hidden;}
+.next-text{min-width:0;}
+.next-tag{display:inline-block;font-weight:700;font-size:.9rem;padding:5px 14px;border-radius:999px;background:color-mix(in srgb,var(--g3) 24%,var(--surface));color:var(--ink);}
+.next h2{font-size:clamp(1.9rem,4.4vw,2.8rem);font-weight:700;letter-spacing:.01em;line-height:1.15;margin:12px 0 10px;color:var(--ink);}
+.next p{color:var(--muted);max-width:44ch;margin:0 0 20px;font-size:1.08rem;}
+.next-actions{display:flex;flex-wrap:wrap;gap:10px;}
+.nbtn{display:inline-flex;align-items:center;gap:8px;font-weight:700;font-size:1rem;text-decoration:none;color:var(--ink);padding:12px 22px;border-radius:999px;border:2px solid var(--ink);background:transparent;}
+.nbtn.primary{background:var(--ink);color:var(--surface);}
+.nbtn:hover{background:var(--ink);color:var(--surface);}
+.nbtn.primary:hover{background:transparent;color:var(--ink);}
+.nbtn:focus-visible{outline:3px solid var(--ink);outline-offset:3px;}
+.nbtn svg{width:16px;height:16px;}
+.next-art{flex:0 0 190px;width:190px;height:auto;}
+@media (prefers-reduced-motion:no-preference){.nbtn{transition:background-color .15s,color .15s,transform .15s;}.nbtn:hover{transform:translateY(-2px);}}
+@media (max-width:680px){.next{padding:26px 22px;}.next-art{display:none;}}
+.lfoot{margin-top:80px;padding-top:18px;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center;justify-content:space-between;font-size:.82rem;color:var(--muted);}
+.lfoot div{display:flex;flex-wrap:wrap;gap:8px;}
+.lfoot a{font-size:.82rem;font-weight:600;padding:5px 11px;border:1px solid var(--line);border-radius:999px;background:var(--surface);color:var(--muted);text-decoration:none;}
+.lfoot a:hover{color:var(--ink);border-color:var(--ink);}
+.lfoot a:focus-visible{outline:3px solid var(--ink);outline-offset:2px;}
+
+input[type='text']{width:100%;font:inherit;padding:10px 12px;border:2px solid var(--line);border-radius:12px;background:var(--surface);color:var(--ink);margin:2px 0 12px;}
+input[type='text']:focus-visible{outline:3px solid var(--ink);outline-offset:2px;}
+.cols>div{min-width:0;}
+
+</style>
+</head>
+<body>
+<nav class="site" id="sitenav" aria-label="Site"><a href="05-design-systems.html">&larr; Design Systems</a><a href="index.html">All sections</a></nav>
+<div id="home">
+<header class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <h1>Layout and Composition</h1>
+      <p class="lead">22 ideas about how pages are set up, structured and made to flex. Each one has a hands-on demo.</p>
+      <nav class="jump" aria-label="Jump to a group">
+        <a class="j1" href="#setup">Setting up the page</a>
+        <a class="j2" href="#grids">Grids and structure</a>
+        <a class="j3" href="#flexible">Flexible layouts and the fold</a>
+      </nav>
+      <p class="note">Every card opens an in-depth lesson. Click a card, or the &ldquo;Read the full lesson&rdquo; pill on it, to begin.</p>
+    </div>
+    <div class="lab" id="lab"></div>
+  </div>
+</header>
+<main class="wrap" id="groups"></main>
+<footer>
+  <div class="wrap">
+    <aside class="next" aria-label="What to do next">
+      <div class="next-text">
+        <span class="next-tag">Up next</span>
+        <h2>Digital Interface Design</h2>
+        <p>That section isn’t built yet. In the meantime, you can revisit Layout and Composition or browse all sections.</p>
+        <div class="next-actions"><a class="nbtn primary" href="index.html">See all sections <svg viewBox='0 0 24 24' aria-hidden='true' fill='none' stroke='currentColor' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'><path d='M5 12h14M13 6l6 6-6 6'/></svg></a><a class="nbtn" href="06-layout-and-composition.html">Back to Layout and Composition</a></div>
+      </div>
+      <svg class='next-art' viewBox='0 0 180 150' aria-hidden='true' focusable='false'><circle cx='50' cy='52' r='34' fill='var(--g1)'/><rect x='82' y='26' width='62' height='62' rx='14' fill='var(--g2)' opacity='.92' transform='rotate(10 113 57)'/><polygon points='40,138 84,70 120,138' fill='var(--g4)' opacity='.95'/><circle cx='142' cy='116' r='20' fill='var(--g3)'/></svg>
+    </aside>
+  </div>
+</footer>
+</div>
+<main class="wrap lesson" id="lesson" hidden></main>
+<script>
+function hslToHex(h,s,l){
+  h=((h%360)+360)%360; s/=100; l/=100;
+  var k=function(n){return (n+h/30)%12;};
+  var a=s*Math.min(l,1-l);
+  var f=function(n){return l-a*Math.max(-1,Math.min(k(n)-3,Math.min(9-k(n),1)));};
+  var x=function(v){return Math.round(v*255).toString(16).padStart(2,"0");};
+  return ("#"+x(f(0))+x(f(8))+x(f(4))).toUpperCase();
+}
+function textOn(hex){
+  var r=parseInt(hex.substr(1,2),16),g=parseInt(hex.substr(3,2),16),b=parseInt(hex.substr(5,2),16);
+  var lin=function(c){c/=255;return c<=0.03928?c/12.92:Math.pow((c+0.055)/1.055,2.4);};
+  var L=0.2126*lin(r)+0.7152*lin(g)+0.0722*lin(b);
+  return L>0.4?"#111111":"#FFFFFF";
+}
+function polar(cx,cy,r,deg){var a=(deg-90)*Math.PI/180;return [cx+r*Math.cos(a),cy+r*Math.sin(a)];}
+function wedge(cx,cy,r0,r1,a0,a1){
+  var p0=polar(cx,cy,r1,a0),p1=polar(cx,cy,r1,a1),p2=polar(cx,cy,r0,a1),p3=polar(cx,cy,r0,a0);
+  return 'M'+p0+'A'+r1+','+r1+' 0 0 1 '+p1+'L'+p2+'A'+r0+','+r0+' 0 0 0 '+p3+'Z';
+}
+function hexRgb(h){return [parseInt(h.substr(1,2),16),parseInt(h.substr(3,2),16),parseInt(h.substr(5,2),16)];}
+function mixHex(a,b,t){
+  var A=hexRgb(a),B=hexRgb(b);
+  return "#"+[0,1,2].map(function(i){return Math.round(A[i]+(B[i]-A[i])*t).toString(16).padStart(2,"0");}).join("").toUpperCase();
+}
+function prep(root){
+  var smooth=!(window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+  Array.prototype.slice.call(root.querySelectorAll('[data-scroll]')).forEach(function(b){
+    b.addEventListener('click',function(){var t=root.querySelector('#'+b.getAttribute('data-scroll'));if(t){t.scrollIntoView({behavior:smooth?'smooth':'auto',block:'start'});}});
+  });
+  return {$:function(s){return root.querySelector(s);},$$:function(s){return Array.prototype.slice.call(root.querySelectorAll(s));}};
+}
+function rgbToHsl(r,g,b){
+  r/=255;g/=255;b/=255;
+  var mx=Math.max(r,g,b),mn=Math.min(r,g,b),l=(mx+mn)/2,h=0,s=0,d=mx-mn;
+  if(d){s=d/(1-Math.abs(2*l-1));if(mx===r){h=((g-b)/d)%6;}else if(mx===g){h=(b-r)/d+2;}else{h=(r-g)/d+4;}h*=60;if(h<0){h+=360;}}
+  return [Math.round(h),Math.round(s*100),Math.round(l*100)];
+}
+function relLum(hex){
+  var c=hexRgb(hex).map(function(v){v/=255;return v<=0.03928?v/12.92:Math.pow((v+0.055)/1.055,2.4);});
+  return 0.2126*c[0]+0.7152*c[1]+0.0722*c[2];
+}
+function contrastRatio(a,b){var A=relLum(a),B=relLum(b);return (Math.max(A,B)+0.05)/(Math.min(A,B)+0.05);}
+function lerpHue(a,b,t){var d=((b-a+540)%360)-180;return (a+d*t+360)%360;}
+function hex2(n){return Math.max(0,Math.min(255,Math.round(n))).toString(16).padStart(2,'0');}
+function shell(title,sub,icon,secs){
+  var svgI='<svg viewBox="0 0 48 48" aria-hidden="true" focusable="false" style="fill:none;stroke:currentColor;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round">'+ICONS[icon]+'</svg>';
+  var back='<button class="btn" data-back type="button">← Back to '+SECTION_NAME+'</button>';
+  return back+'<div class="lhero"><div class="gbadge">'+svgI+'</div><div><h1>'+title+'</h1><p>'+sub+'</p></div></div><nav class="toc" aria-label="In this lesson">'+secs.map(function(s){return '<button class="chip" type="button" data-scroll="'+s[0]+'">'+s[1]+'</button>';}).join('')+'</nav>'+secs.map(function(s){return '<section class="lsec" id="'+s[0]+'">'+s[2]+'</section>';}).join('')+'<p style="margin-top:36px">'+back+'</p>';
+}
+function quick(arr){return `<h2>Quick check</h2><p>Click each question to reveal the answer.</p>`+arr.map(function(q,i){return `<details><summary>${i+1}. ${q[0]}</summary><p>${q[1]}</p></details>`;}).join('');}
+function bigideas(arr){return `<h2>The big ideas</h2><ul class='tk'>`+arr.map(function(x){return '<li>'+x+'</li>';}).join('')+'</ul>';}
+function steps(arr){return `<ol class='steps'>`+arr.map(function(x){return '<li>'+x+'</li>';}).join('')+'</ol>';}
+function chipsHtml(id,items,cur,lab){return `<div class='ctrls' id='${id}' role='group' aria-label='${lab}'>`+items.map(function(x){return `<button class='chip' type='button' data-v='${x[0]}' aria-pressed='${x[0]===cur}'>${x[1]}</button>`;}).join('')+`</div>`;}
+function bindChips(root,id,cb){var c=root.querySelector('#'+id);c.addEventListener('click',function(e){var b=e.target.closest('.chip');if(!b)return;Array.prototype.slice.call(c.querySelectorAll('.chip')).forEach(function(x){x.setAttribute('aria-pressed',x===b?'true':'false');});cb(b.getAttribute('data-v'));});}
+function rng(id,lab,min,max,val,step,unit){return `<label for='${id}'>${lab}: <span id='${id}v'>${val}</span>${unit||''}</label><input id='${id}' type='range' min='${min}' max='${max}' step='${step||1}' value='${val}'>`;}
+function onRng(root,id,cb){var el=root.querySelector('#'+id),sp=root.querySelector('#'+id+'v');el.addEventListener('input',function(){if(sp){sp.textContent=el.value;}cb(parseFloat(el.value));});}
+function pr(i,k){var x=Math.sin(i*127.1+k*311.7)*43758.5453;return x-Math.floor(x);}
+function copyText(t,btn){
+  function ok(){btn.classList.add('ok');clearTimeout(btn._t);btn._t=setTimeout(function(){btn.classList.remove('ok');},1400);}
+  function fallback(){try{var ta=document.createElement('textarea');ta.value=t;ta.setAttribute('readonly','');ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.select();var r=document.execCommand('copy');document.body.removeChild(ta);if(r){ok();}}catch(e){}}
+  if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(ok,fallback);}else{fallback();}
+}
+function wrapHex(root){
+  var w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,null),nodes=[],n,test=/#[0-9A-Fa-f]{6}(?![0-9A-Fa-f])/;
+  while((n=w.nextNode())){if(test.test(n.nodeValue)&&n.parentNode&&n.parentNode.closest&&!n.parentNode.closest('script,style,textarea,button,svg')){nodes.push(n);}}
+  nodes.forEach(function(n){
+    var frag=document.createDocumentFragment(),s=n.nodeValue,last=0,re=/#[0-9A-Fa-f]{6}(?![0-9A-Fa-f])/g,mm;
+    while((mm=re.exec(s))){
+      if(mm.index>last){frag.appendChild(document.createTextNode(s.slice(last,mm.index)));}
+      var b=document.createElement('button');b.type='button';b.className='hx';b.setAttribute('data-hex',mm[0].toUpperCase());b.setAttribute('aria-label','Copy '+mm[0].toUpperCase());b.textContent=mm[0];frag.appendChild(b);
+      last=mm.index+mm[0].length;
+    }
+    if(last<s.length){frag.appendChild(document.createTextNode(s.slice(last)));}
+    n.parentNode.replaceChild(frag,n);
+  });
+}
+function queueHex(){if(hxQueued){return;}hxQueued=true;requestAnimationFrame(function(){hxQueued=false;wrapHex(document.body);});}
+function slug(t){return t.toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"");}
+function svg(name){
+  return '<svg viewBox="0 0 48 48" aria-hidden="true" focusable="false">'+ICONS[name]+'</svg>';
+}
+var hxQueued=false;
+
+function siteFoot(){
+  var S=window.SITE||{},a='';
+  if(S.prev){a+='<a href="'+S.prev[1]+'">&larr; '+S.prev[0]+'</a>';}
+  a+='<a href="index.html">All sections</a>';
+  if(S.next){a+='<a href="'+S.next[1]+'">'+S.next[0]+' &rarr;</a>';}
+  return '<nav class="lfoot" aria-label="Other sections"><span>Explore other sections</span><div>'+a+'</div></nav>';
+}
+
+function startSite(){
+  var out='';
+  GROUPS.forEach(function(g){
+    out+='<section class="group '+g.cls+'" id="'+g.id+'"><div class="ghead"><div class="gbadge"><svg viewBox="0 0 48 48" aria-hidden="true" focusable="false" style="fill:none;stroke:currentColor;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round">'+ICONS[g.icon]+'</svg></div><div><h2>'+g.title+'</h2><p>'+g.intro+'</p></div></div><div class="grid">';
+    g.items.forEach(function(it){
+      var sl=slug(it[1]);
+      if(LESSONS[sl]){
+        out+='<a class="card has" href="#'+sl+'" data-lesson="'+sl+'"><div class="tile">'+svg(it[0])+'</div><h3>'+it[1]+'</h3><p>'+it[2]+'</p><span class="more">Read the full lesson</span></a>';
+      } else {
+        out+='<article class="card"><div class="tile">'+svg(it[0])+'</div><h3>'+it[1]+'</h3><p>'+it[2]+'</p></article>';
+      }
+    });
+    out+='</div></section>';
+  });
+  document.getElementById('groups').innerHTML=out;
+
+  var homeEl=document.getElementById('home'),lessonEl=document.getElementById('lesson');
+  function showLesson(id){
+    var L=LESSONS[id];
+    if(!L){return;}
+    homeEl.hidden=true;lessonEl.hidden=false;lessonEl.className='wrap lesson '+(L.g||'');
+    var sn=document.getElementById('sitenav');if(sn){sn.hidden=true;}
+    lessonEl.innerHTML=L.html+siteFoot();
+    L.init(lessonEl);
+    window.scrollTo(0,0);
+    try{history.replaceState(null,'','#'+id);}catch(e){}
+  }
+  function showHome(){
+    lessonEl.hidden=true;lessonEl.innerHTML='';homeEl.hidden=false;
+    var sn=document.getElementById('sitenav');if(sn){sn.hidden=false;}
+    window.scrollTo(0,0);
+    try{history.replaceState(null,'',location.pathname+location.search);}catch(e){}
+  }
+  document.getElementById('groups').addEventListener('click',function(e){
+    var a=e.target.closest('a[data-lesson]');
+    if(a){e.preventDefault();showLesson(a.getAttribute('data-lesson'));}
+  });
+  lessonEl.addEventListener('click',function(e){
+    if(e.target.closest('[data-back]')){showHome();}
+  });
+  Array.prototype.slice.call(document.querySelectorAll('.jump a')).forEach(function(a){
+    a.addEventListener('click',function(e){
+      var t=document.getElementById((a.getAttribute('href')||'').slice(1));
+      if(!t){return;}
+      e.preventDefault();
+      var smooth=!(window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+      t.scrollIntoView({behavior:smooth?'smooth':'auto',block:'start'});
+    });
+  });
+  document.addEventListener('click',function(e){
+    var b=e.target.closest&&e.target.closest('.hx');
+    if(b){e.preventDefault();e.stopPropagation();copyText(b.getAttribute('data-hex'),b);}
+  });
+  new MutationObserver(queueHex).observe(document.body,{childList:true,subtree:true,characterData:true});
+  queueHex();
+  var startId=(location.hash||'').slice(1);
+  if(LESSONS[startId]){showLesson(startId);}
+}
+
+var SECTION_NAME='Layout and Composition';
+var SITE={prev:['Design Systems','05-design-systems.html']};
+
+function GT(t,o){o=o||{};return `<text x='${o.x||24}' y='${o.y||33}' text-anchor='middle' font-size='${o.s||24}' font-weight='${o.w||700}' font-family='${o.f||'Arial,sans-serif'}' fill='currentColor' stroke='none'>${t}</text>`;}
+var ICONS={
+  canvas:`<rect x='4' y='4' width='40' height='40' rx='3' stroke-dasharray='3 3'/><rect x='13' y='13' width='22' height='22' rx='2'/>`,
+  artboard:`<rect x='10' y='6' width='28' height='36' rx='2'/><path d='M10 14h-5M10 34h-5M38 14h5M38 34h5'/>`,
+  docsetup:`<rect x='8' y='5' width='32' height='38' rx='3'/><path d='M14 14h20M14 22h20M14 30h12'/>`,
+  margins:`<rect x='6' y='6' width='36' height='36' rx='2'/><rect x='13' y='13' width='22' height='22' rx='1' stroke-dasharray='3 3'/>`,
+  bleed:`<rect x='4' y='4' width='40' height='40' fill='currentColor' fill-opacity='.25'/><rect x='11' y='11' width='26' height='26'/>`,
+  safe:`<rect x='12' y='4' width='24' height='40' rx='4'/><rect x='16' y='14' width='16' height='20' stroke-dasharray='3 3'/>`,
+  aspect:`<rect x='4' y='14' width='26' height='18' rx='2'/><rect x='34' y='8' width='10' height='32' rx='2'/>`,
+  orient:`<rect x='6' y='10' width='20' height='28' rx='3'/><path d='M32 16a10 10 0 0 1 8 8M40 16v8h-8'/>`,
+  columns:`<path d='M6 6h10v36H6zM19 6h10v36H19zM32 6h10v36H32z'/>`,
+  gutters:`<rect x='5' y='8' width='12' height='32'/><rect x='31' y='8' width='12' height='32'/><path d='M20 24h8M22 21l-3 3 3 3M26 21l3 3-3 3'/>`,
+  modular:`<g fill='none'><rect x='5' y='5' width='17' height='17'/><rect x='26' y='5' width='17' height='17'/><rect x='5' y='26' width='17' height='17'/><rect x='26' y='26' width='17' height='17' fill='currentColor' fill-opacity='.3'/></g>`,
+  baseline:`<path d='M6 12h36M6 22h36M6 32h36M6 42h36' stroke-width='1.5'/>`+GT('Ag',{s:20,y:30}),
+  rhythm:`<g fill='currentColor' stroke='none'><rect x='6' y='6' width='36' height='6' rx='2'/><rect x='6' y='16' width='24' height='3' rx='1'/><rect x='6' y='28' width='36' height='6' rx='2'/><rect x='6' y='38' width='24' height='3' rx='1'/></g>`,
+  density:`<g fill='currentColor' stroke='none'><rect x='6' y='6' width='36' height='4'/><rect x='6' y='13' width='36' height='4'/><rect x='6' y='20' width='36' height='4'/><rect x='6' y='27' width='36' height='4'/><rect x='6' y='34' width='36' height='4'/></g>`,
+  responsive:`<rect x='4' y='9' width='28' height='22' rx='2'/><rect x='34' y='17' width='10' height='18' rx='2'/>`,
+  fluid:`<path d='M6 14c8-8 12 8 20 0s12 8 16 0M6 26c8-8 12 8 20 0s12 8 16 0M6 38c8-8 12 8 20 0s12 8 16 0'/>`,
+  fixed:`<rect x='12' y='6' width='24' height='36' rx='2'/><path d='M4 24h4M40 24h4'/>`,
+  modlayout:`<rect x='6' y='5' width='36' height='10' rx='2'/><rect x='6' y='19' width='36' height='10' rx='2' fill='currentColor' fill-opacity='.3'/><rect x='6' y='33' width='36' height='10' rx='2'/>`,
+  resizing:`<rect x='8' y='8' width='20' height='20' rx='2'/><path d='M32 32l8 8M32 40h8v-8M20 28v8M16 32l4 4 4-4'/>`,
+  template:`<rect x='6' y='6' width='36' height='36' rx='3'/><rect x='11' y='11' width='26' height='12' rx='1' fill='currentColor' fill-opacity='.3'/><path d='M11 29h26M11 35h16'/>`,
+  fold:`<rect x='8' y='5' width='32' height='38' rx='2'/><path d='M4 24h40' stroke-dasharray='4 3'/>`,
+  foldaware:`<rect x='8' y='5' width='32' height='26' rx='2'/><path d='M4 24h40' stroke-dasharray='4 3'/><path d='M24 34v8M20 38l4 4 4-4'/>`
+};
+
+var GROUPS=[
+ {cls:'',id:'setup',title:'Setting up the page',icon:'artboard',intro:'The production decisions you make before designing: size, shape, margins and what survives printing or cropping.',items:[
+  ['canvas','Canvas','The unlimited workspace around your designs.'],
+  ['artboard','Artboard','A frame that defines one design\u2019s size and what gets exported.'],
+  ['docsetup','Document setup','The size, units, colour mode and resolution you choose at the start.'],
+  ['margins','Margins','The empty border between the content and the edge of the page.'],
+  ['bleed','Bleed','Extra artwork past the trim edge, so cutting never leaves white slivers.'],
+  ['safe','Safe areas','The central zone where content will never be covered or cut off.'],
+  ['aspect','Aspect ratios','The proportion of width to height, such as 16:9 or 4:5.'],
+  ['orient','Orientation','Portrait, landscape or square, and how a design adapts to each.']
+ ]},
+ {cls:'f',id:'grids',title:'Grids and structure',icon:'columns',intro:'The invisible structure that holds a layout together.',items:[
+  ['columns','Columns','Vertical divisions that organise content and control line length.'],
+  ['gutters','Gutters','The gaps between columns.'],
+  ['modular','Modular grids','Grids with rows as well as columns, forming a field of modules.'],
+  ['baseline','Baseline grids','Horizontal lines that text sits on, so lines align across columns.'],
+  ['rhythm','Visual rhythm','Spacing and repetition that make a page feel ordered.'],
+  ['density','Content density','How much information fits in a given space.']
+ ]},
+ {cls:'s',id:'flexible',title:'Flexible layouts and the fold',icon:'responsive',intro:'How layouts adapt to different screens, and how to treat the first screenful.',items:[
+  ['responsive','Responsive layouts','Layouts that rearrange themselves to suit the screen.'],
+  ['fluid','Fluid layouts','Layouts sized in percentages, so they stretch smoothly.'],
+  ['fixed','Fixed layouts','Layouts with set pixel widths that do not adapt.'],
+  ['modlayout','Modular layouts','Pages built from self-contained blocks that can be rearranged.'],
+  ['resizing','Responsive resizing','The ways elements change as the screen changes: scale, stack, hide, move.'],
+  ['template','Template design','Layouts built once, then filled with new content again and again.'],
+  ['fold','Above-the-fold design','Making the first screenful count.'],
+  ['foldaware','Fold awareness','Knowing where the fold falls, and inviting people past it.']
+ ]}
+];
+
+function togg(id,items,state){return `<div class='ctrls' id='${id}' role='group' aria-label='Options'>`+items.map(function(x){return `<button class='chip' type='button' data-v='${x[0]}' aria-pressed='${!!state[x[0]]}'>${x[1]}</button>`;}).join('')+`</div>`;}
+function bindTogg(root,id,state,cb){var c=root.querySelector('#'+id);c.addEventListener('click',function(e){var b=e.target.closest('.chip');if(!b)return;var k=b.getAttribute('data-v');state[k]=!state[k];b.setAttribute('aria-pressed',state[k]?'true':'false');cb();});}
+var LOREM='Good layout organises information so that readers can see what matters, find what they need and enjoy the page. It is built from space, structure and repetition.';
+
+/* ===== lessons: Setting up the page ===== */
+var L_CANVAS=shell('Canvas','The unlimited workspace around your designs.','canvas',[
+['cv-what','What it is',`<h2>What the canvas is</h2><p>In design tools such as Figma and Illustrator, the <b>canvas</b> is the big, often endless workspace where everything lives. It holds your <b>artboards</b> (the actual designs), but also notes, references, experiments and leftovers.</p><p>Anything outside an artboard is part of the canvas but is <b>not exported</b>, so you can use it freely as a scratch pad.</p>`],
+['cv-explore','Canvas or export?',`<h2>Canvas or export?</h2><p>Switch between the full canvas and what actually gets exported, then zoom.</p><div class='panel'>${chipsHtml('cvc',[['canvas','Whole canvas'],['export','What gets exported']],'canvas','View')}${rng('cvz','Zoom (%)',50,160,100,5)}<div class='stage' id='cvo' style='margin-top:6px;overflow:auto;justify-content:start;align-items:start'></div><p class='mood' id='cvn' aria-live='polite'></p></div>`],
+['cv-use','Use it well',`<h2>Using the canvas well</h2><ul class='tk'><li><b>Keep it tidy.</b> Arrange artboards in flows, left to right, with labels.</li><li><b>Park references and notes beside your work,</b> not on top of artboards.</li><li><b>Clean up before export.</b> Stray objects outside artboards can confuse colleagues.</li></ul>`],
+['cv-check','Quick check',quick([['What is the canvas?','The unlimited workspace that holds all your artboards and notes.'],['Is everything on the canvas exported?','No. Only what is on an artboard (or selected for export).'],['What is a good use for the space outside artboards?','Notes, references and experiments.']])],
+['cv-recap','Big ideas',bigideas(['The canvas is the endless workspace.','Artboards sit on it; only they are exported.','Keep it organised.'])]
+]);
+
+var ABD=[['post','Instagram post','1080 \u00d7 1080 px',1080,1080,'Square feed posts and profile art.'],['story','Story or reel','1080 \u00d7 1920 px',1080,1920,'Full-screen vertical video and stories.'],['a4','A4 portrait','210 \u00d7 297 mm',210,297,'Letters, flyers and printed documents.'],['desk','Desktop web','1440 \u00d7 900 px',1440,900,'Desktop website and app designs.'],['mob','Mobile screen','390 \u00d7 844 px',390,844,'Phone app and mobile web designs.']];
+var L_ARTBOARD=shell('Artboard','A frame that defines one design\u2019s size.','artboard',[
+['ab-what','What it is',`<h2>What an artboard is</h2><p>An artboard (called a <b>frame</b> in Figma and a <b>page</b> in some tools) is a rectangle on the canvas that defines <b>one design at a specific size</b>. Content inside is exported; content outside is not.</p><p>Designers keep several artboards side by side: one per screen, per social format or per page.</p>`],
+['ab-explore','Pick a size',`<h2>Pick an artboard size</h2><div class='panel'>${chipsHtml('abc',ABD.map(function(a){return [a[0],a[1]];}),'post','Preset')}<div class='wheelrow' style='margin-top:14px'><div class='stage' id='abs'></div><div id='abo' class='readout' aria-live='polite'></div></div></div>`],
+['ab-use','Use it well',`<h2>Using artboards well</h2><ul class='tk'><li><b>Start from a preset</b> or the platform\u2019s published size.</li><li><b>Name every artboard</b> clearly: \u201cCheckout / Mobile / 01\u201d.</li><li><b>Design at 1x size.</b> You can export at 2x or 3x for sharper screens.</li></ul>`],
+['ab-check','Quick check',quick([['What does an artboard define?','The size of one design and what gets exported.'],['What is an artboard called in Figma?','A frame.'],['Why name artboards?','So you and others can find and understand them.']])],
+['ab-recap','Big ideas',bigideas(['An artboard is a design\u2019s frame.','Start from real sizes.','Name them and design at 1x.'])]
+]);
+
+var DSET={
+ screen:{n:'Screen design',r:[['Units','Pixels (px)'],['Colour mode','RGB'],['Resolution','72 ppi, designed at 1x and exported at 2x or 3x if needed'],['Bleed','None'],['Colour profile','sRGB'],['Export formats','PNG, JPG, SVG, WebP']]},
+ print:{n:'Print design',r:[['Units','Millimetres (mm) or points (pt)'],['Colour mode','CMYK'],['Resolution','300 ppi at final printed size'],['Bleed','3 mm on every side (check with your printer)'],['Colour profile','The CMYK profile your printer specifies'],['Export formats','Print-ready PDF']]},
+ social:{n:'Social media',r:[['Units','Pixels (px)'],['Colour mode','RGB'],['Resolution','72 ppi (screen only)'],['Bleed','None, but keep content inside safe areas'],['Colour profile','sRGB'],['Export formats','PNG or JPG, kept under the platform\u2019s file-size limit']]}
+};
+var L_DOCSET=shell('Document setup','The choices you make before you start.','docsetup',[
+['dsu-what','What it is',`<h2>What document setup is</h2><p>Document setup is the set of decisions at the start of a project: <b>size, units, colour mode, resolution and bleed</b>. Getting them right at the beginning saves painful rescues later, such as a web design in CMYK or a poster at 72 ppi.</p>`],
+['dsu-explore','What to choose',`<h2>What should I choose?</h2><div class='panel'>${chipsHtml('dsuc',Object.keys(DSET).map(function(k){return [k,DSET[k].n];}),'screen','Output')}<div id='dsuo' style='margin-top:14px;overflow-x:auto'></div></div>`],
+['dsu-steps','In your tools',`<h2>Setting up in real tools</h2><p>Menu names change between versions, so look for the nearest match.</p><h3>Photoshop</h3>`+steps(['Open the <b>File</b> menu at the top and choose <b>New</b> (shortcut Ctrl+N, or Cmd+N on a Mac).','Click a category tab at the top of the dialog, such as <b>Print</b> or <b>Web</b>, and pick a preset, or type your own <b>Width</b> and <b>Height</b>.','In the panel on the right, set the <b>Resolution</b> (for example 300 pixels per inch for print) and the <b>Color Mode</b> (RGB or CMYK).','Click <b>Create</b>.'])+`<h3>InDesign</h3>`+steps(['Open <b>File</b>, then <b>New</b>, then <b>Document</b>.','Choose <b>Intent</b> (Print or Web), then set <b>Width</b>, <b>Height</b> and <b>Number of Pages</b>.','In the <b>Margins and Columns</b> section, set margins and the number of columns.','Open the <b>Bleed and Slug</b> section (click the small arrow if it is collapsed) and set the bleed, usually 3 mm.'])],
+['dsu-use','Use it well',`<h2>Setting up well</h2><ul class='tk'><li><b>Ask where it will end up</b> before you open the tool.</li><li><b>Get specs in writing</b> from the printer or platform.</li><li><b>Save a template</b> with the right settings for jobs you repeat.</li></ul>`],
+['dsu-check','Quick check',quick([['Which colour mode is for screens?','RGB.'],['What resolution is typical for print?','300 ppi at final size.'],['Why ask where a design will end up first?','Output decides size, colour mode, resolution and bleed.']])],
+['dsu-recap','Big ideas',bigideas(['Set up size, units, colour mode and resolution first.','Print needs CMYK, 300 ppi and bleed.','Get specs in writing and save templates.'])]
+]);
+
+var L_MARG=shell('Margins','The empty border around the content.','margins',[
+['mg-what','What they are',`<h2>What margins are</h2><p>Margins are the empty border between the <b>content</b> and the <b>edge of the page or screen</b>. They stop content crashing into the edge, frame it, and give the eye a rest.</p><p>In print they also keep content clear of trimming and binding. In books, designers often use a larger bottom margin than top, so the text block sits slightly high and feels settled.</p>`],
+['mg-explore','Change the margins',`<h2>Change the margins</h2><div class='panel'>${chipsHtml('mgc',[['equal','Equal on all sides'],['book','Book style (bigger at the bottom)']],'equal','Style')}${rng('mgs','Margin size (mm)',5,40,20)}<div class='stage' id='mgo' style='margin-top:6px'></div><p class='mood' id='mgn' aria-live='polite'></p></div>`],
+['mg-use','Use it well',`<h2>Using margins well</h2><ul class='tk'><li><b>Be generous.</b> Tight margins feel cramped and cheap.</li><li><b>Keep them consistent</b> from page to page.</li><li><b>For print,</b> keep important content at least 5 to 10 mm inside the trim.</li></ul>`],
+['mg-check','Quick check',quick([['What are margins?','The empty border between content and the page edge.'],['Why use a larger bottom margin in books?','The text block sits slightly high and feels settled.'],['What happens with tiny margins?','The page feels cramped, and print may be trimmed off.']])],
+['mg-recap','Big ideas',bigideas(['Margins frame the content.','Be generous and consistent.','Keep print content safely inside the trim.'])]
+]);
+
+var L_BLEED=shell('Bleed','Artwork that runs past the trim edge.','bleed',[
+['bl-what','What it is',`<h2>What bleed is</h2><p>Print is cut after it is printed, and cutting is never perfectly exact. If artwork stops exactly at the cut line, even a tiny shift leaves a <b>white sliver</b> at the edge. <b>Bleed</b> solves this: backgrounds and images are extended <b>beyond the trim line</b>, usually by 3 mm, so a slightly off cut still lands on colour.</p><p>The page has three lines: the <b>bleed edge</b> (outer), the <b>trim line</b> (where it is cut) and the <b>safe margin</b> (inner).</p>`],
+['bl-explore','Cut it',`<h2>Cut it, with and without bleed</h2><p>Set the bleed, then slide the cut drift to see if a white sliver appears.</p><div class='panel'>${rng('bls','Bleed (mm)',0,6,3)}${rng('bld','Cutting drift (mm)',0,4,1.5,0.5)}<div class='stage' id='blo' style='margin-top:6px'></div><p class='mood' id='bln' aria-live='polite'></p></div>`],
+['bl-use','Use it well',`<h2>Using bleed well</h2><ul class='tk'><li><b>Add 3 mm bleed</b> on every side unless your printer says otherwise.</li><li><b>Extend backgrounds and images</b> into the bleed, not just the box.</li><li><b>Keep text and logos well inside the trim,</b> not in the bleed.</li><li><b>Export a PDF with crop marks and bleed</b> turned on.</li></ul>`],
+['bl-check','Quick check',quick([['Why is bleed needed?','Cutting is not exact, so artwork must extend past the trim to avoid white slivers.'],['How much bleed is common?','About 3 mm on each side.'],['Should text go in the bleed?','No. Keep text and logos well inside the trim.']])],
+['bl-recap','Big ideas',bigideas(['Bleed extends artwork past the trim.','It hides small cutting errors.','Keep important content inside the trim.'])]
+]);
+
+var L_SAFE=shell('Safe areas','The zone where content is never covered or cut off.','safe',[
+['sf-what','What they are',`<h2>What safe areas are</h2><p>A safe area is the <b>central zone of a design where content is guaranteed to stay visible</b>. Outside it, things may be covered by interface (a story\u2019s name bar and reply box), cut by a phone\u2019s notch or rounded corners, or trimmed in print.</p><p>Platforms publish their own safe zones. Always check the latest, since interfaces change.</p>`],
+['sf-explore','Test the zones',`<h2>Test the zones</h2><p>Pick a format and slide the text up and down. The shaded bands are unsafe.</p><div class='panel'>${chipsHtml('sfc',[['story','Story or reel'],['app','Phone app screen'],['sq','Square post']],'story','Format')}${rng('sfp','Text position (% from the top)',0,100,50)}<div class='stage' id='sfo' style='margin-top:6px'></div><p class='mood' id='sfn' aria-live='polite'></p></div>`],
+['sf-use','Use it well',`<h2>Using safe areas well</h2><ul class='tk'><li><b>Put key content in the middle.</b> Decoration can go near the edges.</li><li><b>Leave the top and bottom of vertical video clear</b> for platform buttons and captions.</li><li><b>Respect system insets</b> on phones, such as the notch and home bar.</li></ul>`],
+['sf-check','Quick check',quick([['What is a safe area?','The central zone where content will not be covered or cut off.'],['What usually covers the top and bottom of a story?','Platform interface such as the name bar and reply box.'],['Where should decoration go?','Near the edges, outside the safe area.']])],
+['sf-recap','Big ideas',bigideas(['Safe areas keep content visible.','Top and bottom are often covered.','Check each platform\u2019s current guide.'])]
+]);
+
+var ARD=[['1:1',1,1,'Square posts, profile pictures, album covers.'],['4:5',4,5,'Portrait feed posts. Takes up more screen than a square.'],['16:9',16,9,'Video, slides and desktop hero images.'],['9:16',9,16,'Full-screen vertical video, stories and reels.'],['3:2',3,2,'Classic photography and many camera sensors.'],['21:9',21,9,'Ultra-wide cinematic banners.']];
+var L_ASPECT=shell('Aspect ratios','The proportion of width to height.','aspect',[
+['ar-what','What it is',`<h2>What an aspect ratio is</h2><p>An aspect ratio describes shape as <b>width : height</b>. A 16:9 rectangle is 16 units wide for every 9 tall, whatever its actual size. Resizing while keeping the ratio changes the size but not the shape.</p><p>Different platforms prefer different ratios. Cropping an image to a new ratio changes what is in the frame.</p>`],
+['ar-explore','Try the ratios',`<h2>Try the ratios</h2><div class='panel'>${chipsHtml('arc',ARD.map(function(a){return [a[0],a[0]];}),'16:9','Ratio')}${rng('arw','Width (px)',120,420,300,10)}<div class='stage' id='aro' style='margin-top:6px'></div><p class='mood' id='arn' aria-live='polite'></p></div>`],
+['ar-use','Use it well',`<h2>Using aspect ratios well</h2><ul class='tk'><li><b>Plan the crop</b> when you shoot or choose images.</li><li><b>Keep the focal point in the middle,</b> so it survives different crops.</li><li><b>Never stretch an image</b> to fit. Crop it instead.</li></ul>`],
+['ar-check','Quick check',quick([['What does 16:9 mean?','16 units wide for every 9 units tall.'],['What happens if you resize keeping the ratio?','Size changes but the shape stays the same.'],['Why not stretch images to fit?','It distorts them. Crop instead.']])],
+['ar-recap','Big ideas',bigideas(['Aspect ratio is shape, written width : height.','Platforms prefer different ratios.','Crop, never stretch.'])]
+]);
+
+var L_ORIENT=shell('Orientation','Portrait, landscape or square.','orient',[
+['or-what','What it is',`<h2>What orientation is</h2><p>Orientation is the direction a page or screen is held: <b>portrait</b> (taller than wide), <b>landscape</b> (wider than tall) or <b>square</b>. Phones rotate, so interfaces must handle both. Print jobs choose one: posters are often portrait, slides and banners landscape.</p>`],
+['or-explore','Rotate it',`<h2>Rotate the screen</h2><div class='panel'>${chipsHtml('orc',[['portrait','Portrait'],['landscape','Landscape']],'portrait','Orientation')}<div class='stage' id='oro' style='margin-top:6px;min-height:260px'></div><p class='mood' id='orn' aria-live='polite'></p></div>`],
+['or-use','Use it well',`<h2>Using orientation well</h2><ul class='tk'><li><b>Stack in portrait, place side by side in landscape.</b></li><li><b>Do not lock to one orientation</b> without a good reason, since some people use a fixed stand.</li><li><b>Check both</b> before you hand off.</li></ul>`],
+['or-check','Quick check',quick([['What are the main orientations?','Portrait, landscape and square.'],['How does a layout usually change when rotated?','Stacked in portrait, side by side in landscape.'],['Why avoid locking orientation?','Some people use devices fixed in one position.']])],
+['or-recap','Big ideas',bigideas(['Orientation is the direction of the page.','Layouts should adapt when rotated.','Check both orientations.'])]
+]);
+
+/* ===== lessons: Grids and structure ===== */
+var L_COLS=shell('Columns','Vertical divisions that organise content.','columns',[
+['cl-what','What they are',`<h2>What columns are</h2><p>Columns divide a page into <b>vertical strips</b> for content. In text-heavy layouts, columns control <b>line length</b>. Newspapers use many narrow columns because short lines are quick to read. A single wide column makes lines too long.</p><p>Comfortable line length is roughly <b>45 to 75 characters</b>.</p>`],
+['cl-explore','Change the columns',`<h2>Change the number of columns</h2><div class='panel'>${chipsHtml('clc',[['1','1 column'],['2','2 columns'],['3','3 columns'],['4','4 columns']],'2','Columns')}<div id='clo' style='margin-top:14px;background:#fff;color:#14213D;border-radius:12px;padding:16px;font-size:15px;line-height:1.5'></div><p class='mood' id='cln' aria-live='polite'></p></div>`],
+['cl-use','Use it well',`<h2>Using columns well</h2><ul class='tk'><li><b>Match columns to line length,</b> not to what fits.</li><li><b>Use fewer on small screens.</b></li><li><b>Align everything to the columns,</b> including images and headings.</li></ul>`],
+['cl-check','Quick check',quick([['What do columns control in text layouts?','Line length.'],['What line length is comfortable?','About 45 to 75 characters.'],['How should columns change on small screens?','There should be fewer, often just one.']])],
+['cl-recap','Big ideas',bigideas(['Columns organise content and control line length.','45 to 75 characters is comfortable.','Use fewer columns on small screens.'])]
+]);
+
+var L_GUT=shell('Gutters','The gaps between columns.','gutters',[
+['gt-what','What they are',`<h2>What gutters are</h2><p>Gutters are the <b>spaces between columns</b>. They stop text and images in neighbouring columns colliding. Too narrow and columns merge into each other. Too wide and the layout falls apart.</p><p>In print, the word <b>gutter</b> can also mean the inner margin where pages meet at the binding.</p>`],
+['gt-explore','Slide the gutter',`<h2>Slide the gutter</h2><div class='panel'>${rng('gts','Gutter width (px)',0,64,24)}<div id='gto' style='margin-top:14px'></div><p class='mood' id='gtn' aria-live='polite'></p></div>`],
+['gt-use','Use it well',`<h2>Using gutters well</h2><ul class='tk'><li><b>Pick a value from your spacing scale,</b> such as 16, 24 or 32 px.</li><li><b>Make gutters at least as wide as the text\u2019s line height.</b></li><li><b>Shrink them on small screens</b> but keep them visible.</li></ul>`],
+['gt-check','Quick check',quick([['What is a gutter?','The space between columns.'],['What happens if gutters are too narrow?','Columns merge and text collides.'],['What else can gutter mean in print?','The inner margin at the binding.']])],
+['gt-recap','Big ideas',bigideas(['Gutters separate columns.','Not too narrow, not too wide.','Choose from the spacing scale.'])]
+]);
+
+var L_MODGRID=shell('Modular grids','Grids with rows as well as columns.','modular',[
+['mo-what','What they are',`<h2>What modular grids are</h2><p>A modular grid divides a page into <b>rows and columns</b>, forming a field of equal <b>modules</b>. Content blocks span one or more modules. Calendars, dashboards, magazines and Swiss-style posters use modular grids, which give strong order while allowing varied layouts.</p>`],
+['mo-explore','Build on a grid',`<h2>Build on a grid</h2><div class='panel'>${chipsHtml('moc',[['3','3 by 3'],['4','4 by 4'],['6','6 by 6']],'4','Modules')}<div id='moo' style='margin-top:14px;max-width:360px'></div><p class='mood' id='mon' aria-live='polite'></p></div>`],
+['mo-use','Use it well',`<h2>Using modular grids well</h2><ul class='tk'><li><b>Choose a module size</b> that fits your smallest content.</li><li><b>Let big things span many modules</b> and small things span one.</li><li><b>Leave some modules empty</b> for breathing space.</li></ul>`],
+['mo-check','Quick check',quick([['How is a modular grid different from a column grid?','It also divides the page into rows, forming modules.'],['Where are modular grids common?','Dashboards, calendars, magazines and Swiss-style posters.'],['Why leave modules empty?','It gives the layout breathing space.']])],
+['mo-recap','Big ideas',bigideas(['Modular grids use rows and columns.','Blocks span one or more modules.','Empty modules are useful.'])]
+]);
+
+var L_BASE=shell('Baseline grids','Horizontal lines that text sits on.','baseline',[
+['bg-what','What they are',`<h2>What baseline grids are</h2><p>A baseline grid is a set of <b>evenly spaced horizontal lines</b> that the baseline of every line of text sits on. When all text and spacing is a multiple of the grid unit, lines in neighbouring columns <b>line up across the page</b>, which creates a calm, ordered look. Editorial designers swear by it.</p>`],
+['bg-explore','Aligned or not?',`<h2>Aligned or not?</h2><p>The pink lines are the baseline grid. Watch the two columns.</p><div class='panel'>${chipsHtml('bgc',[['yes','Aligned to the grid'],['no','Not aligned']],'yes','Version')}${rng('bgu','Grid unit (px)',16,28,24,4)}<div id='bgo' style='margin-top:14px'></div><p class='mood' id='bgn' aria-live='polite'></p></div>`],
+['bg-use','Use it well',`<h2>Using baseline grids well</h2><ul class='tk'><li><b>Set the line height to the grid unit</b> (or a multiple).</li><li><b>Make spacing multiples of the unit,</b> so everything stays on the grid.</li><li><b>Do not obsess on screens,</b> where fonts and zoom vary. It matters most in print and editorial design.</li></ul>`],
+['bg-check','Quick check',quick([['What sits on a baseline grid?','The baselines of lines of text.'],['What is the benefit?','Lines align across columns, giving order.'],['Where is it most important?','Print and editorial design.']])],
+['bg-recap','Big ideas',bigideas(['A baseline grid is evenly spaced lines for text.','Use multiples of the unit for line height and spacing.','Strongest in print and editorial work.'])]
+]);
+
+var L_RHYTHM=shell('Visual rhythm','Spacing and repetition that order a page.','rhythm',[
+['vr-what','What it is',`<h2>What visual rhythm is in layout</h2><p>In layout, rhythm is the <b>pattern of spacing and repetition</b> down a page. When related things sit close together and separate groups are divided by a larger, <b>consistent</b> step, the eye learns the pattern and moves easily. Random spacing breaks the pattern and makes a page feel messy.</p>`],
+['vr-explore','Compare the spacing',`<h2>Compare the spacing</h2><div class='panel'>${chipsHtml('vrc',[['even','Same gap everywhere'],['rhythm','Consistent rhythm'],['rand','Random gaps']],'rhythm','Spacing')}<div id='vro' style='margin-top:14px;max-width:420px'></div><p class='mood' id='vrn' aria-live='polite'></p></div>`],
+['vr-use','Use it well',`<h2>Using rhythm well</h2><ul class='tk'><li><b>Use a small set of gaps</b> and repeat them.</li><li><b>Tight inside groups, looser between them.</b></li><li><b>Check by squinting.</b> The pattern should still be visible.</li></ul>`],
+['vr-check','Quick check',quick([['What creates rhythm in a layout?','Consistent, repeated spacing, with a larger step between groups.'],['What does random spacing do?','Breaks the pattern, so the page feels messy.'],['How do you test rhythm?','Squint or blur and look for the pattern.']])],
+['vr-recap','Big ideas',bigideas(['Rhythm is consistent, repeated spacing.','Tight within groups, looser between.','Use a small set of gaps.'])]
+]);
+
+var L_DENS=shell('Content density','How much fits in a given space.','density',[
+['de-what','What it is',`<h2>What content density is</h2><p>Density is how much information is packed into a space. <b>High density</b> (compact) shows more at once, which suits experts and data tables. <b>Low density</b> (spacious) is easier to scan and feels calmer, which suits casual use and touch screens.</p><p>Many products let people choose, with settings such as <b>Compact, Comfortable and Spacious</b>.</p>`],
+['de-explore','Change the density',`<h2>Change the density</h2><div class='panel'>${chipsHtml('dec',[['compact','Compact'],['comfortable','Comfortable'],['spacious','Spacious']],'comfortable','Density')}<div id='deo' style='margin-top:14px;max-width:460px'></div><p class='mood' id='den' aria-live='polite'></p></div>`],
+['de-use','Use it well',`<h2>Choosing a density</h2><ul class='tk'><li><b>Match the user.</b> Power users like compact; first-time users like spacious.</li><li><b>Keep touch targets large,</b> even in compact views on touch screens (about 44 to 48 px).</li><li><b>Offer a choice</b> where people spend hours in the product.</li></ul>`],
+['de-check','Quick check',quick([['What is high density?','A lot of information in a small space.'],['Who prefers compact views?','Experienced, frequent users and people reading lots of data.'],['What must stay large in dense touch layouts?','Touch targets.']])],
+['de-recap','Big ideas',bigideas(['Density is information per space.','Compact for experts; spacious for easy scanning.','Offer a choice when it matters.'])]
+]);
+
+/* ===== lessons: Flexible layouts and the fold ===== */
+var L_RESPL=shell('Responsive layouts','Layouts that rearrange to suit the screen.','responsive',[
+['rl-what','What they are',`<h2>What responsive layouts are</h2><p>A responsive layout <b>rearranges itself</b> to suit the screen it is on. A page might show three columns and a sidebar on a big monitor, two columns on a tablet and one stacked column on a phone, from the same content.</p><p>The idea was named by Ethan Marcotte in 2010. It relies on <b>fluid grids</b>, <b>flexible images</b> and <b>media queries</b>.</p>`],
+['rl-explore','Resize the screen',`<h2>Resize the screen</h2><div class='panel'>${rng('rlw','Screen width (px)',320,1200,800,10)}<div class='stage' id='rlo' style='margin-top:6px'></div><p class='mood' id='rln' aria-live='polite'></p></div>`],
+['rl-use','Use it well',`<h2>Using responsive layouts well</h2><ul class='tk'><li><b>Design mobile first.</b> Start with the essentials.</li><li><b>Change the layout where the content breaks,</b> not at fixed device sizes.</li><li><b>Keep the order sensible</b> when stacking: most important first.</li></ul>`],
+['rl-check','Quick check',quick([['What is a responsive layout?','One that rearranges itself to suit the screen.'],['Who named responsive design?','Ethan Marcotte, in 2010.'],['What should come first when stacked?','The most important content.']])],
+['rl-recap','Big ideas',bigideas(['Responsive layouts rearrange for each screen.','Fluid grids, flexible images and media queries make them work.','Design mobile first.'])]
+]);
+
+var L_FLUID=shell('Fluid layouts','Sized in percentages so they stretch smoothly.','fluid',[
+['fl-what','What they are',`<h2>What fluid layouts are</h2><p>A fluid layout sizes its columns in <b>percentages</b> rather than fixed pixels, so the whole layout stretches and shrinks smoothly with the window. It is the foundation that responsive design builds on.</p><p>The weakness: at extreme widths, columns become too narrow or lines too long, so fluid layouts are usually combined with a <b>maximum width</b> and breakpoints.</p>`],
+['fl-explore','Stretch it',`<h2>Stretch the window</h2><div class='panel'>${rng('flw','Window width (px)',320,1400,900,10)}<div id='flo' style='margin-top:14px'></div><p class='mood' id='fln' aria-live='polite'></p></div>`],
+['fl-use','Use it well',`<h2>Using fluid layouts well</h2><ul class='tk'><li><b>Use percentages and flexible units</b> such as fr and %.</li><li><b>Add a max-width</b> so text never gets too long.</li><li><b>Add breakpoints</b> where columns get too narrow.</li></ul>`],
+['fl-check','Quick check',quick([['What do fluid layouts use for sizes?','Percentages and flexible units.'],['What is the risk at wide screens?','Lines become too long.'],['How is it fixed?','With a maximum width and breakpoints.']])],
+['fl-recap','Big ideas',bigideas(['Fluid layouts stretch smoothly.','Percentages, not fixed pixels.','Combine with a max-width and breakpoints.'])]
+]);
+
+var L_FIXED=shell('Fixed layouts','Set pixel widths that do not adapt.','fixed',[
+['fx-what','What they are',`<h2>What fixed layouts are</h2><p>A fixed layout has a <b>set width in pixels</b>, for example 960px, regardless of the screen. It was the norm in the early web and is still normal in <b>print</b>, <b>slides</b> and <b>social graphics</b>, where the size is known.</p><p>On the web today, a purely fixed width is rarely wise: on small screens it forces sideways scrolling, and on big ones it wastes space.</p>`],
+['fx-explore','Resize the window',`<h2>Resize the window</h2><div class='panel'>${rng('fxw','Window width (px)',320,1400,1100,20)}<div class='stage' id='fxo' style='margin-top:6px'></div><p class='mood' id='fxn' aria-live='polite'></p></div>`],
+['fx-use','Use it well',`<h2>When fixed makes sense</h2><ul class='tk'><li><b>Print, posters and slides,</b> where the format is fixed.</li><li><b>Social media graphics,</b> which have set sizes.</li><li><b>Not for general websites.</b> Use fluid or responsive instead.</li></ul>`],
+['fx-check','Quick check',quick([['What is a fixed layout?','One with a set pixel width that does not adapt.'],['Where is fixed still normal?','Print, slides and social graphics.'],['What goes wrong on small screens?','Sideways scrolling.']])],
+['fx-recap','Big ideas',bigideas(['Fixed layouts have set widths.','Normal in print and slides.','Poor for general websites.'])]
+]);
+
+var MODS={hero:['Hero','#2F6FD8','#fff',120],features:['Features','#E8EBF5','#14213D',90],proof:['Testimonials','#FFF4D6','#4A3300',90],pricing:['Pricing','#E4F1EE','#1E3F3A',110],faq:['FAQ','#F1E8FA','#3B1E5E',80],cta:['Call to action','#E8456B','#fff',70]};
+var L_MODL=shell('Modular layouts','Pages built from self-contained blocks.','modlayout',[
+['ml-what','What they are',`<h2>What modular layouts are</h2><p>A modular layout is built from <b>self-contained blocks</b>, such as a hero, a features strip, testimonials and a call to action. Each block is designed once and works anywhere, so pages can be assembled, reordered and reused quickly.</p><p>It is the layout version of a component library, and the basis of most page builders and content management systems.</p>`],
+['ml-explore','Assemble a page',`<h2>Assemble a page</h2><div class='panel'>${togg('mlt',Object.keys(MODS).map(function(k){return [k,MODS[k][0]];}),{hero:1,features:1,cta:1})}<div class='ctrls'><button class='btn' id='mls' type='button'>Shuffle the order</button></div><div id='mlo' style='margin-top:6px;max-width:420px'></div><p class='mood' id='mln' aria-live='polite'></p></div>`],
+['ml-use','Use it well',`<h2>Using modular layouts well</h2><ul class='tk'><li><b>Make each module work on its own,</b> in any position.</li><li><b>Share spacing and type rules</b> across modules so any order looks right.</li><li><b>Document each module</b> and when to use it.</li></ul>`],
+['ml-check','Quick check',quick([['What is a module in a layout?','A self-contained block, such as a hero or testimonials strip.'],['Why share spacing rules between modules?','So any order still looks consistent.'],['What is a page builder?','A tool that assembles pages from modules.']])],
+['ml-recap','Big ideas',bigideas(['Modular layouts use reusable blocks.','Each block works in any position.','Shared rules keep every combination consistent.'])]
+]);
+
+var L_RESIZE=shell('Responsive resizing','The ways elements change as the screen changes.','resizing',[
+['rz-what','What it is',`<h2>What responsive resizing is</h2><p>When the screen changes, each element needs a plan. The four common behaviours are:</p><ul class='tk'><li><b>Scale:</b> keep the shape and change the size (images, video).</li><li><b>Stack:</b> side-by-side items move into a column.</li><li><b>Hide or reveal:</b> secondary items disappear behind a button.</li><li><b>Reposition:</b> an element moves, for example a sidebar goes below the content.</li></ul>`],
+['rz-explore','See the behaviours',`<h2>See the behaviours</h2><div class='panel'>${chipsHtml('rzc',[['scale','Scale'],['stack','Stack'],['hide','Hide and reveal'],['move','Reposition']],'stack','Behaviour')}${rng('rzw','Screen width (px)',320,1000,700,10)}<div class='stage' id='rzo' style='margin-top:6px'></div><p class='mood' id='rzn' aria-live='polite'></p></div>`],
+['rz-use','Use it well',`<h2>Planning resizing well</h2><ul class='tk'><li><b>Decide the behaviour for each element</b> and write it in the spec.</li><li><b>Hide carefully.</b> Anything essential must stay reachable.</li><li><b>Test the in-between widths,</b> not only phone, tablet and desktop.</li></ul>`],
+['rz-check','Quick check',quick([['Name the four resizing behaviours.','Scale, stack, hide or reveal, and reposition.'],['What should never be hidden entirely?','Essential content and actions.'],['What should you test?','In-between widths as well as the standard ones.']])],
+['rz-recap','Big ideas',bigideas(['Every element needs a resizing plan.','Scale, stack, hide or reposition.','Test in-between widths.'])]
+]);
+
+var L_TEMPL=shell('Template design','Layouts built once and filled again and again.','template',[
+['td-what','What it is',`<h2>What template design is</h2><p>A template is a layout designed once, with <b>fixed structure and editable slots</b>, so that other people (or you, next week) can drop in new content and still get a consistent result. Social post series, slide decks, newsletters and reports all depend on templates.</p><p>The craft is deciding what is <b>locked</b> (logo, colour, grid) and what is <b>editable</b> (headline, image, date).</p>`],
+['td-explore','Fill a template',`<h2>Fill a template</h2><div class='panel'><label for='tdh'>Headline</label><input id='tdh' type='text' value='Summer market' maxlength='28'><label for='tds'>Subtitle</label><input id='tds' type='text' value='Saturday, 10am' maxlength='34'>${chipsHtml('tdc',[['post','Square post'],['story','Story'],['slide','Slide']],'post','Format')}${rng('tdu','Accent colour (hue)',0,359,340,1,'\u00b0')}<div class='stage' id='tdo' style='margin-top:6px'></div><p class='mood'>The logo, grid and fonts are locked. Only the headline, subtitle and accent colour are editable.</p></div>`],
+['td-use','Use it well',`<h2>Designing good templates</h2><ul class='tk'><li><b>Lock what must stay consistent,</b> and leave only what needs to change.</li><li><b>Test with extreme content:</b> a very long headline and a very short one.</li><li><b>Add instructions</b> inside the template, such as image size and word limits.</li></ul>`],
+['td-check','Quick check',quick([['What does a template lock?','Structure and brand elements such as logo, grid and fonts.'],['Why test with extreme content?','Long or short text can break a layout.'],['Why add instructions inside a template?','So others fill it in correctly.']])],
+['td-recap','Big ideas',bigideas(['A template is structure plus editable slots.','Lock the brand, free the content.','Test with extreme content.'])]
+]);
+
+var FDEV={laptop:['Laptop',700],desktop:['Large desktop',900],phone:['Phone',640]};
+var L_FOLD=shell('Above-the-fold design','Making the first screenful count.','fold',[
+['af-what','What it is',`<h2>What \u201cabove the fold\u201d means</h2><p>The term comes from newspapers: the most important story went on the top half, visible when the paper was folded on a newsstand. On screens, the <b>fold</b> is the bottom edge of the first screenful, before any scrolling. Its position varies with the device.</p><p>Whatever sits above it is what people see first. It should say <b>what this is, why it matters and what to do next</b>.</p>`],
+['af-explore','Find the fold',`<h2>Find the fold</h2><p>The pink line is the fold. Choose a device and change the hero height.</p><div class='panel'>${chipsHtml('afc',Object.keys(FDEV).map(function(k){return [k,FDEV[k][0]];}),'laptop','Device')}${rng('afh','Hero height (px)',200,800,420,10)}<div class='stage' id='afo' style='margin-top:6px'></div><p class='mood' id='afn' aria-live='polite'></p></div>`],
+['af-use','Use it well',`<h2>Using the first screen well</h2><ul class='tk'><li><b>Lead with value.</b> A clear headline and one main action.</li><li><b>Show the brand,</b> but do not let the navigation eat the space.</li><li><b>Test on real devices.</b> The fold moves.</li></ul>`],
+['af-check','Quick check',quick([['Where does the term come from?','Newspapers, whose top half was visible when folded.'],['What should be above the fold?','What this is, why it matters and what to do next.'],['Is the fold in the same place everywhere?','No, it varies with the device.']])],
+['af-recap','Big ideas',bigideas(['The fold is the bottom of the first screen.','It varies by device.','Use it for value and one clear action.'])]
+]);
+
+var L_FOLDAW=shell('Fold awareness','Knowing where the fold falls, and inviting people past it.','foldaware',[
+['fa-what','What it is',`<h2>What fold awareness is</h2><p>People do scroll. Research by the Nielsen Norman Group has found that they spend most of their viewing time above the fold, but they will keep going when something gives them a reason. Fold awareness means <b>noticing where the fold falls</b> and designing it so that people <b>want to continue</b>.</p><p>The worst case is a <b>false floor</b>: a clean horizontal break exactly at the fold that looks like the end of the page.</p>`],
+['fa-explore','Treat the fold',`<h2>Three ways to treat the fold</h2><div class='panel'>${chipsHtml('fac',[['hard','Hard cut'],['peek','Peek of the next section'],['cue','Scroll cue']],'peek','Treatment')}<div class='stage' id='fao' style='margin-top:6px'></div><p class='mood' id='fan' aria-live='polite'></p></div>`],
+['fa-use','Use it well',`<h2>Using fold awareness well</h2><ul class='tk'><li><b>Let content cross the fold</b> so people see there is more.</li><li><b>Avoid full-width horizontal breaks</b> at likely fold positions.</li><li><b>Use a subtle cue</b> where there is nothing to peek at.</li></ul>`],
+['fa-check','Quick check',quick([['What is a false floor?','A clean break at the fold that makes people think the page has ended.'],['How can you invite scrolling?','Let content cross the fold, or add a subtle cue.'],['Do people scroll?','Yes, if they have a reason to.']])],
+['fa-recap','Big ideas',bigideas(['People scroll when given a reason.','Avoid false floors.','Let content cross the fold or add a cue.'])]
+]);
+
+/* ===== inits: Setting up the page ===== */
+function initCanvas(root){
+  var m=prep(root),$=m.$,mode='canvas',z=100;
+  function draw(){
+    var ex=mode==='export',ab=[[60,40,150,200,'Home'],[240,40,150,200,'About'],[420,40,120,200,'Contact']];
+    var h=`<rect width='600' height='300' fill='${ex?'#fff':'#D5D9E8'}'/>`;
+    if(!ex){h+=`<rect x='20' y='255' width='110' height='34' rx='4' fill='#FFE066'/><text x='75' y='277' text-anchor='middle' font-size='12' font-family='sans-serif' fill='#333'>TODO: fix logo</text><circle cx='568' cy='34' r='20' fill='#8E4BDB'/><text x='568' y='38' text-anchor='middle' font-size='10' fill='#fff' font-family='sans-serif'>ref</text>`;}
+    ab.forEach(function(a){h+=`<rect x='${a[0]}' y='${a[1]}' width='${a[2]}' height='${a[3]}' fill='#fff' stroke='${ex?'#E4E8F2':'#9AA0BC'}'/><rect x='${a[0]+10}' y='${a[1]+12}' width='${a[2]-20}' height='20' rx='3' fill='#2F6FD8'/><rect x='${a[0]+10}' y='${a[1]+44}' width='${a[2]-20}' height='60' rx='3' fill='#E8EBF5'/><rect x='${a[0]+10}' y='${a[1]+116}' width='${(a[2]-20)*0.7}' height='8' rx='3' fill='#9AA0BC'/>`+(ex?'':`<text x='${a[0]}' y='${a[1]-8}' font-size='11' font-family='sans-serif' fill='#4A5070'>${a[4]}</text>`);});
+    $('#cvo').innerHTML=`<svg viewBox='0 0 600 300' width='${z}%' style='min-width:300px;max-width:none;flex:none' role='img' aria-label='A canvas with three artboards'>${h}</svg>`;
+    $('#cvn').textContent=ex?'Exported: only the three artboards. The note and the reference image outside them are left behind.':'The canvas also holds a sticky note and a reference image outside the artboards. They are not part of the design.';
+  }
+  bindChips(root,'cvc',function(v){mode=v;draw();});onRng(root,'cvz',function(v){z=v;draw();});draw();
+}
+
+function initArtboard(root){
+  var m=prep(root),$=m.$;
+  function draw(k){
+    var a=ABD.filter(function(x){return x[0]===k;})[0],sc=Math.min(200/a[3],200/a[4]),w=a[3]*sc,h=a[4]*sc;
+    $('#abs').innerHTML=`<svg viewBox='0 0 220 220' width='200' role='img' aria-label='${a[1]} artboard'><rect x='${(220-w)/2}' y='${(220-h)/2}' width='${w}' height='${h}' fill='#fff' stroke='var(--c)' stroke-width='3'/><rect x='${(220-w)/2+8}' y='${(220-h)/2+8}' width='${w-16}' height='${Math.max(10,h*0.12)}' fill='var(--c)' opacity='.8'/></svg>`;
+    $('#abo').innerHTML=`<h4>${a[1]}</h4><div class='facts'><p><b>Size:</b> ${a[2]}</p><p><b>Ratio:</b> about ${(a[3]/a[4]).toFixed(2)} to 1</p><p><b>Used for:</b> ${a[5]}</p></div>`;
+  }
+  bindChips(root,'abc',draw);draw('post');
+}
+
+function initDocSetup(root){
+  var m=prep(root),$=m.$;
+  function draw(k){$('#dsuo').innerHTML=`<table class='t'><tr><th>Setting</th><th>Recommended for ${DSET[k].n.toLowerCase()}</th></tr>`+DSET[k].r.map(function(r){return `<tr><td><b>${r[0]}</b></td><td>${r[1]}</td></tr>`;}).join('')+`</table>`;}
+  bindChips(root,'dsuc',draw);draw('screen');
+}
+
+function initMargins(root){
+  var m=prep(root),$=m.$,st='equal',mm=20;
+  function draw(){
+    var t=mm,l=mm,r=mm,b=st==='book'?mm*1.8:mm,tw=210-l-r,th=297-t-b,lines='',i,n=Math.max(0,Math.floor((th-30)/9));
+    for(i=0;i<n;i++){lines+=`<rect x='${l}' y='${t+28+i*9}' width='${(i%7===6)?tw*0.6:tw}' height='3' fill='#9AA0BC'/>`;}
+    $('#mgo').innerHTML=`<svg viewBox='0 0 210 297' width='200' style='background:#fff;border:1px solid var(--line)' role='img' aria-label='A page with margins'><rect x='${l}' y='${t}' width='${tw}' height='${th}' fill='none' stroke='#E8456B' stroke-dasharray='3 2'/><rect x='${l}' y='${t}' width='${tw}' height='${Math.min(22,th)}' fill='#14213D'/>${lines}</svg>`;
+    $('#mgn').textContent='Text block: '+tw.toFixed(0)+' by '+th.toFixed(0)+' mm on an A4 page. '+(mm<10?'Tight margins feel cramped, and the edge may be trimmed.':mm>30?'Very generous: elegant, but the text block shrinks a lot.':'A comfortable margin.');
+  }
+  bindChips(root,'mgc',function(v){st=v;draw();});onRng(root,'mgs',function(v){mm=v;draw();});draw();
+}
+
+function initBleed(root){
+  var m=prep(root),$=m.$,bl=3,dr=1.5;
+  function draw(){
+    var S=4,W=60,H=80,pad=10,vw=(W+pad*2)*S,vh=(H+pad*2)*S;
+    var ax=(pad-bl)*S,ay=(pad-bl)*S,aw=(W+2*bl)*S,ah=(H+2*bl)*S,cx=(pad+dr)*S,cy=(pad+dr)*S;
+    var sliver=Math.max(0,dr-bl);
+    $('#blo').innerHTML=`<svg viewBox='0 0 ${vw} ${vh}' width='260' role='img' aria-label='A print page with bleed and a cut line'><defs><clipPath id='cb'><rect x='${cx}' y='${cy}' width='${W*S}' height='${H*S}'/></clipPath></defs><rect width='${vw}' height='${vh}' fill='#E4E8F2'/><rect x='${cx}' y='${cy}' width='${W*S}' height='${H*S}' fill='#fff'/><g clip-path='url(#cb)'><rect x='${ax}' y='${ay}' width='${aw}' height='${ah}' fill='#2F6FD8'/><circle cx='${(pad+W/2)*S}' cy='${(pad+H/2)*S}' r='${W*S*0.28}' fill='#FFE066'/></g><rect x='${pad*S}' y='${pad*S}' width='${W*S}' height='${H*S}' fill='none' stroke='#E8456B' stroke-dasharray='5 4' stroke-width='1.5'/><rect x='${cx}' y='${cy}' width='${W*S}' height='${H*S}' fill='none' stroke='#14213D' stroke-width='2'/></svg>`;
+    $('#bln').textContent=sliver>0?'A white sliver of about '+sliver.toFixed(1)+' mm shows on the right and bottom edges. The cut drifted further than the bleed covers.':'No white edge: the bleed covers the cutting drift. (Pink dashed line is the intended trim; dark line is where the blade actually cut.)';
+  }
+  onRng(root,'bls',function(v){bl=v;draw();});onRng(root,'bld',function(v){dr=v;draw();});draw();
+}
+
+function initSafe(root){
+  var m=prep(root),$=m.$,k='story',p=50;
+  var F={story:{w:180,h:320,t:0.13,b:0.18,n:'Story or reel',msg:'the top is covered by the account name and the bottom by the reply box'},app:{w:180,h:320,t:0.09,b:0.06,n:'Phone app screen',msg:'the top has the notch and status bar, and the bottom has the home indicator'},sq:{w:240,h:240,t:0.06,b:0.06,n:'Square post',msg:'edges can be cropped when the post is shown as a thumbnail'}};
+  function draw(){
+    var f=F[k],y=p/100*(f.h-36),tz=f.t*f.h,bz=f.b*f.h,bad=(y<tz)||(y+36>f.h-bz);
+    $('#sfo').innerHTML=`<svg viewBox='0 0 ${f.w} ${f.h}' width='${f.w}' role='img' aria-label='${f.n} with unsafe zones shaded'><rect width='${f.w}' height='${f.h}' rx='14' fill='#fff' stroke='#9AA0BC'/><rect width='${f.w}' height='${tz}' fill='rgba(214,40,57,.25)'/><rect y='${f.h-bz}' width='${f.w}' height='${bz}' fill='rgba(214,40,57,.25)'/><rect x='14' y='${y}' width='${f.w-28}' height='36' rx='6' fill='${bad?'#D62839':'#1F9D55'}'/><text x='${f.w/2}' y='${y+23}' text-anchor='middle' font-size='13' font-weight='700' font-family='sans-serif' fill='#fff'>Your headline</text></svg>`;
+    $('#sfn').textContent=bad?'Unsafe: the text sits in a shaded zone, where '+f.msg+'.':'Safe: the text is clear of the shaded zones.';
+  }
+  bindChips(root,'sfc',function(v){k=v;draw();});onRng(root,'sfp',function(v){p=v;draw();});draw();
+}
+
+function initAspect(root){
+  var m=prep(root),$=m.$,k='16:9',w=300;
+  function draw(){
+    var a=ARD.filter(function(x){return x[0]===k;})[0],h=w*a[2]/a[1];
+    var scene=`<rect width='600' height='400' fill='#BFD8F5'/><circle cx='430' cy='110' r='42' fill='#FBE18B'/><path d='M0,290 C120,220 230,290 340,250 S520,220 600,270 V400 H0Z' fill='#6FB07E'/><circle cx='200' cy='230' r='20' fill='#E8456B'/><rect x='186' y='248' width='28' height='60' rx='8' fill='#E8456B'/>`;
+    $('#aro').innerHTML=`<svg width='${w}' height='${h.toFixed(0)}' viewBox='0 0 600 400' preserveAspectRatio='xMidYMid slice' style='border-radius:8px;max-width:none' role='img' aria-label='Landscape cropped to ${k}'>${scene}</svg>`;
+    $('#arn').textContent=k+' at '+w+' px wide is '+h.toFixed(0)+' px tall. '+a[3];
+  }
+  bindChips(root,'arc',function(v){k=v;draw();});onRng(root,'arw',function(v){w=v;draw();});draw();
+}
+
+function initOrient(root){
+  var m=prep(root),$=m.$;
+  function draw(k){
+    var p=k==='portrait',w=p?150:270,h=p?260:150;
+    var inner=p?`<div style='height:90px;border-radius:8px;background:linear-gradient(135deg,#B7C9EE,#E8D9F7);margin-bottom:10px'></div><div style='font-weight:800;margin-bottom:4px'>Trail guide</div><div style='font-size:.75rem;color:#4A5070;margin-bottom:10px'>Ten routes for the weekend.</div><div style='background:#2F6FD8;color:#fff;text-align:center;border-radius:8px;padding:7px;font-weight:700;font-size:.8rem'>Start</div>`:`<div style='display:flex;gap:12px;height:100%'><div style='flex:0 0 42%;border-radius:8px;background:linear-gradient(135deg,#B7C9EE,#E8D9F7)'></div><div style='flex:1'><div style='font-weight:800;margin-bottom:4px'>Trail guide</div><div style='font-size:.75rem;color:#4A5070;margin-bottom:10px'>Ten routes for the weekend.</div><div style='background:#2F6FD8;color:#fff;text-align:center;border-radius:8px;padding:7px;font-weight:700;font-size:.8rem'>Start</div></div></div>`;
+    $('#oro').innerHTML=`<div style='width:${w}px;height:${h}px;border:4px solid #14213D;border-radius:22px;background:#fff;color:#14213D;padding:12px;box-sizing:border-box;font-family:Inter,sans-serif;overflow:hidden'>${inner}</div>`;
+    $('#orn').textContent=p?'Portrait: the picture sits above the text, and everything stacks.':'Landscape: the picture moves to the left and the text to the right, using the extra width.';
+  }
+  bindChips(root,'orc',draw);draw('portrait');
+}
+
+/* ===== inits: Grids and structure ===== */
+function initColumnsL(root){
+  var m=prep(root),$=m.$;
+  function draw(k){
+    var n=parseInt(k,10),cw=(520-(n-1)*24)/n,ch=Math.round(cw/7.5);
+    $('#clo').style.columnCount=n;$('#clo').style.columnGap='24px';
+    $('#clo').innerHTML=[LOREM,LOREM,LOREM].join(' ')+' '+LOREM;
+    $('#cln').textContent=n+' column'+(n>1?'s':'')+': roughly '+ch+' characters per line on a 520 px wide block. '+(ch>75?'Too long for comfortable reading.':ch<35?'Very short: the lines break up the reading.':'In the comfortable range.');
+  }
+  bindChips(root,'clc',draw);draw('2');
+}
+
+function initGutters(root){
+  var m=prep(root),$=m.$;
+  function draw(g){
+    var col=function(t){return `<div style='background:#E8EBF5;border-radius:6px;padding:8px;font-size:.8rem;line-height:1.4;color:#14213D'><b>${t}</b><br>Notes sit here, with a few lines of copy.</div>`;};
+    $('#gto').innerHTML=`<div style='display:grid;grid-template-columns:repeat(3,1fr);gap:${g}px;background:#fff;padding:12px;border-radius:12px'>${col('Plan')}${col('Build')}${col('Launch')}</div>`;
+    $('#gtn').textContent=g+'px gutters. '+(g<8?'Too tight: the columns nearly touch.':g<=40?'A comfortable gap.':'Very wide: the columns start to look disconnected.');
+  }
+  onRng(root,'gts',draw);draw(24);
+}
+
+function initModGrid(root){
+  var m=prep(root),$=m.$;
+  function draw(k){
+    var n=parseInt(k,10),h=Math.ceil(n/2),f=n>=4,hb=f?n-1:n,half=Math.ceil(n/2);
+    var cells='',i;for(i=0;i<n*n;i++){cells+=`<div style='border:1px dashed #C9CEE0'></div>`;}
+    var blk=function(a,col,txt){return `<div style='grid-area:${a};background:${col};border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:700;color:#fff'>${txt}</div>`;};
+    var b=blk('1 / 1 / '+(h+1)+' / '+(n+1),'#2F6FD8','Hero');
+    b+=blk((h+1)+' / 1 / '+(hb+1)+' / '+(half+1),'#0E8467','Block A');
+    if(half+1<=n){b+=blk((h+1)+' / '+(half+1)+' / '+(hb+1)+' / '+(n+1),'#A86F00','Block B');}
+    if(f){b+=blk(n+' / 1 / '+(n+1)+' / '+(n+1),'#14213D','Footer');}
+    $('#moo').innerHTML=`<div style='position:relative;aspect-ratio:1;background:#fff;border-radius:12px;padding:8px'><div style='position:absolute;top:8px;left:8px;right:8px;bottom:8px;display:grid;grid-template-columns:repeat(${n},1fr);grid-template-rows:repeat(${n},1fr);gap:0'>${cells}</div><div style='position:absolute;top:8px;left:8px;right:8px;bottom:8px;display:grid;grid-template-columns:repeat(${n},1fr);grid-template-rows:repeat(${n},1fr);gap:4px'>${b}</div></div>`;
+    $('#mon').textContent=n+' by '+n+' modules ('+(n*n)+' in total). The hero spans '+n+' by '+h+' modules; the blocks below span whole modules too.';
+  }
+  bindChips(root,'moc',draw);draw('4');
+}
+
+function initBaselineL(root){
+  var m=prep(root),$=m.$,al='yes',u=24;
+  function draw(){
+    var yes=al==='yes',fs=Math.round(u*0.62),hfs=u*1.5;
+    var grid=`background-image:repeating-linear-gradient(to bottom,transparent 0,transparent ${u-1}px,rgba(232,69,107,.55) ${u-1}px,rgba(232,69,107,.55) ${u}px);`;
+    var head=yes?`font-size:${hfs}px;line-height:${u*2}px;margin:0;font-weight:800;`:`font-size:${hfs}px;line-height:1.3;margin:0 0 7px;font-weight:800;`;
+    var para=`font-size:${fs}px;line-height:${u}px;margin:0;`;
+    var right=yes?'':`margin-top:9px;`;
+    $('#bgo').innerHTML=`<div style='${grid}background-color:#fff;color:#14213D;border-radius:12px;padding:0 14px;display:grid;grid-template-columns:1fr 1fr;gap:20px;font-family:Inter,sans-serif;overflow:hidden'><div><h4 style='${head}'>Rhythm</h4><p style='${para}'>${LOREM}</p></div><div style='${right}'><p style='${para}'>${LOREM} ${LOREM}</p></div></div>`;
+    $('#bgn').textContent=yes?'Aligned: the lines of text in both columns sit on the same pink lines, so the page feels calm and ordered.':'Not aligned: the heading and the right column drift off the grid, so the lines no longer match across columns.';
+  }
+  bindChips(root,'bgc',function(v){al=v;draw();});onRng(root,'bgu',function(v){u=v;draw();});draw();
+}
+
+function initRhythmL(root){
+  var m=prep(root),$=m.$;
+  function draw(k){
+    var h='',i,S=['Intro','Method','Results','Next steps'];
+    for(i=0;i<4;i++){
+      var within=k==='even'?24:k==='rhythm'?8:6+Math.round(pr(i,5)*28),between=k==='even'?24:k==='rhythm'?32:8+Math.round(pr(i,9)*40);
+      h+=`<div style='font-weight:800;font-family:Inter,sans-serif;color:#14213D'>${S[i]}</div><div style='height:${within}px'></div><div style='height:7px;background:#9AA0BC;border-radius:3px;width:92%'></div><div style='height:6px'></div><div style='height:7px;background:#9AA0BC;border-radius:3px;width:70%'></div>`+(i<3?`<div style='height:${between}px'></div>`:'');
+    }
+    $('#vro').innerHTML=`<div style='background:#fff;border-radius:12px;padding:16px'>${h}</div>`;
+    $('#vrn').textContent={even:'The same gap everywhere: headings float equally far from their text and from the next section, so groups are not visible.',rhythm:'Tight within each group (8px) and a bigger step between groups (32px), repeated. The structure is clear at a glance.',rand:'Random gaps: nothing repeats, so the page feels untidy even though the content is the same.'}[k];
+  }
+  bindChips(root,'vrc',draw);draw('rhythm');
+}
+
+function initDensity(root){
+  var m=prep(root),$=m.$;
+  var ROWS=[['Alpha Studio','Active','1,240'],['Bright Co','Paused','980'],['Cedar Labs','Active','2,310'],['Delta Works','Active','455'],['Echo Media','Trial','120'],['Fable Foods','Active','3,005'],['Grove Bank','Paused','770'],['Harbor Inc','Active','1,640'],['Iris Health','Trial','210'],['Juno Travel','Active','890'],['Kite Energy','Active','2,050'],['Lumen Arts','Paused','340']];
+  function draw(k){
+    var rh={compact:28,comfortable:40,spacious:56}[k],fs={compact:.78,comfortable:.88,spacious:1}[k],vis=Math.min(ROWS.length,Math.floor(230/rh));
+    $('#deo').innerHTML=`<div style='height:230px;overflow:hidden;background:#fff;color:#14213D;border-radius:12px;font-family:Inter,sans-serif'>`+ROWS.map(function(r){return `<div style='display:grid;grid-template-columns:2fr 1fr 1fr;height:${rh}px;align-items:center;padding:0 14px;border-bottom:1px solid #E4E8F2;font-size:${fs}rem'><span style='font-weight:700'>${r[0]}</span><span>${r[1]}</span><span style='text-align:right'>${r[2]}</span></div>`;}).join('')+`</div>`;
+    $('#den').textContent=k.charAt(0).toUpperCase()+k.slice(1)+': '+rh+' px rows, so about '+vis+' rows fit in this window. '+(k==='compact'?'Great for scanning lots of data, but harder to tap.':k==='spacious'?'Easy on the eye and easy to tap, but you see much less at once.':'A balanced default.');
+  }
+  bindChips(root,'dec',draw);draw('comfortable');
+}
+
+/* ===== inits: Flexible layouts and the fold ===== */
+function initResponsiveL(root){
+  var m=prep(root),$=m.$;
+  function R(x,y,w,h,c,t){return `<rect x='${x}' y='${y}' width='${w}' height='${h}' rx='6' fill='${c}'/>`+(t?`<text x='${x+w/2}' y='${y+h/2+5}' text-anchor='middle' font-size='14' font-weight='700' font-family='sans-serif' fill='#fff'>${t}</text>`:'');}
+  function draw(W){
+    var pad=16,h='',cols=W>=900?3:W>=600?2:1,side=W>=900,sw=side?W*0.24:0,cw=side?W-3*pad-sw:W-2*pad,cardW=(cw-(cols-1)*pad)/cols,rows=Math.ceil(3/cols),cardH=90,y=0,i;
+    h+=R(0,0,W,40,'#14213D');
+    if(W<900){h+=`<g fill='#fff'><rect x='16' y='13' width='22' height='3'/><rect x='16' y='19' width='22' height='3'/><rect x='16' y='25' width='22' height='3'/></g>`;}else{h+=`<g fill='#fff'><rect x='${W-300}' y='18' width='60' height='5' rx='2'/><rect x='${W-220}' y='18' width='60' height='5' rx='2'/><rect x='${W-140}' y='18' width='60' height='5' rx='2'/></g>`;}
+    h+=R(0,48,W,W<600?80:110,'#2F6FD8','Hero');
+    y=48+(W<600?80:110)+pad;
+    for(i=0;i<3;i++){h+=R(pad+(i%cols)*(cardW+pad),y+Math.floor(i/cols)*(cardH+pad),cardW,cardH,i%2?'#9AA0BC':'#0E8467','Card '+(i+1));}
+    var ey=y+rows*(cardH+pad)-pad;
+    if(side){h+=R(pad+cw+pad,y,sw,ey-y,'#A86F00','Sidebar');}else{h+=R(pad,ey+pad,W-2*pad,60,'#A86F00','Sidebar');ey+=pad+60;}
+    var H=ey+pad;
+    $('#rlo').innerHTML=`<svg viewBox='0 0 ${W} ${H}' width='100%' style='max-width:560px;background:#fff;border:1px solid #D9DDEB' role='img' aria-label='Layout at ${W} pixels wide'>${h}</svg>`;
+    $('#rln').textContent=W+'px: '+(cols===3?'three columns with the sidebar beside them and the full menu in the header.':cols===2?'two columns, the sidebar dropped below, and the menu collapsed to an icon.':'everything stacked in one column, with the menu collapsed.');
+  }
+  onRng(root,'rlw',draw);draw(800);
+}
+
+function initFluidL(root){
+  var m=prep(root),$=m.$;
+  function draw(W){
+    var inner=W-32,col=inner/3,chars=Math.round(col/8);
+    $('#flo').innerHTML=`<div style='background:#fff;border-radius:12px;padding:12px;overflow:hidden'><div style='width:${Math.min(W,560)/W*100}%;max-width:100%'><div style='display:flex;gap:0;width:100%'>`+['#2F6FD8','#0E8467','#A86F00'].map(function(c,i){return `<div style='flex:1;background:${c};color:#fff;height:70px;display:flex;align-items:center;justify-content:center;font-weight:700;border-right:2px solid #fff'>33%</div>`;}).join('')+`</div></div></div>`;
+    $('#fln').textContent='At '+W+'px the container is '+inner+'px, so each column is about '+Math.round(col)+'px wide and holds about '+chars+' characters per line. '+(col<130?'The columns are very narrow now: time for a breakpoint.':chars>75?'Lines are too long. Add a maximum width.':'Comfortable.');
+  }
+  onRng(root,'flw',draw);draw(900);
+}
+
+function initFixedL(root){
+  var m=prep(root),$=m.$;
+  function draw(W){
+    var L=960,x=Math.max(0,(W-L)/2),vw=Math.max(W,L)+40;
+    var h=`<rect x='0' y='0' width='${W}' height='150' fill='${W>L?'#E4E8F2':'#fff'}' stroke='#9AA0BC' stroke-width='3'/><defs><clipPath id='vp'><rect width='${W}' height='150'/></clipPath></defs><g clip-path='url(#vp)'><rect x='${x}' y='6' width='${L}' height='138' fill='#fff' stroke='#2F6FD8' stroke-width='3'/><rect x='${x+12}' y='16' width='${L-24}' height='24' fill='#14213D'/><rect x='${x+12}' y='50' width='${(L-48)/3}' height='80' fill='#2F6FD8'/><rect x='${x+24+(L-48)/3}' y='50' width='${(L-48)/3}' height='80' fill='#0E8467'/><rect x='${x+36+2*(L-48)/3}' y='50' width='${(L-48)/3}' height='80' fill='#A86F00'/></g>`;
+    if(W<L){h+=`<text x='${W-12}' y='140' text-anchor='end' font-size='28' font-weight='700' fill='#E8456B' font-family='sans-serif'>cut off \u203A</text>`;}
+    $('#fxo').innerHTML=`<svg viewBox='-4 -4 ${vw} 160' width='100%' style='max-width:560px;max-height:200px' role='img' aria-label='A 960 pixel layout in a ${W} pixel window'>${h}</svg>`;
+    $('#fxn').textContent=W<L?'The window is '+W+'px but the layout is fixed at '+L+'px: '+(L-W)+'px is cut off, so visitors must scroll sideways.':W>L?'The window is '+W+'px: the layout stays '+L+'px wide, leaving '+Math.round((W-L)/2)+'px of unused space on each side.':'The window and the layout are both '+L+'px: a perfect fit, but only at exactly this width.';
+  }
+  onRng(root,'fxw',draw);draw(1100);
+}
+
+function initModL(root){
+  var m=prep(root),$=m.$,on={hero:1,features:1,cta:1},order=Object.keys(MODS);
+  function draw(){
+    var vis=order.filter(function(k){return on[k];});
+    $('#mlo').innerHTML=`<div style='background:#fff;border-radius:12px;padding:10px'>`+(vis.length?vis.map(function(k){var M=MODS[k];return `<div style='background:${M[1]};color:${M[2]};height:${M[3]*0.6}px;border-radius:8px;margin-bottom:6px;display:flex;align-items:center;justify-content:center;font-weight:700;font-family:Inter,sans-serif'>${M[0]}</div>`;}).join(''):`<div style='padding:20px;text-align:center;color:#7A809C'>No modules yet. Switch some on.</div>`)+`</div>`;
+    $('#mln').textContent=vis.length+' module'+(vis.length===1?'':'s')+' in the page. Each block is self-contained, so any order and any combination still works.';
+  }
+  bindTogg(root,'mlt',on,draw);
+  $('#mls').addEventListener('click',function(){var a=order.slice(),i,j,t;for(i=a.length-1;i>0;i--){j=Math.floor(Math.random()*(i+1));t=a[i];a[i]=a[j];a[j]=t;}order=a;draw();});
+  draw();
+}
+
+function initResizingL(root){
+  var m=prep(root),$=m.$,k='stack',W=700;
+  function R(x,y,w,h,c,t){return `<rect x='${x}' y='${y}' width='${w}' height='${h}' rx='6' fill='${c}'/>`+(t?`<text x='${x+w/2}' y='${y+h/2+5}' text-anchor='middle' font-size='14' font-weight='700' font-family='sans-serif' fill='#fff'>${t}</text>`:'');}
+  function draw(){
+    var pad=16,h='',H=170,msg='';
+    if(k==='scale'){var iw=W*0.6,ih=iw*0.5;h=R(pad,pad,iw,ih,'#2F6FD8','Image')+R(pad+iw+pad,pad,W-iw-3*pad,ih,'#9AA0BC','Text');H=ih+2*pad;msg='Scale: the image keeps its shape and simply gets bigger or smaller with the screen.';}
+    if(k==='stack'){var row=W>=700,cw=row?(W-4*pad)/3:W-2*pad,i;for(i=0;i<3;i++){h+=R(row?pad+i*(cw+pad):pad,row?pad:pad+i*(60+pad),cw,60,['#2F6FD8','#0E8467','#A86F00'][i],'Card '+(i+1));}H=row?60+2*pad:3*60+4*pad;msg=row?'Stack: wide enough, so the three cards sit side by side.':'Stack: too narrow, so the cards stack into a single column.';}
+    if(k==='hide'){h=R(0,0,W,44,'#14213D');if(W>=700){h+=`<g fill='#fff'><rect x='${W-300}' y='20' width='60' height='5' rx='2'/><rect x='${W-220}' y='20' width='60' height='5' rx='2'/><rect x='${W-140}' y='20' width='60' height='5' rx='2'/></g>`;}else{h+=`<g fill='#fff'><rect x='${W-40}' y='14' width='24' height='3'/><rect x='${W-40}' y='20' width='24' height='3'/><rect x='${W-40}' y='26' width='24' height='3'/></g>`;}h+=R(pad,60,W-2*pad,70,'#9AA0BC','Content');H=146;msg=W>=700?'Hide or reveal: there is room, so the three menu links are shown.':'Hide or reveal: no room, so the links hide behind a menu icon.';}
+    if(k==='move'){var side=W>=700,sw=side?W*0.28:W-2*pad,cw2=side?W-3*pad-sw:W-2*pad;h=R(pad,pad,cw2,100,'#2F6FD8','Content')+(side?R(pad*2+cw2,pad,sw,100,'#A86F00','Sidebar'):R(pad,pad+100+pad,sw,60,'#A86F00','Sidebar'));H=side?132:100+60+3*pad;msg=side?'Reposition: wide enough, so the sidebar sits beside the content.':'Reposition: too narrow, so the sidebar moves below the content.';}
+    $('#rzo').innerHTML=`<svg viewBox='0 0 ${W} ${H}' width='100%' style='max-width:560px;background:#fff;border:1px solid #D9DDEB' role='img' aria-label='Resizing behaviour at ${W} pixels'>${h}</svg>`;
+    $('#rzn').textContent=W+'px. '+msg;
+  }
+  bindChips(root,'rzc',function(v){k=v;draw();});onRng(root,'rzw',function(v){W=v;draw();});draw();
+}
+
+function initTemplateDesign(root){
+  var m=prep(root),$=m.$,hd='Summer market',sb='Saturday, 10am',fm='post',hu=340;
+  function draw(){
+    var D={post:[240,240],story:[160,284],slide:[320,180]}[fm],w=D[0],h=D[1],ac=hslToHex(hu,75,52),t=(hd||'Headline').replace(/</g,''),s=(sb||'Subtitle').replace(/</g,'');
+    var fs=t.length>22?w*0.075:t.length>14?w*0.095:w*0.115,sf=w*0.055,pad=w*0.08;
+    $('#tdo').innerHTML=`<svg viewBox='0 0 ${w} ${h}' width='${w}' role='img' aria-label='Template filled with your text'><rect width='${w}' height='${h}' fill='#14213D'/><rect x='0' y='0' width='${w}' height='${h*0.045}' fill='${ac}'/><text x='${pad}' y='${h*0.14}' font-size='${w*0.06}' font-weight='800' fill='#fff' font-family='Sora,sans-serif'>Nova</text><text x='${pad}' y='${h*0.58}' font-size='${fs}' font-weight='800' fill='#fff' font-family='Sora,sans-serif'>${t}</text><rect x='${pad}' y='${h*0.63}' width='${w*0.18}' height='4' fill='${ac}'/><text x='${pad}' y='${h*0.73}' font-size='${sf}' fill='#C9D2F0' font-family='DM Sans,sans-serif'>${s}</text></svg>`;
+  }
+  $('#tdh').addEventListener('input',function(e){hd=e.target.value;draw();});$('#tds').addEventListener('input',function(e){sb=e.target.value;draw();});
+  bindChips(root,'tdc',function(v){fm=v;draw();});onRng(root,'tdu',function(v){hu=v;draw();});draw();
+}
+
+function initAboveFold(root){
+  var m=prep(root),$=m.$,dv='laptop',hh=420;
+  function draw(){
+    var fold=FDEV[dv][1],sc=0.22,nav=60,hero=hh,feat=280,test=240,total=nav+hero+feat+test,cta=nav+hero-70,h='';
+    var parts=[['Navigation',0,nav,'#14213D'],['Hero',nav,hero,'#2F6FD8'],['Features',nav+hero,feat,'#0E8467'],['Testimonials',nav+hero+feat,test,'#A86F00']];
+    parts.forEach(function(p){h+=`<rect x='10' y='${p[1]*sc}' width='160' height='${p[2]*sc}' fill='${p[3]}'/><text x='90' y='${(p[1]+p[2]/2)*sc+4}' text-anchor='middle' font-size='11' font-weight='700' fill='#fff' font-family='sans-serif'>${p[0]}</text>`;});
+    h+=`<rect x='60' y='${cta*sc}' width='60' height='${34*sc*1.6}' rx='4' fill='#FFE066'/><text x='90' y='${cta*sc+11}' text-anchor='middle' font-size='9' font-weight='700' fill='#14213D' font-family='sans-serif'>Button</text>`;
+    h+=`<rect x='4' y='${fold*sc}' width='172' height='${(total-fold)*sc}' fill='rgba(255,255,255,.6)'/><line x1='0' y1='${fold*sc}' x2='260' y2='${fold*sc}' stroke='#E8456B' stroke-width='2' stroke-dasharray='6 4'/><text x='176' y='${fold*sc-5}' font-size='11' font-weight='700' fill='#E8456B' font-family='sans-serif'>The fold (${fold}px)</text>`;
+    $('#afo').innerHTML=`<svg viewBox='0 0 280 ${total*sc+6}' width='280' role='img' aria-label='Page with the fold marked'>${h}</svg>`;
+    var vis=parts.filter(function(p){return p[1]<fold;}).map(function(p){return p[0]+(p[1]+p[2]>fold?' (partly)':'');});
+    var btn=cta+34>fold;
+    $('#afn').textContent='On a '+FDEV[dv][0].toLowerCase()+' the first screen shows: '+vis.join(', ')+'. '+(btn?'The main button sits below the fold, so many visitors will not see it. Shorten the hero or move the button up.':'The main button is above the fold.');
+  }
+  bindChips(root,'afc',function(v){dv=v;draw();});onRng(root,'afh',function(v){hh=v;draw();});draw();
+}
+
+function initFoldAware(root){
+  var m=prep(root),$=m.$;
+  var N={hard:'Hard cut: the hero ends exactly at the fold, with a clean break below it. It looks like the end of the page, so many people stop. This is a false floor.',peek:'Peek: the next section starts above the fold, so a headline and a few lines are visible. That suggests there is more, and invites a scroll.',cue:'Scroll cue: a small arrow near the bottom tells people to continue. Use this when there is no content to peek at.'};
+  function draw(k){
+    var f=200,h=`<rect width='260' height='300' fill='#fff' stroke='#9AA0BC'/>`;
+    if(k==='hard'){h+=`<rect x='0' y='0' width='260' height='${f}' fill='#2F6FD8'/><rect x='0' y='${f}' width='260' height='100' fill='#E8EBF5'/>`;}
+    if(k==='peek'){h+=`<rect x='0' y='0' width='260' height='170' fill='#2F6FD8'/><rect x='14' y='182' width='130' height='10' rx='3' fill='#14213D'/><rect x='14' y='200' width='220' height='6' rx='3' fill='#9AA0BC'/><rect x='14' y='212' width='190' height='6' rx='3' fill='#9AA0BC'/><rect x='14' y='224' width='210' height='6' rx='3' fill='#9AA0BC'/>`;}
+    if(k==='cue'){h+=`<rect x='0' y='0' width='260' height='${f}' fill='#2F6FD8'/><rect x='0' y='${f}' width='260' height='100' fill='#E8EBF5'/><g fill='none' stroke='#fff' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'><path d='M118 168l12 12 12-12'/></g><text x='130' y='160' text-anchor='middle' font-size='11' font-weight='700' fill='#fff' font-family='sans-serif'>Scroll</text>`;}
+    h+=`<text x='130' y='72' text-anchor='middle' font-size='20' font-weight='800' fill='#fff' font-family='sans-serif'>Headline</text><rect x='95' y='92' width='70' height='26' rx='13' fill='#FFE066'/><rect x='0' y='${f}' width='260' height='100' fill='rgba(255,255,255,.35)'/><line x1='0' y1='${f}' x2='260' y2='${f}' stroke='#E8456B' stroke-width='2' stroke-dasharray='6 4'/><text x='6' y='${f-5}' font-size='10' font-weight='700' fill='#E8456B' font-family='sans-serif'>fold</text>`;
+    $('#fao').innerHTML=`<svg viewBox='0 0 260 300' width='260' role='img' aria-label='Fold treatment: ${k}'>${h}</svg>`;
+    $('#fan').textContent=N[k];
+  }
+  bindChips(root,'fac',draw);draw('peek');
+}
+
+/* ===== registration, hero, start ===== */
+var LESSONS={
+ 'canvas':{html:L_CANVAS,init:initCanvas,g:''},'artboard':{html:L_ARTBOARD,init:initArtboard,g:''},'document-setup':{html:L_DOCSET,init:initDocSetup,g:''},
+ 'margins':{html:L_MARG,init:initMargins,g:''},'bleed':{html:L_BLEED,init:initBleed,g:''},'safe-areas':{html:L_SAFE,init:initSafe,g:''},
+ 'aspect-ratios':{html:L_ASPECT,init:initAspect,g:''},'orientation':{html:L_ORIENT,init:initOrient,g:''},
+ 'columns':{html:L_COLS,init:initColumnsL,g:'f'},'gutters':{html:L_GUT,init:initGutters,g:'f'},'modular-grids':{html:L_MODGRID,init:initModGrid,g:'f'},
+ 'baseline-grids':{html:L_BASE,init:initBaselineL,g:'f'},'visual-rhythm':{html:L_RHYTHM,init:initRhythmL,g:'f'},'content-density':{html:L_DENS,init:initDensity,g:'f'},
+ 'responsive-layouts':{html:L_RESPL,init:initResponsiveL,g:'s'},'fluid-layouts':{html:L_FLUID,init:initFluidL,g:'s'},'fixed-layouts':{html:L_FIXED,init:initFixedL,g:'s'},
+ 'modular-layouts':{html:L_MODL,init:initModL,g:'s'},'responsive-resizing':{html:L_RESIZE,init:initResizingL,g:'s'},'template-design':{html:L_TEMPL,init:initTemplateDesign,g:'s'},
+ 'above-the-fold-design':{html:L_FOLD,init:initAboveFold,g:'s'},'fold-awareness':{html:L_FOLDAW,init:initFoldAware,g:'s'}
+};
+
+(function(){
+  var lab=document.getElementById('lab');
+  lab.innerHTML="<h2>Try it: pick an artboard</h2><p>Common sizes drawn to scale. Notice how different the shapes are.</p>"+chipsHtml('hac',ABD.map(function(a){return [a[0],a[1]];}),'post','Artboard size')+"<div id='hao' style='margin-top:14px;display:flex;gap:18px;align-items:center;flex-wrap:wrap'></div>";
+  function draw(k){
+    var a=ABD.filter(function(x){return x[0]===k;})[0],sc=Math.min(170/a[3],170/a[4]),w=a[3]*sc,h=a[4]*sc;
+    document.getElementById('hao').innerHTML="<svg viewBox='0 0 190 190' width='170' role='img' aria-label='"+a[1]+" to scale'><rect x='"+((190-w)/2)+"' y='"+((190-h)/2)+"' width='"+w+"' height='"+h+"' fill='#fff' stroke='#2F6FD8' stroke-width='3'/><rect x='"+((190-w)/2+6)+"' y='"+((190-h)/2+6)+"' width='"+(w-12)+"' height='"+Math.max(8,h*0.1)+"' fill='#2F6FD8' opacity='.8'/></svg><div><div style='font-family:Sora,sans-serif;font-weight:700;font-size:1.2rem'>"+a[1]+"</div><div style='color:var(--muted)'>"+a[2]+"</div><div style='color:var(--muted);margin-top:6px;max-width:22ch'>"+a[5]+"</div></div>";
+  }
+  bindChips(document,'hac',draw);draw('post');
+})();
+
+startSite();
+
+</script>
+</body>
+</html>
