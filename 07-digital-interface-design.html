@@ -1,0 +1,1530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Digital Interface Design | Digital graphic designer knowledge map</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+<style>
+
+:root{
+  --bg:#F2F4FA; --surface:#FFFFFF; --ink:#1B1F3B; --muted:#4A5070; --line:#D9DDEB;
+  --g1:#D93A62; --g2:#2468D8; --g3:#0E8467; --g4:#A86F00;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#12142A; --surface:#1C2040; --ink:#EEF0FB; --muted:#B4B9D6; --line:#2E3360;
+    --g1:#FF7A9A; --g2:#78A8FF; --g3:#45D1AE; --g4:#F2B93B;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#12142A; --surface:#1C2040; --ink:#EEF0FB; --muted:#B4B9D6; --line:#2E3360;
+  --g1:#FF7A9A; --g2:#78A8FF; --g3:#45D1AE; --g4:#F2B93B;
+  color-scheme:dark;
+}
+html{scroll-padding-top:env(safe-area-inset-top,0px);}
+*,*::before,*::after{box-sizing:inherit;}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"DM Sans",system-ui,-apple-system,"Segoe UI",sans-serif;font-size:17px;line-height:1.55;}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px;}
+h1,h2,h3{font-family:Sora,"DM Sans",system-ui,sans-serif;line-height:1.25;letter-spacing:0.01em;margin:0;}
+
+/* hero */
+.hero{padding:48px 0 40px;}
+.hero-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:36px;align-items:center;}
+.hero h1{font-size:clamp(2.2rem,5.4vw,3.8rem);font-weight:700;letter-spacing:0.01em;line-height:1.2;}
+.hero p.lead{font-size:1.15rem;color:var(--muted);max-width:34ch;margin:18px 0 22px;}
+.jump{display:flex;flex-wrap:wrap;gap:10px;}
+.jump a{color:var(--ink);text-decoration:none;font-weight:700;font-size:.95rem;padding:9px 16px;border-radius:999px;border:2px solid var(--c);background:var(--surface);}
+.jump a:hover{background:var(--c);color:var(--surface);}
+.jump a:focus-visible,input:focus-visible{outline:3px solid var(--ink);outline-offset:3px;}
+.lab{background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:22px;}
+.lab h2{font-size:1.25rem;margin-bottom:4px;}
+.lab p{margin:0 0 16px;color:var(--muted);font-size:.95rem;}
+.sw{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:18px;}
+.sw div{border-radius:12px;padding:30px 8px 8px;font-size:.78rem;font-weight:700;line-height:1.25;}
+.sw div span{display:block;font-weight:500;opacity:.9;}
+.sw div.big{grid-column:span 3;padding:46px 12px 12px;border-radius:16px;font-size:.9rem;}
+label{display:block;font-weight:700;font-size:.9rem;margin-bottom:8px;}
+input[type=range]{width:100%;height:14px;border-radius:99px;appearance:none;-webkit-appearance:none;background:linear-gradient(90deg,hsl(0 80% 55%),hsl(60 80% 55%),hsl(120 80% 45%),hsl(180 80% 45%),hsl(240 80% 60%),hsl(300 80% 55%),hsl(360 80% 55%));margin:0;}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:28px;height:28px;border-radius:50%;background:var(--surface);border:4px solid var(--ink);cursor:grab;}
+input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;background:var(--surface);border:4px solid var(--ink);cursor:grab;}
+
+/* groups */
+.group{padding:36px 0 12px;--c:var(--g1);}
+.group.f{--c:var(--g2);} .group.s{--c:var(--g3);} .group.c{--c:var(--g4);}
+.jump a.j1{--c:var(--g1);} .jump a.j2{--c:var(--g2);} .jump a.j3{--c:var(--g3);} .jump a.j4{--c:var(--g4);}
+.ghead{display:flex;gap:18px;align-items:center;margin-bottom:22px;}
+.gbadge{flex:0 0 72px;height:72px;border-radius:50%;background:var(--c);color:var(--surface);display:grid;place-items:center;}
+.gbadge svg{width:40px;height:40px;}
+.ghead h2{font-size:clamp(1.6rem,3.8vw,2.2rem);font-weight:700;}
+.ghead p{margin:6px 0 0;color:var(--muted);max-width:52ch;}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px;}
+.card{background:var(--surface);border:1px solid var(--line);border-top:5px solid var(--c);border-radius:6px 6px 18px 18px;padding:18px;}
+.tile{width:60px;height:60px;border-radius:16px;display:grid;place-items:center;color:var(--c);background:color-mix(in srgb,var(--c) 14%,var(--surface));margin-bottom:12px;}
+.tile svg{width:38px;height:38px;fill:none;stroke:currentColor;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;}
+.card h3{font-size:1.15rem;font-weight:700;margin-bottom:6px;}
+.card p{margin:0;color:var(--muted);font-size:.97rem;}
+[hidden]{display:none !important;}
+.note{margin:16px 0 0;color:var(--muted);font-size:.92rem;max-width:44ch;}
+.card.has{display:block;text-decoration:none;color:inherit;cursor:pointer;}
+.card.has:hover{border-color:var(--c);}
+.card.has:focus-visible{outline:3px solid var(--ink);outline-offset:3px;}
+.more{display:inline-block;margin-top:12px;font-weight:700;font-size:.92rem;color:var(--ink);padding:6px 12px;border-radius:999px;background:color-mix(in srgb,var(--c) 18%,var(--surface));}
+.lesson{--c:var(--g1);padding-top:20px;padding-bottom:40px;max-width:860px;}
+.btn{font:inherit;font-weight:700;cursor:pointer;border:2px solid var(--ink);background:var(--surface);color:var(--ink);padding:9px 16px;border-radius:999px;}
+.btn:hover{background:var(--ink);color:var(--surface);}
+.btn:focus-visible,.chip:focus-visible,summary:focus-visible{outline:3px solid var(--ink);outline-offset:3px;}
+.lhero{display:flex;gap:18px;align-items:center;margin:26px 0 8px;}
+.lesson h1{font-size:clamp(1.9rem,4.6vw,3rem);font-weight:700;letter-spacing:0.01em;line-height:1.2;}
+.lhero p{margin:6px 0 0;color:var(--muted);}
+.toc{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0 6px;}
+.chip{font:inherit;font-size:.92rem;font-weight:700;cursor:pointer;border:2px solid var(--line);background:var(--surface);color:var(--ink);padding:7px 14px;border-radius:999px;}
+.chip:hover{border-color:var(--c);}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--surface);border-color:var(--ink);}
+.lsec{margin-top:46px;}
+.lsec h2{font-size:clamp(1.45rem,3.3vw,1.9rem);font-weight:700;margin-bottom:14px;}
+.lsec h3{font-size:1.2rem;margin:22px 0 6px;}
+.lsec p,.lsec li{max-width:68ch;}
+.lsec p{margin:0 0 14px;}
+.callout{background:color-mix(in srgb,var(--c) 12%,var(--surface));border-left:6px solid var(--c);border-radius:4px 16px 16px 4px;padding:14px 18px;margin:18px 0;max-width:68ch;}
+.callout p{margin:0 !important;}
+.timeline{list-style:none;margin:16px 0;padding:0 0 0 0;border-left:3px solid var(--line);}
+.timeline li{padding:0 0 18px 22px;position:relative;}
+.timeline li::before{content:"";position:absolute;left:-10px;top:5px;width:17px;height:17px;border-radius:50%;background:var(--c);}
+.timeline b.yr{font-family:Sora,"DM Sans",system-ui,sans-serif;font-size:1.15rem;display:block;}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:20px;margin:18px 0;}
+.wheelrow{display:grid;grid-template-columns:minmax(0,340px) 1fr;gap:24px;align-items:center;}
+.wheelrow svg{width:100%;height:auto;display:block;}
+.wedge{cursor:pointer;stroke:var(--surface);stroke-width:2;}
+.wedge:focus-visible{outline:none;stroke:var(--ink);stroke-width:5;}
+.ctrls{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px;}
+.ctrls .lbl{width:100%;font-weight:700;font-size:.9rem;margin-bottom:-2px;}
+.rswatch{height:90px;border-radius:16px;margin-bottom:12px;}
+.readout h4{font-family:Sora,"DM Sans",system-ui,sans-serif;font-size:1.4rem;margin:0 0 2px;}
+.readout p{margin:0 0 8px !important;color:var(--muted);}
+.pal{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px;}
+.pal div{flex:1 1 90px;border-radius:12px;padding:38px 8px 8px;font-size:.8rem;font-weight:700;line-height:1.3;}
+.pal div span{display:block;font-weight:500;}
+.blend{position:relative;height:190px;border-radius:18px;overflow:hidden;}
+.blend i{position:absolute;width:110px;height:110px;border-radius:50%;display:block;}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.two h3{margin-top:12px;}
+.strip{display:flex;border-radius:12px;overflow:hidden;margin:6px 0 16px;}
+.strip div{flex:1;height:54px;}
+.slab{font-weight:700;font-size:.92rem;margin:12px 0 0;}
+.stack{display:flex;height:70px;border-radius:14px;overflow:hidden;font-weight:700;font-size:.9rem;margin:14px 0;}
+.stack div{display:flex;align-items:center;justify-content:center;text-align:center;padding:0 6px;}
+.albers{display:grid;grid-template-columns:1fr 1fr;border-radius:16px;overflow:hidden;margin:14px 0 8px;}
+.albers div{height:170px;display:grid;place-items:center;}
+.albers span{width:72px;height:72px;background:#B87A4B;display:block;}
+.steps{counter-reset:s;list-style:none;padding:0;margin:14px 0;}
+.steps li{counter-increment:s;position:relative;padding:0 0 16px 50px;min-height:36px;}
+.steps li::before{content:counter(s);position:absolute;left:0;top:-2px;width:34px;height:34px;border-radius:50%;background:var(--c);color:var(--surface);display:grid;place-items:center;font-weight:700;}
+details{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:12px 16px;margin:10px 0;max-width:68ch;}
+summary{cursor:pointer;font-weight:700;}
+details p{margin:10px 0 0 !important;color:var(--muted);}
+.tk li{margin:7px 0;}
+.lsec p b,.lsec li b:not(.yr){background:color-mix(in srgb,var(--c) 20%,transparent);padding:0 .22em;border-radius:5px;-webkit-box-decoration-break:clone;box-decoration-break:clone;}
+.lesson.f{--c:var(--g2);}
+.lesson.s{--c:var(--g3);}
+.lesson.c{--c:var(--g4);}
+.stage{background:var(--bg);border:1px solid var(--line);border-radius:16px;padding:14px;display:grid;place-items:center;min-height:120px;overflow:hidden;}
+.stage svg{max-width:100%;height:auto;}
+.mood{margin:12px 0 0;color:var(--muted);}
+.hx{font:inherit;color:inherit;background:none;border:0;padding:0 .1em;margin:0;cursor:pointer;text-decoration:underline dotted;text-underline-offset:3px;display:inline;}
+.hx::after{content:'';display:inline-block;width:.95em;height:.95em;margin-left:.4em;vertical-align:-.12em;background:currentColor;opacity:.8;-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect x='9' y='9' width='11' height='11' rx='2' fill='none' stroke='black' stroke-width='2'/%3E%3Cpath d='M5 15V6a2 2 0 0 1 2-2h9' fill='none' stroke='black' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E") center/contain no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect x='9' y='9' width='11' height='11' rx='2' fill='none' stroke='black' stroke-width='2'/%3E%3Cpath d='M5 15V6a2 2 0 0 1 2-2h9' fill='none' stroke='black' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E") center/contain no-repeat;}
+.hx:hover::after{opacity:1;}
+.hx.ok::after{opacity:1;-webkit-mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M5 13l4 4L19 7' fill='none' stroke='black' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M5 13l4 4L19 7' fill='none' stroke='black' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");}
+.hx:focus-visible{outline:3px solid currentColor;outline-offset:2px;}
+.swbtns{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:16px;}
+.swbtn{width:46px;height:46px;border-radius:50%;border:3px solid var(--surface);outline:2px solid var(--line);cursor:pointer;padding:0;}
+.swbtn[aria-pressed='true']{outline:4px solid var(--ink);}
+.swbtn:focus-visible{outline:4px solid var(--ink);outline-offset:2px;}
+.rswatch{border:1px solid var(--line);}
+.facts{display:grid;gap:10px;margin-top:10px;}
+.facts p{margin:0 !important;}
+.mockbtn{display:inline-block;padding:10px 18px;border-radius:999px;font-weight:700;margin-top:8px;}
+.mini{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px;margin:14px 0;}
+.mini>div{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:14px;}
+.mini .pair{display:flex;height:46px;border-radius:10px;overflow:hidden;margin-bottom:10px;}
+.mini .pair i{display:block;}
+.mini h3{margin:0 0 4px;font-size:1.05rem;}
+.mini p{margin:0 !important;font-size:.95rem;color:var(--muted);}
+.mock{border-radius:18px;overflow:hidden;border:1px solid rgba(0,0,0,.14);}
+.mock .bar{padding:12px 16px;font-weight:700;}
+.mock .bd{padding:16px;}
+.mock h4{margin:0 0 6px;font-size:1.25rem;}
+.mock p{margin:0 0 12px !important;max-width:none;}
+.tag{display:inline-block;padding:3px 10px;border-radius:999px;font-size:.82rem;font-weight:700;margin-right:6px;}
+.blurme{filter:blur(var(--b,0px));}
+.strip.lab div{display:grid;place-items:center;font-size:.72rem;font-weight:700;}
+canvas{display:block;width:100%;max-width:320px;border-radius:14px;cursor:crosshair;touch-action:none;}
+.sl label{margin:14px 0 6px;}
+table.t{border-collapse:collapse;width:100%;max-width:68ch;margin:12px 0;font-size:.95rem;}
+table.t th,table.t td{border-bottom:1px solid var(--line);padding:8px 10px;text-align:left;}
+.res{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:8px;margin:12px 0;}
+.res div{border:2px solid var(--line);border-radius:12px;padding:8px 12px;font-size:.9rem;}
+.res div b{display:block;}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.row3{display:flex;align-items:center;gap:10px;padding:6px 0;}
+.dot{width:18px;height:18px;border-radius:50%;display:inline-block;flex:0 0 18px;}
+input[type='color']{width:64px;height:40px;padding:0;border:2px solid var(--line);border-radius:10px;background:none;cursor:pointer;}
+@media (max-width:760px){.wheelrow,.two,.cols{grid-template-columns:1fr;}}
+footer{padding:44px 0 56px;color:var(--muted);}
+footer strong{color:var(--ink);}
+@media (max-width:760px){
+  .hero-grid{grid-template-columns:1fr;}
+  .ghead{align-items:flex-start;}
+  .gbadge{flex-basis:56px;height:56px;} .gbadge svg{width:30px;height:30px;}
+}
+@media (prefers-reduced-motion:no-preference){
+  .sw div{transition:background-color .25s;}
+}
+
+.site{max-width:1080px;margin:0 auto;padding:14px 20px 0;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;font-weight:700;font-size:.95rem;}
+.site a{color:var(--ink);text-decoration:none;padding:7px 14px;border-radius:999px;border:2px solid var(--line);background:var(--surface);}
+.site a:hover{border-color:var(--g2);}
+.site a:focus-visible{outline:3px solid var(--ink);outline-offset:3px;}
+.next{display:flex;gap:28px;align-items:center;justify-content:space-between;background:color-mix(in srgb,var(--g2) 11%,var(--surface));border:1px solid var(--line);border-radius:30px;padding:32px 36px;overflow:hidden;}
+.next-text{min-width:0;}
+.next-tag{display:inline-block;font-weight:700;font-size:.9rem;padding:5px 14px;border-radius:999px;background:color-mix(in srgb,var(--g3) 24%,var(--surface));color:var(--ink);}
+.next h2{font-size:clamp(1.9rem,4.4vw,2.8rem);font-weight:700;letter-spacing:.01em;line-height:1.15;margin:12px 0 10px;color:var(--ink);}
+.next p{color:var(--muted);max-width:44ch;margin:0 0 20px;font-size:1.08rem;}
+.next-actions{display:flex;flex-wrap:wrap;gap:10px;}
+.nbtn{display:inline-flex;align-items:center;gap:8px;font-weight:700;font-size:1rem;text-decoration:none;color:var(--ink);padding:12px 22px;border-radius:999px;border:2px solid var(--ink);background:transparent;}
+.nbtn.primary{background:var(--ink);color:var(--surface);}
+.nbtn:hover{background:var(--ink);color:var(--surface);}
+.nbtn.primary:hover{background:transparent;color:var(--ink);}
+.nbtn:focus-visible{outline:3px solid var(--ink);outline-offset:3px;}
+.nbtn svg{width:16px;height:16px;}
+.next-art{flex:0 0 190px;width:190px;height:auto;}
+@media (prefers-reduced-motion:no-preference){.nbtn{transition:background-color .15s,color .15s,transform .15s;}.nbtn:hover{transform:translateY(-2px);}}
+@media (max-width:680px){.next{padding:26px 22px;}.next-art{display:none;}}
+.lfoot{margin-top:80px;padding-top:18px;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center;justify-content:space-between;font-size:.82rem;color:var(--muted);}
+.lfoot div{display:flex;flex-wrap:wrap;gap:8px;}
+.lfoot a{font-size:.82rem;font-weight:600;padding:5px 11px;border:1px solid var(--line);border-radius:999px;background:var(--surface);color:var(--muted);text-decoration:none;}
+.lfoot a:hover{color:var(--ink);border-color:var(--ink);}
+.lfoot a:focus-visible{outline:3px solid var(--ink);outline-offset:2px;}
+.jump a.j5{--c:var(--g1);} .jump a.j6{--c:var(--g2);}
+
+input[type='text']{width:100%;font:inherit;padding:10px 12px;border:2px solid var(--line);border-radius:12px;background:var(--surface);color:var(--ink);margin:2px 0 12px;box-sizing:border-box;}
+input[type='text']:focus-visible{outline:3px solid var(--ink);outline-offset:2px;}
+.cols>div{min-width:0;}
+.fspin{display:inline-block;width:14px;height:14px;border:3px solid var(--line);border-top-color:var(--c);border-radius:50%;vertical-align:-2px;animation:fsp .7s linear infinite;}
+@keyframes fsp{to{transform:rotate(360deg);}}
+.skel{background:linear-gradient(90deg,#E4E8F2 25%,#F4F6FB 50%,#E4E8F2 75%);background-size:200% 100%;animation:shim 1.2s linear infinite;}
+@keyframes shim{to{background-position:-200% 0;}}
+@media (prefers-reduced-motion:reduce){.skel,.fspin{animation:none;}}
+.tipbtn{position:relative;}
+.tipbtn.hov:hover::after,.tipbtn.both:hover::after,.tipbtn.both:focus-visible::after{content:attr(data-tip);position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%);background:#14213D;color:#fff;padding:4px 10px;border-radius:6px;font-size:.8rem;white-space:nowrap;z-index:5;font-family:Inter,sans-serif;font-weight:600;}
+.tipbtn:focus-visible{outline:3px solid var(--ink);outline-offset:2px;}
+.hvb{display:inline-block;background:#2F6FD8;color:#fff;border-radius:10px;padding:10px 18px;font-weight:700;transition:background .15s;}
+.hvc{background:#fff;border:1px solid #D9DDEB;border-radius:12px;padding:12px;transition:transform .15s,box-shadow .15s;}
+.hvr{padding:9px 12px;border:1px solid #E4E8F2;border-radius:8px;}
+.hvl{color:#2F6FD8;text-decoration:none;}
+.hv-live .hvb:hover,.hv-force .hvb{background:#1E4FA6;}
+.hv-live .hvc:hover,.hv-force .hvc{transform:translateY(-3px);box-shadow:0 10px 20px rgba(20,33,61,.2);}
+.hv-live .hvr:hover,.hv-force .hvr{background:#E6EEFC;}
+.hv-live .hvl:hover,.hv-force .hvl{text-decoration:underline;}
+.fcb{font:inherit;background:#2F6FD8;color:#fff;border:0;border-radius:10px;padding:10px 18px;font-weight:700;cursor:pointer;}
+.fcl{color:#2F6FD8;}
+.fc-default :focus-visible{outline:auto;}
+.fc-ring :focus-visible{outline:3px solid #2F6FD8;outline-offset:3px;box-shadow:0 0 0 7px rgba(47,111,216,.25);}
+.fc-none :focus,.fc-none :focus-visible{outline:none !important;}
+.ac-on .acb:active{background:#1E4FA6;transform:scale(.95);}
+.ac-on .aci:active{background:#E6EEFC;transform:scale(.97);}
+.ac-on .act:active{transform:scale(.88);background:#B01E2D;}
+kbd{font-family:inherit;border:1px solid #9AA0BC;border-bottom-width:2px;border-radius:5px;padding:0 6px;font-size:.85em;background:#fff;color:#14213D;}
+
+</style>
+</head>
+<body>
+<nav class="site" id="sitenav" aria-label="Site"><a href="06-layout-and-composition.html">&larr; Layout and Composition</a><a href="index.html">All sections</a><a href="08-user-experience.html">Next: User Experience &rarr;</a></nav>
+<div id="home">
+<header class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <h1>Digital Interface Design</h1>
+      <p class="lead">43 ideas about the screens, parts and behaviours of digital products. Each one has a hands-on demo.</p>
+      <nav class="jump" aria-label="Jump to a group">
+        <a class="j1" href="#foundations">Foundations</a>
+        <a class="j2" href="#navigating">Navigation and finding</a>
+        <a class="j3" href="#components">Components</a>
+        <a class="j4" href="#states">States and feedback</a>
+        <a class="j5" href="#journeys">Screens and journeys</a>
+        <a class="j6" href="#devices">Designing for devices</a>
+      </nav>
+      <p class="note">Every card opens an in-depth lesson. Click a card, or the &ldquo;Read the full lesson&rdquo; pill on it, to begin.</p>
+    </div>
+    <div class="lab" id="lab"></div>
+  </div>
+</header>
+<main class="wrap" id="groups"></main>
+<footer>
+  <div class="wrap">
+    <aside class="next" aria-label="What to do next">
+      <div class="next-text">
+        <span class="next-tag">Up next</span>
+        <h2>User Experience</h2>
+        <p>Now that you know the interface, the next section looks at the whole experience around it: research, usability, testing and ethics.</p>
+        <div class="next-actions"><a class="nbtn primary" href="08-user-experience.html">Start User Experience <svg viewBox='0 0 24 24' aria-hidden='true' fill='none' stroke='currentColor' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'><path d='M5 12h14M13 6l6 6-6 6'/></svg></a><a class="nbtn" href="index.html">See all sections</a></div>
+      </div>
+      <svg class='next-art' viewBox='0 0 180 150' aria-hidden='true' focusable='false'><circle cx='50' cy='52' r='34' fill='var(--g1)'/><rect x='82' y='26' width='62' height='62' rx='14' fill='var(--g2)' opacity='.92' transform='rotate(10 113 57)'/><polygon points='40,138 84,70 120,138' fill='var(--g4)' opacity='.95'/><circle cx='142' cy='116' r='20' fill='var(--g3)'/></svg>
+    </aside>
+  </div>
+</footer>
+</div>
+<main class="wrap lesson" id="lesson" hidden></main>
+<script>
+function hslToHex(h,s,l){
+  h=((h%360)+360)%360; s/=100; l/=100;
+  var k=function(n){return (n+h/30)%12;};
+  var a=s*Math.min(l,1-l);
+  var f=function(n){return l-a*Math.max(-1,Math.min(k(n)-3,Math.min(9-k(n),1)));};
+  var x=function(v){return Math.round(v*255).toString(16).padStart(2,"0");};
+  return ("#"+x(f(0))+x(f(8))+x(f(4))).toUpperCase();
+}
+function textOn(hex){
+  var r=parseInt(hex.substr(1,2),16),g=parseInt(hex.substr(3,2),16),b=parseInt(hex.substr(5,2),16);
+  var lin=function(c){c/=255;return c<=0.03928?c/12.92:Math.pow((c+0.055)/1.055,2.4);};
+  var L=0.2126*lin(r)+0.7152*lin(g)+0.0722*lin(b);
+  return L>0.4?"#111111":"#FFFFFF";
+}
+function polar(cx,cy,r,deg){var a=(deg-90)*Math.PI/180;return [cx+r*Math.cos(a),cy+r*Math.sin(a)];}
+function wedge(cx,cy,r0,r1,a0,a1){
+  var p0=polar(cx,cy,r1,a0),p1=polar(cx,cy,r1,a1),p2=polar(cx,cy,r0,a1),p3=polar(cx,cy,r0,a0);
+  return 'M'+p0+'A'+r1+','+r1+' 0 0 1 '+p1+'L'+p2+'A'+r0+','+r0+' 0 0 0 '+p3+'Z';
+}
+function hexRgb(h){return [parseInt(h.substr(1,2),16),parseInt(h.substr(3,2),16),parseInt(h.substr(5,2),16)];}
+function mixHex(a,b,t){
+  var A=hexRgb(a),B=hexRgb(b);
+  return "#"+[0,1,2].map(function(i){return Math.round(A[i]+(B[i]-A[i])*t).toString(16).padStart(2,"0");}).join("").toUpperCase();
+}
+function prep(root){
+  var smooth=!(window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+  Array.prototype.slice.call(root.querySelectorAll('[data-scroll]')).forEach(function(b){
+    b.addEventListener('click',function(){var t=root.querySelector('#'+b.getAttribute('data-scroll'));if(t){t.scrollIntoView({behavior:smooth?'smooth':'auto',block:'start'});}});
+  });
+  return {$:function(s){return root.querySelector(s);},$$:function(s){return Array.prototype.slice.call(root.querySelectorAll(s));}};
+}
+function rgbToHsl(r,g,b){
+  r/=255;g/=255;b/=255;
+  var mx=Math.max(r,g,b),mn=Math.min(r,g,b),l=(mx+mn)/2,h=0,s=0,d=mx-mn;
+  if(d){s=d/(1-Math.abs(2*l-1));if(mx===r){h=((g-b)/d)%6;}else if(mx===g){h=(b-r)/d+2;}else{h=(r-g)/d+4;}h*=60;if(h<0){h+=360;}}
+  return [Math.round(h),Math.round(s*100),Math.round(l*100)];
+}
+function relLum(hex){
+  var c=hexRgb(hex).map(function(v){v/=255;return v<=0.03928?v/12.92:Math.pow((v+0.055)/1.055,2.4);});
+  return 0.2126*c[0]+0.7152*c[1]+0.0722*c[2];
+}
+function contrastRatio(a,b){var A=relLum(a),B=relLum(b);return (Math.max(A,B)+0.05)/(Math.min(A,B)+0.05);}
+function lerpHue(a,b,t){var d=((b-a+540)%360)-180;return (a+d*t+360)%360;}
+function hex2(n){return Math.max(0,Math.min(255,Math.round(n))).toString(16).padStart(2,'0');}
+function shell(title,sub,icon,secs){
+  var svgI='<svg viewBox="0 0 48 48" aria-hidden="true" focusable="false" style="fill:none;stroke:currentColor;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round">'+ICONS[icon]+'</svg>';
+  var back='<button class="btn" data-back type="button">← Back to '+SECTION_NAME+'</button>';
+  return back+'<div class="lhero"><div class="gbadge">'+svgI+'</div><div><h1>'+title+'</h1><p>'+sub+'</p></div></div><nav class="toc" aria-label="In this lesson">'+secs.map(function(s){return '<button class="chip" type="button" data-scroll="'+s[0]+'">'+s[1]+'</button>';}).join('')+'</nav>'+secs.map(function(s){return '<section class="lsec" id="'+s[0]+'">'+s[2]+'</section>';}).join('')+'<p style="margin-top:36px">'+back+'</p>';
+}
+function quick(arr){return `<h2>Quick check</h2><p>Click each question to reveal the answer.</p>`+arr.map(function(q,i){return `<details><summary>${i+1}. ${q[0]}</summary><p>${q[1]}</p></details>`;}).join('');}
+function bigideas(arr){return `<h2>The big ideas</h2><ul class='tk'>`+arr.map(function(x){return '<li>'+x+'</li>';}).join('')+'</ul>';}
+function steps(arr){return `<ol class='steps'>`+arr.map(function(x){return '<li>'+x+'</li>';}).join('')+'</ol>';}
+function chipsHtml(id,items,cur,lab){return `<div class='ctrls' id='${id}' role='group' aria-label='${lab}'>`+items.map(function(x){return `<button class='chip' type='button' data-v='${x[0]}' aria-pressed='${x[0]===cur}'>${x[1]}</button>`;}).join('')+`</div>`;}
+function bindChips(root,id,cb){var c=root.querySelector('#'+id);c.addEventListener('click',function(e){var b=e.target.closest('.chip');if(!b)return;Array.prototype.slice.call(c.querySelectorAll('.chip')).forEach(function(x){x.setAttribute('aria-pressed',x===b?'true':'false');});cb(b.getAttribute('data-v'));});}
+function rng(id,lab,min,max,val,step,unit){return `<label for='${id}'>${lab}: <span id='${id}v'>${val}</span>${unit||''}</label><input id='${id}' type='range' min='${min}' max='${max}' step='${step||1}' value='${val}'>`;}
+function onRng(root,id,cb){var el=root.querySelector('#'+id),sp=root.querySelector('#'+id+'v');el.addEventListener('input',function(){if(sp){sp.textContent=el.value;}cb(parseFloat(el.value));});}
+function pr(i,k){var x=Math.sin(i*127.1+k*311.7)*43758.5453;return x-Math.floor(x);}
+function copyText(t,btn){
+  function ok(){btn.classList.add('ok');clearTimeout(btn._t);btn._t=setTimeout(function(){btn.classList.remove('ok');},1400);}
+  function fallback(){try{var ta=document.createElement('textarea');ta.value=t;ta.setAttribute('readonly','');ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.select();var r=document.execCommand('copy');document.body.removeChild(ta);if(r){ok();}}catch(e){}}
+  if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(ok,fallback);}else{fallback();}
+}
+function wrapHex(root){
+  var w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,null),nodes=[],n,test=/#[0-9A-Fa-f]{6}(?![0-9A-Fa-f])/;
+  while((n=w.nextNode())){if(test.test(n.nodeValue)&&n.parentNode&&n.parentNode.closest&&!n.parentNode.closest('script,style,textarea,button,svg')){nodes.push(n);}}
+  nodes.forEach(function(n){
+    var frag=document.createDocumentFragment(),s=n.nodeValue,last=0,re=/#[0-9A-Fa-f]{6}(?![0-9A-Fa-f])/g,mm;
+    while((mm=re.exec(s))){
+      if(mm.index>last){frag.appendChild(document.createTextNode(s.slice(last,mm.index)));}
+      var b=document.createElement('button');b.type='button';b.className='hx';b.setAttribute('data-hex',mm[0].toUpperCase());b.setAttribute('aria-label','Copy '+mm[0].toUpperCase());b.textContent=mm[0];frag.appendChild(b);
+      last=mm.index+mm[0].length;
+    }
+    if(last<s.length){frag.appendChild(document.createTextNode(s.slice(last)));}
+    n.parentNode.replaceChild(frag,n);
+  });
+}
+function queueHex(){if(hxQueued){return;}hxQueued=true;requestAnimationFrame(function(){hxQueued=false;wrapHex(document.body);});}
+function slug(t){return t.toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"");}
+function svg(name){
+  return '<svg viewBox="0 0 48 48" aria-hidden="true" focusable="false">'+ICONS[name]+'</svg>';
+}
+var hxQueued=false;
+
+function siteFoot(){
+  var S=window.SITE||{},a='';
+  if(S.prev){a+='<a href="'+S.prev[1]+'">&larr; '+S.prev[0]+'</a>';}
+  a+='<a href="index.html">All sections</a>';
+  if(S.next){a+='<a href="'+S.next[1]+'">'+S.next[0]+' &rarr;</a>';}
+  return '<nav class="lfoot" aria-label="Other sections"><span>Explore other sections</span><div>'+a+'</div></nav>';
+}
+
+function startSite(){
+  var out='';
+  GROUPS.forEach(function(g){
+    out+='<section class="group '+g.cls+'" id="'+g.id+'"><div class="ghead"><div class="gbadge"><svg viewBox="0 0 48 48" aria-hidden="true" focusable="false" style="fill:none;stroke:currentColor;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round">'+ICONS[g.icon]+'</svg></div><div><h2>'+g.title+'</h2><p>'+g.intro+'</p></div></div><div class="grid">';
+    g.items.forEach(function(it){
+      var sl=slug(it[1]);
+      if(LESSONS[sl]){
+        out+='<a class="card has" href="#'+sl+'" data-lesson="'+sl+'"><div class="tile">'+svg(it[0])+'</div><h3>'+it[1]+'</h3><p>'+it[2]+'</p><span class="more">Read the full lesson</span></a>';
+      } else {
+        out+='<article class="card"><div class="tile">'+svg(it[0])+'</div><h3>'+it[1]+'</h3><p>'+it[2]+'</p></article>';
+      }
+    });
+    out+='</div></section>';
+  });
+  document.getElementById('groups').innerHTML=out;
+
+  var homeEl=document.getElementById('home'),lessonEl=document.getElementById('lesson');
+  function showLesson(id){
+    var L=LESSONS[id];
+    if(!L){return;}
+    homeEl.hidden=true;lessonEl.hidden=false;lessonEl.className='wrap lesson '+(L.g||'');
+    var sn=document.getElementById('sitenav');if(sn){sn.hidden=true;}
+    lessonEl.innerHTML=L.html+siteFoot();
+    L.init(lessonEl);
+    window.scrollTo(0,0);
+    try{history.replaceState(null,'','#'+id);}catch(e){}
+  }
+  function showHome(){
+    lessonEl.hidden=true;lessonEl.innerHTML='';homeEl.hidden=false;
+    var sn=document.getElementById('sitenav');if(sn){sn.hidden=false;}
+    window.scrollTo(0,0);
+    try{history.replaceState(null,'',location.pathname+location.search);}catch(e){}
+  }
+  document.getElementById('groups').addEventListener('click',function(e){
+    var a=e.target.closest('a[data-lesson]');
+    if(a){e.preventDefault();showLesson(a.getAttribute('data-lesson'));}
+  });
+  lessonEl.addEventListener('click',function(e){
+    if(e.target.closest('[data-back]')){showHome();}
+  });
+  Array.prototype.slice.call(document.querySelectorAll('.jump a')).forEach(function(a){
+    a.addEventListener('click',function(e){
+      var t=document.getElementById((a.getAttribute('href')||'').slice(1));
+      if(!t){return;}
+      e.preventDefault();
+      var smooth=!(window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+      t.scrollIntoView({behavior:smooth?'smooth':'auto',block:'start'});
+    });
+  });
+  document.addEventListener('click',function(e){
+    var b=e.target.closest&&e.target.closest('.hx');
+    if(b){e.preventDefault();e.stopPropagation();copyText(b.getAttribute('data-hex'),b);}
+  });
+  new MutationObserver(queueHex).observe(document.body,{childList:true,subtree:true,characterData:true});
+  queueHex();
+  var startId=(location.hash||'').slice(1);
+  if(LESSONS[startId]){showLesson(startId);}
+}
+
+var SECTION_NAME='Digital Interface Design';
+var SITE={prev:['Layout and Composition','06-layout-and-composition.html'],next:['User Experience','08-user-experience.html']};
+
+var ICONS={
+  ui:`<rect x='9' y='5' width='30' height='38' rx='4'/><path d='M15 14h18M15 22h18M15 30h10'/>`,
+  ux:`<circle cx='24' cy='24' r='16'/><path d='M16 28c4 5 12 5 16 0'/><circle cx='18' cy='20' r='1.5' fill='currentColor'/><circle cx='30' cy='20' r='1.5' fill='currentColor'/>`,
+  interaction:`<path d='M14 8l22 12-10 3 6 12-5 2-6-12-7 7z'/>`,
+  ia:`<rect x='17' y='5' width='14' height='9' rx='2'/><rect x='4' y='34' width='14' height='9' rx='2'/><rect x='30' y='34' width='14' height='9' rx='2'/><path d='M24 14v9M11 34V23h26v11'/>`,
+  navigation:`<circle cx='24' cy='24' r='17'/><path d='M31 17l-4 10-10 4 4-10z'/>`,
+  menus:`<path d='M8 12h32M8 24h32M8 36h32'/>`,
+  headers:`<rect x='5' y='8' width='38' height='12' rx='2'/><path d='M5 28h38M5 36h26'/>`,
+  footers:`<rect x='5' y='28' width='38' height='12' rx='2'/><path d='M5 12h38M5 20h26'/>`,
+  tabs:`<rect x='5' y='16' width='38' height='24' rx='2'/><path d='M5 16v-6h14v6'/>`,
+  breadcrumbs:`<path d='M6 24h8M18 24h8M30 24h12'/><path d='M14 20l4 4-4 4M26 20l4 4-4 4'/>`,
+  pagination:`<rect x='4' y='17' width='9' height='14' rx='2'/><rect x='16' y='17' width='9' height='14' rx='2' fill='currentColor' fill-opacity='.3'/><rect x='28' y='17' width='9' height='14' rx='2'/>`,
+  search:`<circle cx='21' cy='21' r='12'/><path d='M30 30l11 11'/>`,
+  filters:`<path d='M6 10h36L28 26v12l-8 4V26z'/>`,
+  cards:`<rect x='7' y='6' width='34' height='36' rx='4'/><rect x='7' y='6' width='34' height='16' rx='4' fill='currentColor' fill-opacity='.25'/><path d='M13 30h22M13 36h12'/>`,
+  buttons:`<rect x='5' y='14' width='38' height='20' rx='10'/><path d='M16 24h16'/>`,
+  cta:`<rect x='5' y='14' width='38' height='20' rx='10' fill='currentColor' fill-opacity='.3'/><path d='M18 24h12M26 19l5 5-5 5'/>`,
+  forms:`<rect x='7' y='6' width='34' height='6' rx='2'/><rect x='7' y='16' width='34' height='6' rx='2'/><rect x='7' y='26' width='34' height='6' rx='2'/><rect x='7' y='36' width='16' height='6' rx='3' fill='currentColor'/>`,
+  inputs:`<rect x='5' y='15' width='38' height='18' rx='3'/><path d='M12 21v6'/>`,
+  dropdowns:`<rect x='5' y='8' width='38' height='12' rx='3'/><path d='M30 12l4 4 4-4'/><rect x='5' y='24' width='38' height='16' rx='3' stroke-dasharray='3 3'/>`,
+  toggles:`<rect x='6' y='15' width='36' height='18' rx='9'/><circle cx='33' cy='24' r='6' fill='currentColor'/>`,
+  modals:`<rect x='4' y='4' width='40' height='40' rx='3' stroke-dasharray='3 3'/><rect x='11' y='13' width='26' height='22' rx='3'/>`,
+  tooltips:`<rect x='6' y='6' width='36' height='20' rx='4'/><path d='M20 26l4 6 4-6'/><circle cx='24' cy='40' r='3' fill='currentColor'/>`,
+  alerts:`<path d='M24 6l19 34H5z'/><path d='M24 18v10M24 33v1'/>`,
+  notifications:`<path d='M10 34V22a14 14 0 0 1 28 0v12l4 4H6zM19 42h10'/>`,
+  empty:`<rect x='6' y='14' width='36' height='24' rx='3' stroke-dasharray='4 3'/><path d='M18 26h12'/>`,
+  loading:`<circle cx='24' cy='24' r='15' stroke-dasharray='60 34'/>`,
+  error:`<circle cx='24' cy='24' r='16'/><path d='M18 18l12 12M30 18L18 30'/>`,
+  success:`<circle cx='24' cy='24' r='16'/><path d='M16 25l6 6 11-12'/>`,
+  hover:`<circle cx='24' cy='24' r='16' stroke-dasharray='3 3'/><path d='M20 18l12 6-5 2 3 6-3 1-3-6-4 4z'/>`,
+  focus:`<rect x='9' y='15' width='30' height='18' rx='5'/><rect x='4' y='10' width='40' height='28' rx='8' stroke-dasharray='4 3'/>`,
+  active:`<rect x='9' y='15' width='30' height='18' rx='9' fill='currentColor' fill-opacity='.4'/>`,
+  disabled:`<rect x='7' y='15' width='34' height='18' rx='9' stroke-dasharray='3 3'/><path d='M12 36L36 12'/>`,
+  micro:`<path d='M24 6v10M24 32v10M6 24h10M32 24h10M12 12l6 6M30 30l6 6M36 12l-6 6M18 30l-6 6'/>`,
+  onboarding:`<circle cx='20' cy='16' r='7'/><path d='M8 42c0-9 5-14 12-14s12 5 12 14'/><path d='M38 6l2 4 4 2-4 2-2 4-2-4-4-2 4-2z'/>`,
+  dashboards:`<rect x='5' y='6' width='16' height='14' rx='2'/><rect x='25' y='6' width='18' height='14' rx='2'/><rect x='5' y='24' width='38' height='18' rx='2'/><path d='M10 36l6-6 6 4 6-8 8 6'/>`,
+  flows:`<rect x='4' y='6' width='14' height='9' rx='2'/><path d='M11 15v8h26v8'/><rect x='30' y='31' width='14' height='9' rx='2'/>`,
+  wireframes:`<rect x='7' y='6' width='34' height='36' rx='2' stroke-dasharray='4 3'/><path d='M7 18h34M17 18v24'/>`,
+  mockups:`<rect x='7' y='6' width='34' height='36' rx='4'/><rect x='12' y='11' width='24' height='12' rx='2' fill='currentColor' fill-opacity='.35'/><path d='M12 30h24M12 36h14'/>`,
+  prototypes:`<rect x='5' y='8' width='14' height='24' rx='2'/><rect x='29' y='16' width='14' height='24' rx='2'/><path d='M20 20h8M25 16l4 4-4 4'/>`,
+  responsive:`<rect x='4' y='9' width='28' height='22' rx='2'/><rect x='34' y='17' width='10' height='18' rx='2'/>`,
+  mobilefirst:`<rect x='15' y='5' width='18' height='38' rx='4'/><path d='M22 38h4'/>`,
+  desktop:`<rect x='5' y='7' width='38' height='26' rx='3'/><path d='M18 40h12M24 33v7'/>`,
+  touch:`<circle cx='24' cy='24' r='16' stroke-dasharray='4 3'/><circle cx='24' cy='24' r='6' fill='currentColor'/>`
+};
+
+var GROUPS=[
+ {cls:'',id:'foundations',title:'Foundations',icon:'ui',intro:'What interface design is, and how it relates to the wider experience.',items:[
+  ['ui','User interface design','Designing the visible, interactive parts of a product.'],
+  ['ux','User experience design','Designing how the whole experience feels and works.'],
+  ['interaction','Interaction design','Designing how people and interfaces respond to each other.'],
+  ['ia','Information architecture','Organising and labelling content so people can find it.']
+ ]},
+ {cls:'f',id:'navigating',title:'Navigation and finding',icon:'navigation',intro:'Helping people move around and find what they need.',items:[
+  ['navigation','Navigation','The systems that let people move through a product.'],
+  ['menus','Menus','Lists of choices, from dropdowns to full-screen drawers.'],
+  ['headers','Headers','The top of a page, with identity and key actions.'],
+  ['footers','Footers','The bottom of a page, a safety net of links and information.'],
+  ['tabs','Tabs','Switching between related views in the same space.'],
+  ['breadcrumbs','Breadcrumbs','A trail showing where you are in the hierarchy.'],
+  ['pagination','Pagination','Splitting long lists into pages.'],
+  ['search','Search','Letting people type what they want.'],
+  ['filters','Filters','Narrowing a long list down to what matters.']
+ ]},
+ {cls:'s',id:'components',title:'Components',icon:'cards',intro:'The building blocks that people click, type into and read.',items:[
+  ['cards','Cards','Containers that group related content into one unit.'],
+  ['buttons','Buttons','Controls that trigger actions.'],
+  ['cta','CTAs (calls to action)','The prompts that ask people to take a next step.'],
+  ['forms','Forms','Collections of fields for gathering information.'],
+  ['inputs','Input fields','Places to type text, numbers and more.'],
+  ['dropdowns','Dropdowns','Lists that open to reveal choices.'],
+  ['toggles','Toggles','Switches that turn a setting on or off.'],
+  ['modals','Modals','Dialogs that interrupt to demand attention.'],
+  ['tooltips','Tooltips','Small hints that appear on hover or focus.'],
+  ['alerts','Alerts','Messages that draw attention to important information.'],
+  ['notifications','Notifications','Short updates that arrive without being asked for.']
+ ]},
+ {cls:'c',id:'states',title:'States and feedback',icon:'loading',intro:'How an interface responds, from the moment of interaction to success or failure.',items:[
+  ['empty','Empty states','What people see when there is nothing to show yet.'],
+  ['loading','Loading states','What people see while they wait.'],
+  ['error','Error states','What happens when something goes wrong.'],
+  ['success','Success states','Confirming that something worked.'],
+  ['hover','Hover states','How things look when the pointer is over them.'],
+  ['focus','Focus states','The visible marker for keyboard navigation.'],
+  ['active','Active states','How things look at the moment they are pressed.'],
+  ['disabled','Disabled states','How unavailable controls are shown.'],
+  ['micro','Microinteractions','Small, single-purpose moments of feedback.']
+ ]},
+ {cls:'',id:'journeys',title:'Screens and journeys',icon:'flows',intro:'Planning, drawing and testing whole screens and the paths between them.',items:[
+  ['onboarding','Onboarding','Helping new users reach their first success.'],
+  ['dashboards','Dashboards','Screens that summarise key information at a glance.'],
+  ['flows','User flows','Diagrams of the steps people take to reach a goal.'],
+  ['wireframes','Wireframes','Simple layout drawings without visual polish.'],
+  ['mockups','Mockups','Realistic still images of a design.'],
+  ['prototypes','Prototypes','Clickable models for testing before building.']
+ ]},
+ {cls:'f',id:'devices',title:'Designing for devices',icon:'responsive',intro:'Adapting interfaces to the screens and fingers that use them.',items:[
+  ['responsive','Responsive UI','Interfaces that adapt as the screen changes size.'],
+  ['mobilefirst','Mobile-first design','Starting with the smallest screen and growing up.'],
+  ['desktop','Desktop design','Using the extra space, precision and keyboard of desktops.'],
+  ['touch','Touch targets','Making tappable things big enough for fingers.']
+ ]}
+];
+
+/* ===== helpers ===== */
+function tk(o){o=o||{};var h=o.hue==null?215:o.hue;return {h:h,c:hslToHex(h,70,46),cd:hslToHex(h,70,34),cl:hslToHex(h,70,94),r:o.r==null?10:o.r};}
+function dsBtn(t,o){
+  o=o||{};var v=o.v||'primary',sz=o.sz||'M',st=o.state||'default';
+  var pad={S:'6px 12px',M:'10px 18px',L:'14px 26px'}[sz],fs={S:'.85rem',M:'1rem',L:'1.15rem'}[sz];
+  var hov=(st==='hover'||st==='active'),bg,col,bd='2px solid transparent',ex='';
+  if(v==='primary'){bg=hov?t.cd:t.c;col='#fff';}else if(v==='secondary'){bg=hov?t.cl:'transparent';col=t.c;bd='2px solid '+t.c;}else if(v==='ghost'){bg=hov?t.cl:'transparent';col=t.c;}else{bg=hov?'#B01E2D':'#D62839';col='#fff';}
+  if(st==='disabled'){bg=(v==='secondary'||v==='ghost')?'transparent':'#D8DBE8';col='#8A90AA';bd=v==='secondary'?'2px solid #D8DBE8':bd;ex+='cursor:not-allowed;';}
+  if(st==='focus'){ex+='outline:3px solid #14213D;outline-offset:3px;';}
+  if(st==='active'){ex+='transform:scale(.97);';}
+  return `<span style='display:${o.full?'flex':'inline-flex'};justify-content:center;align-items:center;gap:6px;background:${bg};color:${col};border:${bd};border-radius:${t.r}px;padding:${pad};font-size:${fs};font-weight:700;font-family:Inter,sans-serif;${ex}'>${o.label||'Button'}</span>`;
+}
+function dsInput(t,o){
+  o=o||{};var st=o.state||'default',bd='2px solid #9AA0BC',ex='',bg='#fff',col='#14213D';
+  if(st==='focus'){bd='2px solid '+t.c;ex='box-shadow:0 0 0 4px '+t.cl+';';}
+  if(st==='error'){bd='2px solid #D62839';}
+  if(st==='disabled'){bg='#EEF0F6';col='#8A90AA';bd='2px solid #D8DBE8';}
+  return `<div style='font-family:Inter,sans-serif;max-width:300px'><div style='font-size:.85rem;font-weight:700;color:#14213D;margin-bottom:4px'>${o.label||'Email'}</div><div style='background:${bg};border:${bd};border-radius:${t.r}px;padding:10px 12px;color:${col};${ex}'>${o.value||'name@example.com'}</div><div style='font-size:.8rem;margin-top:4px;color:${st==='error'?'#D62839':'#5A6180'}'>${st==='error'?'Enter a valid email address.':(o.help||'')}</div></div>`;
+}
+function togg(id,items,state){return `<div class='ctrls' id='${id}' role='group' aria-label='Options'>`+items.map(function(x){return `<button class='chip' type='button' data-v='${x[0]}' aria-pressed='${!!state[x[0]]}'>${x[1]}</button>`;}).join('')+`</div>`;}
+function bindTogg(root,id,state,cb){var c=root.querySelector('#'+id);c.addEventListener('click',function(e){var b=e.target.closest('.chip');if(!b)return;var k=b.getAttribute('data-v');state[k]=!state[k];b.setAttribute('aria-pressed',state[k]?'true':'false');cb();});}
+function boxw(inner,extra){return `<div style='background:#fff;color:#14213D;border-radius:14px;padding:16px;font-family:Inter,sans-serif;${extra||''}'>${inner}</div>`;}
+
+/* ===== lessons: Foundations ===== */
+var L_UI=shell('User interface design','Designing the visible, interactive parts of a product.','ui',[
+['ui-what','What it is',`<h2>What user interface design is</h2><p>User interface (UI) design is the craft of the things people <b>see and touch</b> on a screen: layout, colour, typography, icons, buttons and every other control. The interface is the surface of the product; good UI makes it <b>clear, consistent and pleasant</b> to use.</p><p>UI design is one part of the bigger experience, which is the focus of UX design.</p>`],
+['ui-explore','From structure to polish',`<h2>From structure to polish</h2><p>The same screen at four stages of UI design.</p><div class='panel'>${chipsHtml('uic',[['0','Structure only'],['1','Add colour'],['2','Add type'],['3','Add polish']],'0','Stage')}<div id='uio' style='margin-top:14px;max-width:320px'></div><p class='mood' id='uin' aria-live='polite'></p></div>`],
+['ui-use','Use it well',`<h2>Using UI design well</h2><ul class='tk'><li><b>Start with structure.</b> Layout and hierarchy first, decoration later.</li><li><b>Use a consistent set of components.</b></li><li><b>Design every state,</b> not just the happy path.</li></ul>`],
+['ui-check','Quick check',quick([['What does UI design cover?','The visible, interactive parts: layout, colour, type, icons and controls.'],['What should come first, structure or decoration?','Structure.'],['Is UI the same as UX?','No. UI is the surface; UX covers the whole experience.']])],
+['ui-recap','Big ideas',bigideas(['UI is the surface people see and touch.','Structure first, polish last.','Consistency makes it easier to use.'])]
+]);
+
+var L_UX=shell('User experience design','Designing how the whole experience feels and works.','ux',[
+['ux-what','What it is',`<h2>What user experience design is</h2><p>User experience (UX) design shapes the <b>whole journey</b> a person has with a product: whether they can find it, understand it, finish their task and feel good about it afterwards. It includes research, structure, flows and testing as well as the interface. The term was popularised by Don Norman in the 1990s.</p><p>A beautiful interface can sit on a bad experience, and the reverse.</p>`],
+['ux-explore','Looks versus works',`<h2>Looks versus works</h2><div class='panel'>${chipsHtml('uxc',[['pretty','Beautiful, hard to use'],['plain','Plain, easy to use'],['both','Beautiful and easy']],'pretty','Version')}<div id='uxo' style='margin-top:14px;max-width:360px'></div><p class='mood' id='uxn' aria-live='polite'></p></div>`],
+['ux-use','Use it well',`<h2>Using UX thinking well</h2><ul class='tk'><li><b>Start with what people are trying to do,</b> not with the screen.</li><li><b>Remove steps.</b> Every extra step loses some people.</li><li><b>Test with real users</b> early and often.</li></ul>`],
+['ux-check','Quick check',quick([['What does UX design cover?','The whole journey: research, structure, flows, interface and testing.'],['Who popularised the term UX?','Don Norman.'],['Can a beautiful interface still have poor UX?','Yes, if it is slow, confusing or has too many steps.']])],
+['ux-recap','Big ideas',bigideas(['UX is the whole experience, not just the screen.','Fewer steps beat prettier steps.','Test with real people.'])]
+]);
+
+var L_IXD=shell('Interaction design','How people and interfaces respond to each other.','interaction',[
+['ix-what','What it is',`<h2>What interaction design is</h2><p>Interaction design (IxD) decides <b>how the interface behaves</b> when people do things: tap, swipe, drag, hover, press and hold, type. It defines what happens, how it feels and what feedback is given. The term was coined by Bill Moggridge and Bill Verplank in the 1980s.</p>`],
+['ix-explore','Try the gestures',`<h2>Try the gestures</h2><div class='panel'>${chipsHtml('ixc',[['tap','Tap'],['drag','Drag'],['hover','Hover'],['hold','Press and hold']],'tap','Gesture')}<div id='ixo' style='margin-top:14px;min-height:90px'></div><p class='mood' id='ixn' aria-live='polite'></p></div>`],
+['ix-use','Use it well',`<h2>Using interaction design well</h2><ul class='tk'><li><b>Make the response immediate and clear.</b></li><li><b>Use gestures people already know.</b> Hidden or novel gestures need a visible alternative.</li><li><b>Do not rely on hover alone,</b> since touch screens have none.</li></ul>`],
+['ix-check','Quick check',quick([['What does interaction design define?','How an interface behaves in response to what people do.'],['Why not rely on hover alone?','Touch screens have no hover.'],['What should accompany a hidden gesture?','A visible alternative.']])],
+['ix-recap','Big ideas',bigideas(['IxD is the behaviour of the interface.','Feedback must be immediate and clear.','Offer visible alternatives to hidden gestures.'])]
+]);
+
+var IAS={flat:['Flat list','12 categories in one long list.','Everything is one click away, but the list is overwhelming.',1],group:['Grouped','3 groups: Women, Men, Sale, each with sub-categories.','A balance of choice and depth.',2],deep:['Too deep','Five nested levels.','Tidy, but you need five clicks to reach anything.',5]};
+var L_IA=shell('Information architecture','Organising and labelling content so people can find it.','ia',[
+['ia-what','What it is',`<h2>What information architecture is</h2><p>Information architecture (IA) is how a product\u2019s content is <b>organised, grouped and labelled</b>. It decides the structure people navigate. Good IA lets someone find what they want without thinking about where it might be.</p><p>Common methods include <b>card sorting</b> (asking people to group topics), <b>tree testing</b> and <b>sitemaps</b>.</p>`],
+['ia-explore','Compare structures',`<h2>Compare three structures</h2><p>The same 12 product categories, organised three ways. How many clicks to reach \u201cRunning shoes\u201d?</p><div class='panel'>${chipsHtml('iac',Object.keys(IAS).map(function(k){return [k,IAS[k][0]];}),'group','Structure')}<div id='iao' style='margin-top:14px'></div></div>`],
+['ia-use','Use it well',`<h2>Using IA well</h2><ul class='tk'><li><b>Use labels people use.</b> Test them.</li><li><b>Keep it shallow.</b> Three levels are plenty for most products.</li><li><b>Group by how people think,</b> not by how the company is organised.</li></ul>`],
+['ia-check','Quick check',quick([['What is card sorting?','Asking people to group topics so you can see how they think.'],['How deep should structure go?','Usually no more than about three levels.'],['Should you group by company departments?','No. Group by how people think.']])],
+['ia-recap','Big ideas',bigideas(['IA organises and labels content.','Keep structures shallow.','Use people\u2019s words, and test with card sorting.'])]
+]);
+
+/* ===== lessons: Navigation and finding ===== */
+var NAVT={top:['Top bar','A row of links across the top.','Best for sites with a handful of main sections.'],side:['Sidebar','A vertical list down the left.','Best for tools and dashboards with many sections.'],bottom:['Bottom tab bar','Three to five icons along the bottom.','Best for mobile apps, within thumb reach.'],hamb:['Hamburger menu','A three-line icon that opens a menu.','Saves space but hides options, so use it for secondary items.']};
+var L_NAV=shell('Navigation','The systems that let people move through a product.','navigation',[
+['nv-what','What it is',`<h2>What navigation is</h2><p>Navigation is the set of controls that lets people <b>find their way around</b>: where am I, where can I go, and how do I get back? Good navigation answers all three at a glance.</p>`],
+['nv-explore','Compare patterns',`<h2>Compare patterns</h2><div class='panel'>${chipsHtml('nvc',Object.keys(NAVT).map(function(k){return [k,NAVT[k][0]];}),'top','Pattern')}<div id='nvo' style='margin-top:14px'></div><p class='mood' id='nvn' aria-live='polite'></p></div>`],
+['nv-use','Use it well',`<h2>Using navigation well</h2><ul class='tk'><li><b>Show where you are.</b> Highlight the current item.</li><li><b>Keep it consistent</b> on every screen.</li><li><b>Limit the top level to about five to seven items.</b></li></ul>`],
+['nv-check','Quick check',quick([['What three questions should navigation answer?','Where am I, where can I go, and how do I get back?'],['Which pattern suits mobile apps?','A bottom tab bar.'],['How many top-level items are sensible?','About five to seven.']])],
+['nv-recap','Big ideas',bigideas(['Navigation helps people find their way.','Choose the pattern that fits the product and device.','Show current location and stay consistent.'])]
+]);
+
+var L_MENUS=shell('Menus','Lists of choices.','menus',[
+['mn-what','What they are',`<h2>What menus are</h2><p>A menu is a <b>list of choices</b> that appears when needed. Common kinds: <b>dropdown menus</b> (open under a link), <b>mega menus</b> (large panels with groups of links), <b>context menus</b> (open on right-click or long-press) and <b>drawers</b> (slide in from the side).</p>`],
+['mn-explore','Open a menu',`<h2>Open a menu</h2><div class='panel'>${chipsHtml('mnc',[['drop','Dropdown'],['mega','Mega menu'],['ctx','Context menu'],['drawer','Drawer']],'drop','Type')}<div class='ctrls'><button class='btn' id='mnb' type='button'>Open or close</button></div><div id='mno' style='margin-top:6px;min-height:200px'></div></div>`],
+['mn-use','Use it well',`<h2>Using menus well</h2><ul class='tk'><li><b>Keep dropdowns short</b> and clear.</li><li><b>Make them work with a keyboard.</b> Arrow keys, Enter and Escape.</li><li><b>Open on click, not only on hover,</b> so touch users can use them.</li></ul>`],
+['mn-check','Quick check',quick([['What is a context menu?','A menu that opens on right-click or long-press, with actions for that item.'],['Why open on click rather than hover?','Touch screens have no hover.'],['Which keys should work in a menu?','Arrow keys, Enter and Escape.']])],
+['mn-recap','Big ideas',bigideas(['Menus offer choices when needed.','Dropdown, mega, context and drawer.','Support keyboard and touch.'])]
+]);
+
+var L_HEADERS=shell('Headers','The top of a page.','headers',[
+['hd-what','What they are',`<h2>What headers are</h2><p>The header is the strip at the top of a page. It usually holds the <b>logo</b> (linking home), <b>main navigation</b>, and key actions such as <b>search</b>, <b>account</b> and one <b>call to action</b>. It is the first thing people see and the first place they look when lost.</p>`],
+['hd-explore','Build a header',`<h2>Build a header</h2><p>Switch elements on and watch the header fill up.</p><div class='panel'>${togg('hdt',[['logo','Logo'],['links','Nav links'],['search','Search'],['account','Account'],['cta','Call to action']],{logo:1,links:1})}<div id='hdo' style='margin-top:14px'></div><p class='mood' id='hdn' aria-live='polite'></p></div>`],
+['hd-use','Use it well',`<h2>Using headers well</h2><ul class='tk'><li><b>Keep it light.</b> Every item competes with the others.</li><li><b>One call to action,</b> clearly distinct.</li><li><b>Make the logo link home.</b> People expect it.</li></ul>`],
+['hd-check','Quick check',quick([['What does a header usually contain?','Logo, main navigation and a few key actions.'],['How many calls to action in a header?','One.'],['Where should the logo link?','To the home page.']])],
+['hd-recap','Big ideas',bigideas(['A header holds identity, navigation and key actions.','Keep it light.','One call to action; logo links home.'])]
+]);
+
+var L_FOOTERS=shell('Footers','The safety net at the bottom.','footers',[
+['ft-what','What they are',`<h2>What footers are</h2><p>The footer is the strip at the bottom of a page. It holds things people look for last or rarely: <b>secondary links, contact details, legal information, social links, newsletter sign-up</b>. It is also a <b>safety net</b>: people who reach the bottom without finding what they want still have somewhere to go.</p>`],
+['ft-explore','Build a footer',`<h2>Build a footer</h2><div class='panel'>${togg('ftt',[['links','Link groups'],['contact','Contact'],['news','Newsletter'],['legal','Legal'],['social','Social']],{links:1,legal:1})}<div id='fto' style='margin-top:14px'></div></div>`],
+['ft-use','Use it well',`<h2>Using footers well</h2><ul class='tk'><li><b>Group links under clear headings.</b></li><li><b>Include the essentials:</b> contact, privacy and terms.</li><li><b>Repeat key navigation</b> so people at the bottom can continue.</li></ul>`],
+['ft-check','Quick check',quick([['What belongs in a footer?','Secondary links, contact, legal information, social links and sign-up.'],['Why call a footer a safety net?','People who reach the bottom still have somewhere to go.'],['What legal links are common?','Privacy policy and terms of use.']])],
+['ft-recap','Big ideas',bigideas(['Footers hold secondary and legal content.','They act as a safety net.','Group links clearly.'])]
+]);
+
+var L_TABS=shell('Tabs','Switching between related views.','tabs',[
+['tb-what','What they are',`<h2>What tabs are</h2><p>Tabs let people switch between <b>related views in the same space</b>, such as Overview, Details and Reviews on a product page. Only one view shows at a time. They are best for content at the same level that people may want to compare or revisit.</p>`],
+['tb-explore','Try the tabs',`<h2>Try the tabs</h2><p>They really work: click through them, or use the arrow keys.</p><div class='panel'>${chipsHtml('tbs',[['line','Underline'],['pill','Pill'],['seg','Segmented']],'line','Style')}<div id='tbo' style='margin-top:14px'></div></div>`],
+['tb-use','Use it well',`<h2>Using tabs well</h2><ul class='tk'><li><b>Two to six tabs.</b> More becomes a menu.</li><li><b>Short, clear labels.</b></li><li><b>Make the selected tab obvious,</b> with more than colour alone.</li><li><b>Support the arrow keys</b> and use proper roles for screen readers.</li></ul>`],
+['tb-check','Quick check',quick([['What are tabs best for?','Related views at the same level, shown one at a time.'],['How many tabs are sensible?','Two to six.'],['How should the selected tab be shown?','Clearly, with more than colour alone.']])],
+['tb-recap','Big ideas',bigideas(['Tabs switch related views in one space.','Keep them few and clear.','Make selection obvious and keyboard-friendly.'])]
+]);
+
+var L_CRUMBS=shell('Breadcrumbs','A trail showing where you are.','breadcrumbs',[
+['bc-what','What they are',`<h2>What breadcrumbs are</h2><p>Breadcrumbs are a <b>trail of links</b> showing where the current page sits in the hierarchy, for example Home / Shop / Shoes / Trail running. Named after the trail of breadcrumbs in Hansel and Gretel, they help people understand their location and jump back up a level.</p>`],
+['bc-explore','Change the depth',`<h2>Change the depth</h2><div class='panel'>${rng('bcd','Levels deep',1,5,4)}${chipsHtml('bcm',[['full','Full trail'],['short','Collapsed for small screens']],'full','Display')}<div id='bco' style='margin-top:14px'></div><p class='mood' id='bcn' aria-live='polite'></p></div>`],
+['bc-use','Use it well',`<h2>Using breadcrumbs well</h2><ul class='tk'><li><b>Show the hierarchy,</b> not the history of pages visited.</li><li><b>Make every step a link,</b> except the current page.</li><li><b>Collapse the middle on small screens.</b></li></ul>`],
+['bc-check','Quick check',quick([['What do breadcrumbs show?','Where the current page sits in the hierarchy.'],['Should the current page be a link?','No, it is the last item, shown as plain text.'],['How do they adapt to small screens?','The middle levels collapse into an ellipsis.']])],
+['bc-recap','Big ideas',bigideas(['Breadcrumbs show location in the hierarchy.','Every step but the last is a link.','Collapse the middle on small screens.'])]
+]);
+
+var L_PAGE=shell('Pagination','Splitting long lists into pages.','pagination',[
+['pg-what','What it is',`<h2>What pagination is</h2><p>Pagination splits a long list into <b>numbered pages</b>. The alternatives are a <b>Load more</b> button and <b>infinite scroll</b>. Pagination gives people a sense of place and makes it easy to return to a spot, which suits search results. Infinite scroll suits casual browsing, but it makes footers unreachable and positions hard to find again.</p>`],
+['pg-explore','Page through',`<h2>Page through</h2><div class='panel'>${rng('pgt','Total pages',3,60,24)}${chipsHtml('pgs',[['num','Numbered'],['pn','Previous and next'],['more','Load more']],'num','Style')}<div id='pgo' style='margin-top:14px'></div><p class='mood' id='pgn' aria-live='polite'></p></div>`],
+['pg-use','Use it well',`<h2>Using pagination well</h2><ul class='tk'><li><b>Show the current page, first, last and neighbours,</b> with an ellipsis between.</li><li><b>Make targets big enough to tap.</b></li><li><b>Keep position in the address</b> so Back works.</li></ul>`],
+['pg-check','Quick check',quick([['What are the alternatives to pagination?','Load more buttons and infinite scroll.'],['Which suits search results?','Pagination.'],['Why use an ellipsis?','To keep the control short when there are many pages.']])],
+['pg-recap','Big ideas',bigideas(['Pagination gives a sense of place.','Alternatives: load more and infinite scroll.','Show first, last, current and neighbours.'])]
+]);
+
+var SRCH=['Running shoes','Rain jacket','Rucksack 30L','Trail socks','Water bottle','Wool hat','Waterproof trousers','Headtorch','Sleeping bag','Trekking poles','Sun cream','Walking boots'];
+var L_SEARCH=shell('Search','Letting people type what they want.','search',[
+['sr-what','What it is',`<h2>What search is</h2><p>Search lets people <b>type what they want</b> instead of browsing. It matters most when a product has lots of content. Good search offers <b>suggestions as you type</b>, forgives typos, shows what matched, and handles <b>no results</b> helpfully.</p>`],
+['sr-explore','Try it',`<h2>Try the search</h2><p>Type \u201cr\u201d or \u201cwa\u201d, or something that does not exist.</p><div class='panel'><label for='srq'>Search products</label><input id='srq' type='text' placeholder='Search...' autocomplete='off'><div id='sro' aria-live='polite'></div></div>`],
+['sr-use','Use it well',`<h2>Using search well</h2><ul class='tk'><li><b>Put it where people expect it,</b> top right or top centre.</li><li><b>Make the field wide enough</b> to type a real query.</li><li><b>Handle empty results:</b> suggest alternatives or ask people to check spelling.</li><li><b>Highlight the matching text.</b></li></ul>`],
+['sr-check','Quick check',quick([['What should search do as you type?','Offer suggestions.'],['What should happen with no results?','Suggest alternatives and help people recover.'],['Where do people expect search?','Top right or top centre.']])],
+['sr-recap','Big ideas',bigideas(['Search lets people state what they want.','Suggestions, forgiveness and helpful empty results.','Put it where people expect it.'])]
+]);
+
+var PRODS=[['Trail runner','shoes',89],['Road runner','shoes',99],['Rain shell','jackets',120],['Fleece','jackets',65],['Daypack','bags',55],['Expedition pack','bags',180],['Wool socks','accessories',18],['Beanie','accessories',22]];
+var L_FILTERS=shell('Filters','Narrowing a list down.','filters',[
+['fi-what','What they are',`<h2>What filters are</h2><p>Filters let people <b>narrow a long list</b> by attributes such as category, price or colour. They differ from sorting (which reorders) and search (which matches text). Good filters show <b>how many results</b> remain and make it easy to <b>clear</b> everything.</p>`],
+['fi-explore','Filter the list',`<h2>Filter the list</h2><div class='panel'>${chipsHtml('fic',[['all','All'],['shoes','Shoes'],['jackets','Jackets'],['bags','Bags'],['accessories','Accessories']],'all','Category')}${rng('fip','Maximum price (pounds)',15,200,200,5)}<div id='fio' style='margin-top:14px'></div><p class='mood' id='fin' aria-live='polite'></p></div>`],
+['fi-use','Use it well',`<h2>Using filters well</h2><ul class='tk'><li><b>Show the result count</b> as filters change.</li><li><b>Show active filters as removable tags,</b> and offer \u201cClear all\u201d.</li><li><b>Never show filters that give zero results</b> without warning.</li></ul>`],
+['fi-check','Quick check',quick([['What is the difference between filtering and sorting?','Filtering narrows the list; sorting reorders it.'],['What should filters show?','How many results remain.'],['What should always be available?','A way to clear all filters.']])],
+['fi-recap','Big ideas',bigideas(['Filters narrow a list by attributes.','Show counts and active filters.','Offer Clear all.'])]
+]);
+
+/* ===== lessons: Components ===== */
+var L_CARDS=shell('Cards','Containers that group related content.','cards',[
+['cd-what','What they are',`<h2>What cards are</h2><p>A card is a <b>self-contained container</b> for one piece of related content: an image, a title, some text, perhaps an action. Cards are easy to scan, rearrange and resize, which is why they dominate feeds, galleries and dashboards. Google\u2019s Material Design helped popularise them.</p>`],
+['cd-explore','Build a card',`<h2>Build a card</h2><div class='panel'>${chipsHtml('cdl',[['v','Vertical'],['h','Horizontal'],['o','Image overlay']],'v','Layout')}${togg('cdt',[['image','Image'],['badge','Badge'],['button','Button']],{image:1,badge:1,button:1})}<div id='cdo' style='margin-top:14px;max-width:420px'></div></div>`],
+['cd-use','Use it well',`<h2>Using cards well</h2><ul class='tk'><li><b>One idea per card.</b></li><li><b>Make the whole card clickable</b> where it leads somewhere, with one clear link.</li><li><b>Keep cards in a set the same size and structure.</b></li></ul>`],
+['cd-check','Quick check',quick([['What is a card?','A self-contained container for one piece of related content.'],['Why are cards popular?','They are easy to scan, rearrange and resize.'],['How many ideas per card?','One.']])],
+['cd-recap','Big ideas',bigideas(['A card groups related content.','One idea per card.','Keep sets consistent.'])]
+]);
+
+var L_BUTTONS=shell('Buttons','Controls that trigger actions.','buttons',[
+['bt-what','What they are',`<h2>What buttons are</h2><p>A button <b>does something</b>: submit, save, delete, open. (A link <b>goes somewhere</b>.) Buttons come in a <b>hierarchy</b>: a <b>primary</b> button for the main action, <b>secondary</b> for alternatives and <b>tertiary</b> or text buttons for the least important. Destructive actions use a warning colour.</p>`],
+['bt-explore','Order the buttons',`<h2>Order the buttons</h2><p>A delete confirmation, in three versions.</p><div class='panel'>${chipsHtml('btc',[['good','Clear hierarchy'],['equal','All equal'],['risky','Danger as the main button']],'good','Version')}<div id='bto' style='margin-top:14px'></div><p class='mood' id='btn' aria-live='polite'></p></div>`],
+['bt-use','Use it well',`<h2>Using buttons well</h2><ul class='tk'><li><b>One primary button per area.</b></li><li><b>Label with a verb:</b> \u201cSave changes\u201d, not \u201cOK\u201d.</li><li><b>Make them look pressable</b> and give them a large enough target.</li></ul>`],
+['bt-check','Quick check',quick([['What is the difference between a button and a link?','A button does something; a link goes somewhere.'],['How many primary buttons per area?','One.'],['What makes a good label?','A clear verb that says what will happen.']])],
+['bt-recap','Big ideas',bigideas(['Buttons trigger actions.','Primary, secondary and tertiary create a hierarchy.','Label with a verb.'])]
+]);
+
+var CTAS=[['Submit','Vague. It says what the person does, not what they get.'],['Get started free','Names the benefit and removes the fear of cost.'],['Start my free trial','Specific, personal and clear about what happens.'],['Learn more','Low commitment, good for a secondary action but weak as the main one.']];
+var L_CTA=shell('CTAs (calls to action)','Prompts that ask for the next step.','cta',[
+['ct-what','What they are',`<h2>What a call to action is</h2><p>A call to action (CTA) <b>tells people what to do next</b> and makes the step feel worth taking. It is usually a button, but can be a link or banner. A good CTA is <b>visible</b>, <b>specific</b> and <b>about the benefit</b>.</p>`],
+['ct-explore','Test the wording',`<h2>Test the wording</h2><div class='panel'>${chipsHtml('ctc',CTAS.map(function(c,i){return [String(i),c[0]];}),'2','Button text')}${chipsHtml('cts',[['solid','Solid'],['outline','Outline']],'solid','Style')}<div id='cto' style='margin-top:14px'></div><p class='mood' id='ctn' aria-live='polite'></p></div>`],
+['ct-use','Use it well',`<h2>Using CTAs well</h2><ul class='tk'><li><b>Start with a verb</b> and say what happens.</li><li><b>Make it the most prominent thing</b> in its area.</li><li><b>One main CTA per screen.</b></li><li><b>Test the wording.</b> Small changes can matter a lot.</li></ul>`],
+['ct-check','Quick check',quick([['What makes a good CTA?','Visible, specific and focused on the benefit.'],['Why is \u201cSubmit\u201d weak?','It is vague about what the person gets.'],['How many main CTAs per screen?','One.']])],
+['ct-recap','Big ideas',bigideas(['A CTA asks for the next step.','Specific, benefit-led wording wins.','One main CTA per screen.'])]
+]);
+
+var L_FORMS=shell('Forms','Collecting information.','forms',[
+['fm-what','What they are',`<h2>What forms are</h2><p>A form is a <b>conversation</b>: the interface asks questions and the person answers. Forms are where many products lose people, so every field should justify its place. Good forms use <b>clear labels</b>, a <b>logical order</b> and <b>helpful errors</b>.</p>`],
+['fm-explore','Compare layouts',`<h2>Compare layouts</h2><div class='panel'>${chipsHtml('fml',[['one','Single column'],['two','Two columns']],'one','Layout')}${chipsHtml('fmb',[['above','Labels above'],['ph','Placeholder only']],'above','Labels')}<div id='fmo' style='margin-top:14px;max-width:460px'></div><p class='mood' id='fmn' aria-live='polite'></p></div>`],
+['fm-use','Use it well',`<h2>Using forms well</h2><ul class='tk'><li><b>Ask only what you need.</b></li><li><b>Keep labels visible.</b> Placeholders disappear when typing.</li><li><b>Single column is usually easiest to follow.</b></li><li><b>Explain errors beside the field,</b> in words.</li></ul>`],
+['fm-check','Quick check',quick([['Why avoid placeholder-only labels?','They vanish when typing, leaving people unsure what the field was.'],['What layout is usually easiest?','A single column.'],['Where should errors appear?','Next to the field, in plain words.']])],
+['fm-recap','Big ideas',bigideas(['Forms are conversations.','Ask for less.','Visible labels and helpful errors.'])]
+]);
+
+var L_INPUTS=shell('Input fields','Places to type.','inputs',[
+['in-what','What they are',`<h2>What input fields are</h2><p>Input fields are where people <b>type or choose values</b>: text, email, password, numbers, long text. The right type brings the right keyboard on phones, helpful checks and the right behaviour, such as a <b>show password</b> toggle or a <b>stepper</b> for numbers.</p>`],
+['in-explore','Try the fields',`<h2>Try the fields</h2><div class='panel'><div id='ino'></div></div>`],
+['in-use','Use it well',`<h2>Using inputs well</h2><ul class='tk'><li><b>Use the right type</b> (email, tel, number) to get the right keyboard.</li><li><b>Size the field to the expected input.</b></li><li><b>Show hints and counts</b> where limits exist.</li><li><b>Allow paste</b> in every field.</li></ul>`],
+['in-check','Quick check',quick([['Why set the input type?','It brings the right keyboard and checks on phones.'],['Why add a show password option?','It reduces typing mistakes.'],['Should you block pasting?','No.']])],
+['in-recap','Big ideas',bigideas(['Choose the input type that matches the data.','Add helpers such as show password and counters.','Never block paste.'])]
+]);
+
+var L_DROP=shell('Dropdowns','Lists that open to reveal choices.','dropdowns',[
+['dr-what','What they are',`<h2>What dropdowns are</h2><p>A dropdown hides a list of options until the control is opened. It saves space, but hides the choices. The right control depends on <b>how many options</b> there are: radio buttons for a few, a dropdown for a moderate number, and a searchable list (autocomplete) for many.</p>`],
+['dr-explore','Match the control',`<h2>Match the control to the options</h2><div class='panel'>${rng('drn','Number of options',2,60,8)}<div id='dro' style='margin-top:14px;max-width:360px'></div><p class='mood' id='drm' aria-live='polite'></p></div>`],
+['dr-use','Use it well',`<h2>Using dropdowns well</h2><ul class='tk'><li><b>Fewer than five options:</b> show them all as radio buttons.</li><li><b>Many options:</b> let people type to filter.</li><li><b>Sort sensibly,</b> with common choices first.</li></ul>`],
+['dr-check','Quick check',quick([['What control suits two or three options?','Radio buttons.'],['What suits dozens of options?','A searchable list (autocomplete).'],['Why not use dropdowns for everything?','They hide the choices and need an extra click.']])],
+['dr-recap','Big ideas',bigideas(['Dropdowns hide options to save space.','Match the control to the number of options.','Make long lists searchable.'])]
+]);
+
+var L_TOGGLES=shell('Toggles','Switches for on and off.','toggles',[
+['tg-what','What they are',`<h2>What toggles are</h2><p>A toggle switch turns a setting <b>on or off, and the change happens immediately</b>. A <b>checkbox</b> is different: it records a choice that is applied later, when a form is submitted. Use a toggle for instant settings, and a checkbox for choices in a form.</p>`],
+['tg-explore','Toggle or checkbox?',`<h2>Toggle or checkbox?</h2><div class='panel'><div class='cols'><div><p class='slab'>Toggle: applies instantly</p><div id='tgo'></div></div><div><p class='slab'>Checkbox: applies on Save</p><div id='tgc'></div></div></div></div>`],
+['tg-use','Use it well',`<h2>Using toggles well</h2><ul class='tk'><li><b>Label the setting,</b> not the state.</li><li><b>Show the state with more than colour</b> (position and a label).</li><li><b>Apply instantly,</b> with feedback.</li></ul>`],
+['tg-check','Quick check',quick([['When use a toggle?','For a setting that applies immediately.'],['When use a checkbox?','For choices in a form that are submitted later.'],['How should state be shown?','With position and text, not colour alone.']])],
+['tg-recap','Big ideas',bigideas(['Toggles apply instantly.','Checkboxes wait for a submit.','Label the setting and show state clearly.'])]
+]);
+
+var L_MODALS=shell('Modals','Dialogs that interrupt.','modals',[
+['md-what','What they are',`<h2>What modals are</h2><p>A modal is a dialog that <b>sits on top of the page and blocks it</b> until it is dealt with. That makes it powerful and annoying. Use modals for decisions that <b>need an answer</b> (confirm a delete) and avoid them for information people can ignore.</p><p>Accessibility needs care: focus must move into the dialog, stay there, and return to where it was when closed.</p>`],
+['md-explore','Open a modal',`<h2>Open a modal</h2><div class='panel'>${chipsHtml('mdc',[['confirm','Confirm'],['form','Form'],['info','Information']],'confirm','Type')}<div class='ctrls'><button class='btn' id='mdb' type='button'>Open the modal</button></div><div id='mdo' style='position:relative;min-height:230px;background:#E8EBF5;border-radius:14px;overflow:hidden;font-family:Inter,sans-serif;color:#14213D'></div><p class='mood' id='mdn' aria-live='polite'></p></div>`],
+['md-use','Use it well',`<h2>Using modals well</h2><ul class='tk'><li><b>Use sparingly.</b> Each one interrupts.</li><li><b>Make closing easy:</b> a close button, the Escape key and a click outside.</li><li><b>Trap focus inside</b> and return it afterwards.</li></ul>`],
+['md-check','Quick check',quick([['When is a modal appropriate?','When a decision needs an answer before continuing.'],['How should people close it?','With a close button, Escape and clicking outside.'],['Where should focus go?','Into the dialog, and back afterwards.']])],
+['md-recap','Big ideas',bigideas(['Modals interrupt, so use them sparingly.','Make closing easy.','Manage focus for accessibility.'])]
+]);
+
+var L_TIPS=shell('Tooltips','Small hints on hover or focus.','tooltips',[
+['tt-what','What they are',`<h2>What tooltips are</h2><p>A tooltip is a <b>small label that appears</b> when someone hovers over or focuses an element, to explain an icon or add a detail. Tooltips must never hold <b>essential</b> information: touch users cannot hover, and many people never see them.</p>`],
+['tt-explore','Try the tooltips',`<h2>Try the tooltips</h2><p>Hover, or press Tab to reach each icon.</p><div class='panel'>${chipsHtml('ttc',[['hover','Hover only'],['both','Hover and focus']],'both','Triggers')}<div id='tto' style='margin-top:14px;padding-top:36px'></div><p class='mood' id='ttn' aria-live='polite'></p></div>`],
+['tt-use','Use it well',`<h2>Using tooltips well</h2><ul class='tk'><li><b>Keep them short,</b> a few words.</li><li><b>Show on focus as well as hover.</b></li><li><b>Never put critical information in a tooltip.</b></li></ul>`],
+['tt-check','Quick check',quick([['What is a tooltip?','A small label shown on hover or focus.'],['Why show on focus too?','Keyboard users cannot hover.'],['Should critical info go in a tooltip?','No. Many people never see it.']])],
+['tt-recap','Big ideas',bigideas(['Tooltips add small hints.','Show on hover and focus.','Never hide essential information.'])]
+]);
+
+var ALERTS={info:['Information','#2F6FD8','#E6EEFC','\u2139','Your report will be ready in a few minutes.'],success:['Success','#1F7A46','#E3F4EA','\u2713','Your changes have been saved.'],warning:['Warning','#8A5A00','#FFF4D6','!','Your storage is almost full.'],error:['Error','#B01E2D','#FDE6E8','\u2715','We could not send your message.']};
+var L_ALERTS=shell('Alerts','Messages that draw attention.','alerts',[
+['al-what','What they are',`<h2>What alerts are</h2><p>An alert draws attention to <b>important information</b> within the page. Four standard kinds: <b>information</b>, <b>success</b>, <b>warning</b> and <b>error</b>. Each combines <b>colour, an icon and words</b>, so the meaning does not depend on colour alone.</p>`],
+['al-explore','Try the alerts',`<h2>Try the alerts</h2><div class='panel'>${chipsHtml('alc',Object.keys(ALERTS).map(function(k){return [k,ALERTS[k][0]];}),'info','Type')}${chipsHtml('ald',[['no','Stays'],['yes','Can be dismissed']],'yes','Behaviour')}<div id='alo' style='margin-top:14px;max-width:460px'></div></div>`],
+['al-use','Use it well',`<h2>Using alerts well</h2><ul class='tk'><li><b>Say what happened and what to do.</b></li><li><b>Place it near the cause.</b></li><li><b>Do not overuse.</b> If everything is an alert, nothing is.</li><li><b>Use role=alert</b> sparingly so screen readers announce urgent messages.</li></ul>`],
+['al-check','Quick check',quick([['Name the four standard alert types.','Information, success, warning and error.'],['Why use an icon and words as well as colour?','So the meaning does not rely on colour alone.'],['Where should an alert appear?','Near what caused it.']])],
+['al-recap','Big ideas',bigideas(['Alerts highlight important information.','Colour, icon and words together.','Place near the cause and use sparingly.'])]
+]);
+
+var L_NOTIF=shell('Notifications','Short updates that arrive unasked.','notifications',[
+['no-what','What they are',`<h2>What notifications are</h2><p>Notifications are <b>short messages that arrive without being requested</b>: a new message, a completed payment, an update. In-app ones appear as <b>toasts</b> (small pop-ups that fade). Others are push notifications or emails. They compete for attention, so every one needs to be <b>useful, timely and relevant</b>.</p>`],
+['no-explore','Send some',`<h2>Send some toasts</h2><div class='panel'><div class='ctrls'><button class='btn' data-n='message' type='button'>New message</button><button class='btn' data-n='payment' type='button'>Payment received</button><button class='btn' data-n='update' type='button'>Update available</button></div>${chipsHtml('noc',[['tr','Top right'],['bc','Bottom centre']],'tr','Position')}<div id='noo' style='position:relative;min-height:220px;background:#E8EBF5;border-radius:14px;overflow:hidden;margin-top:12px'></div></div>`],
+['no-use','Use it well',`<h2>Using notifications well</h2><ul class='tk'><li><b>Be useful.</b> Tell people something they care about.</li><li><b>Stay out of the way.</b> Auto-dismiss simple confirmations but keep important ones until read.</li><li><b>Give control.</b> Let people choose what they receive.</li></ul>`],
+['no-check','Quick check',quick([['What is a toast?','A small pop-up message that fades away.'],['What makes a notification good?','Useful, timely and relevant.'],['What should people control?','What notifications they receive.']])],
+['no-recap','Big ideas',bigideas(['Notifications arrive unasked, so earn attention.','Toasts auto-dismiss; important ones stay.','Give people control.'])]
+]);
+
+/* ===== lessons: States and feedback ===== */
+var EMP={first:['First use','Nothing here yet, and that is fine.','No projects yet','Create your first project to get started.','New project'],none:['No results','The search worked, but found nothing.','No results for \u201cpurple unicorn\u201d','Check the spelling or try a broader search.','Clear search'],cleared:['All done','The user has cleared everything.','Inbox zero','You have no new messages. Enjoy the quiet.','Refresh']};
+var L_EMPTY=shell('Empty states','What people see when there is nothing to show.','empty',[
+['es-what','What they are',`<h2>What empty states are</h2><p>An empty state is the screen or area shown when there is <b>no content yet</b>: a new account with no projects, a search with no results, a cleared inbox. A blank space leaves people wondering if something is broken. A good empty state <b>explains why it is empty and offers a next step</b>.</p>`],
+['es-explore','Three kinds',`<h2>Three kinds of empty</h2><div class='panel'>${chipsHtml('emc',Object.keys(EMP).map(function(k){return [k,EMP[k][0]];}),'first','Kind')}<div id='emo' style='margin-top:14px'></div><p class='mood' id='emn' aria-live='polite'></p></div>`],
+['es-use','Use it well',`<h2>Using empty states well</h2><ul class='tk'><li><b>Say why it is empty.</b></li><li><b>Offer one clear action.</b></li><li><b>Keep the tone friendly,</b> and match the situation.</li></ul>`],
+['es-check','Quick check',quick([['What should an empty state do?','Explain why it is empty and offer a next step.'],['Name three kinds.','First use, no results and cleared.'],['Why is a blank space bad?','People may think something is broken.']])],
+['es-recap','Big ideas',bigideas(['An empty state is an opportunity.','Explain and offer a next step.','Match the tone to the situation.'])]
+]);
+
+var L_LOADING=shell('Loading states','What people see while they wait.','loading',[
+['ld-what','What they are',`<h2>What loading states are</h2><p>Loading states tell people that <b>something is happening</b>. Rough timing guides: under about 1 second needs nothing special; a few seconds suits a <b>spinner</b>; layouts that take a moment suit <b>skeleton screens</b> (grey placeholders in the shape of the content); long waits need a <b>progress bar</b> that shows how far along it is.</p>`],
+['ld-explore','Compare the waits',`<h2>Compare the waits</h2><div class='panel'>${chipsHtml('ldc',[['spin','Spinner'],['skel','Skeleton'],['bar','Progress bar']],'skel','Style')}<div class='ctrls'><button class='btn' id='ldb' type='button'>Load content</button></div><div id='ldo' style='margin-top:6px;min-height:150px'></div><p class='mood' id='ldn' aria-live='polite'></p></div>`],
+['ld-use','Use it well',`<h2>Using loading states well</h2><ul class='tk'><li><b>Match the pattern to the wait.</b></li><li><b>Keep the layout stable,</b> so nothing jumps when content arrives.</li><li><b>Respect reduced motion</b> for animated indicators.</li></ul>`],
+['ld-check','Quick check',quick([['What is a skeleton screen?','A grey placeholder shaped like the content that is coming.'],['When use a progress bar?','For longer waits where progress can be measured.'],['Why keep layout stable?','So nothing jumps when content arrives.']])],
+['ld-recap','Big ideas',bigideas(['Loading states reassure people.','Spinner, skeleton or progress bar, by wait length.','Keep the layout stable.'])]
+]);
+
+var L_ERROR=shell('Error states','When something goes wrong.','error',[
+['er-what','What they are',`<h2>What error states are</h2><p>Errors happen. A good error state says <b>what went wrong, why (if useful) and how to fix it</b>, in plain words, next to where it happened. It does not blame the person, and it keeps what they have already typed.</p>`],
+['er-explore','Try a validation',`<h2>Try a live validation</h2><p>Type an email address. Try \u201cada@\u201d, then \u201cada@example.com\u201d.</p><div class='panel'>${chipsHtml('erc',[['vague','Vague message'],['helpful','Helpful message']],'helpful','Message')}<label for='ern'>Email</label><input id='ern' type='text' value='ada@' autocomplete='off'><div id='ero' aria-live='polite'></div></div>`],
+['er-use','Use it well',`<h2>Using error states well</h2><ul class='tk'><li><b>Be specific and kind.</b> \u201cEnter an email like name@example.com\u201d.</li><li><b>Show errors beside the field</b> and in text, not only red.</li><li><b>Never lose people\u2019s input.</b></li></ul>`],
+['er-check','Quick check',quick([['What should an error message include?','What went wrong and how to fix it.'],['Where should it appear?','Next to the field, in text.'],['What must never be lost?','What the person has already typed.']])],
+['er-recap','Big ideas',bigideas(['Say what happened and how to fix it.','Show errors beside the problem, in words.','Keep the person\u2019s input.'])]
+]);
+
+var L_SUCCESS=shell('Success states','Confirming that something worked.','success',[
+['su-what','What they are',`<h2>What success states are</h2><p>When an action works, say so. A success state <b>confirms what happened</b> and often <b>points to what comes next</b>. How big it is should match how big the moment was: a small toast for a saved setting, a full screen for a finished purchase.</p>`],
+['su-explore','Confirm it',`<h2>Confirm it, three ways</h2><div class='panel'>${chipsHtml('suc',[['toast','Toast'],['inline','Inline message'],['screen','Full screen']],'toast','Style')}<div class='ctrls'><button class='btn' id='sub' type='button'>Place order</button></div><div id='suo' style='position:relative;min-height:200px;background:#E8EBF5;border-radius:14px;overflow:hidden;font-family:Inter,sans-serif;color:#14213D'></div><p class='mood' id='sun' aria-live='polite'></p></div>`],
+['su-use','Use it well',`<h2>Using success states well</h2><ul class='tk'><li><b>Match the size to the moment.</b></li><li><b>Say exactly what happened.</b> \u201cOrder 1042 placed\u201d.</li><li><b>Offer a next step,</b> such as viewing the order.</li></ul>`],
+['su-check','Quick check',quick([['When use a full-screen success state?','For a big moment such as a finished purchase.'],['What should a success message say?','Exactly what happened.'],['What can follow success?','A suggested next step.']])],
+['su-recap','Big ideas',bigideas(['Always confirm success.','Match its size to the moment.','Offer a next step.'])]
+]);
+
+var L_HOVER=shell('Hover states','How things look when the pointer is over them.','hover',[
+['hv-what','What they are',`<h2>What hover states are</h2><p>A hover state is the change that happens when a <b>pointer rests over</b> an element: a button darkens, a card lifts, a link underlines. It signals \u201cyou can interact with this\u201d. Hover only exists with a mouse or trackpad, so it must <b>never carry essential information</b>.</p>`],
+['hv-explore','Hover over these',`<h2>Hover over these</h2><p>Move your pointer over each item, or force the hover look to compare.</p><div class='panel'>${chipsHtml('hvc',[['live','Live hover'],['force','Force the hover look'],['off','No hover styles']],'live','Mode')}<div id='hvo' style='margin-top:14px'></div></div>`],
+['hv-use','Use it well',`<h2>Using hover states well</h2><ul class='tk'><li><b>Make the change clear but not jarring.</b></li><li><b>Keep it subtle for large areas.</b></li><li><b>Provide an equivalent for touch and keyboard.</b></li></ul>`],
+['hv-check','Quick check',quick([['What does a hover state signal?','That an element can be interacted with.'],['Why must it not carry essential information?','Touch screens have no hover.'],['What else is needed for keyboard users?','A focus state.']])],
+['hv-recap','Big ideas',bigideas(['Hover signals interactivity.','It exists only with a pointer.','Never depend on it alone.'])]
+]);
+
+var L_FOCUS=shell('Focus states','The visible marker for keyboard navigation.','focus',[
+['fc-what','What they are',`<h2>What focus states are</h2><p>When someone uses the <b>Tab key</b> to move through a page, the focus state shows <b>which element is selected</b>. Without it, keyboard users are lost. People who rely on it include those with motor impairments, screen-reader users and anyone whose mouse has died.</p><p>The WCAG guidelines require a visible focus indicator (success criterion 2.4.7).</p>`],
+['fc-explore','Press Tab',`<h2>Press Tab</h2><p>Click in the box below, then press Tab to move through the controls. Compare the three styles.</p><div class='panel'>${chipsHtml('fcc',[['default','Default outline'],['ring','Custom ring'],['none','No outline (bad)']],'ring','Style')}<div id='fco' style='margin-top:14px;display:flex;gap:12px;flex-wrap:wrap;align-items:center;font-family:Inter,sans-serif'></div><p class='mood' id='fcn' aria-live='polite'></p></div>`],
+['fc-use','Use it well',`<h2>Using focus states well</h2><ul class='tk'><li><b>Never remove the outline</b> without a replacement.</li><li><b>Make it high contrast</b> against both the element and the background.</li><li><b>Use :focus-visible</b> to show it for keyboard use without cluttering mouse clicks.</li></ul>`],
+['fc-check','Quick check',quick([['What does a focus state show?','Which element is currently selected by the keyboard.'],['Is it fine to remove the outline?','No, not without a visible replacement.'],['What does :focus-visible do?','Shows focus for keyboard use but not for most mouse clicks.']])],
+['fc-recap','Big ideas',bigideas(['Focus states guide keyboard users.','Never remove them without a replacement.','Make them high contrast.'])]
+]);
+
+var L_ACTIVE=shell('Active states','How things look when pressed.','active',[
+['ac-what','What they are',`<h2>What active states are</h2><p>The active state appears <b>during the press</b>: while the mouse button is down or a finger is on the screen. It confirms \u201cI felt that\u201d with a darker colour, a slight shrink or an inset look. It is the shortest state, but it makes an interface feel responsive and physical.</p><p>The word is also used for the <b>currently selected</b> item in a menu or tab, so be clear which meaning your team uses.</p>`],
+['ac-explore','Press and hold',`<h2>Press and hold</h2><p>Hold the mouse button (or your finger) down on each control.</p><div class='panel'>${chipsHtml('acc',[['on','With pressed feedback'],['off','No pressed feedback']],'on','Version')}<div id='aco' style='margin-top:14px;display:flex;gap:14px;flex-wrap:wrap;align-items:center;font-family:Inter,sans-serif'></div><p class='mood' id='acn' aria-live='polite'></p></div>`],
+['ac-use','Use it well',`<h2>Using active states well</h2><ul class='tk'><li><b>Make the press obvious but quick.</b></li><li><b>Use a consistent effect</b> across the product.</li><li><b>Keep the target in view:</b> a finger covers the control, so feedback should be visible around it too.</li></ul>`],
+['ac-check','Quick check',quick([['When does the active state appear?','During the press.'],['What does it confirm?','That the input was registered.'],['What other meaning does active have?','The currently selected item in a menu or tab.']])],
+['ac-recap','Big ideas',bigideas(['Active is the pressed state.','It makes interfaces feel responsive.','Be consistent about the effect.'])]
+]);
+
+var L_DISABLED=shell('Disabled states','How unavailable controls are shown.','disabled',[
+['db-what','What they are',`<h2>What disabled states are</h2><p>A disabled control is <b>visible but unavailable</b>: greyed out, no hover or focus response. Disabled buttons can be frustrating, because people do not know <b>why</b> nothing happens, and disabled controls often fail contrast checks. Many designers prefer to keep the button enabled and show helpful errors when someone presses it.</p>`],
+['db-explore','Compare the approaches',`<h2>Compare the approaches</h2><div class='panel'>${chipsHtml('dbc',[['dis','Disabled until valid'],['en','Enabled with helpful errors']],'dis','Approach')}<div id='dbo' style='margin-top:14px;max-width:340px'></div><p class='mood' id='dbn' aria-live='polite'></p></div>`],
+['db-use','Use it well',`<h2>Using disabled states well</h2><ul class='tk'><li><b>Explain why</b> something is unavailable.</li><li><b>Prefer helpful errors</b> to a mysteriously dead button.</li><li><b>Remember disabled text is exempt from contrast rules,</b> but still make it readable.</li></ul>`],
+['db-check','Quick check',quick([['Why can disabled buttons frustrate people?','They do not explain why nothing happens.'],['What is an alternative?','Keep the button enabled and show helpful errors on press.'],['What should you add if you do disable?','An explanation of why.']])],
+['db-recap','Big ideas',bigideas(['Disabled controls are visible but unavailable.','They hide the reason.','Explain, or use helpful errors instead.'])]
+]);
+
+var L_MICRO=shell('Microinteractions','Small, single-purpose moments of feedback.','micro',[
+['mi-what','What they are',`<h2>What microinteractions are</h2><p>A microinteraction is a <b>tiny, single-purpose moment</b>: liking a post, toggling a switch, copying a link, pulling to refresh. Dan Saffer, who wrote the book on them, breaks each into a <b>trigger</b>, <b>rules</b>, <b>feedback</b> and <b>loops</b>. Done well they add delight and clarity. Done badly they get in the way.</p>`],
+['mi-explore','Try some',`<h2>Try some microinteractions</h2><div class='panel'>${chipsHtml('mic',[['on','Motion on'],['off','Reduced motion']],'on','Motion')}<div id='mio' style='margin-top:14px;display:flex;gap:18px;flex-wrap:wrap;align-items:center;font-family:Inter,sans-serif'></div><p class='mood' id='min' aria-live='polite'></p></div>`],
+['mi-use','Use it well',`<h2>Using microinteractions well</h2><ul class='tk'><li><b>Give each one a job:</b> confirm, guide or reward.</li><li><b>Keep it fast,</b> usually under half a second.</li><li><b>Respect the prefers-reduced-motion setting.</b></li></ul>`],
+['mi-check','Quick check',quick([['What are the four parts of a microinteraction?','Trigger, rules, feedback and loops.'],['How long should one last?','Usually under half a second.'],['What setting should be respected?','Reduced motion.']])],
+['mi-recap','Big ideas',bigideas(['Microinteractions are tiny moments with one job.','Trigger, rules, feedback, loops.','Keep them quick and respect reduced motion.'])]
+]);
+
+/* ===== lessons: Screens and journeys ===== */
+var L_ONBOARD=shell('Onboarding','Helping new users reach their first success.','onboarding',[
+['ob-what','What it is',`<h2>What onboarding is</h2><p>Onboarding is how a product <b>welcomes new users</b> and helps them reach their first success quickly. Patterns include a <b>welcome carousel</b>, a <b>checklist</b>, a <b>guided tour</b> of tooltips and <b>learning by doing</b>. The best onboarding teaches as little as possible up front and lets people start.</p>`],
+['ob-explore','Try a carousel',`<h2>Try the welcome carousel</h2><div class='panel'><div id='obo' style='max-width:320px'></div></div>`],
+['ob-use','Use it well',`<h2>Using onboarding well</h2><ul class='tk'><li><b>Let people skip.</b></li><li><b>Teach in context,</b> at the moment of need.</li><li><b>Aim for the first success fast.</b></li></ul>`],
+['ob-check','Quick check',quick([['What is the goal of onboarding?','To help people reach their first success quickly.'],['Why allow skipping?','Some people already know what to do.'],['When should you teach?','In context, at the moment people need it.']])],
+['ob-recap','Big ideas',bigideas(['Onboarding welcomes and guides.','Teach in context and allow skipping.','Aim for a fast first success.'])]
+]);
+
+var L_DASH=shell('Dashboards','Screens that summarise key information.','dashboards',[
+['da-what','What they are',`<h2>What dashboards are</h2><p>A dashboard presents the <b>most important information at a glance</b>: key numbers, trends, items needing attention. A good one answers a specific question for a specific person, such as \u201care we on track this week?\u201d. A bad one shows everything just because it can.</p>`],
+['da-explore','Build a dashboard',`<h2>Build a dashboard</h2><div class='panel'>${togg('dbt',[['kpi','Key numbers'],['chart','Trend chart'],['table','Recent orders'],['alerts','Needs attention']],{kpi:1,chart:1})}<div id='dao' style='margin-top:14px'></div><p class='mood' id='dan' aria-live='polite'></p></div>`],
+['da-use','Use it well',`<h2>Using dashboards well</h2><ul class='tk'><li><b>Put the most important numbers top left.</b></li><li><b>Show change, not just totals.</b></li><li><b>Use charts that fit the data,</b> and label them clearly.</li></ul>`],
+['da-check','Quick check',quick([['What should a dashboard do?','Answer a specific question at a glance.'],['Where do the most important numbers go?','Top left, where eyes land first.'],['Why show change as well as totals?','Trends are often more useful than single numbers.']])],
+['da-recap','Big ideas',bigideas(['A dashboard summarises key information.','Answer one question for one person.','Put the most important at top left.'])]
+]);
+
+var FLOWS={signup:['Sign up',[['Start','p'],['Enter email','s'],['Valid?','d'],['Create password','s'],['Welcome screen','p']],'Email already used. Show a sign-in link.'],checkout:['Checkout',[['Basket','p'],['Enter address','s'],['Choose payment','s'],['Payment OK?','d'],['Order confirmed','p']],'Payment declined. Offer another method.'],reset:['Reset password',[['Forgot link','p'],['Enter email','s'],['Email sent','s'],['Link valid?','d'],['New password set','p']],'Link expired. Offer a fresh one.']};
+var L_FLOWS=shell('User flows','Diagrams of the steps to a goal.','flows',[
+['uf-what','What they are',`<h2>What user flows are</h2><p>A user flow is a <b>diagram of the steps a person takes</b> to reach a goal, from entry point to finish. Boxes are screens or actions, arrows are the paths, and <b>diamonds</b> are decisions. Mapping flows early shows missing steps and unnecessary ones before any screens are designed.</p>`],
+['uf-explore','Map a flow',`<h2>Map a flow</h2><div class='panel'>${chipsHtml('ufc',Object.keys(FLOWS).map(function(k){return [k,FLOWS[k][0]];}),'signup','Flow')}${chipsHtml('ufe',[['off','Happy path only'],['on','Show the error path']],'off','Paths')}<div id='ufo' style='margin-top:14px;overflow-x:auto'></div><p class='mood' id='ufn' aria-live='polite'></p></div>`],
+['uf-use','Use it well',`<h2>Using user flows well</h2><ul class='tk'><li><b>Start with the goal</b> and the entry point.</li><li><b>Include the sad paths:</b> errors, empty states and cancellations.</li><li><b>Keep each flow to one goal.</b></li></ul>`],
+['uf-check','Quick check',quick([['What does a diamond mean in a flow?','A decision.'],['Why include error paths?','Real people hit them, and they need designing.'],['How many goals per flow?','One.']])],
+['uf-recap','Big ideas',bigideas(['A flow maps steps to a goal.','Boxes are steps, diamonds are decisions.','Include the error paths.'])]
+]);
+
+var L_WIRE=shell('Wireframes','Simple layout drawings.','wireframes',[
+['wr-what','What they are',`<h2>What wireframes are</h2><p>A wireframe is a <b>simple, stripped-back drawing of a screen</b>: boxes, lines and placeholder text that show structure and priority without colour or imagery. They let teams debate <b>layout and content</b> without being distracted by style. Fidelity ranges from <b>hand sketches</b> to <b>detailed grey-box layouts</b>.</p>`],
+['wr-explore','Three fidelities',`<h2>Three fidelities</h2><div class='panel'>${chipsHtml('wrc',[['sketch','Sketch'],['low','Low-fidelity'],['high','High-fidelity']],'low','Fidelity')}<div id='wro' style='margin-top:14px;max-width:300px'></div><p class='mood' id='wrn' aria-live='polite'></p></div>`],
+['wr-use','Use it well',`<h2>Using wireframes well</h2><ul class='tk'><li><b>Start rough.</b> Quick sketches are cheap to change.</li><li><b>Use real content where you can.</b> Lorem ipsum hides problems.</li><li><b>Annotate behaviour.</b></li></ul>`],
+['wr-check','Quick check',quick([['What do wireframes leave out?','Colour, imagery and visual polish.'],['Why use real content?','Lorem ipsum hides layout problems.'],['Why start rough?','It is cheap to change.']])],
+['wr-recap','Big ideas',bigideas(['Wireframes show structure, not style.','Fidelity ranges from sketch to detailed.','Start rough and use real content.'])]
+]);
+
+var L_MOCK=shell('Mockups','Realistic still images of a design.','mockups',[
+['mk-what','What they are',`<h2>What mockups are</h2><p>A mockup is a <b>static, realistic picture</b> of how a design will look: real colours, type, images and icons, but not clickable. It comes after the wireframe, and lets stakeholders judge the <b>visual design</b> before development. Mockups often show the design in <b>different themes and devices</b>.</p>`],
+['mk-explore','Change the look',`<h2>Change the theme and device</h2><div class='panel'>${chipsHtml('mkt',[['light','Light'],['dark','Dark'],['brand','Brand']],'light','Theme')}${chipsHtml('mkd',[['phone','Phone'],['desk','Desktop']],'phone','Device')}<div class='stage' id='mko' style='margin-top:6px;min-height:240px'></div></div>`],
+['mk-use','Use it well',`<h2>Using mockups well</h2><ul class='tk'><li><b>Use real content and realistic data.</b></li><li><b>Show key states,</b> not just the ideal one.</li><li><b>Check contrast in every theme.</b></li></ul>`],
+['mk-check','Quick check',quick([['How is a mockup different from a wireframe?','It has real colours, type and imagery.'],['Is a mockup clickable?','No, that is a prototype.'],['What should mockups include besides the ideal case?','Key states such as empty and error.']])],
+['mk-recap','Big ideas',bigideas(['Mockups show the visual design.','They are static, not clickable.','Use real content and show states.'])]
+]);
+
+var L_PROTO=shell('Prototypes','Clickable models for testing.','prototypes',[
+['pt-what','What they are',`<h2>What prototypes are</h2><p>A prototype is an <b>interactive model</b> of a design: you can tap, move between screens and feel the flow, without any real code behind it. Prototypes let you <b>test ideas with real people</b> before the expensive part. Fidelity varies from linked paper sketches to near-real simulations.</p>`],
+['pt-explore','Tap through',`<h2>Tap through a prototype</h2><p>This is a tiny three-screen prototype. Tap the buttons. Turn on hotspots to see the clickable areas.</p><div class='panel'>${chipsHtml('prh',[['off','Normal'],['on','Show hotspots']],'off','View')}<div id='pro' style='margin-top:14px'></div></div>`],
+['pt-use','Use it well',`<h2>Using prototypes well</h2><ul class='tk'><li><b>Prototype only what you need to test.</b></li><li><b>Give people a task,</b> and watch without helping.</li><li><b>Fix what you learn,</b> then test again.</li></ul>`],
+['pt-check','Quick check',quick([['What is a prototype for?','Testing an idea with real people before building it.'],['How much should you prototype?','Only what you need to test.'],['What should you do during a test?','Give a task and watch without helping.']])],
+['pt-recap','Big ideas',bigideas(['Prototypes are clickable models.','Test before you build.','Prototype only what you need.'])]
+]);
+
+/* ===== lessons: Designing for devices ===== */
+var L_RESP=shell('Responsive UI','Interfaces that adapt to the screen.','responsive',[
+['ru-what','What it is',`<h2>What responsive UI is</h2><p>Responsive UI adapts <b>components and content</b>, not just page columns. A data table may become a list of cards on a phone, a navigation bar may collapse into a menu, a two-column form may become one column.</p>`],
+['ru-explore','Resize',`<h2>Resize the screen</h2><p>Watch the same data change shape.</p><div class='panel'>${rng('ruw','Screen width (px)',320,1000,700,10)}<div id='ruo' style='margin-top:14px'></div><p class='mood' id='run' aria-live='polite'></p></div>`],
+['ru-use','Use it well',`<h2>Using responsive UI well</h2><ul class='tk'><li><b>Keep the same content and functions</b> across sizes.</li><li><b>Rethink components,</b> not just scale them.</li><li><b>Test with real devices.</b></li></ul>`],
+['ru-check','Quick check',quick([['What can a table become on a phone?','A list of cards.'],['Should functions change between sizes?','No. Keep the same content and functions.'],['What is better than resizing a browser?','Testing on real devices.']])],
+['ru-recap','Big ideas',bigideas(['Responsive UI adapts components, not just columns.','Keep the same content and functions.','Test on real devices.'])]
+]);
+
+var L_MFIRST=shell('Mobile-first design','Start small, then grow.','mobilefirst',[
+['mf-what','What it is',`<h2>What mobile-first design is</h2><p>Mobile-first means designing <b>for the smallest screen first</b> and adding for larger ones. The small screen forces you to find the <b>core content and tasks</b>. Larger screens then add extras, rather than starting with a huge page and cutting things away. Luke Wroblewski championed the idea around 2009.</p>`],
+['mf-explore','Grow the screen',`<h2>Grow the screen</h2><div class='panel'>${chipsHtml('mfc',[['s','Phone (320px)'],['m','Tablet (600px)'],['l','Desktop (1024px)']],'s','Screen')}<div id='mfo' style='margin-top:14px'></div><p class='mood' id='mfn' aria-live='polite'></p></div>`],
+['mf-use','Use it well',`<h2>Using mobile-first well</h2><ul class='tk'><li><b>Ask what the essential task is.</b></li><li><b>Add, do not hide,</b> as space grows.</li><li><b>Design for thumbs, slow networks and interruptions.</b></li></ul>`],
+['mf-check','Quick check',quick([['What does mobile-first mean?','Design for the smallest screen first, then add for larger ones.'],['What does it force you to find?','The core content and tasks.'],['Who championed it?','Luke Wroblewski.']])],
+['mf-recap','Big ideas',bigideas(['Start with the smallest screen.','It exposes the essentials.','Add as space grows.'])]
+]);
+
+var L_DESK=shell('Desktop design','Using space, precision and the keyboard.','desktop',[
+['dk-what','What it is',`<h2>What desktop design is</h2><p>Desktop screens offer <b>more space</b>, a <b>precise pointer</b>, <b>hover</b> and a <b>keyboard</b>. Good desktop design uses them: denser layouts, hover previews, keyboard shortcuts, right-click menus and multiple columns, while keeping lines of text a readable length.</p>`],
+['dk-explore','Use the extras',`<h2>Switch on desktop extras</h2><div class='panel'>${togg('dkt',[['hover','Hover preview'],['keys','Shortcut hints'],['cols','Second column'],['menu','Right-click menu']],{})}<div id='dko' style='margin-top:14px'></div><p class='mood' id='dkn' aria-live='polite'></p></div>`],
+['dk-use','Use it well',`<h2>Using desktop design well</h2><ul class='tk'><li><b>Use the space, but keep text lines readable.</b></li><li><b>Add shortcuts for expert users.</b></li><li><b>Treat hover as a bonus,</b> never required.</li></ul>`],
+['dk-check','Quick check',quick([['What does desktop have that phones do not?','Space, a precise pointer, hover and a keyboard.'],['Should hover be required?','No, only a bonus.'],['What helps expert users?','Keyboard shortcuts.']])],
+['dk-recap','Big ideas',bigideas(['Desktop offers space, precision, hover and keys.','Use them without depending on them.','Keep text lines readable.'])]
+]);
+
+var L_TOUCH=shell('Touch targets','Making tappable things big enough.','touch',[
+['tz-what','What they are',`<h2>What touch targets are</h2><p>A touch target is the <b>area that responds to a tap</b>. Fingertips are around 10 mm wide, so small targets cause mis-taps. Common guidance: <b>44 by 44 points</b> (Apple), <b>48 by 48 dp</b> (Google Material), and WCAG 2.2 sets a minimum of <b>24 by 24 CSS pixels</b> (level AA), with 44 pixels as the enhanced level.</p><p>The target can be bigger than the visible icon: add invisible padding.</p>`],
+['tz-explore','Size the target',`<h2>Size the target</h2><p>The dashed squares are the tap areas around each icon.</p><div class='panel'>${rng('tzs','Target size (px)',16,64,44)}${rng('tzg','Space between targets (px)',0,24,8)}<div id='tzo' style='margin-top:14px'></div><p class='mood' id='tzn' aria-live='polite'></p></div>`],
+['tz-use','Use it well',`<h2>Using touch targets well</h2><ul class='tk'><li><b>Aim for at least 44 px</b> in both directions.</li><li><b>Add spacing</b> between neighbouring targets.</li><li><b>Make the whole row or card tappable,</b> not just a tiny link.</li></ul>`],
+['tz-check','Quick check',quick([['What size is Apple\u2019s guidance?','44 by 44 points.'],['What is the WCAG 2.2 AA minimum?','24 by 24 CSS pixels.'],['Can a target be larger than its icon?','Yes, with invisible padding.']])],
+['tz-recap','Big ideas',bigideas(['Targets should be at least about 44 pixels.','Add space between them.','Padding can enlarge a target invisibly.'])]
+]);
+
+/* ===== inits: Foundations ===== */
+function initUI(root){
+  var m=prep(root),$=m.$;
+  var N=['Structure only: boxes and labels, with no colour, no type choices and no polish. It shows layout and hierarchy.','Colour added: now there is brand, emphasis and mood, but the type is still plain.','Type added: sizes and weights set the hierarchy, and it starts to read well.','Polish added: corners, shadows and an icon make it feel finished and consistent.'];
+  function draw(k){
+    var s=parseInt(k,10),c=s>=1,ty=s>=2,po=s>=3;
+    var ff=ty?'Inter,sans-serif':'Times New Roman,serif';
+    var r=po?'14px':'0',sh=po?'0 8px 22px rgba(20,33,61,.22)':'none';
+    $('#uio').innerHTML=`<div style='background:#fff;border:${po?'0':'2px solid #888'};border-radius:${r};box-shadow:${sh};overflow:hidden;font-family:${ff};color:#14213D'><div style='background:${c?'#2F6FD8':'#DDD'};color:${c?'#fff':'#333'};padding:12px 14px;font-weight:${ty?800:400};font-size:${ty?'1.1rem':'1rem'}'>${po?'\u2630 ':''}Recipes</div><div style='padding:14px'><div style='height:90px;background:${c?'linear-gradient(135deg,#F5B96B,#E8456B)':'#CCC'};border-radius:${po?'10px':'0'};margin-bottom:10px'></div><div style='font-size:${ty?'1.35rem':'1rem'};font-weight:${ty?800:400};margin-bottom:4px'>Pasta night</div><div style='font-size:${ty?'.9rem':'1rem'};color:${ty?'#4A5070':'#333'};margin-bottom:12px'>Ready in 20 minutes.</div><span style='display:inline-block;background:${c?'#E8456B':'#BBB'};color:${c?'#fff':'#333'};padding:9px 18px;border-radius:${po?'999px':'0'};font-weight:${ty?700:400};font-size:${ty?'.95rem':'1rem'}'>Start cooking</span></div></div>`;
+    $('#uin').textContent=N[s];
+  }
+  bindChips(root,'uic',draw);draw('0');
+}
+
+function initUX(root){
+  var m=prep(root),$=m.$;
+  function draw(k){
+    var pretty=k==='pretty'||k==='both',easy=k==='plain'||k==='both',n=easy?3:9,st=easy?'1 step':'6 steps';
+    var f='',i,L=['Full name','Email','Phone','Date of birth','Address line 1','Address line 2','City','Postcode','Country'];
+    for(i=0;i<n;i++){f+=`<div style='margin-bottom:8px'><div style='font-size:.75rem;font-weight:700;margin-bottom:2px'>${L[i]}</div><div style='border:${pretty?'2px solid #C9D2F0':'1px solid #888'};border-radius:${pretty?'10px':'0'};height:28px;background:#fff'></div></div>`;}
+    $('#uxo').innerHTML=`<div style='background:${pretty?'linear-gradient(160deg,#F4F0FF,#E6F0FF)':'#F3F3F3'};border-radius:${pretty?'16px':'0'};padding:16px;font-family:${pretty?'Inter':'Arial'},sans-serif;color:#14213D'><div style='font-weight:800;font-size:1.2rem;margin-bottom:10px'>Create account</div>${f}<span style='display:inline-block;background:${pretty?'#8E4BDB':'#BBB'};color:${pretty?'#fff':'#000'};padding:9px 18px;border-radius:${pretty?'999px':'0'};font-weight:700;margin-top:6px'>Continue</span></div>`;
+    $('#uxn').textContent={pretty:'Beautiful, but it asks for 9 fields over 6 steps. People will give up. Looks good, works badly.',plain:'Plain, but only 3 fields in 1 step. Nothing fancy, and most people finish. Works well, looks basic.',both:'Both: a polished look and only 3 fields in 1 step. This is the goal.'}[k]+' ('+n+' fields, '+st+')';
+  }
+  bindChips(root,'uxc',draw);draw('pretty');
+}
+
+function initIxD(root){
+  var m=prep(root),$=m.$,liked=false,cnt=24,holdT=null;
+  function draw(k){
+    var h='',n='';
+    if(k==='tap'){h=`<button type='button' id='ixt' style='font:inherit;border:2px solid var(--c);background:var(--surface);color:var(--ink);border-radius:999px;padding:10px 20px;font-weight:700;cursor:pointer'>${liked?'\u2665 Liked':'\u2661 Like'} (${cnt})</button>`;n='Tap or click: the simplest interaction. The label and the count change straight away.';}
+    if(k==='drag'){h=`<label for='ixr'>Volume: <span id='ixv'>40</span></label><input id='ixr' type='range' min='0' max='100' value='40'>`;n='Drag: continuous control, with live feedback as you move.';}
+    if(k==='hover'){h=`<span class='tipbtn hov' data-tip='Share this page' tabindex='0' style='display:inline-block;margin-top:34px;border:2px solid var(--c);border-radius:10px;padding:10px 16px;font-weight:700;cursor:default'>Hover over me</span>`;n='Hover: reveals extra detail. It only works with a mouse, so never rely on it alone.';}
+    if(k==='hold'){h=`<button type='button' id='ixh' style='position:relative;overflow:hidden;font:inherit;border:2px solid #D62839;background:var(--surface);color:var(--ink);border-radius:10px;padding:12px 22px;font-weight:700;cursor:pointer;touch-action:none'><span id='ixf' style='position:absolute;left:0;top:0;bottom:0;width:0;background:rgba(214,40,57,.35)'></span><span id='ixl' style='position:relative'>Hold to delete</span></button>`;n='Press and hold: guards a risky action. Hold the button until the fill completes.';}
+    $('#ixo').innerHTML=h;$('#ixn').textContent=n;
+    if(k==='tap'){$('#ixt').addEventListener('click',function(){liked=!liked;cnt+=liked?1:-1;draw('tap');});}
+    if(k==='drag'){$('#ixr').addEventListener('input',function(e){$('#ixv').textContent=e.target.value;});}
+    if(k==='hold'){
+      var w=0,f=$('#ixf'),l=$('#ixl'),b=$('#ixh');
+      function stop(){clearInterval(holdT);if(w<100){w=0;f.style.width='0';}}
+      b.addEventListener('pointerdown',function(){clearInterval(holdT);w=0;holdT=setInterval(function(){w+=8;f.style.width=Math.min(w,100)+'%';if(w>=100){clearInterval(holdT);l.textContent='Deleted';}},100);});
+      b.addEventListener('pointerup',stop);b.addEventListener('pointerleave',stop);b.addEventListener('pointercancel',stop);
+    }
+  }
+  bindChips(root,'ixc',function(k){clearInterval(holdT);draw(k);});draw('tap');
+}
+
+function initIA(root){
+  var m=prep(root),$=m.$;
+  var CATS=['Running shoes','Walking boots','Jackets','Trousers','Base layers','Hats','Gloves','Socks','Rucksacks','Poles','Tents','Sleeping bags'];
+  function draw(k){
+    var s=IAS[k],h='';
+    if(k==='flat'){h=`<div style='display:flex;flex-wrap:wrap;gap:6px'>`+CATS.map(function(c){return `<span style='background:${c==='Running shoes'?'var(--c)':'var(--surface)'};color:${c==='Running shoes'?'#fff':'var(--ink)'};border:1px solid var(--line);border-radius:8px;padding:5px 10px;font-size:.85rem'>${c}</span>`;}).join('')+`</div>`;}
+    if(k==='group'){var G={Footwear:['Running shoes','Walking boots','Socks'],Clothing:['Jackets','Trousers','Base layers','Hats','Gloves'],Gear:['Rucksacks','Poles','Tents','Sleeping bags']};h=Object.keys(G).map(function(g){return `<div style='margin-bottom:8px'><b>${g}</b><div style='display:flex;flex-wrap:wrap;gap:6px;margin-top:4px'>`+G[g].map(function(c){return `<span style='background:${c==='Running shoes'?'var(--c)':'var(--surface)'};color:${c==='Running shoes'?'#fff':'var(--ink)'};border:1px solid var(--line);border-radius:8px;padding:4px 9px;font-size:.85rem'>${c}</span>`;}).join('')+`</div></div>`;}).join('');}
+    if(k==='deep'){var L=['Shop','Footwear','Sport','Running','Road','Running shoes'],i;for(i=0;i<L.length;i++){h+=`<div style='margin-left:${i*16}px;border-left:3px solid var(--c);padding:3px 8px;font-size:.9rem;font-weight:${i===L.length-1?700:400}'>${L[i]}</div>`;}}
+    $('#iao').innerHTML=h+`<p class='mood'><b>${s[0]}:</b> ${s[1]} ${s[2]} Clicks to reach Running shoes: <b>${s[3]}</b>.</p>`;
+  }
+  bindChips(root,'iac',draw);draw('group');
+}
+
+/* ===== inits: Navigation and finding ===== */
+function initNavigation(root){
+  var m=prep(root),$=m.$;
+  function draw(k){
+    var links=['Home','Shop','About','Contact'],h='';
+    var li=function(t,i){return `<span style='padding:6px 12px;border-radius:8px;${i===1?'background:#E6EEFC;color:#1E4FA6;font-weight:700':''}'>${t}</span>`;};
+    if(k==='top'){h=`<div style='display:flex;align-items:center;gap:6px;background:#fff;border:1px solid #D9DDEB;border-radius:12px;padding:10px 14px;font-family:Inter,sans-serif;color:#14213D'><b style='margin-right:auto'>Shopfront</b>${links.map(li).join('')}</div>`;}
+    if(k==='side'){h=`<div style='display:flex;gap:10px;font-family:Inter,sans-serif;color:#14213D'><div style='width:140px;background:#fff;border:1px solid #D9DDEB;border-radius:12px;padding:10px'><b style='display:block;margin-bottom:8px'>Shopfront</b>${links.map(function(t,i){return `<div style='margin-bottom:2px'>${li(t,i)}</div>`;}).join('')}</div><div style='flex:1;background:#fff;border:1px solid #D9DDEB;border-radius:12px;padding:14px'>Content area</div></div>`;}
+    if(k==='bottom'){h=`<div style='width:230px;margin:auto;border:3px solid #14213D;border-radius:22px;overflow:hidden;font-family:Inter,sans-serif;background:#fff;color:#14213D'><div style='height:120px;display:grid;place-items:center;color:#7A809C'>Screen content</div><div style='display:flex;justify-content:space-around;border-top:1px solid #D9DDEB;padding:8px 4px;font-size:.7rem;text-align:center'>${['Home','Search','Saved','Profile'].map(function(t,i){return `<div style='color:${i===0?'#2F6FD8':'#5A6180'};font-weight:${i===0?700:400}'><div style='font-size:1.1rem'>\u25CF</div>${t}</div>`;}).join('')}</div></div>`;}
+    if(k==='hamb'){h=`<div style='display:flex;align-items:center;gap:12px;background:#fff;border:1px solid #D9DDEB;border-radius:12px;padding:10px 14px;font-family:Inter,sans-serif;color:#14213D'><span style='font-size:1.4rem'>\u2630</span><b>Shopfront</b></div><div style='color:var(--muted);font-size:.9rem;margin-top:8px'>The links are hidden until the icon is tapped.</div>`;}
+    $('#nvo').innerHTML=h;$('#nvn').textContent=NAVT[k][1]+' '+NAVT[k][2];
+  }
+  bindChips(root,'nvc',draw);draw('top');
+}
+
+function initMenus(root){
+  var m=prep(root),$=m.$,k='drop',open=true;
+  var item=function(t,s){return `<div style='padding:7px 14px;${s||''}'>${t}</div>`;};
+  function draw(){
+    var h='';
+    if(k==='drop'){h=`<div style='display:flex;gap:16px;align-items:flex-start;font-family:Inter,sans-serif;color:#14213D;background:#fff;padding:12px 16px;border-radius:12px'><b>Shopfront</b><div style='position:relative'><span style='font-weight:700'>Products \u25BE</span>${open?`<div style='position:absolute;top:26px;left:0;background:#fff;border:1px solid #D9DDEB;border-radius:10px;box-shadow:0 8px 20px rgba(0,0,0,.15);min-width:150px;padding:4px 0;z-index:2'>${item('Shoes')}${item('Jackets')}${item('Bags')}</div>`:''}</div><span>About</span></div><div style='height:100px'></div>`;}
+    if(k==='mega'){h=`<div style='font-family:Inter,sans-serif;color:#14213D;background:#fff;padding:12px 16px;border-radius:12px'><div style='display:flex;gap:16px'><b>Shopfront</b><span style='font-weight:700'>Products \u25BE</span><span>About</span></div>${open?`<div style='display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:12px;border-top:1px solid #D9DDEB;padding-top:12px;font-size:.85rem'><div><b>Footwear</b><br>Running<br>Hiking<br>Sandals</div><div><b>Clothing</b><br>Jackets<br>Fleeces<br>Trousers</div><div><b>Gear</b><br>Packs<br>Tents<br>Poles</div></div>`:''}</div>`;}
+    if(k==='ctx'){h=`<div style='position:relative;font-family:Inter,sans-serif;color:#14213D;background:#fff;padding:16px;border-radius:12px;min-height:170px'><div style='border:1px solid #D9DDEB;border-radius:8px;padding:10px;width:200px'>report.pdf<br><span style='font-size:.8rem;color:#5A6180'>Right-click or long-press</span></div>${open?`<div style='position:absolute;left:150px;top:46px;background:#fff;border:1px solid #D9DDEB;border-radius:10px;box-shadow:0 8px 20px rgba(0,0,0,.18);padding:4px 0;min-width:140px'>${item('Open')}${item('Rename')}${item('Share')}${item('Delete','color:#D62839')}</div>`:''}</div>`;}
+    if(k==='drawer'){h=`<div style='position:relative;width:240px;height:190px;margin:auto;border:3px solid #14213D;border-radius:18px;overflow:hidden;background:#fff;font-family:Inter,sans-serif;color:#14213D'><div style='padding:10px;border-bottom:1px solid #D9DDEB'>\u2630 <b>Shopfront</b></div>${open?`<div style='position:absolute;top:0;left:0;bottom:0;width:150px;background:#14213D;color:#fff;padding:14px 12px;box-shadow:6px 0 18px rgba(0,0,0,.3)'><b style='display:block;margin-bottom:10px'>Menu</b><div style='padding:5px 0'>Shop</div><div style='padding:5px 0'>About</div><div style='padding:5px 0'>Help</div></div><div style='position:absolute;left:150px;top:0;right:0;bottom:0;background:rgba(0,0,0,.35)'></div>`:''}</div>`;}
+    $('#mno').innerHTML=h;
+  }
+  bindChips(root,'mnc',function(v){k=v;open=true;draw();});
+  $('#mnb').addEventListener('click',function(){open=!open;draw();});
+  draw();
+}
+
+function initHeaders(root){
+  var m=prep(root),$=m.$,on={logo:1,links:1};
+  function draw(){
+    var parts=[];
+    if(on.logo){parts.push(`<b style='margin-right:auto;font-size:1.1rem'>Shopfront</b>`);}else{parts.push(`<span style='margin-right:auto'></span>`);}
+    if(on.links){parts.push(`<span>Shop</span><span>About</span><span>Help</span>`);}
+    if(on.search){parts.push(`<span style='border:1.5px solid #9AA0BC;border-radius:999px;padding:3px 14px;color:#7A809C'>Search</span>`);}
+    if(on.account){parts.push(`<span>Account</span>`);}
+    if(on.cta){parts.push(`<span style='background:#E8456B;color:#fff;border-radius:999px;padding:6px 16px;font-weight:700'>Sign up</span>`);}
+    var n=Object.keys(on).filter(function(k){return on[k];}).length;
+    $('#hdo').innerHTML=`<div style='display:flex;align-items:center;gap:14px;flex-wrap:wrap;background:#fff;border:1px solid #D9DDEB;border-radius:12px;padding:12px 16px;font-family:Inter,sans-serif;color:#14213D'>${parts.join('')}</div>`;
+    $('#hdn').textContent=n+' elements. '+(n<=3?'Clean and easy to scan.':n===4?'Getting full. Check it on a phone.':'Crowded: on a narrow screen this would wrap or overflow. Move some items into a menu.');
+  }
+  bindTogg(root,'hdt',on,draw);draw();
+}
+
+function initFooters(root){
+  var m=prep(root),$=m.$,on={links:1,legal:1};
+  function draw(){
+    var h='';
+    if(on.links){h+=`<div style='display:flex;gap:30px;flex-wrap:wrap;margin-bottom:14px'><div><b>Shop</b><br>Shoes<br>Jackets<br>Bags</div><div><b>Company</b><br>About<br>Careers<br>Press</div><div><b>Help</b><br>Delivery<br>Returns<br>FAQ</div></div>`;}
+    if(on.contact){h+=`<div style='margin-bottom:12px'><b>Contact</b><br>hello@shopfront.example<br>0800 000 000</div>`;}
+    if(on.news){h+=`<div style='margin-bottom:12px'><b>Newsletter</b><div style='display:flex;gap:6px;margin-top:6px'><span style='background:#fff;color:#7A809C;border-radius:8px;padding:6px 12px;flex:1'>Your email</span><span style='background:#E8456B;border-radius:8px;padding:6px 12px;font-weight:700'>Join</span></div></div>`;}
+    if(on.social){h+=`<div style='margin-bottom:12px'><b>Follow us</b><br>Instagram, YouTube, LinkedIn</div>`;}
+    if(on.legal){h+=`<div style='border-top:1px solid rgba(255,255,255,.25);padding-top:10px;font-size:.8rem;opacity:.85'>\u00a9 2026 Shopfront. Privacy policy. Terms of use.</div>`;}
+    if(!h){h=`<div style='opacity:.7'>An empty footer. People at the bottom of the page have nowhere to go.</div>`;}
+    $('#fto').innerHTML=`<div style='background:#14213D;color:#fff;border-radius:12px;padding:18px;font-family:Inter,sans-serif;font-size:.9rem;line-height:1.5'>${h}</div>`;
+  }
+  bindTogg(root,'ftt',on,draw);draw();
+}
+
+function initTabsL(root){
+  var m=prep(root),$=m.$,st='line',sel=0;
+  var T=[['Overview','A light trail jacket with a packable hood. Good for most weather.'],['Details','Weight 280 g. Fully taped seams. Two zipped pockets.'],['Reviews','4.7 out of 5 from 312 reviews.']];
+  function draw(){
+    var tabStyle=function(i){var a=i===sel;
+      if(st==='line'){return `font:inherit;background:none;border:0;border-bottom:3px solid ${a?'var(--c)':'transparent'};padding:10px 16px;font-weight:${a?700:500};color:var(--ink);cursor:pointer`;}
+      if(st==='pill'){return `font:inherit;border:0;border-radius:999px;padding:8px 16px;font-weight:700;background:${a?'var(--c)':'transparent'};color:${a?'#fff':'var(--ink)'};cursor:pointer`;}
+      return `font:inherit;border:1px solid var(--line);padding:8px 18px;font-weight:700;background:${a?'var(--ink)':'var(--surface)'};color:${a?'var(--surface)':'var(--ink)'};cursor:pointer`;};
+    $('#tbo').innerHTML=`<div role='tablist' style='display:flex;gap:${st==='seg'?'0':'4px'};border-bottom:${st==='line'?'1px solid var(--line)':'0'}'>`+T.map(function(t,i){return `<button role='tab' type='button' data-i='${i}' aria-selected='${i===sel}' tabindex='${i===sel?0:-1}' style='${tabStyle(i)}'>${t[0]}</button>`;}).join('')+`</div><div role='tabpanel' style='padding:14px 4px'>${T[sel][1]}</div>`;
+  }
+  var box=$('#tbo');
+  box.addEventListener('click',function(e){var b=e.target.closest('[role=tab]');if(!b)return;sel=parseInt(b.getAttribute('data-i'),10);draw();});
+  box.addEventListener('keydown',function(e){if(e.key==='ArrowRight'||e.key==='ArrowLeft'){sel=(sel+(e.key==='ArrowRight'?1:2))%3;draw();var t=box.querySelector('[aria-selected=true]');if(t){t.focus();}}});
+  bindChips(root,'tbs',function(v){st=v;draw();});draw();
+}
+
+function initCrumbs(root){
+  var m=prep(root),$=m.$,d=4,mode='full';
+  var P=['Home','Shop','Shoes','Running','Trail','Pegasus 40'];
+  function draw(){
+    var trail=P.slice(0,d+1),last=trail.length-1,parts=trail.map(function(t,i){return i===last?`<span aria-current='page' style='font-weight:700'>${t}</span>`:`<a href='#' onclick='return false' style='color:var(--c)'>${t}</a>`;});
+    if(mode==='short'&&trail.length>3){parts=[parts[0],`<span>\u2026</span>`,parts[last]];}
+    $('#bco').innerHTML=`<nav aria-label='Breadcrumb' style='background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:12px 16px'>${parts.join(`<span style='margin:0 8px;color:var(--muted)'>/</span>`)}</nav>`;
+    $('#bcn').textContent=trail.length+' levels. '+(mode==='short'&&trail.length>3?'The middle levels are collapsed into an ellipsis to fit a small screen.':'The full trail. Every level but the last is a link.');
+  }
+  onRng(root,'bcd',function(v){d=v;draw();});bindChips(root,'bcm',function(v){mode=v;draw();});draw();
+}
+
+function initPagination(root){
+  var m=prep(root),$=m.$,total=24,st='num',p=1;
+  function pages(){
+    var out=[],add=function(x){out.push(x);},seen={};
+    var show=[1,total,p-1,p,p+1].filter(function(x){return x>=1&&x<=total;}).sort(function(a,b){return a-b;});
+    var last=0;show.forEach(function(x){if(seen[x]){return;}seen[x]=1;if(x-last>1){add('\u2026');}add(x);last=x;});return out;
+  }
+  function btn(l,dis,act,tag){return `<button type='button' ${tag?`data-p='${tag}'`:''} ${dis?'disabled':''} style='font:inherit;min-width:40px;height:40px;border:1px solid var(--line);border-radius:10px;background:${act?'var(--c)':'var(--surface)'};color:${act?'#fff':'var(--ink)'};font-weight:700;cursor:${dis?'not-allowed':'pointer'};opacity:${dis?.5:1}'>${l}</button>`;}
+  function draw(){
+    if(p>total){p=total;}
+    var h='';
+    if(st==='num'){h=`<div style='display:flex;gap:6px;flex-wrap:wrap;align-items:center'>${btn('\u2039',p===1,false,'prev')}`+pages().map(function(x){return x==='\u2026'?`<span style='padding:0 4px'>\u2026</span>`:btn(x,false,x===p,x);}).join('')+btn('\u203A',p===total,false,'next')+`</div>`;}
+    if(st==='pn'){h=`<div style='display:flex;gap:10px;align-items:center'>${btn('Previous',p===1,false,'prev')}<span>Page ${p} of ${total}</span>${btn('Next',p===total,false,'next')}</div>`;}
+    if(st==='more'){h=`<div>Showing ${Math.min(p*10,total*10)} of ${total*10} results</div><div style='margin-top:8px'>${p>=total?'<span style=\'color:var(--muted)\'>That is everything.</span>':btn('Load more',false,false,'next')}</div>`;}
+    $('#pgo').innerHTML=h;
+    $('#pgn').textContent={num:'Numbered: shows where you are, lets you jump, and the ellipsis keeps it short.',pn:'Previous and next: simple, but you cannot jump far.',more:'Load more: easy to use, but harder to return to a place.'}[st]+' (Page '+p+' of '+total+')';
+  }
+  $('#pgo').addEventListener('click',function(e){var b=e.target.closest('[data-p]');if(!b||b.disabled){return;}var v=b.getAttribute('data-p');if(v==='prev'){p=Math.max(1,p-1);}else if(v==='next'){p=Math.min(total,p+1);}else{p=parseInt(v,10);}draw();});
+  onRng(root,'pgt',function(v){total=v;draw();});bindChips(root,'pgs',function(v){st=v;p=1;draw();});draw();
+}
+
+function initSearchL(root){
+  var m=prep(root),$=m.$;
+  function draw(){
+    var q=($('#srq').value||'').trim(),h='';
+    if(!q){h=`<p class='mood'>Start typing to see suggestions.</p>`;}
+    else{
+      var r=SRCH.filter(function(s){return s.toLowerCase().indexOf(q.toLowerCase())>-1;}).slice(0,6);
+      if(r.length){h=`<ul style='list-style:none;padding:0;margin:0;border:1px solid var(--line);border-radius:12px;overflow:hidden'>`+r.map(function(s){var i=s.toLowerCase().indexOf(q.toLowerCase());return `<li style='padding:10px 14px;border-bottom:1px solid var(--line);background:var(--surface)'>${s.slice(0,i)}<b style='background:color-mix(in srgb,var(--c) 25%,transparent)'>${s.slice(i,i+q.length)}</b>${s.slice(i+q.length)}</li>`;}).join('')+`</ul>`;}
+      else{h=`<div class='callout' style='margin:0'><p><b>No results for \u201c${q.replace(/</g,'')}\u201d.</b> Check the spelling, or try a broader word such as \u201cshoes\u201d or \u201cjacket\u201d.</p></div>`;}
+    }
+    $('#sro').innerHTML=h;
+  }
+  $('#srq').addEventListener('input',draw);draw();
+}
+
+function initFiltersL(root){
+  var m=prep(root),$=m.$,cat='all',mx=200;
+  function draw(){
+    var r=PRODS.filter(function(p){return (cat==='all'||p[1]===cat)&&p[2]<=mx;});
+    var act=[];if(cat!=='all'){act.push(cat);}if(mx<200){act.push('under '+mx+' pounds');}
+    $('#fio').innerHTML=(act.length?`<div style='margin-bottom:8px'>`+act.map(function(a){return `<span class='tag' style='background:color-mix(in srgb,var(--c) 20%,var(--surface));color:var(--ink)'>${a} \u2715</span>`;}).join('')+`<button type='button' id='ficl' class='btn' style='padding:3px 12px;font-size:.85rem'>Clear all</button></div>`:'')+(r.length?`<div style='display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:8px'>`+r.map(function(p){return `<div style='background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:10px'><b>${p[0]}</b><div style='color:var(--muted);font-size:.85rem'>${p[2]} pounds</div></div>`;}).join('')+`</div>`:`<div class='callout' style='margin:0'><p><b>Nothing matches.</b> Try removing a filter.</p></div>`);
+    $('#fin').textContent='Showing '+r.length+' of '+PRODS.length+' products.';
+    var c=$('#ficl');
+    if(c){c.addEventListener('click',function(){
+      cat='all';mx=200;$('#fip').value=200;$('#fipv').textContent=200;
+      Array.prototype.slice.call(root.querySelectorAll('#fic .chip')).forEach(function(x){x.setAttribute('aria-pressed',x.getAttribute('data-v')==='all'?'true':'false');});
+      draw();
+    });}
+  }
+  bindChips(root,'fic',function(v){cat=v;draw();});onRng(root,'fip',function(v){mx=v;draw();});draw();
+}
+
+/* ===== inits: Components ===== */
+function initCardsL(root){
+  var m=prep(root),$=m.$,k='v',on={image:1,badge:1,button:1};
+  function draw(){
+    var img=on.image?`<div style='${k==='h'?'flex:0 0 38%;':k==='o'?'position:absolute;top:0;left:0;right:0;bottom:0;':'height:110px;'}background:linear-gradient(135deg,#7EC8A4,#2F6FD8)'></div>`:'';
+    var bd=on.badge?`<span class='tag' style='background:#FFE066;color:#14213D;margin-bottom:6px'>New</span>`:'',bt=on.button?`<div style='margin-top:8px'>${dsBtn(tk({}),{label:'View trip',sz:'S'})}</div>`:'';
+    var body=`<div style='padding:14px;${k==='o'?'position:relative;color:#fff;margin-top:70px;background:linear-gradient(transparent,rgba(0,0,0,.6))':''}'>${bd}<div style='font-weight:800'>Lake District weekend</div><div style='font-size:.85rem;opacity:.85'>Two days, three lakes, one very good pub.</div>${bt}</div>`;
+    $('#cdo').innerHTML=`<div style='position:relative;display:${k==='h'?'flex':'block'};background:#fff;color:#14213D;border-radius:14px;overflow:hidden;box-shadow:0 6px 18px rgba(20,33,61,.2);font-family:Inter,sans-serif;${k==='o'?'min-height:190px':''}'>${img}${body}</div>`;
+  }
+  bindChips(root,'cdl',function(v){k=v;draw();});bindTogg(root,'cdt',on,draw);draw();
+}
+
+function initButtonsUI(root){
+  var m=prep(root),$=m.$,t=tk({});
+  function draw(k){
+    var h='',n='';
+    var dlg=function(inner){return `<div style='background:#fff;color:#14213D;border-radius:14px;padding:18px;max-width:360px;box-shadow:0 10px 30px rgba(0,0,0,.18);font-family:Inter,sans-serif'><div style='font-weight:800;margin-bottom:4px'>Delete project?</div><div style='color:#4A5070;margin-bottom:14px'>This removes all 24 files and cannot be undone.</div><div style='display:flex;gap:8px;justify-content:flex-end;align-items:center'>${inner}</div></div>`;};
+    if(k==='good'){h=dlg(dsBtn(t,{v:'secondary',label:'Cancel'})+dsBtn(t,{v:'danger',label:'Delete project'}));n='Clear hierarchy: the safe choice is a quiet secondary button, and the destructive one is red and clearly labelled.';}
+    if(k==='equal'){h=dlg(dsBtn(t,{label:'Cancel'})+dsBtn(t,{label:'Delete'}));n='All equal: both buttons shout the same. Nothing says which is safe, so mistakes are likely.';}
+    if(k==='risky'){h=dlg(`<span style='color:#7A809C;font-size:.85rem;margin-right:auto'>Cancel</span>`+dsBtn(t,{sz:'L',label:'Delete everything'}));n='Danger as the main button: the safe option is tiny and the destructive one is big and inviting. This invites accidents.';}
+    $('#bto').innerHTML=h;$('#btn').textContent=n;
+  }
+  bindChips(root,'btc',draw);draw('good');
+}
+
+function initCTAL(root){
+  var m=prep(root),$=m.$,i=2,st='solid';
+  function draw(){
+    var c=tk({}),btn=st==='solid'?dsBtn(c,{sz:'L',label:CTAS[i][0]}):dsBtn(c,{v:'secondary',sz:'L',label:CTAS[i][0]});
+    $('#cto').innerHTML=`<div style='background:linear-gradient(135deg,#E6EEFC,#F4F0FF);border-radius:14px;padding:26px;font-family:Inter,sans-serif;color:#14213D'><div style='font-weight:800;font-size:1.6rem;line-height:1.15;margin-bottom:6px'>Plan your week in minutes</div><div style='color:#4A5070;margin-bottom:16px'>A calendar that works the way you think.</div>${btn}</div>`;
+    $('#ctn').textContent='\u201c'+CTAS[i][0]+'\u201d: '+CTAS[i][1]+(st==='outline'?' An outline style is calmer, but less prominent as the main action.':'');
+  }
+  bindChips(root,'ctc',function(v){i=parseInt(v,10);draw();});bindChips(root,'cts',function(v){st=v;draw();});draw();
+}
+
+function initFormsL(root){
+  var m=prep(root),$=m.$,lay='one',lb='above';
+  var F=[['Full name','Ada Lovelace'],['Email','ada@example.com'],['City','London'],['Phone','07700 900123']];
+  function draw(){
+    var f=F.map(function(x){return `<div>${lb==='above'?`<div style='font-size:.8rem;font-weight:700;margin-bottom:3px'>${x[0]}</div>`:''}<div style='border:2px solid #9AA0BC;border-radius:8px;padding:9px 12px;color:${lb==='ph'?'#8A90AA':'#14213D'};background:#fff'>${lb==='ph'?x[0]:x[1]}</div></div>`;}).join('');
+    $('#fmo').innerHTML=`<div style='background:#fff;color:#14213D;border-radius:14px;padding:16px;font-family:Inter,sans-serif'><div style='display:grid;grid-template-columns:${lay==='two'?'1fr 1fr':'1fr'};gap:12px'>${f}</div><div style='margin-top:14px'>${dsBtn(tk({}),{label:'Save details'})}</div></div>`;
+    $('#fmn').textContent=(lay==='one'?'Single column: a clear top-to-bottom path.':'Two columns: compact, but the eye zig-zags and fields can be missed.')+' '+(lb==='above'?'Labels above stay visible while typing.':'With only placeholders, the label disappears once you start typing.');
+  }
+  bindChips(root,'fml',function(v){lay=v;draw();});bindChips(root,'fmb',function(v){lb=v;draw();});draw();
+}
+
+function initInputsL(root){
+  var m=prep(root),$=m.$,n=2;
+  var S='font:inherit;border:2px solid #9AA0BC;border-radius:10px;padding:9px 12px;background:#fff;color:#14213D;width:100%;box-sizing:border-box;';
+  $('#ino').innerHTML=`<div style='display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;background:#fff;color:#14213D;border-radius:14px;padding:16px;font-family:Inter,sans-serif'>
+  <div><label for='ia1' style='font-weight:700;font-size:.85rem'>Email (brings the @ keyboard)</label><input id='ia1' type='email' placeholder='name@example.com' style='${S}'></div>
+  <div><label for='ia2' style='font-weight:700;font-size:.85rem'>Password</label><div style='display:flex;gap:6px'><input id='ia2' type='password' value='hunter2hunter2' style='${S}'><button id='iat' type='button' style='font:inherit;border:2px solid #9AA0BC;border-radius:10px;background:#fff;color:#14213D;padding:0 10px;cursor:pointer'>Show</button></div></div>
+  <div><label style='font-weight:700;font-size:.85rem'>Guests (number stepper)</label><div style='display:flex;gap:8px;align-items:center'><button id='iam' type='button' aria-label='Fewer guests' style='font:inherit;width:44px;height:44px;border-radius:10px;border:2px solid #9AA0BC;background:#fff;color:#14213D;cursor:pointer'>\u2212</button><b id='ian' style='min-width:30px;text-align:center'>2</b><button id='iap' type='button' aria-label='More guests' style='font:inherit;width:44px;height:44px;border-radius:10px;border:2px solid #9AA0BC;background:#fff;color:#14213D;cursor:pointer'>+</button></div></div>
+  <div><label for='ia4' style='font-weight:700;font-size:.85rem'>Message (counter)</label><textarea id='ia4' rows='3' maxlength='120' style='${S}'></textarea><div id='iac' style='font-size:.8rem;color:#5A6180'>120 characters left</div></div></div>`;
+  $('#iat').addEventListener('click',function(){var i=$('#ia2'),show=i.type==='password';i.type=show?'text':'password';$('#iat').textContent=show?'Hide':'Show';});
+  $('#iam').addEventListener('click',function(){n=Math.max(1,n-1);$('#ian').textContent=n;});$('#iap').addEventListener('click',function(){n=Math.min(12,n+1);$('#ian').textContent=n;});
+  $('#ia4').addEventListener('input',function(e){$('#iac').textContent=(120-e.target.value.length)+' characters left';});
+}
+
+function initDropdownsL(root){
+  var m=prep(root),$=m.$;
+  function draw(n){
+    var h='',msg='';
+    var radioStyle='display:flex;align-items:center;gap:8px;padding:4px 0';
+    if(n<=4){var i;for(i=1;i<=n;i++){h+=`<label style='${radioStyle}'><input type='radio' name='dro' ${i===1?'checked':''}> Option ${i}</label>`;}msg='With '+n+' options, show them all as radio buttons. One tap, nothing hidden.';}
+    else if(n<=15){var o='';for(var j=1;j<=n;j++){o+=`<option>Option ${j}</option>`;}h=`<select style='font:inherit;border:2px solid #9AA0BC;border-radius:10px;padding:9px 12px;background:#fff;color:#14213D;width:100%'>${o}</select>`;msg='With '+n+' options, a dropdown saves space without being too long.';}
+    else{h=`<input type='text' placeholder='Type to search ${n} options...' style='margin:0'><div style='border:1px solid var(--line);border-radius:10px;overflow:hidden'>`+[1,2,3].map(function(i){return `<div style='padding:8px 12px;border-bottom:1px solid var(--line);background:var(--surface)'>Option ${i}</div>`;}).join('')+`<div style='padding:8px 12px;color:var(--muted)'>\u2026 and more as you type</div></div>`;msg='With '+n+' options, a long dropdown is painful. Let people type to filter (autocomplete).';}
+    $('#dro').innerHTML=h;$('#drm').textContent=msg;
+  }
+  onRng(root,'drn',draw);draw(8);
+}
+
+function initTogglesL(root){
+  var m=prep(root),$=m.$,on=false,chk=false,saved=false;
+  function drawT(){$('#tgo').innerHTML=`<div style='display:flex;align-items:center;gap:12px'><button type='button' role='switch' aria-checked='${on}' aria-label='Notifications' id='tgs' style='width:52px;height:30px;border-radius:999px;border:0;background:${on?'var(--c)':'#9AA0BC'};position:relative;cursor:pointer;padding:0'><span style='position:absolute;top:3px;left:${on?'25px':'3px'};width:24px;height:24px;border-radius:50%;background:#fff;transition:left .15s'></span></button><span>Notifications: <b>${on?'On':'Off'}</b></span></div><p class='mood'>${on?'Saved straight away. No button needed.':'Flip the switch: the change applies immediately.'}</p>`;$('#tgs').addEventListener('click',function(){on=!on;drawT();});}
+  function drawC(){$('#tgc').innerHTML=`<label style='display:flex;align-items:center;gap:10px'><input type='checkbox' id='tgk' ${chk?'checked':''}> Send me notifications</label><div style='margin-top:10px'>${dsBtn(tk({}),{label:'Save',sz:'S'})}</div><p class='mood'>${saved?'Saved. The choice only applied once you pressed Save.':'Tick the box, then press Save. Nothing happens until then.'}</p>`;$('#tgk').addEventListener('change',function(e){chk=e.target.checked;saved=false;drawC();});}
+  drawT();drawC();
+  $('#tgc').addEventListener('click',function(e){var b=e.target.closest('span');if(b&&/Save/.test(b.textContent)){saved=true;drawC();}});
+}
+
+function initModalsL(root){
+  var m=prep(root),$=m.$,k='confirm',isOpen=false;
+  var C={confirm:['Delete this photo?','This cannot be undone.',['Cancel','Delete']],form:['Invite a teammate',`<input type='text' placeholder='name@example.com' style='margin:8px 0 0'>`,['Cancel','Send invite']],info:['Terms updated','We have updated our terms. They apply from 1 March.',['Got it']]};
+  function draw(){
+    var c=C[k],btns=c[2].map(function(b,i){return `<button type='button' data-x='1' class='btn' style='${i===c[2].length-1?'background:var(--ink);color:var(--surface)':''}'>${b}</button>`;}).join('');
+    $('#mdo').innerHTML=`<div style='padding:16px'>Page content behind the dialog.<br>Another line of the page.</div>`+(isOpen?`<div id='mdbd' style='position:absolute;top:0;left:0;right:0;bottom:0;background:rgba(20,33,61,.55);display:grid;place-items:center'><div role='dialog' aria-modal='true' aria-label='${c[0]}' style='background:#fff;color:#14213D;border-radius:14px;padding:18px;width:min(300px,86%);box-shadow:0 10px 30px rgba(0,0,0,.3)'><div style='font-weight:800;margin-bottom:6px'>${c[0]}</div><div style='color:#4A5070'>${c[1]}</div><div style='display:flex;gap:8px;justify-content:flex-end;margin-top:14px'>${btns}</div></div></div>`:'');
+    $('#mdn').textContent=isOpen?'The modal blocks the page. Close it with a button, the Escape key or a click outside. Focus moves into the dialog.':'Press the button to open the modal.';
+    if(isOpen){var f=$('#mdo').querySelector('button');if(f){f.focus();}}
+  }
+  function close(){isOpen=false;draw();$('#mdb').focus();}
+  bindChips(root,'mdc',function(v){k=v;isOpen=false;draw();});
+  $('#mdb').addEventListener('click',function(){isOpen=true;draw();});
+  $('#mdo').addEventListener('click',function(e){if(e.target.closest('[data-x]')||e.target.id==='mdbd'){close();}});
+  root.addEventListener('keydown',function(e){if(e.key==='Escape'&&isOpen){close();}});
+  draw();
+}
+
+function initTooltipsL(root){
+  var m=prep(root),$=m.$;
+  var I=[['Edit',`<path d='M5 19l1-4L16 5l3 3L9 18z'/>`],['Share',`<path d='M12 15V4M8 8l4-4 4 4M5 13v7h14v-7'/>`],['Delete',`<path d='M5 7h14M9 7V4h6v3M7 7l1 13h8l1-13'/>`]];
+  function draw(k){
+    $('#tto').innerHTML=`<div style='display:flex;gap:14px'>`+I.map(function(i){return `<button type='button' class='tipbtn ${k==='both'?'both':'hov'}' data-tip='${i[0]}' aria-label='${i[0]}' style='position:relative;font:inherit;width:48px;height:48px;border-radius:12px;border:2px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer;display:grid;place-items:center'><svg width='22' height='22' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true'>${i[1]}</svg></button>`;}).join('')+`</div>`;
+    $('#ttn').textContent=k==='both'?'Hover or Tab to an icon: the tooltip shows for mouse and keyboard.':'Hover only: press Tab and nothing appears. Keyboard users get no help.';
+  }
+  bindChips(root,'ttc',draw);draw('both');
+}
+
+function initAlertsL(root){
+  var m=prep(root),$=m.$,k='info',dm='yes',gone=false;
+  function draw(){
+    var a=ALERTS[k];
+    $('#alo').innerHTML=gone?`<p class='mood'>Dismissed. Change the type to bring it back.</p>`:`<div role='${k==='error'?'alert':'status'}' style='display:flex;gap:10px;align-items:flex-start;background:${a[2]};border-left:6px solid ${a[1]};border-radius:10px;padding:12px 14px;color:#14213D;font-family:Inter,sans-serif'><span style='flex:0 0 24px;height:24px;border-radius:50%;background:${a[1]};color:#fff;display:grid;place-items:center;font-weight:700;font-size:.85rem'>${a[3]}</span><div style='flex:1'><b style='color:${a[1]}'>${a[0]}</b><div>${a[4]}</div></div>${dm==='yes'?`<button type='button' id='ald2' aria-label='Dismiss' style='font:inherit;border:0;background:none;color:#14213D;cursor:pointer;font-size:1.1rem'>\u2715</button>`:''}</div>`;
+    var d=$('#ald2');if(d){d.addEventListener('click',function(){gone=true;draw();});}
+  }
+  bindChips(root,'alc',function(v){k=v;gone=false;draw();});bindChips(root,'ald',function(v){dm=v;gone=false;draw();});draw();
+}
+
+function initNotifsL(root){
+  var m=prep(root),$=m.$,pos='tr',list=[],id=0;
+  var N={message:['New message','Ada sent you a photo.'],payment:['Payment received','You received 40 pounds.'],update:['Update available','Version 2.1 is ready to install.']};
+  function draw(){
+    if(!$('#noo')){return;}
+    var st=pos==='tr'?'top:10px;right:10px;align-items:flex-end':'bottom:10px;left:0;right:0;align-items:center';
+    $('#noo').innerHTML=`<div style='position:absolute;${st};display:flex;flex-direction:column;gap:8px'>`+list.map(function(n){return `<div role='status' style='background:#14213D;color:#fff;border-radius:12px;padding:10px 14px;min-width:200px;box-shadow:0 8px 20px rgba(0,0,0,.3);font-family:Inter,sans-serif'><b>${n.t}</b><div style='font-size:.85rem;opacity:.85'>${n.b}</div></div>`;}).join('')+`</div>`+(list.length?'':`<div style='padding:16px;color:#5A6180'>Press a button above. Toasts disappear by themselves after four seconds, and no more than three show at once.</div>`);
+  }
+  Array.prototype.slice.call(root.querySelectorAll('[data-n]')).forEach(function(b){b.addEventListener('click',function(){var d=N[b.getAttribute('data-n')],i=++id;list.push({i:i,t:d[0],b:d[1]});if(list.length>3){list.shift();}draw();setTimeout(function(){list=list.filter(function(x){return x.i!==i;});draw();},4000);});});
+  bindChips(root,'noc',function(v){pos=v;draw();});draw();
+}
+
+/* ===== inits: States and feedback ===== */
+function initEmptyL(root){
+  var m=prep(root),$=m.$;
+  function draw(k){var e=EMP[k];$('#emo').innerHTML=`<div style='background:#fff;border-radius:14px;padding:24px;text-align:center;color:#14213D;font-family:Inter,sans-serif'><div style='width:64px;height:64px;border-radius:50%;background:#E6EEFC;margin:0 auto 12px'></div><div style='font-weight:800;font-size:1.15rem'>${e[2]}</div><div style='color:#4A5070;margin:4px 0 14px'>${e[3]}</div>${dsBtn(tk({}),{label:e[4]})}</div>`;$('#emn').textContent=e[0]+': '+e[1];}
+  bindChips(root,'emc',draw);draw('first');
+}
+
+function initLoadingL(root){
+  var m=prep(root),$=m.$,k='skel',timer=null,state='idle';
+  var content=`<div style='display:flex;gap:12px;align-items:center'><div style='width:64px;height:64px;border-radius:12px;background:linear-gradient(135deg,#7EC8A4,#2F6FD8)'></div><div><div style='font-weight:800'>Lake District weekend</div><div style='color:#4A5070;font-size:.9rem'>Two days, three lakes, one very good pub.</div></div></div>`;
+  function draw(p){
+    var h='';
+    if(state==='idle'){h=`<div style='color:#5A6180'>Press Load content.</div>`;}
+    else if(state==='done'){h=content;}
+    else if(k==='spin'){h=`<div style='display:flex;align-items:center;gap:10px'><span class='fspin' style='width:22px;height:22px'></span> Loading...</div>`;}
+    else if(k==='skel'){h=`<div style='display:flex;gap:12px;align-items:center'><div class='skel' style='width:64px;height:64px;border-radius:12px'></div><div style='flex:1'><div class='skel' style='height:14px;width:60%;margin-bottom:8px;border-radius:6px'></div><div class='skel' style='height:10px;width:85%;border-radius:6px'></div></div></div>`;}
+    else{h=`<div style='font-size:.85rem;margin-bottom:6px'>Loading ${p||0}%</div><div style='background:#E1E5F2;border-radius:99px;height:12px'><div style='width:${p||0}%;height:100%;background:#2F6FD8;border-radius:99px'></div></div>`;}
+    $('#ldo').innerHTML=`<div style='background:#fff;border-radius:14px;padding:18px;color:#14213D;font-family:Inter,sans-serif;min-height:100px'>${h}</div>`;
+  }
+  function start(){clearInterval(timer);state='loading';var p=0;draw(0);timer=setInterval(function(){if(!$('#ldo')){clearInterval(timer);return;}p+=10;if(k==='bar'){draw(p);}if(p>=100){clearInterval(timer);state='done';draw();}},220);}
+  var note={spin:'Spinner: tells people that something is happening, but not how long it will take. Good for short waits.',skel:'Skeleton: shows the shape of what is coming, so the layout does not jump and the wait feels shorter.',bar:'Progress bar: shows how far along the process is. Best for longer waits you can measure.'};
+  bindChips(root,'ldc',function(v){k=v;clearInterval(timer);state='idle';draw();$('#ldn').textContent=note[k];});
+  $('#ldb').addEventListener('click',start);
+  $('#ldn').textContent=note[k];draw();
+}
+
+function initErrorL(root){
+  var m=prep(root),$=m.$,mode='helpful';
+  function draw(){
+    var v=$('#ern').value.trim(),ok=/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v),i=$('#ern');
+    i.style.borderColor=ok?'#1F9D55':(v?'#D62839':'');
+    $('#ero').innerHTML=ok?`<p style='color:#1F7A46;font-weight:700;margin:0'>\u2713 Looks good.</p>`:`<p style='color:#B01E2D;font-weight:700;margin:0'>${v===''?'Enter your email address.':(mode==='vague'?'Invalid input.':'That email is missing a part. Use the form name@example.com.')}</p><p class='mood'>${mode==='vague'?'Vague: it does not say what is wrong or how to fix it.':'Helpful: says what is wrong, in plain words, and shows the fix.'}</p>`;
+  }
+  $('#ern').addEventListener('input',draw);bindChips(root,'erc',function(v){mode=v;draw();});draw();
+}
+
+function initSuccessL(root){
+  var m=prep(root),$=m.$,k='toast',shown=false;
+  var N={toast:'Toast: a small, passing confirmation. Good for minor actions.',inline:'Inline message: sits in the page where the action happened. Good for forms.',screen:'Full screen: a celebratory confirmation for a big moment, such as a purchase.'};
+  function draw(){
+    var base=`<div style='padding:18px'><b>Your basket</b><div style='color:#4A5070'>2 items, total 48 pounds</div></div>`,over='';
+    if(shown&&k==='toast'){over=`<div style='position:absolute;right:12px;top:12px;background:#14213D;color:#fff;border-radius:12px;padding:10px 14px'>\u2713 Order placed</div>`;}
+    if(shown&&k==='inline'){base=`<div style='padding:18px'><b>Your basket</b><div style='background:#E3F4EA;border-left:6px solid #1F7A46;border-radius:8px;padding:10px 12px;margin-top:8px'><b style='color:#1F7A46'>Order 1042 placed.</b> A receipt is on its way.</div></div>`;}
+    if(shown&&k==='screen'){over=`<div style='position:absolute;top:0;left:0;right:0;bottom:0;background:#fff;display:grid;place-items:center;text-align:center'><div><div style='width:60px;height:60px;border-radius:50%;background:#1F7A46;color:#fff;display:grid;place-items:center;font-size:1.8rem;margin:0 auto 8px'>\u2713</div><b style='font-size:1.2rem'>Thank you!</b><div style='color:#4A5070'>Order 1042 is confirmed.</div></div></div>`;}
+    $('#suo').innerHTML=base+over;$('#sun').textContent=N[k];
+  }
+  bindChips(root,'suc',function(v){k=v;shown=false;draw();});$('#sub').addEventListener('click',function(){shown=true;draw();});draw();
+}
+
+function initHoverL(root){
+  var m=prep(root),$=m.$;
+  function draw(k){
+    $('#hvo').innerHTML=`<div class='${k==='live'?'hv-live':k==='force'?'hv-force':''}' style='display:flex;flex-direction:column;gap:12px;font-family:Inter,sans-serif;color:#14213D;background:#fff;border-radius:14px;padding:16px'><div><span class='hvb'>Primary button</span></div><div class='hvc' style='max-width:260px'><b>A card</b><div style='color:#4A5070;font-size:.9rem'>It lifts slightly on hover.</div></div><div class='hvr'>A table row: its background changes.</div><div><a href='#' onclick='return false' class='hvl'>A text link</a></div></div>`;
+    $('#hvn').textContent=k==='live'?'Move your pointer over each item to feel the response.':k==='force'?'All hover looks shown at once, so you can compare them with the normal state.':'No hover styles: nothing signals that these are interactive.';
+  }
+  var p=document.createElement('p');p.className='mood';p.id='hvn';p.setAttribute('aria-live','polite');$('#hvo').parentNode.appendChild(p);
+  bindChips(root,'hvc',draw);draw('live');
+}
+
+function initFocusL(root){
+  var m=prep(root),$=m.$;
+  var N={default:'Default outline: the browser draws a visible outline. Clear and reliable.',ring:'Custom ring: a thicker, branded ring with a soft halo. Easy to see.',none:'No outline: keyboard users cannot tell where they are. Never do this.'};
+  function draw(k){
+    $('#fco').innerHTML=`<div class='fc-${k}' style='display:flex;gap:14px;flex-wrap:wrap;align-items:center;background:#fff;color:#14213D;border-radius:14px;padding:16px'><button type='button' class='fcb'>Button</button><input type='text' placeholder='A text field' style='width:160px;margin:0'><a href='#' onclick='return false' class='fcl'>A link</a><label style='display:flex;gap:6px;align-items:center'><input type='checkbox'> Checkbox</label></div>`;
+    $('#fcn').textContent=N[k]+' Press Tab inside the box to see it.';
+  }
+  bindChips(root,'fcc',draw);draw('ring');
+}
+
+function initActiveL(root){
+  var m=prep(root),$=m.$;
+  function draw(k){
+    $('#aco').innerHTML=`<div class='ac-${k}' style='display:flex;gap:14px;flex-wrap:wrap;align-items:center;background:#fff;color:#14213D;border-radius:14px;padding:16px'><span class='acb' style='display:inline-block;background:#2F6FD8;color:#fff;border-radius:10px;padding:10px 18px;font-weight:700;cursor:pointer;user-select:none'>Press me</span><span class='aci' style='display:inline-block;border:2px solid #9AA0BC;border-radius:10px;padding:10px 18px;cursor:pointer;user-select:none'>Or a list item</span><span class='act' style='display:inline-block;width:46px;height:46px;border-radius:50%;background:#E8456B;color:#fff;text-align:center;line-height:46px;font-weight:700;cursor:pointer;user-select:none'>+</span></div>`;
+    $('#acn').textContent=k==='on'?'Hold the mouse button down on each control: it darkens or shrinks while pressed.':'No feedback: it is hard to tell whether the press registered.';
+  }
+  bindChips(root,'acc',draw);draw('on');
+}
+
+function initDisabledL(root){
+  var m=prep(root),$=m.$,mode='dis';
+  function draw(){
+    $('#dbo').innerHTML=`<div style='background:#fff;color:#14213D;border-radius:14px;padding:16px;font-family:Inter,sans-serif'><label for='dbn1' style='font-weight:700;font-size:.85rem'>Name</label><input id='dbn1' type='text' placeholder='Your name'><label for='dbn2' style='font-weight:700;font-size:.85rem'>Email</label><input id='dbn2' type='text' placeholder='name@example.com'><div id='dbb'></div><div id='dbe' style='color:#B01E2D;font-weight:700;margin-top:8px'></div></div>`;
+    function valid(){return $('#dbn1').value.trim()!==''&&/@/.test($('#dbn2').value);}
+    function btn(){var b=$('#dbb');if(mode==='dis'){b.innerHTML=dsBtn(tk({}),{label:'Create account',state:valid()?'default':'disabled'});}else{b.innerHTML=`<button type='button' id='dbg' style='border:0;background:none;padding:0;cursor:pointer'>${dsBtn(tk({}),{label:'Create account'})}</button>`;$('#dbg').addEventListener('click',function(){var e=[];if(!$('#dbn1').value.trim()){e.push('Enter your name.');}if(!/@/.test($('#dbn2').value)){e.push('Enter an email with an @.');}$('#dbe').textContent=e.join(' ')||'\u2713 Account created.';$('#dbe').style.color=e.length?'#B01E2D':'#1F7A46';});}}
+    $('#dbn1').addEventListener('input',btn);$('#dbn2').addEventListener('input',btn);btn();
+    $('#dbn').textContent=mode==='dis'?'Disabled until valid: the button is greyed out and stays silent. Fill in both fields to enable it. A new user may not know what is missing.':'Enabled with helpful errors: press it with empty fields and it tells you exactly what to fix.';
+  }
+  bindChips(root,'dbc',function(v){mode=v;draw();});draw();
+}
+
+function initMicroL(root){
+  var m=prep(root),$=m.$,mo='on',liked=false,added=false,sw=false,busy=false;
+  function draw(){
+    if(!$('#mio')){return;}
+    var tr=mo==='on';
+    $('#mio').innerHTML=`<div style='display:flex;gap:22px;flex-wrap:wrap;align-items:center;background:#fff;color:#14213D;border-radius:14px;padding:18px'><button type='button' id='mih' aria-label='Like' aria-pressed='${liked}' style='font:inherit;font-size:2rem;border:0;background:none;cursor:pointer;color:${liked?'#E8456B':'#9AA0BC'};${tr?'transition:transform .25s,color .25s;':''}transform:scale(${liked&&tr?1.0:1})'>${liked?'\u2665':'\u2661'}</button><button type='button' id='mic2' style='font:inherit;border:0;border-radius:10px;padding:10px 18px;font-weight:700;cursor:pointer;color:#fff;background:${added?'#1F7A46':'#2F6FD8'};${tr?'transition:background .3s;':''}'>${busy?'Adding...':added?'\u2713 Added':'Add to basket'}</button><button type='button' id='mis' role='switch' aria-checked='${sw}' aria-label='Wi-Fi' style='width:52px;height:30px;border-radius:999px;border:0;background:${sw?'#2F6FD8':'#9AA0BC'};position:relative;cursor:pointer;padding:0;${tr?'transition:background .2s;':''}'><span style='position:absolute;top:3px;left:${sw?'25px':'3px'};width:24px;height:24px;border-radius:50%;background:#fff;${tr?'transition:left .2s;':''}'></span></button></div>`;
+    $('#min').textContent=tr?'Heart: it fills in colour. Button: it confirms with a tick. Switch: the knob slides. Each one is tiny and has one job.':'Reduced motion: the same feedback, but changes happen instantly, with no sliding or fading.';
+    $('#mih').addEventListener('click',function(){liked=!liked;draw();var h=$('#mih');if(tr&&liked){h.animate([{transform:'scale(1)'},{transform:'scale(1.5)'},{transform:'scale(1)'}],{duration:350});}});
+    $('#mic2').addEventListener('click',function(){if(busy||added){added=false;draw();return;}if(tr){busy=true;draw();setTimeout(function(){busy=false;added=true;draw();},600);}else{added=true;draw();}});
+    $('#mis').addEventListener('click',function(){sw=!sw;draw();});
+  }
+  bindChips(root,'mic',function(v){mo=v;draw();});draw();
+}
+
+/* ===== inits: Screens and journeys ===== */
+function initOnboardL(root){
+  var m=prep(root),$=m.$,s=0,done=false;
+  var S=[['Welcome to Trails','Find walks you will love, wherever you are.','#7EC8A4'],['Save your favourites','Tap the heart to keep a walk for later.','#F5B96B'],['Walk with confidence','Download maps to use offline.','#8FA8F5']];
+  function draw(){
+    if(done){$('#obo').innerHTML=boxw(`<div style='text-align:center;padding:30px 6px'><div style='font-size:2rem'>\u2713</div><b>You are in!</b><div style='color:#4A5070'>Your first walk is waiting.</div></div>`);return;}
+    var c=S[s];
+    $('#obo').innerHTML=boxw(`<div style='height:120px;border-radius:12px;background:${c[2]};margin-bottom:12px'></div><div style='font-weight:800;font-size:1.15rem'>${c[0]}</div><div style='color:#4A5070;margin:4px 0 12px'>${c[1]}</div><div style='display:flex;gap:6px;justify-content:center;margin-bottom:12px'>`+S.map(function(x,i){return `<span style='width:${i===s?22:8}px;height:8px;border-radius:99px;background:${i===s?'#2F6FD8':'#C9D2F0'}'></span>`;}).join('')+`</div><div style='display:flex;justify-content:space-between;align-items:center'><button type='button' id='obs' style='font:inherit;border:0;background:none;color:#5A6180;cursor:pointer'>Skip</button><button type='button' id='obn' class='btn' style='background:var(--ink);color:var(--surface)'>${s===S.length-1?'Get started':'Next'}</button></div>`);
+    $('#obs').addEventListener('click',function(){done=true;draw();});
+    $('#obn').addEventListener('click',function(){if(s===S.length-1){done=true;}else{s++;}draw();});
+  }
+  draw();
+}
+
+function initDashL(root){
+  var m=prep(root),$=m.$,on={kpi:1,chart:1};
+  function draw(){
+    var h='';
+    if(on.kpi){h+=`<div style='display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:8px'>`+[['Revenue','12.4k','+8%'],['Orders','318','+3%'],['Returns','12','-2%']].map(function(k){return `<div style='background:#fff;border-radius:10px;padding:10px'><div style='font-size:.7rem;color:#5A6180'>${k[0]}</div><b style='font-size:1.2rem'>${k[1]}</b> <span style='font-size:.75rem;color:${k[2][0]==='+'?'#1F7A46':'#B01E2D'}'>${k[2]}</span></div>`;}).join('')+`</div>`;}
+    if(on.chart){h+=`<div style='background:#fff;border-radius:10px;padding:10px;margin-bottom:8px'><div style='font-size:.75rem;color:#5A6180;margin-bottom:4px'>Sales this week</div><svg viewBox='0 0 280 70' width='100%' role='img' aria-label='Line chart of sales rising through the week'><polyline points='5,55 50,45 95,50 140,30 185,35 230,15 275,20' fill='none' stroke='#2F6FD8' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/></svg></div>`;}
+    if(on.table){h+=`<div style='background:#fff;border-radius:10px;padding:6px 10px;margin-bottom:8px;font-size:.8rem'><b>Recent orders</b>`+[['#1042','Ada','48'],['#1041','Grace','120'],['#1040','Alan','35']].map(function(r){return `<div style='display:flex;justify-content:space-between;border-top:1px solid #E4E8F2;padding:4px 0'><span>${r[0]} ${r[1]}</span><span>${r[2]} pounds</span></div>`;}).join('')+`</div>`;}
+    if(on.alerts){h+=`<div style='background:#FFF4D6;border-left:5px solid #B7791F;border-radius:8px;padding:8px 10px;font-size:.8rem;color:#4A3300'><b>Needs attention:</b> 3 orders waiting more than 2 days.</div>`;}
+    if(!h){h=`<div style='padding:20px;text-align:center;color:#5A6180'>An empty dashboard.</div>`;}
+    var n=Object.keys(on).filter(function(k){return on[k];}).length;
+    $('#dao').innerHTML=`<div style='background:#F1F3FA;border-radius:14px;padding:10px;max-width:420px;color:#14213D;font-family:Inter,sans-serif'>${h}</div>`;
+    $('#dan').textContent=n+' widget'+(n===1?'':'s')+'. '+(n<=2?'Focused: the key numbers are visible at a glance.':n===3?'Getting busy. Is each widget answering the main question?':'Crowded: if everything is shown, nothing stands out. Prioritise.');
+  }
+  bindTogg(root,'dbt',on,draw);draw();
+}
+
+function initFlowsL(root){
+  var m=prep(root),$=m.$,k='signup',err='off';
+  function draw(){
+    var f=FLOWS[k],N=f[1],h='',i,w=118,gap=16;
+    var X=function(i){return 8+i*(w+gap);};
+    for(i=0;i<N.length;i++){
+      var n=N[i],x=X(i),y=30,isD=n[1]==='d',fill=n[1]==='p'?'#14213D':isD?'#FFE066':'#E6EEFC',tc=n[1]==='p'?'#fff':'#14213D';
+      if(isD){h+=`<polygon points='${x+w/2},${y-16} ${x+w},${y+22} ${x+w/2},${y+60} ${x},${y+22}' fill='${fill}' stroke='#14213D' stroke-width='2'/>`;}
+      else{h+=`<rect x='${x}' y='${y}' width='${w}' height='44' rx='${n[1]==='p'?22:8}' fill='${fill}' stroke='#14213D' stroke-width='2'/>`;}
+      h+=`<text x='${x+w/2}' y='${y+27}' text-anchor='middle' font-size='12' font-weight='700' font-family='sans-serif' fill='${tc}'>${n[0]}</text>`;
+      if(i<N.length-1){h+=`<path d='M${x+w} ${y+22}h${gap-3}' stroke='#14213D' stroke-width='2' marker-end='url(#fa)'/>`;if(isD){h+=`<text x='${x+w+2}' y='${y+14}' font-size='10' font-weight='700' font-family='sans-serif' fill='#1F7A46'>Yes</text>`;}}
+      if(isD&&err==='on'){h+=`<path d='M${x+w/2} ${y+60}v26' stroke='#D62839' stroke-width='2' marker-end='url(#fb)'/><text x='${x+w/2+6}' y='${y+78}' font-size='10' font-weight='700' font-family='sans-serif' fill='#D62839'>No</text><rect x='${x-10}' y='${y+90}' width='${w+20}' height='44' rx='8' fill='#FDE6E8' stroke='#D62839' stroke-width='2'/><text x='${x+w/2}' y='${y+108}' text-anchor='middle' font-size='10' font-weight='700' font-family='sans-serif' fill='#B01E2D'>Show an error</text><text x='${x+w/2}' y='${y+122}' text-anchor='middle' font-size='9' font-family='sans-serif' fill='#B01E2D'>then return</text>`;}
+    }
+    $('#ufo').innerHTML=`<svg viewBox='0 0 ${X(N.length)} ${err==='on'?150:110}' width='${X(N.length)}' style='max-width:none' role='img' aria-label='Flow diagram for ${f[0]}'><defs><marker id='fa' viewBox='0 0 10 10' refX='8' refY='5' markerWidth='6' markerHeight='6' orient='auto'><path d='M0 0L10 5L0 10z' fill='#14213D'/></marker><marker id='fb' viewBox='0 0 10 10' refX='8' refY='5' markerWidth='6' markerHeight='6' orient='auto'><path d='M0 0L10 5L0 10z' fill='#D62839'/></marker></defs>${h}</svg>`;
+    $('#ufn').textContent=err==='on'?'The error path: '+f[2]+' Real people hit this, so it needs designing too.':'The happy path only. Switch on the error path to see what is missing.';
+  }
+  bindChips(root,'ufc',function(v){k=v;draw();});bindChips(root,'ufe',function(v){err=v;draw();});draw();
+}
+
+function initWireL(root){
+  var m=prep(root),$=m.$;
+  var N={sketch:'Sketch: fast and cheap. Perfect for exploring many ideas and for talking.',low:'Low-fidelity: grey boxes and labels. Shows structure and priority without visual distraction.',high:'High-fidelity: realistic spacing and content, still without colour or imagery. Close to the final structure.'};
+  function draw(k){
+    var s=k==='sketch',lo=k==='low',hi=k==='high',f=s?'Comic Sans MS,cursive':'Inter,sans-serif',bd=s?'2px dashed #555':'2px solid #888',r=s?'4px':'6px';
+    var box=function(h,t){return `<div style='height:${h}px;border:${bd};border-radius:${r};background:${s?'#fff':'#E6E8EF'};display:flex;align-items:center;justify-content:center;color:#555;font-size:.8rem'>${t}</div>`;};
+    var head=hi?`<div style='display:flex;justify-content:space-between;margin-bottom:12px;font-weight:700'><span>Trails</span><span>Menu</span></div>`:`<div style='margin-bottom:10px'>${box(26,'Header')}</div>`;
+    var text=hi?`<div style='font-weight:700;margin:12px 0 4px'>Lake District weekend</div><div style='color:#555;font-size:.85rem;margin-bottom:12px'>Two days, three lakes, one very good pub.</div>`:`<div style='margin:10px 0'>${box(14,s?'Title':'Title')}</div><div style='margin-bottom:10px'>${box(26,'Text')}</div>`;
+    $('#wro').innerHTML=`<div style='background:#fff;border:${s?'2px dashed #555':'2px solid #888'};border-radius:10px;padding:12px;font-family:${f};color:#222'>${head}${box(s?80:90,'Image')}${text}<div style='display:inline-block;border:${bd};border-radius:${r};padding:${hi?'7px 16px':'5px 22px'};background:${hi?'#D8DBE8':s?'#fff':'#E6E8EF'};font-size:.85rem'>${hi?'Start walking':'Button'}</div></div>`;
+    $('#wrn').textContent=N[k];
+  }
+  bindChips(root,'wrc',draw);draw('low');
+}
+
+function initMockL(root){
+  var m=prep(root),$=m.$,th='light',dv='phone';
+  var T={light:['#fff','#14213D','#2F6FD8','#E6EEFC'],dark:['#12182E','#EEF0FB','#86A9EE','#1E2745'],brand:['#FFF4D6','#4A2D0B','#E8456B','#FFE3A0']};
+  function draw(){
+    var t=T[th],w=dv==='phone'?200:360,h=dv==='phone'?340:210;
+    $('#mko').innerHTML=`<div style='width:${w}px;height:${h}px;border:${dv==='phone'?'4px solid #14213D':'3px solid #14213D'};border-radius:${dv==='phone'?'26px':'10px'};background:${t[0]};color:${t[1]};padding:14px;box-sizing:border-box;overflow:hidden;font-family:Inter,sans-serif'><div style='display:flex;justify-content:space-between;margin-bottom:10px;font-weight:800'><span>Trails</span><span style='color:${t[2]}'>\u2630</span></div><div style='height:${dv==='phone'?110:70}px;border-radius:12px;background:linear-gradient(135deg,#7EC8A4,${t[2]});margin-bottom:10px'></div><div style='font-weight:800;font-size:1.05rem'>Lake District</div><div style='font-size:.8rem;opacity:.8;margin-bottom:10px'>Two days, three lakes.</div><span style='display:inline-block;background:${t[2]};color:${th==='dark'?'#12182E':'#fff'};border-radius:999px;padding:7px 16px;font-weight:700;font-size:.85rem'>Start walking</span></div>`;
+  }
+  bindChips(root,'mkt',function(v){th=v;draw();});bindChips(root,'mkd',function(v){dv=v;draw();});draw();
+}
+
+function initProtoL(root){
+  var m=prep(root),$=m.$,s=0,hs='off';
+  function hot(){return hs==='on'?'outline:2px dashed #E8456B;outline-offset:2px;background:rgba(232,69,107,.12);':'';}
+  function draw(){
+    var h='';
+    if(s===0){h=`<div style='font-weight:800;margin-bottom:8px'>Walks near you</div><div data-go='1' style='cursor:pointer;border:1px solid #D9DDEB;border-radius:10px;padding:10px;margin-bottom:8px;${hot()}'><b>Lake loop</b><div style='font-size:.8rem;color:#5A6180'>5 km, easy</div></div><div style='border:1px solid #D9DDEB;border-radius:10px;padding:10px;color:#9AA0BC'>Ridge walk (not in this prototype)</div>`;}
+    if(s===1){h=`<span data-go='0' style='cursor:pointer;color:#2F6FD8;${hot()}display:inline-block;margin-bottom:8px'>\u2039 Back</span><div style='height:80px;border-radius:10px;background:linear-gradient(135deg,#7EC8A4,#2F6FD8);margin-bottom:8px'></div><b>Lake loop</b><div style='font-size:.85rem;color:#5A6180;margin:4px 0 10px'>A gentle 5 km walk with views across the water.</div><span data-go='2' style='cursor:pointer;display:inline-block;background:#2F6FD8;color:#fff;border-radius:999px;padding:8px 18px;font-weight:700;${hot()}'>Save walk</span>`;}
+    if(s===2){h=`<div style='text-align:center;padding:30px 0'><div style='width:54px;height:54px;border-radius:50%;background:#1F7A46;color:#fff;display:grid;place-items:center;font-size:1.6rem;margin:0 auto 8px'>\u2713</div><b>Walk saved</b><div><span data-go='0' style='cursor:pointer;color:#2F6FD8;display:inline-block;margin-top:10px;${hot()}'>Back to start</span></div></div>`;}
+    $('#pro').innerHTML=`<div style='width:230px;min-height:250px;border:4px solid #14213D;border-radius:22px;background:#fff;color:#14213D;padding:14px;box-sizing:border-box;font-family:Inter,sans-serif'>${h}</div><p class='mood'>Screen ${s+1} of 3. Tap the highlighted-looking elements to move through the prototype.</p>`;
+  }
+  $('#pro').addEventListener('click',function(e){var g=e.target.closest('[data-go]');if(g){s=parseInt(g.getAttribute('data-go'),10);draw();}});
+  bindChips(root,'prh',function(v){hs=v;draw();});draw();
+}
+
+/* ===== inits: Devices ===== */
+function initRespUI(root){
+  var m=prep(root),$=m.$;
+  var D=[['Ada Lovelace','Active','1,240'],['Grace Hopper','Paused','980'],['Alan Turing','Active','2,310']];
+  function draw(W){
+    var wide=W>=600,h='';
+    if(wide){h=`<div style='display:grid;grid-template-columns:2fr 1fr 1fr;padding:6px 12px;font-weight:700;font-size:.8rem;color:#5A6180'><span>Name</span><span>Status</span><span style='text-align:right'>Points</span></div>`+D.map(function(r){return `<div style='display:grid;grid-template-columns:2fr 1fr 1fr;padding:9px 12px;border-top:1px solid #E4E8F2'><b>${r[0]}</b><span>${r[1]}</span><span style='text-align:right'>${r[2]}</span></div>`;}).join('');}
+    else{h=D.map(function(r){return `<div style='border:1px solid #E4E8F2;border-radius:10px;padding:10px;margin-bottom:8px'><b>${r[0]}</b><div style='display:flex;justify-content:space-between;font-size:.85rem;color:#4A5070'><span>${r[1]}</span><span>${r[2]} points</span></div></div>`;}).join('');}
+    $('#ruo').innerHTML=`<div style='width:${Math.round(W/1000*100)}%;min-width:150px;background:#fff;color:#14213D;border-radius:12px;padding:10px;font-family:Inter,sans-serif;font-size:${wide?'.9rem':'.8rem'}'>${h}</div>`;
+    $('#run').textContent=W+'px: '+(wide?'wide enough for a table with columns.':'too narrow for columns, so each row becomes a card. The same data and functions, in a shape that fits.');
+  }
+  onRng(root,'ruw',draw);draw(700);
+}
+
+function initMFirst(root){
+  var m=prep(root),$=m.$;
+  function card(i){return `<div style='background:#fff;border:1px solid #D9DDEB;border-radius:10px;padding:8px;font-size:.8rem'><div style='height:34px;border-radius:6px;background:linear-gradient(135deg,#7EC8A4,#2F6FD8);margin-bottom:4px'></div><b>Walk ${i}</b></div>`;}
+  function draw(k){
+    var h='',n='';
+    if(k==='s'){h=`<div style='width:200px;margin:auto'><div style='display:flex;flex-direction:column;gap:8px;margin-bottom:8px'>${card(1)}${card(2)}${card(3)}</div><div style='display:flex;justify-content:space-around;border-top:1px solid #D9DDEB;padding-top:6px;font-size:.7rem;color:#5A6180'><span>Home</span><span>Saved</span><span>Profile</span></div></div>`;n='Phone: the essentials only. One column, big targets, bottom navigation.';}
+    if(k==='m'){h=`<div style='width:340px;margin:auto'><div style='border:1.5px solid #9AA0BC;border-radius:999px;padding:4px 12px;font-size:.8rem;color:#7A809C;margin-bottom:8px'>Search walks</div><div style='display:grid;grid-template-columns:1fr 1fr;gap:8px'>${card(1)}${card(2)}${card(3)}${card(4)}</div></div>`;n='Tablet: adds a visible search bar and a two-column grid. Nothing from the phone is removed.';}
+    if(k==='l'){h=`<div style='display:flex;gap:10px;width:100%'><div style='width:110px;font-size:.8rem;background:#fff;border:1px solid #D9DDEB;border-radius:10px;padding:8px'><b>Filters</b><br>Easy<br>Medium<br>Hard</div><div style='flex:1'><div style='border:1.5px solid #9AA0BC;border-radius:999px;padding:4px 12px;font-size:.8rem;color:#7A809C;margin-bottom:8px'>Search walks</div><div style='display:grid;grid-template-columns:repeat(3,1fr);gap:8px'>${card(1)}${card(2)}${card(3)}${card(4)}${card(5)}${card(6)}</div></div></div>`;n='Desktop: adds a filter sidebar and three columns. Each larger size adds, never starts over.';}
+    $('#mfo').innerHTML=`<div style='background:#F1F3FA;border-radius:14px;padding:14px;color:#14213D;font-family:Inter,sans-serif;overflow-x:auto'>${h}</div>`;$('#mfn').textContent=n;
+  }
+  bindChips(root,'mfc',draw);draw('s');
+}
+
+function initDesktopL(root){
+  var m=prep(root),$=m.$,on={},menuAt=-1;
+  var R=['Quarterly report.pdf','Team photo.jpg','Budget 2026.xlsx','Notes.txt'];
+  function draw(){
+    var rows=R.map(function(r,i){return `<div class='dkrow' data-i='${i}' style='position:relative;padding:9px 12px;border-top:1px solid #E4E8F2;display:flex;justify-content:space-between;cursor:default'><span>${r}</span>${on.hover?`<span class='dkprev' style='display:none;position:absolute;left:55%;top:-6px;background:#14213D;color:#fff;border-radius:8px;padding:6px 10px;font-size:.75rem;z-index:3;white-space:nowrap'>Preview: ${r}, edited yesterday</span>`:''}${menuAt===i&&on.menu?`<span style='position:absolute;left:60%;top:20px;background:#fff;border:1px solid #D9DDEB;border-radius:8px;box-shadow:0 6px 16px rgba(0,0,0,.2);padding:4px 0;z-index:4;font-size:.8rem'><span style='display:block;padding:4px 14px'>Open</span><span style='display:block;padding:4px 14px'>Rename</span><span style='display:block;padding:4px 14px;color:#D62839'>Delete</span></span>`:''}</div>`;}).join('');
+    $('#dko').innerHTML=`<div style='display:flex;gap:10px;font-family:Inter,sans-serif;color:#14213D'><div style='flex:1;background:#fff;border-radius:12px;padding:6px 0'><div style='padding:6px 12px;font-weight:800'>Files</div>${rows}${on.keys?`<div style='border-top:1px solid #E4E8F2;padding:8px 12px;font-size:.8rem;color:#5A6180'>Shortcuts: <kbd>/</kbd> search, <kbd>N</kbd> new file, <kbd>Del</kbd> delete</div>`:''}</div>${on.cols?`<div style='flex:0 0 38%;background:#fff;border-radius:12px;padding:12px;font-size:.85rem'><b>Details</b><div style='color:#5A6180;margin-top:6px'>Select a file to see its size, owner and history here, without leaving the list.</div></div>`:''}</div>`;
+    var n=Object.keys(on).filter(function(k){return on[k];}).length;
+    $('#dkn').textContent=n===0?'The same list as on a phone, stretched. Switch on desktop extras.':'Extras on: '+['hover preview','shortcut hints','second column','right-click menu'].filter(function(l,i){return on[['hover','keys','cols','menu'][i]];}).join(', ')+'. '+(on.hover?'Hover over a file. ':'')+(on.menu?'Right-click a file. ':'');
+  }
+  var box=$('#dko');
+  box.addEventListener('mouseover',function(e){if(!on.hover){return;}var r=e.target.closest('.dkrow');Array.prototype.slice.call(box.querySelectorAll('.dkprev')).forEach(function(p){p.style.display='none';});if(r){var p=r.querySelector('.dkprev');if(p){p.style.display='block';}}});
+  box.addEventListener('mouseleave',function(){Array.prototype.slice.call(box.querySelectorAll('.dkprev')).forEach(function(p){p.style.display='none';});});
+  box.addEventListener('contextmenu',function(e){if(!on.menu){return;}var r=e.target.closest('.dkrow');if(r){e.preventDefault();menuAt=parseInt(r.getAttribute('data-i'),10);draw();}});
+  box.addEventListener('click',function(){if(menuAt>-1){menuAt=-1;draw();}});
+  bindTogg(root,'dkt',on,draw);draw();
+}
+
+function initTouchL(root){
+  var m=prep(root),$=m.$,sz=44,g=8;
+  var IC=[`<path d='M5 19l1-4L16 5l3 3L9 18z'/>`,`<path d='M12 15V4M8 8l4-4 4 4M5 13v7h14v-7'/>`,`<path d='M12 21C4 15 3 9 7 6c2-1 4 0 5 2 1-2 3-3 5-2 4 3 3 9-5 15z'/>`,`<path d='M5 7h14M9 7V4h6v3M7 7l1 13h8l1-13'/>`,`<circle cx='11' cy='11' r='7'/><path d='M16 16l5 5'/>`];
+  function draw(){
+    $('#tzo').innerHTML=`<div style='display:flex;gap:${g}px;background:#fff;color:#14213D;border-radius:14px;padding:16px;overflow-x:auto'>`+IC.map(function(i){return `<div style='flex:0 0 ${sz}px;width:${sz}px;height:${sz}px;border:2px dashed #E8456B;border-radius:10px;display:grid;place-items:center;background:rgba(232,69,107,.08)'><svg width='22' height='22' viewBox='0 0 24 24' fill='none' stroke='#14213D' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true'>${i}</svg></div>`;}).join('')+`</div>`;
+    $('#tzn').textContent=sz+' by '+sz+' px targets with '+g+' px between them. '+(sz<24?'Below the WCAG 2.2 minimum of 24 px. Many people will mis-tap.':sz<44?'Meets the 24 px minimum, but below the 44 to 48 px recommended for comfortable touch.':'At or above 44 px: comfortable for most fingers.')+(g<4&&sz<44?' With almost no space between them, neighbours are easy to hit by accident.':'');
+  }
+  onRng(root,'tzs',function(v){sz=v;draw();});onRng(root,'tzg',function(v){g=v;draw();});draw();
+}
+
+/* ===== registration, hero, start ===== */
+var LESSONS={
+ 'user-interface-design':{html:L_UI,init:initUI,g:''},'user-experience-design':{html:L_UX,init:initUX,g:''},'interaction-design':{html:L_IXD,init:initIxD,g:''},'information-architecture':{html:L_IA,init:initIA,g:''},
+ 'navigation':{html:L_NAV,init:initNavigation,g:'f'},'menus':{html:L_MENUS,init:initMenus,g:'f'},'headers':{html:L_HEADERS,init:initHeaders,g:'f'},'footers':{html:L_FOOTERS,init:initFooters,g:'f'},'tabs':{html:L_TABS,init:initTabsL,g:'f'},'breadcrumbs':{html:L_CRUMBS,init:initCrumbs,g:'f'},'pagination':{html:L_PAGE,init:initPagination,g:'f'},'search':{html:L_SEARCH,init:initSearchL,g:'f'},'filters':{html:L_FILTERS,init:initFiltersL,g:'f'},
+ 'cards':{html:L_CARDS,init:initCardsL,g:'s'},'buttons':{html:L_BUTTONS,init:initButtonsUI,g:'s'},'ctas-calls-to-action':{html:L_CTA,init:initCTAL,g:'s'},'forms':{html:L_FORMS,init:initFormsL,g:'s'},'input-fields':{html:L_INPUTS,init:initInputsL,g:'s'},'dropdowns':{html:L_DROP,init:initDropdownsL,g:'s'},'toggles':{html:L_TOGGLES,init:initTogglesL,g:'s'},'modals':{html:L_MODALS,init:initModalsL,g:'s'},'tooltips':{html:L_TIPS,init:initTooltipsL,g:'s'},'alerts':{html:L_ALERTS,init:initAlertsL,g:'s'},'notifications':{html:L_NOTIF,init:initNotifsL,g:'s'},
+ 'empty-states':{html:L_EMPTY,init:initEmptyL,g:'c'},'loading-states':{html:L_LOADING,init:initLoadingL,g:'c'},'error-states':{html:L_ERROR,init:initErrorL,g:'c'},'success-states':{html:L_SUCCESS,init:initSuccessL,g:'c'},'hover-states':{html:L_HOVER,init:initHoverL,g:'c'},'focus-states':{html:L_FOCUS,init:initFocusL,g:'c'},'active-states':{html:L_ACTIVE,init:initActiveL,g:'c'},'disabled-states':{html:L_DISABLED,init:initDisabledL,g:'c'},'microinteractions':{html:L_MICRO,init:initMicroL,g:'c'},
+ 'onboarding':{html:L_ONBOARD,init:initOnboardL,g:''},'dashboards':{html:L_DASH,init:initDashL,g:''},'user-flows':{html:L_FLOWS,init:initFlowsL,g:''},'wireframes':{html:L_WIRE,init:initWireL,g:''},'mockups':{html:L_MOCK,init:initMockL,g:''},'prototypes':{html:L_PROTO,init:initProtoL,g:''},
+ 'responsive-ui':{html:L_RESP,init:initRespUI,g:'f'},'mobile-first-design':{html:L_MFIRST,init:initMFirst,g:'f'},'desktop-design':{html:L_DESK,init:initDesktopL,g:'f'},'touch-targets':{html:L_TOUCH,init:initTouchL,g:'f'}
+};
+
+(function(){
+  var lab=document.getElementById('lab'),s=0;
+  lab.innerHTML="<h2>Try it: tap through a tiny app</h2><p>A three-screen prototype. Tap the buttons to move through it.</p><div id='hpo' style='margin-top:12px'></div>";
+  function draw(){
+    var h='';
+    if(s===0){h="<div style='font-weight:800;margin-bottom:8px'>Welcome</div><div style='height:80px;border-radius:10px;background:linear-gradient(135deg,#7EC8A4,#2F6FD8);margin-bottom:10px'></div><div style='color:#4A5070;margin-bottom:10px'>Find walks you will love.</div><span data-g='1' style='cursor:pointer;display:inline-block;background:#2F6FD8;color:#fff;border-radius:999px;padding:9px 20px;font-weight:700'>Get started</span>";}
+    if(s===1){h="<div style='font-weight:800;margin-bottom:8px'>Pick a level</div>"+['Easy','Medium','Hard'].map(function(l){return "<div data-g='2' style='cursor:pointer;border:1px solid #D9DDEB;border-radius:10px;padding:10px;margin-bottom:6px'>"+l+"</div>";}).join('');}
+    if(s===2){h="<div style='text-align:center;padding:24px 0'><div style='width:50px;height:50px;border-radius:50%;background:#1F7A46;color:#fff;display:grid;place-items:center;font-size:1.5rem;margin:0 auto 8px'>\u2713</div><b>You are all set</b><div><span data-g='0' style='cursor:pointer;color:#2F6FD8;display:inline-block;margin-top:8px'>Start again</span></div></div>";}
+    document.getElementById('hpo').innerHTML="<div style='width:220px;min-height:230px;margin:auto;border:4px solid #14213D;border-radius:22px;background:#fff;color:#14213D;padding:14px;box-sizing:border-box;font-family:Inter,sans-serif'>"+h+"</div>";
+  }
+  document.getElementById('hpo').addEventListener('click',function(e){var g=e.target.closest('[data-g]');if(g){s=parseInt(g.getAttribute('data-g'),10);draw();}});
+  draw();
+})();
+
+startSite();
+
+</script>
+</body>
+</html>

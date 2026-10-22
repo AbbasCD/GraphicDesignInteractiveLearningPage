@@ -213,6 +213,7 @@ footer strong{color:var(--ink);}
 .lfoot a{font-size:.82rem;font-weight:600;padding:5px 11px;border:1px solid var(--line);border-radius:999px;background:var(--surface);color:var(--muted);text-decoration:none;}
 .lfoot a:hover{color:var(--ink);border-color:var(--ink);}
 .lfoot a:focus-visible{outline:3px solid var(--ink);outline-offset:2px;}
+.jump a.j5{--c:var(--g1);} .jump a.j6{--c:var(--g2);}
 
 input[type='text']{width:100%;font:inherit;padding:10px 12px;border:2px solid var(--line);border-radius:12px;background:var(--surface);color:var(--ink);margin:2px 0 12px;}
 input[type='text']:focus-visible{outline:3px solid var(--ink);outline-offset:2px;}
@@ -221,7 +222,7 @@ input[type='text']:focus-visible{outline:3px solid var(--ink);outline-offset:2px
 </style>
 </head>
 <body>
-<nav class="site" id="sitenav" aria-label="Site"><a href="05-design-systems.html">&larr; Design Systems</a><a href="index.html">All sections</a></nav>
+<nav class="site" id="sitenav" aria-label="Site"><a href="05-design-systems.html">&larr; Design Systems</a><a href="index.html">All sections</a><a href="07-digital-interface-design.html">Next: Digital Interface Design &rarr;</a></nav>
 <div id="home">
 <header class="hero">
   <div class="wrap hero-grid">
@@ -245,8 +246,8 @@ input[type='text']:focus-visible{outline:3px solid var(--ink);outline-offset:2px
       <div class="next-text">
         <span class="next-tag">Up next</span>
         <h2>Digital Interface Design</h2>
-        <p>That section isn’t built yet. In the meantime, you can revisit Layout and Composition or browse all sections.</p>
-        <div class="next-actions"><a class="nbtn primary" href="index.html">See all sections <svg viewBox='0 0 24 24' aria-hidden='true' fill='none' stroke='currentColor' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'><path d='M5 12h14M13 6l6 6-6 6'/></svg></a><a class="nbtn" href="06-layout-and-composition.html">Back to Layout and Composition</a></div>
+        <p>Now that you can set up and structure a page, the next section is about the interface itself: navigation, components, states and screens.</p>
+        <div class="next-actions"><a class="nbtn primary" href="07-digital-interface-design.html">Start Digital Interface Design <svg viewBox='0 0 24 24' aria-hidden='true' fill='none' stroke='currentColor' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'><path d='M5 12h14M13 6l6 6-6 6'/></svg></a><a class="nbtn" href="index.html">See all sections</a></div>
       </div>
       <svg class='next-art' viewBox='0 0 180 150' aria-hidden='true' focusable='false'><circle cx='50' cy='52' r='34' fill='var(--g1)'/><rect x='82' y='26' width='62' height='62' rx='14' fill='var(--g2)' opacity='.92' transform='rotate(10 113 57)'/><polygon points='40,138 84,70 120,138' fill='var(--g4)' opacity='.95'/><circle cx='142' cy='116' r='20' fill='var(--g3)'/></svg>
     </aside>
@@ -406,7 +407,7 @@ function startSite(){
 }
 
 var SECTION_NAME='Layout and Composition';
-var SITE={prev:['Design Systems','05-design-systems.html']};
+var SITE={prev:['Design Systems','05-design-systems.html'],next:['Digital Interface Design','07-digital-interface-design.html']};
 
 function GT(t,o){o=o||{};return `<text x='${o.x||24}' y='${o.y||33}' text-anchor='middle' font-size='${o.s||24}' font-weight='${o.w||700}' font-family='${o.f||'Arial,sans-serif'}' fill='currentColor' stroke='none'>${t}</text>`;}
 var ICONS={

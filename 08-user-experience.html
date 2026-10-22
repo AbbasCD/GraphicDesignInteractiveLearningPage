@@ -1,0 +1,1053 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>User Experience | Digital graphic designer knowledge map</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+<style>
+
+:root{
+  --bg:#F2F4FA; --surface:#FFFFFF; --ink:#1B1F3B; --muted:#4A5070; --line:#D9DDEB;
+  --g1:#D93A62; --g2:#2468D8; --g3:#0E8467; --g4:#A86F00;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#12142A; --surface:#1C2040; --ink:#EEF0FB; --muted:#B4B9D6; --line:#2E3360;
+    --g1:#FF7A9A; --g2:#78A8FF; --g3:#45D1AE; --g4:#F2B93B;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#12142A; --surface:#1C2040; --ink:#EEF0FB; --muted:#B4B9D6; --line:#2E3360;
+  --g1:#FF7A9A; --g2:#78A8FF; --g3:#45D1AE; --g4:#F2B93B;
+  color-scheme:dark;
+}
+html{scroll-padding-top:env(safe-area-inset-top,0px);}
+*,*::before,*::after{box-sizing:inherit;}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"DM Sans",system-ui,-apple-system,"Segoe UI",sans-serif;font-size:17px;line-height:1.55;}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px;}
+h1,h2,h3{font-family:Sora,"DM Sans",system-ui,sans-serif;line-height:1.25;letter-spacing:0.01em;margin:0;}
+
+/* hero */
+.hero{padding:48px 0 40px;}
+.hero-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:36px;align-items:center;}
+.hero h1{font-size:clamp(2.2rem,5.4vw,3.8rem);font-weight:700;letter-spacing:0.01em;line-height:1.2;}
+.hero p.lead{font-size:1.15rem;color:var(--muted);max-width:34ch;margin:18px 0 22px;}
+.jump{display:flex;flex-wrap:wrap;gap:10px;}
+.jump a{color:var(--ink);text-decoration:none;font-weight:700;font-size:.95rem;padding:9px 16px;border-radius:999px;border:2px solid var(--c);background:var(--surface);}
+.jump a:hover{background:var(--c);color:var(--surface);}
+.jump a:focus-visible,input:focus-visible{outline:3px solid var(--ink);outline-offset:3px;}
+.lab{background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:22px;}
+.lab h2{font-size:1.25rem;margin-bottom:4px;}
+.lab p{margin:0 0 16px;color:var(--muted);font-size:.95rem;}
+.sw{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:18px;}
+.sw div{border-radius:12px;padding:30px 8px 8px;font-size:.78rem;font-weight:700;line-height:1.25;}
+.sw div span{display:block;font-weight:500;opacity:.9;}
+.sw div.big{grid-column:span 3;padding:46px 12px 12px;border-radius:16px;font-size:.9rem;}
+label{display:block;font-weight:700;font-size:.9rem;margin-bottom:8px;}
+input[type=range]{width:100%;height:14px;border-radius:99px;appearance:none;-webkit-appearance:none;background:linear-gradient(90deg,hsl(0 80% 55%),hsl(60 80% 55%),hsl(120 80% 45%),hsl(180 80% 45%),hsl(240 80% 60%),hsl(300 80% 55%),hsl(360 80% 55%));margin:0;}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:28px;height:28px;border-radius:50%;background:var(--surface);border:4px solid var(--ink);cursor:grab;}
+input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;background:var(--surface);border:4px solid var(--ink);cursor:grab;}
+
+/* groups */
+.group{padding:36px 0 12px;--c:var(--g1);}
+.group.f{--c:var(--g2);} .group.s{--c:var(--g3);} .group.c{--c:var(--g4);}
+.jump a.j1{--c:var(--g1);} .jump a.j2{--c:var(--g2);} .jump a.j3{--c:var(--g3);} .jump a.j4{--c:var(--g4);}
+.ghead{display:flex;gap:18px;align-items:center;margin-bottom:22px;}
+.gbadge{flex:0 0 72px;height:72px;border-radius:50%;background:var(--c);color:var(--surface);display:grid;place-items:center;}
+.gbadge svg{width:40px;height:40px;}
+.ghead h2{font-size:clamp(1.6rem,3.8vw,2.2rem);font-weight:700;}
+.ghead p{margin:6px 0 0;color:var(--muted);max-width:52ch;}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px;}
+.card{background:var(--surface);border:1px solid var(--line);border-top:5px solid var(--c);border-radius:6px 6px 18px 18px;padding:18px;}
+.tile{width:60px;height:60px;border-radius:16px;display:grid;place-items:center;color:var(--c);background:color-mix(in srgb,var(--c) 14%,var(--surface));margin-bottom:12px;}
+.tile svg{width:38px;height:38px;fill:none;stroke:currentColor;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;}
+.card h3{font-size:1.15rem;font-weight:700;margin-bottom:6px;}
+.card p{margin:0;color:var(--muted);font-size:.97rem;}
+[hidden]{display:none !important;}
+.note{margin:16px 0 0;color:var(--muted);font-size:.92rem;max-width:44ch;}
+.card.has{display:block;text-decoration:none;color:inherit;cursor:pointer;}
+.card.has:hover{border-color:var(--c);}
+.card.has:focus-visible{outline:3px solid var(--ink);outline-offset:3px;}
+.more{display:inline-block;margin-top:12px;font-weight:700;font-size:.92rem;color:var(--ink);padding:6px 12px;border-radius:999px;background:color-mix(in srgb,var(--c) 18%,var(--surface));}
+.lesson{--c:var(--g1);padding-top:20px;padding-bottom:40px;max-width:860px;}
+.btn{font:inherit;font-weight:700;cursor:pointer;border:2px solid var(--ink);background:var(--surface);color:var(--ink);padding:9px 16px;border-radius:999px;}
+.btn:hover{background:var(--ink);color:var(--surface);}
+.btn:focus-visible,.chip:focus-visible,summary:focus-visible{outline:3px solid var(--ink);outline-offset:3px;}
+.lhero{display:flex;gap:18px;align-items:center;margin:26px 0 8px;}
+.lesson h1{font-size:clamp(1.9rem,4.6vw,3rem);font-weight:700;letter-spacing:0.01em;line-height:1.2;}
+.lhero p{margin:6px 0 0;color:var(--muted);}
+.toc{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0 6px;}
+.chip{font:inherit;font-size:.92rem;font-weight:700;cursor:pointer;border:2px solid var(--line);background:var(--surface);color:var(--ink);padding:7px 14px;border-radius:999px;}
+.chip:hover{border-color:var(--c);}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--surface);border-color:var(--ink);}
+.lsec{margin-top:46px;}
+.lsec h2{font-size:clamp(1.45rem,3.3vw,1.9rem);font-weight:700;margin-bottom:14px;}
+.lsec h3{font-size:1.2rem;margin:22px 0 6px;}
+.lsec p,.lsec li{max-width:68ch;}
+.lsec p{margin:0 0 14px;}
+.callout{background:color-mix(in srgb,var(--c) 12%,var(--surface));border-left:6px solid var(--c);border-radius:4px 16px 16px 4px;padding:14px 18px;margin:18px 0;max-width:68ch;}
+.callout p{margin:0 !important;}
+.timeline{list-style:none;margin:16px 0;padding:0 0 0 0;border-left:3px solid var(--line);}
+.timeline li{padding:0 0 18px 22px;position:relative;}
+.timeline li::before{content:"";position:absolute;left:-10px;top:5px;width:17px;height:17px;border-radius:50%;background:var(--c);}
+.timeline b.yr{font-family:Sora,"DM Sans",system-ui,sans-serif;font-size:1.15rem;display:block;}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:20px;margin:18px 0;}
+.wheelrow{display:grid;grid-template-columns:minmax(0,340px) 1fr;gap:24px;align-items:center;}
+.wheelrow svg{width:100%;height:auto;display:block;}
+.wedge{cursor:pointer;stroke:var(--surface);stroke-width:2;}
+.wedge:focus-visible{outline:none;stroke:var(--ink);stroke-width:5;}
+.ctrls{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px;}
+.ctrls .lbl{width:100%;font-weight:700;font-size:.9rem;margin-bottom:-2px;}
+.rswatch{height:90px;border-radius:16px;margin-bottom:12px;}
+.readout h4{font-family:Sora,"DM Sans",system-ui,sans-serif;font-size:1.4rem;margin:0 0 2px;}
+.readout p{margin:0 0 8px !important;color:var(--muted);}
+.pal{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px;}
+.pal div{flex:1 1 90px;border-radius:12px;padding:38px 8px 8px;font-size:.8rem;font-weight:700;line-height:1.3;}
+.pal div span{display:block;font-weight:500;}
+.blend{position:relative;height:190px;border-radius:18px;overflow:hidden;}
+.blend i{position:absolute;width:110px;height:110px;border-radius:50%;display:block;}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.two h3{margin-top:12px;}
+.strip{display:flex;border-radius:12px;overflow:hidden;margin:6px 0 16px;}
+.strip div{flex:1;height:54px;}
+.slab{font-weight:700;font-size:.92rem;margin:12px 0 0;}
+.stack{display:flex;height:70px;border-radius:14px;overflow:hidden;font-weight:700;font-size:.9rem;margin:14px 0;}
+.stack div{display:flex;align-items:center;justify-content:center;text-align:center;padding:0 6px;}
+.albers{display:grid;grid-template-columns:1fr 1fr;border-radius:16px;overflow:hidden;margin:14px 0 8px;}
+.albers div{height:170px;display:grid;place-items:center;}
+.albers span{width:72px;height:72px;background:#B87A4B;display:block;}
+.steps{counter-reset:s;list-style:none;padding:0;margin:14px 0;}
+.steps li{counter-increment:s;position:relative;padding:0 0 16px 50px;min-height:36px;}
+.steps li::before{content:counter(s);position:absolute;left:0;top:-2px;width:34px;height:34px;border-radius:50%;background:var(--c);color:var(--surface);display:grid;place-items:center;font-weight:700;}
+details{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:12px 16px;margin:10px 0;max-width:68ch;}
+summary{cursor:pointer;font-weight:700;}
+details p{margin:10px 0 0 !important;color:var(--muted);}
+.tk li{margin:7px 0;}
+.lsec p b,.lsec li b:not(.yr){background:color-mix(in srgb,var(--c) 20%,transparent);padding:0 .22em;border-radius:5px;-webkit-box-decoration-break:clone;box-decoration-break:clone;}
+.lesson.f{--c:var(--g2);}
+.lesson.s{--c:var(--g3);}
+.lesson.c{--c:var(--g4);}
+.stage{background:var(--bg);border:1px solid var(--line);border-radius:16px;padding:14px;display:grid;place-items:center;min-height:120px;overflow:hidden;}
+.stage svg{max-width:100%;height:auto;}
+.mood{margin:12px 0 0;color:var(--muted);}
+.hx{font:inherit;color:inherit;background:none;border:0;padding:0 .1em;margin:0;cursor:pointer;text-decoration:underline dotted;text-underline-offset:3px;display:inline;}
+.hx::after{content:'';display:inline-block;width:.95em;height:.95em;margin-left:.4em;vertical-align:-.12em;background:currentColor;opacity:.8;-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect x='9' y='9' width='11' height='11' rx='2' fill='none' stroke='black' stroke-width='2'/%3E%3Cpath d='M5 15V6a2 2 0 0 1 2-2h9' fill='none' stroke='black' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E") center/contain no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect x='9' y='9' width='11' height='11' rx='2' fill='none' stroke='black' stroke-width='2'/%3E%3Cpath d='M5 15V6a2 2 0 0 1 2-2h9' fill='none' stroke='black' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E") center/contain no-repeat;}
+.hx:hover::after{opacity:1;}
+.hx.ok::after{opacity:1;-webkit-mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M5 13l4 4L19 7' fill='none' stroke='black' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M5 13l4 4L19 7' fill='none' stroke='black' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");}
+.hx:focus-visible{outline:3px solid currentColor;outline-offset:2px;}
+.swbtns{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:16px;}
+.swbtn{width:46px;height:46px;border-radius:50%;border:3px solid var(--surface);outline:2px solid var(--line);cursor:pointer;padding:0;}
+.swbtn[aria-pressed='true']{outline:4px solid var(--ink);}
+.swbtn:focus-visible{outline:4px solid var(--ink);outline-offset:2px;}
+.rswatch{border:1px solid var(--line);}
+.facts{display:grid;gap:10px;margin-top:10px;}
+.facts p{margin:0 !important;}
+.mockbtn{display:inline-block;padding:10px 18px;border-radius:999px;font-weight:700;margin-top:8px;}
+.mini{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px;margin:14px 0;}
+.mini>div{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:14px;}
+.mini .pair{display:flex;height:46px;border-radius:10px;overflow:hidden;margin-bottom:10px;}
+.mini .pair i{display:block;}
+.mini h3{margin:0 0 4px;font-size:1.05rem;}
+.mini p{margin:0 !important;font-size:.95rem;color:var(--muted);}
+.mock{border-radius:18px;overflow:hidden;border:1px solid rgba(0,0,0,.14);}
+.mock .bar{padding:12px 16px;font-weight:700;}
+.mock .bd{padding:16px;}
+.mock h4{margin:0 0 6px;font-size:1.25rem;}
+.mock p{margin:0 0 12px !important;max-width:none;}
+.tag{display:inline-block;padding:3px 10px;border-radius:999px;font-size:.82rem;font-weight:700;margin-right:6px;}
+.blurme{filter:blur(var(--b,0px));}
+.strip.lab div{display:grid;place-items:center;font-size:.72rem;font-weight:700;}
+canvas{display:block;width:100%;max-width:320px;border-radius:14px;cursor:crosshair;touch-action:none;}
+.sl label{margin:14px 0 6px;}
+table.t{border-collapse:collapse;width:100%;max-width:68ch;margin:12px 0;font-size:.95rem;}
+table.t th,table.t td{border-bottom:1px solid var(--line);padding:8px 10px;text-align:left;}
+.res{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:8px;margin:12px 0;}
+.res div{border:2px solid var(--line);border-radius:12px;padding:8px 12px;font-size:.9rem;}
+.res div b{display:block;}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.row3{display:flex;align-items:center;gap:10px;padding:6px 0;}
+.dot{width:18px;height:18px;border-radius:50%;display:inline-block;flex:0 0 18px;}
+input[type='color']{width:64px;height:40px;padding:0;border:2px solid var(--line);border-radius:10px;background:none;cursor:pointer;}
+@media (max-width:760px){.wheelrow,.two,.cols{grid-template-columns:1fr;}}
+footer{padding:44px 0 56px;color:var(--muted);}
+footer strong{color:var(--ink);}
+@media (max-width:760px){
+  .hero-grid{grid-template-columns:1fr;}
+  .ghead{align-items:flex-start;}
+  .gbadge{flex-basis:56px;height:56px;} .gbadge svg{width:30px;height:30px;}
+}
+@media (prefers-reduced-motion:no-preference){
+  .sw div{transition:background-color .25s;}
+}
+
+.site{max-width:1080px;margin:0 auto;padding:14px 20px 0;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;font-weight:700;font-size:.95rem;}
+.site a{color:var(--ink);text-decoration:none;padding:7px 14px;border-radius:999px;border:2px solid var(--line);background:var(--surface);}
+.site a:hover{border-color:var(--g2);}
+.site a:focus-visible{outline:3px solid var(--ink);outline-offset:3px;}
+.next{display:flex;gap:28px;align-items:center;justify-content:space-between;background:color-mix(in srgb,var(--g2) 11%,var(--surface));border:1px solid var(--line);border-radius:30px;padding:32px 36px;overflow:hidden;}
+.next-text{min-width:0;}
+.next-tag{display:inline-block;font-weight:700;font-size:.9rem;padding:5px 14px;border-radius:999px;background:color-mix(in srgb,var(--g3) 24%,var(--surface));color:var(--ink);}
+.next h2{font-size:clamp(1.9rem,4.4vw,2.8rem);font-weight:700;letter-spacing:.01em;line-height:1.15;margin:12px 0 10px;color:var(--ink);}
+.next p{color:var(--muted);max-width:44ch;margin:0 0 20px;font-size:1.08rem;}
+.next-actions{display:flex;flex-wrap:wrap;gap:10px;}
+.nbtn{display:inline-flex;align-items:center;gap:8px;font-weight:700;font-size:1rem;text-decoration:none;color:var(--ink);padding:12px 22px;border-radius:999px;border:2px solid var(--ink);background:transparent;}
+.nbtn.primary{background:var(--ink);color:var(--surface);}
+.nbtn:hover{background:var(--ink);color:var(--surface);}
+.nbtn.primary:hover{background:transparent;color:var(--ink);}
+.nbtn:focus-visible{outline:3px solid var(--ink);outline-offset:3px;}
+.nbtn svg{width:16px;height:16px;}
+.next-art{flex:0 0 190px;width:190px;height:auto;}
+@media (prefers-reduced-motion:no-preference){.nbtn{transition:background-color .15s,color .15s,transform .15s;}.nbtn:hover{transform:translateY(-2px);}}
+@media (max-width:680px){.next{padding:26px 22px;}.next-art{display:none;}}
+.lfoot{margin-top:80px;padding-top:18px;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center;justify-content:space-between;font-size:.82rem;color:var(--muted);}
+.lfoot div{display:flex;flex-wrap:wrap;gap:8px;}
+.lfoot a{font-size:.82rem;font-weight:600;padding:5px 11px;border:1px solid var(--line);border-radius:999px;background:var(--surface);color:var(--muted);text-decoration:none;}
+.lfoot a:hover{color:var(--ink);border-color:var(--ink);}
+.lfoot a:focus-visible{outline:3px solid var(--ink);outline-offset:2px;}
+.jump a.j5{--c:var(--g1);} .jump a.j6{--c:var(--g2);}
+
+input[type='text']{width:100%;font:inherit;padding:10px 12px;border:2px solid var(--line);border-radius:12px;background:var(--surface);color:var(--ink);margin:2px 0 12px;box-sizing:border-box;}
+input[type='text']:focus-visible{outline:3px solid var(--ink);outline-offset:2px;}
+.cols>div{min-width:0;}
+
+</style>
+</head>
+<body>
+<nav class="site" id="sitenav" aria-label="Site"><a href="07-digital-interface-design.html">&larr; Digital Interface Design</a><a href="index.html">All sections</a></nav>
+<div id="home">
+<header class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <h1>User Experience</h1>
+      <p class="lead">26 ideas about understanding people and designing the whole experience. Each one has a hands-on demo.</p>
+      <nav class="jump" aria-label="Jump to a group">
+        <a class="j1" href="#understanding">Understanding users</a>
+        <a class="j2" href="#people">Designing for people</a>
+        <a class="j3" href="#doing">Getting things done</a>
+        <a class="j4" href="#testing">Testing and improving</a>
+        <a class="j5" href="#influence">Influence and ethics</a>
+      </nav>
+      <p class="note">Every card opens an in-depth lesson. Click a card, or the &ldquo;Read the full lesson&rdquo; pill on it, to begin.</p>
+    </div>
+    <div class="lab" id="lab"></div>
+  </div>
+</header>
+<main class="wrap" id="groups"></main>
+<footer>
+  <div class="wrap">
+    <aside class="next" aria-label="What to do next">
+      <div class="next-text">
+        <span class="next-tag">Up next</span>
+        <h2>Accessibility</h2>
+        <p>That section isn’t built yet. In the meantime, you can revisit User Experience or browse all sections.</p>
+        <div class="next-actions"><a class="nbtn primary" href="index.html">See all sections <svg viewBox='0 0 24 24' aria-hidden='true' fill='none' stroke='currentColor' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'><path d='M5 12h14M13 6l6 6-6 6'/></svg></a><a class="nbtn" href="08-user-experience.html">Back to User Experience</a></div>
+      </div>
+      <svg class='next-art' viewBox='0 0 180 150' aria-hidden='true' focusable='false'><circle cx='50' cy='52' r='34' fill='var(--g1)'/><rect x='82' y='26' width='62' height='62' rx='14' fill='var(--g2)' opacity='.92' transform='rotate(10 113 57)'/><polygon points='40,138 84,70 120,138' fill='var(--g4)' opacity='.95'/><circle cx='142' cy='116' r='20' fill='var(--g3)'/></svg>
+    </aside>
+  </div>
+</footer>
+</div>
+<main class="wrap lesson" id="lesson" hidden></main>
+<script>
+function hslToHex(h,s,l){
+  h=((h%360)+360)%360; s/=100; l/=100;
+  var k=function(n){return (n+h/30)%12;};
+  var a=s*Math.min(l,1-l);
+  var f=function(n){return l-a*Math.max(-1,Math.min(k(n)-3,Math.min(9-k(n),1)));};
+  var x=function(v){return Math.round(v*255).toString(16).padStart(2,"0");};
+  return ("#"+x(f(0))+x(f(8))+x(f(4))).toUpperCase();
+}
+function textOn(hex){
+  var r=parseInt(hex.substr(1,2),16),g=parseInt(hex.substr(3,2),16),b=parseInt(hex.substr(5,2),16);
+  var lin=function(c){c/=255;return c<=0.03928?c/12.92:Math.pow((c+0.055)/1.055,2.4);};
+  var L=0.2126*lin(r)+0.7152*lin(g)+0.0722*lin(b);
+  return L>0.4?"#111111":"#FFFFFF";
+}
+function polar(cx,cy,r,deg){var a=(deg-90)*Math.PI/180;return [cx+r*Math.cos(a),cy+r*Math.sin(a)];}
+function wedge(cx,cy,r0,r1,a0,a1){
+  var p0=polar(cx,cy,r1,a0),p1=polar(cx,cy,r1,a1),p2=polar(cx,cy,r0,a1),p3=polar(cx,cy,r0,a0);
+  return 'M'+p0+'A'+r1+','+r1+' 0 0 1 '+p1+'L'+p2+'A'+r0+','+r0+' 0 0 0 '+p3+'Z';
+}
+function hexRgb(h){return [parseInt(h.substr(1,2),16),parseInt(h.substr(3,2),16),parseInt(h.substr(5,2),16)];}
+function mixHex(a,b,t){
+  var A=hexRgb(a),B=hexRgb(b);
+  return "#"+[0,1,2].map(function(i){return Math.round(A[i]+(B[i]-A[i])*t).toString(16).padStart(2,"0");}).join("").toUpperCase();
+}
+function prep(root){
+  var smooth=!(window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+  Array.prototype.slice.call(root.querySelectorAll('[data-scroll]')).forEach(function(b){
+    b.addEventListener('click',function(){var t=root.querySelector('#'+b.getAttribute('data-scroll'));if(t){t.scrollIntoView({behavior:smooth?'smooth':'auto',block:'start'});}});
+  });
+  return {$:function(s){return root.querySelector(s);},$$:function(s){return Array.prototype.slice.call(root.querySelectorAll(s));}};
+}
+function rgbToHsl(r,g,b){
+  r/=255;g/=255;b/=255;
+  var mx=Math.max(r,g,b),mn=Math.min(r,g,b),l=(mx+mn)/2,h=0,s=0,d=mx-mn;
+  if(d){s=d/(1-Math.abs(2*l-1));if(mx===r){h=((g-b)/d)%6;}else if(mx===g){h=(b-r)/d+2;}else{h=(r-g)/d+4;}h*=60;if(h<0){h+=360;}}
+  return [Math.round(h),Math.round(s*100),Math.round(l*100)];
+}
+function relLum(hex){
+  var c=hexRgb(hex).map(function(v){v/=255;return v<=0.03928?v/12.92:Math.pow((v+0.055)/1.055,2.4);});
+  return 0.2126*c[0]+0.7152*c[1]+0.0722*c[2];
+}
+function contrastRatio(a,b){var A=relLum(a),B=relLum(b);return (Math.max(A,B)+0.05)/(Math.min(A,B)+0.05);}
+function lerpHue(a,b,t){var d=((b-a+540)%360)-180;return (a+d*t+360)%360;}
+function hex2(n){return Math.max(0,Math.min(255,Math.round(n))).toString(16).padStart(2,'0');}
+function shell(title,sub,icon,secs){
+  var svgI='<svg viewBox="0 0 48 48" aria-hidden="true" focusable="false" style="fill:none;stroke:currentColor;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round">'+ICONS[icon]+'</svg>';
+  var back='<button class="btn" data-back type="button">← Back to '+SECTION_NAME+'</button>';
+  return back+'<div class="lhero"><div class="gbadge">'+svgI+'</div><div><h1>'+title+'</h1><p>'+sub+'</p></div></div><nav class="toc" aria-label="In this lesson">'+secs.map(function(s){return '<button class="chip" type="button" data-scroll="'+s[0]+'">'+s[1]+'</button>';}).join('')+'</nav>'+secs.map(function(s){return '<section class="lsec" id="'+s[0]+'">'+s[2]+'</section>';}).join('')+'<p style="margin-top:36px">'+back+'</p>';
+}
+function quick(arr){return `<h2>Quick check</h2><p>Click each question to reveal the answer.</p>`+arr.map(function(q,i){return `<details><summary>${i+1}. ${q[0]}</summary><p>${q[1]}</p></details>`;}).join('');}
+function bigideas(arr){return `<h2>The big ideas</h2><ul class='tk'>`+arr.map(function(x){return '<li>'+x+'</li>';}).join('')+'</ul>';}
+function steps(arr){return `<ol class='steps'>`+arr.map(function(x){return '<li>'+x+'</li>';}).join('')+'</ol>';}
+function chipsHtml(id,items,cur,lab){return `<div class='ctrls' id='${id}' role='group' aria-label='${lab}'>`+items.map(function(x){return `<button class='chip' type='button' data-v='${x[0]}' aria-pressed='${x[0]===cur}'>${x[1]}</button>`;}).join('')+`</div>`;}
+function bindChips(root,id,cb){var c=root.querySelector('#'+id);c.addEventListener('click',function(e){var b=e.target.closest('.chip');if(!b)return;Array.prototype.slice.call(c.querySelectorAll('.chip')).forEach(function(x){x.setAttribute('aria-pressed',x===b?'true':'false');});cb(b.getAttribute('data-v'));});}
+function rng(id,lab,min,max,val,step,unit){return `<label for='${id}'>${lab}: <span id='${id}v'>${val}</span>${unit||''}</label><input id='${id}' type='range' min='${min}' max='${max}' step='${step||1}' value='${val}'>`;}
+function onRng(root,id,cb){var el=root.querySelector('#'+id),sp=root.querySelector('#'+id+'v');el.addEventListener('input',function(){if(sp){sp.textContent=el.value;}cb(parseFloat(el.value));});}
+function pr(i,k){var x=Math.sin(i*127.1+k*311.7)*43758.5453;return x-Math.floor(x);}
+function copyText(t,btn){
+  function ok(){btn.classList.add('ok');clearTimeout(btn._t);btn._t=setTimeout(function(){btn.classList.remove('ok');},1400);}
+  function fallback(){try{var ta=document.createElement('textarea');ta.value=t;ta.setAttribute('readonly','');ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.select();var r=document.execCommand('copy');document.body.removeChild(ta);if(r){ok();}}catch(e){}}
+  if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(ok,fallback);}else{fallback();}
+}
+function wrapHex(root){
+  var w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,null),nodes=[],n,test=/#[0-9A-Fa-f]{6}(?![0-9A-Fa-f])/;
+  while((n=w.nextNode())){if(test.test(n.nodeValue)&&n.parentNode&&n.parentNode.closest&&!n.parentNode.closest('script,style,textarea,button,svg')){nodes.push(n);}}
+  nodes.forEach(function(n){
+    var frag=document.createDocumentFragment(),s=n.nodeValue,last=0,re=/#[0-9A-Fa-f]{6}(?![0-9A-Fa-f])/g,mm;
+    while((mm=re.exec(s))){
+      if(mm.index>last){frag.appendChild(document.createTextNode(s.slice(last,mm.index)));}
+      var b=document.createElement('button');b.type='button';b.className='hx';b.setAttribute('data-hex',mm[0].toUpperCase());b.setAttribute('aria-label','Copy '+mm[0].toUpperCase());b.textContent=mm[0];frag.appendChild(b);
+      last=mm.index+mm[0].length;
+    }
+    if(last<s.length){frag.appendChild(document.createTextNode(s.slice(last)));}
+    n.parentNode.replaceChild(frag,n);
+  });
+}
+function queueHex(){if(hxQueued){return;}hxQueued=true;requestAnimationFrame(function(){hxQueued=false;wrapHex(document.body);});}
+function slug(t){return t.toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"");}
+function svg(name){
+  return '<svg viewBox="0 0 48 48" aria-hidden="true" focusable="false">'+ICONS[name]+'</svg>';
+}
+var hxQueued=false;
+
+function siteFoot(){
+  var S=window.SITE||{},a='';
+  if(S.prev){a+='<a href="'+S.prev[1]+'">&larr; '+S.prev[0]+'</a>';}
+  a+='<a href="index.html">All sections</a>';
+  if(S.next){a+='<a href="'+S.next[1]+'">'+S.next[0]+' &rarr;</a>';}
+  return '<nav class="lfoot" aria-label="Other sections"><span>Explore other sections</span><div>'+a+'</div></nav>';
+}
+
+function startSite(){
+  var out='';
+  GROUPS.forEach(function(g){
+    out+='<section class="group '+g.cls+'" id="'+g.id+'"><div class="ghead"><div class="gbadge"><svg viewBox="0 0 48 48" aria-hidden="true" focusable="false" style="fill:none;stroke:currentColor;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round">'+ICONS[g.icon]+'</svg></div><div><h2>'+g.title+'</h2><p>'+g.intro+'</p></div></div><div class="grid">';
+    g.items.forEach(function(it){
+      var sl=slug(it[1]);
+      if(LESSONS[sl]){
+        out+='<a class="card has" href="#'+sl+'" data-lesson="'+sl+'"><div class="tile">'+svg(it[0])+'</div><h3>'+it[1]+'</h3><p>'+it[2]+'</p><span class="more">Read the full lesson</span></a>';
+      } else {
+        out+='<article class="card"><div class="tile">'+svg(it[0])+'</div><h3>'+it[1]+'</h3><p>'+it[2]+'</p></article>';
+      }
+    });
+    out+='</div></section>';
+  });
+  document.getElementById('groups').innerHTML=out;
+
+  var homeEl=document.getElementById('home'),lessonEl=document.getElementById('lesson');
+  function showLesson(id){
+    var L=LESSONS[id];
+    if(!L){return;}
+    homeEl.hidden=true;lessonEl.hidden=false;lessonEl.className='wrap lesson '+(L.g||'');
+    var sn=document.getElementById('sitenav');if(sn){sn.hidden=true;}
+    lessonEl.innerHTML=L.html+siteFoot();
+    L.init(lessonEl);
+    window.scrollTo(0,0);
+    try{history.replaceState(null,'','#'+id);}catch(e){}
+  }
+  function showHome(){
+    lessonEl.hidden=true;lessonEl.innerHTML='';homeEl.hidden=false;
+    var sn=document.getElementById('sitenav');if(sn){sn.hidden=false;}
+    window.scrollTo(0,0);
+    try{history.replaceState(null,'',location.pathname+location.search);}catch(e){}
+  }
+  document.getElementById('groups').addEventListener('click',function(e){
+    var a=e.target.closest('a[data-lesson]');
+    if(a){e.preventDefault();showLesson(a.getAttribute('data-lesson'));}
+  });
+  lessonEl.addEventListener('click',function(e){
+    if(e.target.closest('[data-back]')){showHome();}
+  });
+  Array.prototype.slice.call(document.querySelectorAll('.jump a')).forEach(function(a){
+    a.addEventListener('click',function(e){
+      var t=document.getElementById((a.getAttribute('href')||'').slice(1));
+      if(!t){return;}
+      e.preventDefault();
+      var smooth=!(window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+      t.scrollIntoView({behavior:smooth?'smooth':'auto',block:'start'});
+    });
+  });
+  document.addEventListener('click',function(e){
+    var b=e.target.closest&&e.target.closest('.hx');
+    if(b){e.preventDefault();e.stopPropagation();copyText(b.getAttribute('data-hex'),b);}
+  });
+  new MutationObserver(queueHex).observe(document.body,{childList:true,subtree:true,characterData:true});
+  queueHex();
+  var startId=(location.hash||'').slice(1);
+  if(LESSONS[startId]){showLesson(startId);}
+}
+
+var SECTION_NAME='User Experience';
+var SITE={prev:['Digital Interface Design','07-digital-interface-design.html']};
+
+var ICONS={
+  research:`<circle cx='21' cy='21' r='12'/><path d='M30 30l11 11'/>`,
+  persona:`<circle cx='24' cy='16' r='8'/><path d='M8 42c0-10 7-15 16-15s16 5 16 15'/>`,
+  scenario:`<rect x='7' y='8' width='34' height='32' rx='3'/><path d='M13 17h22M13 25h22M13 33h12'/>`,
+  journey:`<path d='M5 36c6-4 8-18 14-18s8 14 14 14 6-18 12-18'/><circle cx='5' cy='36' r='3' fill='currentColor'/><circle cx='43' cy='14' r='3' fill='currentColor'/>`,
+  flow:`<rect x='4' y='6' width='14' height='9' rx='2'/><path d='M11 15v8h26v8'/><rect x='30' y='31' width='14' height='9' rx='2'/>`,
+  jtbd:`<circle cx='24' cy='24' r='16'/><circle cx='24' cy='24' r='8'/><circle cx='24' cy='24' r='2' fill='currentColor'/>`,
+  pain:`<path d='M24 6l19 34H5z'/><path d='M24 18v10M24 33v1'/>`,
+  hcd:`<circle cx='24' cy='24' r='16'/><path d='M16 28c4 5 12 5 16 0'/><circle cx='18' cy='20' r='1.5' fill='currentColor'/><circle cx='30' cy='20' r='1.5' fill='currentColor'/>`,
+  usability:`<rect x='6' y='10' width='36' height='24' rx='3'/><path d='M18 40h12M24 34v6'/><path d='M16 22l5 5 11-11'/>`,
+  access:`<circle cx='24' cy='10' r='4'/><path d='M8 18h32M24 18v12M16 42l8-12 8 12'/>`,
+  inclusive:`<circle cx='14' cy='18' r='6'/><circle cx='34' cy='18' r='6'/><path d='M4 40c0-7 5-11 10-11s10 4 10 11M24 40c0-7 5-11 10-11s10 4 10 11'/>`,
+  mental:`<path d='M12 36c-6-4-8-12-4-19 4-8 14-10 21-6 8 4 9 14 3 20-3 3-6 3-6 8H18c0-3-3-3-6-3z'/>`,
+  content:`<rect x='7' y='7' width='34' height='10' rx='2' fill='currentColor' fill-opacity='.5'/><path d='M7 25h34M7 32h26M7 39h18'/>`,
+  task:`<rect x='8' y='6' width='32' height='36' rx='3'/><path d='M15 17l4 4 7-8M15 31l4 4 7-8M30 19h5M30 33h5'/>`,
+  conversion:`<path d='M5 8h38L30 24v14l-12 4V24z'/>`,
+  scent:`<path d='M8 36c8-4 8-16 16-16s8 12 16 12'/><circle cx='40' cy='32' r='3' fill='currentColor'/><path d='M10 14c4 0 4 4 8 4M18 8c4 0 4 4 8 4'/>`,
+  friction:`<rect x='4' y='28' width='40' height='8' rx='2'/><path d='M10 28V18M20 28V12M30 28V18M40 28V14'/>`,
+  writing:`<path d='M8 10h32v22H22l-8 8v-8H8z'/><path d='M15 18h18M15 25h10'/>`,
+  testing:`<rect x='6' y='6' width='36' height='28' rx='3'/><circle cx='24' cy='20' r='7'/><path d='M14 42h20'/>`,
+  ab:`<rect x='5' y='8' width='16' height='32' rx='3'/><rect x='27' y='8' width='16' height='32' rx='3' fill='currentColor' fill-opacity='.3'/><path d='M13 20h0M35 20h0'/>`,
+  heuristic:`<path d='M10 6h28v36H10z'/><path d='M16 16l3 3 6-6M16 28l3 3 6-6M30 17h4M30 29h4'/>`,
+  behaviour:`<circle cx='24' cy='24' r='16'/><path d='M24 14v10l7 5'/>`,
+  trust:`<path d='M24 5l15 6v13c0 10-7 16-15 19-8-3-15-9-15-19V11z'/><path d='M17 24l5 5 9-10'/>`,
+  persuade:`<path d='M6 24h24M24 14l12 10-12 10'/>`,
+  dark:`<path d='M30 6a18 18 0 1 0 12 24A14 14 0 0 1 30 6z'/>`,
+  ethical:`<path d='M24 8v32M10 14h28M10 14l-6 14a8 8 0 0 0 12 0zM38 14l-6 14a8 8 0 0 0 12 0z'/>`
+};
+
+var GROUPS=[
+ {cls:'',id:'understanding',title:'Understanding users',icon:'research',intro:'Finding out who people are, what they want and where things hurt.',items:[
+  ['research','User research','Learning about people through interviews, observation, surveys and data.'],
+  ['persona','User personas','Research-based profiles that stand in for groups of users.'],
+  ['scenario','User scenarios','Short stories about a person trying to do something in a context.'],
+  ['journey','User journeys','Maps of the whole experience over time, with feelings.'],
+  ['flow','User flows','The steps a person takes to reach a goal, and where they might fall away.'],
+  ['jtbd','Jobs to be done','Understanding the progress people are trying to make, not just the product.'],
+  ['pain','Pain points','The frustrations that get in people\u2019s way.']
+ ]},
+ {cls:'f',id:'people',title:'Designing for people',icon:'hcd',intro:'Principles for making products that fit how people actually think and act.',items:[
+  ['hcd','Human-centred design','Designing around real people\u2019s needs, limits and behaviour.'],
+  ['usability','Usability','How easily and satisfyingly people can use a product.'],
+  ['access','Accessibility','Making products usable by people with a wide range of abilities.'],
+  ['inclusive','Inclusive design','Designing for the full range of human diversity from the start.'],
+  ['mental','Mental models','The ideas people carry about how things work.'],
+  ['content','Content hierarchy','Ordering information by importance so people see what matters first.']
+ ]},
+ {cls:'s',id:'doing',title:'Getting things done',icon:'task',intro:'Helping people reach their goals with as little effort as possible.',items:[
+  ['task','Task completion','Whether people manage to finish what they came to do.'],
+  ['conversion','Conversion paths','The routes people take towards a goal such as buying.'],
+  ['scent','Information scent','The cues that tell people a link will lead where they want.'],
+  ['friction','Friction','Anything that makes a task harder, slower or more annoying.'],
+  ['writing','UX writing','The words in an interface: labels, messages and instructions.']
+ ]},
+ {cls:'c',id:'testing',title:'Testing and improving',icon:'testing',intro:'Checking designs with real people and real data.',items:[
+  ['testing','User testing','Watching real people try to use a design.'],
+  ['ab','A/B testing','Comparing two versions with real traffic to see which does better.'],
+  ['heuristic','Heuristic evaluation','Experts reviewing a design against established usability rules.']
+ ]},
+ {cls:'',id:'influence',title:'Influence and ethics',icon:'ethical',intro:'How designs shape behaviour, and where the line sits.',items:[
+  ['behaviour','Behavioural design','Using insights about human behaviour to shape choices.'],
+  ['trust','Trust signals','Cues that reassure people a product is safe and honest.'],
+  ['persuade','Persuasive design','Designing to encourage a particular behaviour.'],
+  ['dark','Dark patterns','Tricks that push people into choices that are bad for them.'],
+  ['ethical','Ethical design','Respecting people\u2019s interests, autonomy and wellbeing.']
+ ]}
+];
+
+/* ===== helpers ===== */
+function tk(o){o=o||{};var h=o.hue==null?215:o.hue;return {h:h,c:hslToHex(h,70,46),cd:hslToHex(h,70,34),cl:hslToHex(h,70,94),r:o.r==null?10:o.r};}
+function ubtn(t,o){o=o||{};var bg=o.v==='secondary'?'transparent':o.v==='danger'?'#D62839':t.c,col=o.v==='secondary'?t.c:'#fff',bd=o.v==='secondary'?'2px solid '+t.c:'2px solid transparent';if(o.disabled){bg='#D8DBE8';col='#8A90AA';bd='2px solid transparent';}return `<span style='display:inline-flex;background:${bg};color:${col};border:${bd};border-radius:${t.r}px;padding:${o.sz==='S'?'6px 12px':'10px 18px'};font-weight:700;font-family:Inter,sans-serif;font-size:${o.sz==='S'?'.85rem':'1rem'}'>${o.label||'Button'}</span>`;}
+function togg(id,items,state){return `<div class='ctrls' id='${id}' role='group' aria-label='Options'>`+items.map(function(x){return `<button class='chip' type='button' data-v='${x[0]}' aria-pressed='${!!state[x[0]]}'>${x[1]}</button>`;}).join('')+`</div>`;}
+function bindTogg(root,id,state,cb){var c=root.querySelector('#'+id);c.addEventListener('click',function(e){var b=e.target.closest('.chip');if(!b)return;var k=b.getAttribute('data-v');state[k]=!state[k];b.setAttribute('aria-pressed',state[k]?'true':'false');cb();});}
+function boxw(inner,extra){return `<div style='background:#fff;color:#14213D;border-radius:14px;padding:16px;font-family:Inter,sans-serif;${extra||''}'>${inner}</div>`;}
+function bar(label,pct,col){return `<div style='margin-bottom:10px'><div style='display:flex;justify-content:space-between;font-weight:700;font-size:.85rem;margin-bottom:3px'><span>${label}</span><span>${pct}%</span></div><div style='background:var(--line);border-radius:99px;height:14px'><div style='width:${Math.max(0,Math.min(100,pct))}%;height:100%;border-radius:99px;background:${col}'></div></div></div>`;}
+
+/* ===== lessons: Understanding users ===== */
+var RESM=[['int','Interviews','Qualitative, attitudinal','Talk one-to-one to learn motivations, needs and stories.','Early on, to understand why people do things.',0.15,0.22],['sur','Surveys','Quantitative, attitudinal','Ask many people the same questions.','To measure how common an opinion or need is.',0.2,0.8],['obs','Observation','Qualitative, behavioural','Watch people in their real setting.','To see what people actually do, not what they say.',0.85,0.2],['ana','Analytics','Quantitative, behavioural','Measure what people do at scale.','To find where and how many people get stuck.',0.85,0.85],['uts','Usability tests','Mostly qualitative, behavioural','Watch people attempt tasks with a design.','To find usability problems in a design.',0.65,0.3]];
+var L_RESEARCH=shell('User research','Learning about the people you design for.','research',[
+['re-what','What it is',`<h2>What user research is</h2><p>User research is how designers <b>learn about real people</b>: who they are, what they need, what they do and where they struggle. It replaces guessing with evidence. Methods can be sorted on two dimensions: <b>what people say versus what they do</b>, and <b>qualitative (why) versus quantitative (how many)</b>.</p>`],
+['re-explore','Choose a method',`<h2>Choose a method</h2><p>Each dot is a method, placed on the two dimensions.</p><div class='panel'>${chipsHtml('rec',RESM.map(function(r){return [r[0],r[1]];}),'int','Method')}<div class='wheelrow' style='margin-top:14px'><div class='stage' id='res'></div><div id='reo' class='readout' aria-live='polite'></div></div></div>`],
+['re-use','Use it well',`<h2>Doing research well</h2><ul class='tk'><li><b>Combine methods.</b> Numbers say how many; conversations say why.</li><li><b>Watch behaviour,</b> since people are poor at predicting what they will do.</li><li><b>Ask open questions,</b> not leading ones.</li></ul>`],
+['re-check','Quick check',quick([['What is the difference between qualitative and quantitative?','Qualitative explains why with a few people; quantitative measures how many.'],['Why watch behaviour as well as ask?','People often cannot predict or describe what they do.'],['Why combine methods?','Each one covers what the others miss.']])],
+['re-recap','Big ideas',bigideas(['Research replaces guessing with evidence.','Methods differ in saying versus doing, and why versus how many.','Combine them.'])]
+]);
+
+var L_PERSONA=shell('User personas','Research-based profiles of user groups.','persona',[
+['pe-what','What they are',`<h2>What personas are</h2><p>A persona is a <b>fictional but research-based character</b> that represents a group of users: a name, a goal, a frustration and some context. Alan Cooper popularised them in the 1990s. They help teams keep real people in mind. Personas built from guesses or stereotypes do more harm than good.</p>`],
+['pe-explore','Build a persona',`<h2>Build a persona</h2><div class='panel'><label for='pen'>Name</label><input id='pen' type='text' value='Maya' maxlength='16'>${rng('pea','Age',18,80,34)}${chipsHtml('peg',[['time','Save time'],['money','Save money'],['sure','Feel confident']],'time','Main goal')}${chipsHtml('pef',[['slow','Slow apps'],['cost','Hidden costs'],['jargon','Confusing jargon']],'slow','Main frustration')}${rng('pet','Comfort with technology (1 to 5)',1,5,4)}<div id='peo' style='margin-top:10px;max-width:420px'></div></div>`],
+['pe-use','Use it well',`<h2>Using personas well</h2><ul class='tk'><li><b>Base them on research,</b> not assumptions.</li><li><b>Focus on goals and behaviour,</b> not demographics alone.</li><li><b>Keep them few.</b> Three to five is plenty.</li><li><b>Use them in decisions:</b> \u201cwhat would Maya need here?\u201d</li></ul>`],
+['pe-check','Quick check',quick([['What should personas be based on?','Real research with users.'],['Why avoid stereotypes?','They mislead the team and exclude people.'],['How many personas are usually enough?','Three to five.']])],
+['pe-recap','Big ideas',bigideas(['A persona represents a research-based user group.','Goals and behaviour matter more than demographics.','Keep few, and use them.'])]
+]);
+
+var SCEN={commuter:['Maya the commuter','Maya, 34, rides the train to work.','She wants to renew her season ticket.'],owner:['Raj the shop owner','Raj, 52, runs a small corner shop.','He wants to check today\u2019s deliveries.']};
+var CTX={rush:['She is running late and holding a coffee.','Needs one-handed use, big targets and the fewest steps.'],signal:['The train keeps losing signal.','Needs offline support, saved progress and clear retry messages.'],tired:['It is the end of a long day and he is tired.','Needs a calm layout, plain words and forgiving error handling.']};
+var L_SCENARIO=shell('User scenarios','Short stories about a person doing something.','scenario',[
+['sc-what','What they are',`<h2>What user scenarios are</h2><p>A scenario is a <b>short story</b>: a particular person, a goal and a situation. Where a persona says who, a scenario says <b>what, where and why now</b>. Writing them reveals needs that a bare list of features hides, such as being rushed, one-handed or offline.</p>`],
+['sc-explore','Write a scenario',`<h2>Write a scenario</h2><div class='panel'>${chipsHtml('scp',Object.keys(SCEN).map(function(k){return [k,SCEN[k][0]];}),'commuter','Persona')}${chipsHtml('scx',[['rush','Running late'],['signal','Poor signal'],['tired','Tired']],'rush','Context')}<div id='sco' style='margin-top:14px' aria-live='polite'></div></div>`],
+['sc-use','Use it well',`<h2>Using scenarios well</h2><ul class='tk'><li><b>Include context:</b> place, device, time pressure.</li><li><b>Keep them short,</b> a paragraph at most.</li><li><b>Turn each into design questions:</b> what would this person need?</li></ul>`],
+['sc-check','Quick check',quick([['What does a scenario add to a persona?','A goal and a situation: what, where and why now.'],['What details matter?','Context such as place, device and time pressure.'],['What should you do with a scenario?','Turn it into design questions and requirements.']])],
+['sc-recap','Big ideas',bigideas(['A scenario is a short, situated story.','Context reveals hidden needs.','Turn stories into requirements.'])]
+]);
+
+var JSTAGES=[['Aware','Sees an advert, hears from a friend','\u201cIs this for me?\u201d','The offer is unclear in one line.',3],['Consider','Website, reviews, comparison sites','\u201cIs it worth it?\u201d','Pricing is hard to find.',2],['Buy','Basket and checkout','\u201cJust let me pay.\u201d','Forced account creation.',1],['Use','First week, setup, support','\u201cHow do I do this?\u201d','Setup takes far too long.',3],['Share','Referral, reviews, renewal','\u201cMy friend would like this.\u201d','No easy way to share.',4]];
+var L_JOURNEY=shell('User journeys','Maps of the experience over time.','journey',[
+['jo-what','What they are',`<h2>What user journeys are</h2><p>A user journey map shows the <b>whole experience over time</b>: the stages a person goes through, what they do and think at each, and how they <b>feel</b>. The emotion line shows where the experience is high and low, and the lows are where to improve first.</p>`],
+['jo-explore','Walk the journey',`<h2>Walk the journey</h2><p>Pick a stage. The line shows how happy the person is.</p><div class='panel'>${chipsHtml('joc',JSTAGES.map(function(s,i){return [String(i),s[0]];}),'2','Stage')}<div class='stage' id='jos' style='margin-top:6px'></div><div id='joo' aria-live='polite'></div></div>`],
+['jo-use','Use it well',`<h2>Using journey maps well</h2><ul class='tk'><li><b>Base it on research,</b> not workshop guesses.</li><li><b>Show emotion,</b> not just actions.</li><li><b>Find the lowest point</b> and turn it into an opportunity.</li></ul>`],
+['jo-check','Quick check',quick([['What does the emotion line show?','Where the experience feels good or bad.'],['Where should you start improving?','At the lowest points.'],['What should maps be based on?','Real research.']])],
+['jo-recap','Big ideas',bigideas(['A journey map covers the whole experience.','Feelings matter as much as steps.','The lows are your opportunities.'])]
+]);
+
+var FSTEPS=[['email','Enter email'],['verify','Verify email'],['phone','Add phone number'],['pass','Create password'],['photo','Upload a photo'],['survey','Answer a survey']];
+var L_UXFLOW=shell('User flows','The steps to a goal.','flow',[
+['fl-what','What they are',`<h2>What user flows are in UX</h2><p>A flow is the <b>sequence of steps</b> a person takes to reach a goal. UX designers study flows to find steps that can be <b>removed, merged or postponed</b>. Each extra step is another chance for someone to give up.</p><p>(Section 7 covers how flows are drawn. Here the focus is how many steps people will tolerate.)</p>`],
+['fl-explore','Count the steps',`<h2>Count the steps</h2><p>Switch the steps of a sign-up on and off. The bars assume, for illustration only, that each step loses 10% of the people who reach it.</p><div class='panel'>${togg('flt',FSTEPS.map(function(s){return [s[0],s[1]];}),{email:1,pass:1})}<div id='flo' style='margin-top:14px'></div><p class='mood' id='fln' aria-live='polite'></p></div>`],
+['fl-use','Use it well',`<h2>Shortening flows</h2><ul class='tk'><li><b>Ask only what you need now.</b> Collect the rest later.</li><li><b>Merge steps</b> where possible.</li><li><b>Show progress</b> in long flows.</li></ul>`],
+['fl-check','Quick check',quick([['Why are extra steps risky?','Each one is a chance for people to give up.'],['What can you do with non-essential questions?','Postpone them until later.'],['Why show progress?','It makes long flows feel manageable.']])],
+['fl-recap','Big ideas',bigideas(['Flows are sequences of steps.','Each step costs people.','Remove, merge or postpone.'])]
+]);
+
+var JOBS={commute:['The commuter','When I am on a crowded train, I want to read without losing my place, so that I can make use of dead time.','Feature thinking: \u201cmake the screen bigger\u201d. Job thinking: one-handed reading, offline text, instant resume.'],dinner:['The tired cook','When I get home exhausted, I want dinner sorted quickly, so that I can finally relax.','Feature thinking: \u201cadd more recipes\u201d. Job thinking: a fast path from \u201cwhat is in my fridge\u201d to \u201cready in twenty minutes\u201d.'],saving:['The saver','When I get paid, I want money set aside automatically, so that I never have to decide each time.','Feature thinking: \u201cadd a savings calculator\u201d. Job thinking: automatic round-ups and transfers.']};
+var L_JTBD=shell('Jobs to be done','Understanding the progress people want.','jtbd',[
+['jb-what','What it is',`<h2>What jobs to be done is</h2><p>Jobs to be done (JTBD) is a way of understanding why people choose a product: they \u201chire\u201d it to make <b>progress in a situation</b>. Clayton Christensen\u2019s well-known example is that people hire a milkshake for a boring commute, not just to enjoy a drink. A job is written as: <b>\u201cWhen I\u2026, I want to\u2026, so that I can\u2026\u201d</b></p>`],
+['jb-explore','Read three jobs',`<h2>Read three jobs</h2><div class='panel'>${chipsHtml('jbc',Object.keys(JOBS).map(function(k){return [k,JOBS[k][0]];}),'commute','Person')}<div id='jbo' style='margin-top:14px' aria-live='polite'></div></div>`],
+['jb-use','Use it well',`<h2>Using jobs well</h2><ul class='tk'><li><b>Describe the situation,</b> not the person.</li><li><b>Include the desired outcome.</b></li><li><b>Find the competing options.</b> The real alternative may not be a product like yours.</li></ul>`],
+['jb-check','Quick check',quick([['What is the JTBD sentence structure?','When I\u2026, I want to\u2026, so that I can\u2026'],['What does \u201chire\u201d mean here?','People choose a product to make progress in a situation.'],['What is better to describe: person or situation?','The situation.']])],
+['jb-recap','Big ideas',bigideas(['People hire products to make progress.','Write jobs as situation, motivation and outcome.','Look at the real alternatives.'])]
+]);
+
+var L_PAIN=shell('Pain points','The frustrations that get in people\u2019s way.','pain',[
+['pa-what','What they are',`<h2>What pain points are</h2><p>A pain point is a <b>specific frustration</b> that gets in the way of a goal: a slow page, a confusing step, a hidden cost. You cannot fix everything, so pain points are <b>prioritised</b> by how <b>severe</b> they are for the people who hit them and how <b>often</b> it happens.</p>`],
+['pa-explore','Prioritise a pain point',`<h2>Prioritise a pain point</h2><div class='panel'>${rng('pai','Severity (1 to 5)',1,5,4)}${rng('paf','How often it happens (1 to 5)',1,5,4)}<div class='stage' id='pas' style='margin-top:6px'></div><p class='mood' id='pan' aria-live='polite'></p></div>`],
+['pa-use','Use it well',`<h2>Working with pain points</h2><ul class='tk'><li><b>Quote the user,</b> in their own words.</li><li><b>Look for patterns</b> across several people.</li><li><b>Take quick wins first,</b> then plan larger fixes.</li></ul>`],
+['pa-check','Quick check',quick([['How do you prioritise pain points?','By severity and by how often they happen.'],['What is a quick win?','A frequent problem that is cheap to fix.'],['Why look for patterns?','One person may be unusual; a pattern is evidence.']])],
+['pa-recap','Big ideas',bigideas(['Pain points are specific frustrations.','Prioritise by severity and frequency.','Quick wins first.'])]
+]);
+
+/* ===== lessons: Designing for people ===== */
+var HCDV={designer:['Designer-centred','Beautiful and clever, but the icons are unlabelled and the clock face is a riddle.','Choices follow the designer\u2019s taste, so people struggle.'],business:['Business-centred','Crammed with offers and a premium upsell, and a tiny cancel link.','Choices follow business goals, so people feel pushed around.'],human:['Human-centred','A big time, clear labels, one obvious button and an easy way back.','Choices follow what people need, tested with people.']};
+var L_HCD=shell('Human-centred design','Designing around real people.','hcd',[
+['hc-what','What it is',`<h2>What human-centred design is</h2><p>Human-centred design (HCD) puts <b>real people\u2019s needs, abilities and context</b> at the centre of the process, rather than the designer\u2019s taste or the company\u2019s targets. It is defined in the international standard ISO 9241-210 and rests on understanding users, involving them throughout, and <b>iterating</b>.</p>`],
+['hc-explore','Whose needs?',`<h2>Whose needs come first?</h2><p>The same alarm clock app, designed around three different priorities.</p><div class='panel'>${chipsHtml('hcc',Object.keys(HCDV).map(function(k){return [k,HCDV[k][0]];}),'human','Centred on')}<div id='hco' style='margin-top:14px;max-width:340px'></div><p class='mood' id='hcn' aria-live='polite'></p></div>`],
+['hc-use','Use it well',`<h2>Practising HCD</h2><ul class='tk'><li><b>Involve users early and often.</b></li><li><b>Design for the whole experience,</b> not one screen.</li><li><b>Iterate:</b> design, test, learn, repeat.</li></ul>`],
+['hc-check','Quick check',quick([['What sits at the centre of HCD?','Real people\u2019s needs, abilities and context.'],['What does iterating mean?','Design, test, learn and repeat.'],['Which international standard defines it?','ISO 9241-210.']])],
+['hc-recap','Big ideas',bigideas(['HCD centres people, not taste or targets.','Involve users throughout.','Iterate.'])]
+]);
+
+var L_USAB=shell('Usability','How easily and happily people can use something.','usability',[
+['us-what','What it is',`<h2>What usability is</h2><p>Usability is how easily people can <b>achieve their goals</b> with a product. Jakob Nielsen breaks it into five quality components: <b>learnability</b> (first-time ease), <b>efficiency</b> (speed once learned), <b>memorability</b> (ease of returning), <b>errors</b> (how few and how recoverable) and <b>satisfaction</b> (how pleasant it is).</p>`],
+['us-explore','Try a mini usability test',`<h2>Try a mini usability test</h2><p>Pick a layout, press Start, then find and click the <b>Pay now</b> button as fast as you can. Your time shows below.</p><div class='panel'>${chipsHtml('usc',[['messy','Cluttered layout'],['clear','Clear layout']],'messy','Layout')}<div class='ctrls'><button class='btn' id='usb' type='button'>Start the task</button></div><div id='uso' style='min-height:170px'></div><p class='mood' id='usn' aria-live='polite'></p></div>`],
+['us-use','Use it well',`<h2>Improving usability</h2><ul class='tk'><li><b>Measure it:</b> time on task, success, errors, satisfaction.</li><li><b>Test with real users</b> and real tasks.</li><li><b>Fix the biggest problems first.</b></li></ul>`],
+['us-check','Quick check',quick([['Name Nielsen\u2019s five usability components.','Learnability, efficiency, memorability, errors and satisfaction.'],['What can you measure?','Time on task, success rate, errors and satisfaction.'],['Where do you start fixing?','With the biggest problems.']])],
+['us-recap','Big ideas',bigideas(['Usability is ease and satisfaction in reaching goals.','Five components.','Measure, test and fix.'])]
+]);
+
+var POUR={p:['Perceivable','People must be able to perceive the information: enough contrast, text alternatives, captions.'],o:['Operable','People must be able to operate it: keyboard access, enough time, no seizure triggers.'],u:['Understandable','Content and behaviour must be understandable: plain language, predictable, helpful errors.'],r:['Robust','Content must work with many tools, including assistive technology: clean, semantic code.']};
+var L_ACCESS=shell('Accessibility','Making products usable by everyone.','access',[
+['ac-what','What it is',`<h2>What accessibility is</h2><p>Accessibility means designing so that people with a wide range of abilities (vision, hearing, movement, thinking) can use a product. The WCAG guidelines organise it into four principles, <b>POUR</b>: <b>Perceivable, Operable, Understandable, Robust</b>. (Section 9 goes into detail.)</p>`],
+['ac-explore','The four principles',`<h2>The four principles</h2><div class='panel'>${chipsHtml('acc',Object.keys(POUR).map(function(k){return [k,POUR[k][0]];}),'p','Principle')}<div id='aco' style='margin-top:14px' aria-live='polite'></div></div>`],
+['ac-use','Use it well',`<h2>Building accessibility in</h2><ul class='tk'><li><b>Start early.</b> Fixing later costs more.</li><li><b>Test with a keyboard and a screen reader.</b></li><li><b>Include disabled people</b> in your research.</li></ul>`],
+['ac-check','Quick check',quick([['What does POUR stand for?','Perceivable, Operable, Understandable, Robust.'],['Why start early?','Fixing later costs more.'],['What can you test with?','A keyboard and a screen reader.']])],
+['ac-recap','Big ideas',bigideas(['Accessibility serves a wide range of abilities.','POUR: perceivable, operable, understandable, robust.','Build it in from the start.'])]
+]);
+
+var SPEC={touch:['Touch',['One arm','An arm in a cast','Holding a baby'],'One-handed design helps all three.'],see:['Sight',['Blind','Eye injury, dilated pupils','Bright sunlight on the screen'],'High contrast and text alternatives help all three.'],hear:['Hearing',['Deaf','Ear infection','A noisy caf\u00e9'],'Captions help all three.']};
+var L_INCLUSIVE=shell('Inclusive design','Designing for the full range of people.','inclusive',[
+['in-what','What it is',`<h2>What inclusive design is</h2><p>Inclusive design considers the <b>full range of human diversity</b>: ability, language, culture, age, gender and more. Microsoft\u2019s <b>persona spectrum</b> shows that a mismatch can be <b>permanent</b>, <b>temporary</b> or <b>situational</b>, so designing for one end helps many. Their motto: solve for one, extend to many.</p>`],
+['in-explore','The spectrum',`<h2>The persona spectrum</h2><div class='panel'>${chipsHtml('inc',Object.keys(SPEC).map(function(k){return [k,SPEC[k][0]];}),'touch','Ability')}<div id='ino' style='margin-top:14px' aria-live='polite'></div></div>`],
+['in-use','Use it well',`<h2>Practising inclusive design</h2><ul class='tk'><li><b>Recognise exclusion.</b> Ask who is left out.</li><li><b>Learn from people at the edges.</b></li><li><b>Offer choices:</b> text size, themes, input methods.</li></ul>`],
+['in-check','Quick check',quick([['What are the three kinds of mismatch?','Permanent, temporary and situational.'],['What does \u201csolve for one, extend to many\u201d mean?','Designing for one person\u2019s need usually helps many others.'],['What should you ask?','Who is being left out?']])],
+['in-recap','Big ideas',bigideas(['Inclusive design covers human diversity.','Permanent, temporary and situational needs overlap.','Solve for one, extend to many.'])]
+]);
+
+var L_MENTAL=shell('Mental models','The ideas people carry about how things work.','mental',[
+['mm-what','What they are',`<h2>What mental models are</h2><p>A mental model is a person\u2019s <b>belief about how something works</b>, built from past experience. When an interface matches it, things feel obvious. When it breaks it, people are surprised and make mistakes. Designers cannot change mental models quickly, so they should design to match them.</p>`],
+['mm-explore','Press the button',`<h2>Press the button</h2><p>Most people expect \u201cDelete account\u201d to ask for confirmation. Try each version.</p><div class='panel'>${chipsHtml('mmc',[['match','Matches expectation'],['break','Breaks expectation']],'match','Version')}<div id='mmo' style='margin-top:14px;max-width:340px'></div><p class='mood' id='mmn' aria-live='polite'></p></div>`],
+['mm-use','Use it well',`<h2>Working with mental models</h2><ul class='tk'><li><b>Ask people how they think it works,</b> and draw it.</li><li><b>Use familiar terms and patterns.</b></li><li><b>If you must break a model,</b> teach people.</li></ul>`],
+['mm-check','Quick check',quick([['What is a mental model?','A person\u2019s belief about how something works.'],['Why match them?','Interfaces that fit them feel obvious.'],['What if you must break one?','Teach people the new way.']])],
+['mm-recap','Big ideas',bigideas(['Mental models come from experience.','Match them where you can.','Teach when you cannot.'])]
+]);
+
+var L_CONTENT=shell('Content hierarchy','Ordering information by importance.','content',[
+['ch-what','What it is',`<h2>What content hierarchy is</h2><p>Content hierarchy orders information so people see <b>what matters most first</b>. Journalists call the classic approach the <b>inverted pyramid</b>: the most important facts at the top, supporting detail beneath, background last. Readers who stop early still get the point.</p>`],
+['ch-explore','What a skimmer reads',`<h2>What a skimmer reads</h2><div class='panel'>${chipsHtml('chc',[['pyr','Inverted pyramid'],['bury','Buried lead']],'pyr','Structure')}${chipsHtml('chs',[['all','Whole article'],['skim','What a skimmer sees']],'all','View')}<div id='cho' style='margin-top:14px;max-width:460px'></div></div>`],
+['ch-use','Use it well',`<h2>Ordering content well</h2><ul class='tk'><li><b>Lead with the answer.</b></li><li><b>Use headings and summaries</b> so people can scan.</li><li><b>Put background and extras last.</b></li></ul>`],
+['ch-check','Quick check',quick([['What is the inverted pyramid?','Most important information first, then detail, then background.'],['Why lead with the answer?','People who stop early still get the point.'],['Where does background go?','At the end.']])],
+['ch-recap','Big ideas',bigideas(['Order content by importance.','Lead with the answer.','Support scanning with headings and summaries.'])]
+]);
+
+/* ===== lessons: Getting things done ===== */
+var TASKD=[[1,42,0],[1,55,1],[0,120,3],[1,38,0],[1,61,1],[0,90,2],[1,47,0],[1,52,1],[1,70,0],[1,44,0]];
+var L_TASK=shell('Task completion','Whether people finish what they came to do.','task',[
+['tc-what','What it is',`<h2>What task completion is</h2><p>Task completion measures whether people <b>manage to finish</b> what they came to do. It is one of the most useful usability measures, because it is simple. The common metrics are <b>completion rate</b> (what percentage finish), <b>time on task</b> and <b>error rate</b>.</p>`],
+['tc-explore','Read the results',`<h2>Read the results</h2><p>Ten people tried to book an appointment. Here are their results.</p><div class='panel'><div id='tco'></div>${chipsHtml('tcc',[['rate','Completion rate'],['time','Time on task'],['err','Errors']],'rate','Metric')}<div id='tcm' style='margin-top:8px' aria-live='polite'></div></div>`],
+['tc-use','Use it well',`<h2>Measuring completion well</h2><ul class='tk'><li><b>Define success clearly</b> before testing.</li><li><b>Use realistic tasks,</b> not \u201cclick the button\u201d.</li><li><b>Look at why failures happened,</b> not only the percentage.</li></ul>`],
+['tc-check','Quick check',quick([['How do you calculate completion rate?','People who finished divided by people who tried, as a percentage.'],['What other measures matter?','Time on task and errors.'],['Why look at failures?','They show what to fix.']])],
+['tc-recap','Big ideas',bigideas(['Completion is a simple, powerful measure.','Define success first.','Investigate failures.'])]
+]);
+
+var L_CONV=shell('Conversion paths','The routes people take towards a goal.','conversion',[
+['cv-what','What they are',`<h2>What conversion paths are</h2><p>A conversion is a person completing a <b>goal</b>, such as buying or signing up. The path is the series of steps they take, usually shown as a <b>funnel</b>: lots of visitors at the top, fewer at each stage. Looking at each stage shows <b>where the biggest leak is</b>.</p>`],
+['cv-explore','Find the leak',`<h2>Find the leak</h2><p>Set the share of people who continue at each stage.</p><div class='panel'>${rng('cv1','Visit to product page (%)',5,100,60)}${rng('cv2','Product page to basket (%)',5,100,25)}${rng('cv3','Basket to checkout (%)',5,100,60)}${rng('cv4','Checkout to paid (%)',5,100,70)}<div id='cvo' style='margin-top:14px'></div><p class='mood' id='cvn' aria-live='polite'></p></div>`],
+['cv-use','Use it well',`<h2>Improving conversion paths</h2><ul class='tk'><li><b>Fix the biggest leak first.</b></li><li><b>Shorten the path.</b> Remove steps.</li><li><b>Understand why,</b> using research as well as numbers.</li></ul>`],
+['cv-check','Quick check',quick([['What is a funnel?','A chart of how many people remain at each step towards a goal.'],['Where do you start improving?','At the biggest leak.'],['What do numbers not tell you?','Why people leave.']])],
+['cv-recap','Big ideas',bigideas(['Conversion paths are funnels.','Find and fix the biggest leak.','Pair numbers with research.'])]
+]);
+
+var L_SCENT=shell('Information scent','Cues that tell people where a link leads.','scent',[
+['is-what','What it is',`<h2>What information scent is</h2><p>People browse like animals foraging for food: they follow the <b>strongest scent</b>. Information scent is how well a link, label or heading <b>signals what is behind it</b>. Strong scent means people confidently click. Weak scent means they hesitate, guess wrong or leave. The idea comes from information foraging theory (Pirolli and Card).</p>`],
+['is-explore','Smell the labels',`<h2>Smell the labels</h2><p>Task: <b>find out how much a plan costs</b>. The bars show how strongly each label signals the answer.</p><div class='panel'>${chipsHtml('isc',[['vague','Vague labels'],['clear','Clear labels']],'vague','Labels')}<div id='iso' style='margin-top:14px'></div><p class='mood' id='isn' aria-live='polite'></p></div>`],
+['is-use','Use it well',`<h2>Strengthening scent</h2><ul class='tk'><li><b>Use the user\u2019s words</b> in labels and headings.</li><li><b>Make link text specific:</b> \u201cView pricing\u201d, not \u201cClick here\u201d.</li><li><b>Test with a first-click test:</b> where do people click first?</li></ul>`],
+['is-check','Quick check',quick([['What is information scent?','How well a link signals what is behind it.'],['What does weak scent cause?','Hesitation, wrong clicks and abandonment.'],['What is a first-click test?','Asking where people would click first to do a task.']])],
+['is-recap','Big ideas',bigideas(['People follow the strongest scent.','Use clear, specific, familiar words.','Test with first clicks.'])]
+]);
+
+var FRIC=[['account',3,'Forced to create an account'],['long',2,'A very long form'],['fees',3,'Surprise fees at the last step'],['captcha',1,'A puzzle to prove you are human'],['coupon',1,'A huge \u201cpromo code\u201d box that makes people leave to search for one']];
+var L_FRICTION=shell('Friction','Anything that makes a task harder.','friction',[
+['fr-what','What it is',`<h2>What friction is</h2><p>Friction is <b>anything that slows people or makes them work harder</b>: extra steps, confusing wording, forced sign-ups, slow loading. Reducing it usually helps. But <b>good friction</b> exists: a confirmation before deleting something is friction on purpose, to prevent mistakes.</p>`],
+['fr-explore','Add friction',`<h2>Add some friction to a checkout</h2><div class='panel'>${togg('frt',FRIC.map(function(f){return [f[0],f[2]];}),{})}<div id='fro' style='margin-top:14px'></div><p class='mood' id='frn' aria-live='polite'></p></div>`],
+['fr-use','Use it well',`<h2>Managing friction</h2><ul class='tk'><li><b>Remove needless steps.</b></li><li><b>Keep friction where it protects people,</b> such as confirming irreversible actions.</li><li><b>Watch where people hesitate</b> in testing.</li></ul>`],
+['fr-check','Quick check',quick([['What is friction?','Anything that makes a task harder or slower.'],['What is good friction?','Friction on purpose, such as a delete confirmation.'],['How do you find friction?','Watch where people hesitate.']])],
+['fr-recap','Big ideas',bigideas(['Friction slows people down.','Remove the needless kind.','Keep protective friction.'])]
+]);
+
+var UXW={button:['Button','Submit','Send message','The new label says what will happen.'],error:['Error message','Error 403','You do not have access to this page. Ask the owner to invite you.','The new message says what happened and what to do.'],empty:['Empty state','No data','No orders yet. When you place one, it will appear here.','The new text explains and reassures.'],confirm:['Confirmation','Operation successful','Your message has been sent to Ada.','The new text is specific.']};
+var L_UXW=shell('UX writing','The words in an interface.','writing',[
+['wr-what','What it is',`<h2>What UX writing is</h2><p>UX writing is the craft of the <b>words in an interface</b>: buttons, labels, error messages, empty states, instructions. Clear words are part of usability. Good UX writing is <b>clear, concise and useful</b>, and sounds like a helpful person.</p>`],
+['wr-explore','Rewrite the words',`<h2>Rewrite the words</h2><div class='panel'>${chipsHtml('wrc',Object.keys(UXW).map(function(k){return [k,UXW[k][0]];}),'button','Where')}${chipsHtml('wrb',[['before','Before'],['after','After']],'after','Copy')}<div id='wro' style='margin-top:14px'></div><p class='mood' id='wrn' aria-live='polite'></p></div>`],
+['wr-use','Use it well',`<h2>Writing for interfaces</h2><ul class='tk'><li><b>Use plain words,</b> not jargon.</li><li><b>Start buttons with a verb.</b></li><li><b>For errors, say what happened and how to fix it.</b></li><li><b>Read it aloud.</b></li></ul>`],
+['wr-check','Quick check',quick([['What should a button label do?','Say what will happen, starting with a verb.'],['What should an error message say?','What happened and how to fix it.'],['How can you test copy?','Read it aloud.']])],
+['wr-recap','Big ideas',bigideas(['UX writing is part of usability.','Be clear, concise and useful.','Plain words and verbs on buttons.'])]
+]);
+
+/* ===== lessons: Testing and improving ===== */
+var L_UTEST=shell('User testing','Watching real people use a design.','testing',[
+['ut-what','What it is',`<h2>What user testing is</h2><p>In a usability test, you ask people to <b>attempt realistic tasks</b> with a design while you watch. It reveals problems that no amount of internal debate can. Nielsen and Landauer\u2019s classic 1993 finding was that <b>about five users find around 85% of the problems</b>, so several small rounds beat one big one.</p>`],
+['ut-explore','How many users?',`<h2>How many users do you need?</h2><p>The curve uses the classic model with an average of 31% of problems found per user. Real projects vary.</p><div class='panel'>${rng('utn','Number of users',1,15,5)}<div class='stage' id='uts' style='margin-top:6px'></div><p class='mood' id='utm' aria-live='polite'></p></div>`],
+['ut-use','Use it well',`<h2>Running tests well</h2><ul class='tk'><li><b>Test early with rough prototypes.</b></li><li><b>Give tasks, not instructions,</b> and stay quiet.</li><li><b>Fix, then test again.</b></li></ul>`],
+['ut-check','Quick check',quick([['How many users find most problems?','About five find around 85%, in the classic model.'],['Why several small rounds?','You can fix problems and test again.'],['What should you do while people use it?','Watch and stay quiet.']])],
+['ut-recap','Big ideas',bigideas(['Watch real people attempt real tasks.','Five users reveal most problems in a round.','Test, fix, repeat.'])]
+]);
+
+var L_AB=shell('A/B testing','Comparing two versions with real traffic.','ab',[
+['ab-what','What it is',`<h2>What A/B testing is</h2><p>In an A/B test, half your visitors see <b>version A</b> and half see <b>version B</b>, and you compare a measure such as sign-ups. It tells you <b>which performs better</b>, but not <b>why</b>. Small differences need a lot of data to be trusted: early results are often just chance.</p>`],
+['ab-explore','Run a simulated test',`<h2>Run a simulated test</h2><p>Version B really does convert a little better, but the page does not know that yet. Add visitors and watch how the result settles.</p><div class='panel'><div class='ctrls'><button class='btn' id='abr' type='button'>Add 50 visitors</button><button class='btn' id='abm' type='button'>Add 500 visitors</button><button class='btn' id='abx' type='button'>Reset</button></div><div id='abo' style='margin-top:10px'></div><p class='mood' id='abn' aria-live='polite'></p></div>`],
+['ab-use','Use it well',`<h2>Testing well</h2><ul class='tk'><li><b>Decide the sample size before you start,</b> and do not stop early when you like the result.</li><li><b>Change one thing at a time.</b></li><li><b>Pair it with research</b> to learn why.</li></ul>`],
+['ab-check','Quick check',quick([['What does an A/B test tell you?','Which version performs better, but not why.'],['Why not stop early?','Early results are often chance.'],['Why change one thing at a time?','Otherwise you cannot tell which change mattered.']])],
+['ab-recap','Big ideas',bigideas(['A/B tests compare two versions with real users.','They need enough data.','They show what, not why.'])]
+]);
+
+var HEUR=[['H1','Visibility of system status','Keep people informed about what is happening.','After pressing Save, nothing shows that it worked.','Show a message such as \u201cSaved\u201d.'],['H2','Match between system and the real world','Speak the users\u2019 language.','The button says \u201cInitiate transmission\u201d.','Use plain words: \u201cSend\u201d.'],['H3','User control and freedom','Give people a clear way out and an undo.','Deleting a file has no undo.','Add Undo or a confirmation.'],['H4','Consistency and standards','Follow conventions and be consistent.','Save is a round green button; Cancel is a square red link.','Style similar controls the same way.']];
+var L_HEUR=shell('Heuristic evaluation','Experts reviewing a design against usability rules.','heuristic',[
+['he-what','What it is',`<h2>What heuristic evaluation is</h2><p>In a heuristic evaluation, a few experts <b>inspect a design against established rules of thumb</b>, usually Jakob Nielsen\u2019s <b>ten usability heuristics</b>, and list the problems they find. It is fast and cheap, and good before user testing, but it finds expert-spotted problems, not what real users do.</p><p>The ten: visibility of system status; match with the real world; user control and freedom; consistency and standards; error prevention; recognition rather than recall; flexibility and efficiency; aesthetic and minimalist design; help users recover from errors; help and documentation.</p>`],
+['he-explore','Find the problems',`<h2>Find the problems</h2><p>This screen has four problems. Pick one to see which heuristic it breaks.</p><div class='panel'>${chipsHtml('hec',HEUR.map(function(h,i){return [String(i),'Problem '+(i+1)];}),'0','Problem')}<div class='wheelrow' style='margin-top:14px'><div id='heo'></div><div id='hen' class='readout' aria-live='polite'></div></div></div>`],
+['he-use','Use it well',`<h2>Evaluating well</h2><ul class='tk'><li><b>Use several evaluators.</b> One person finds only a fraction of the problems.</li><li><b>Rate severity</b> for each problem.</li><li><b>Follow up with user testing.</b></li></ul>`],
+['he-check','Quick check',quick([['Who created the ten heuristics?','Jakob Nielsen.'],['Why use several evaluators?','One person finds only a fraction of the problems.'],['What is a limit of heuristic evaluation?','It reflects expert opinion, not real user behaviour.']])],
+['he-recap','Big ideas',bigideas(['Experts inspect against ten heuristics.','Fast and cheap, but not a substitute for users.','Use several evaluators and rate severity.'])]
+]);
+
+/* ===== lessons: Influence and ethics ===== */
+var BEH={default:['Defaults','People tend to stick with the pre-selected option.','Fair use: pre-select the option that is genuinely best for most people.'],social:['Social proof','People look to what others do.','Fair use: show real numbers and real reviews.'],anchor:['Anchoring','The first number we see shapes how we judge others.','Fair use: show the real original price, not an invented one.']};
+var L_BEHAV=shell('Behavioural design','Using insights about human behaviour.','behaviour',[
+['bd-what','What it is',`<h2>What behavioural design is</h2><p>Behavioural design applies findings from psychology and behavioural economics to <b>shape the choices people make</b>. People are not purely rational: we follow <b>defaults</b>, copy others (<b>social proof</b>) and are swayed by the first number we see (<b>anchoring</b>). These tendencies can help people (for example, defaulting to saving for retirement) or be abused.</p>`],
+['bd-explore','See three effects',`<h2>See three effects</h2><div class='panel'>${chipsHtml('bdc',Object.keys(BEH).map(function(k){return [k,BEH[k][0]];}),'default','Effect')}<div id='bdo' style='margin-top:14px;max-width:380px'></div><p class='mood' id='bdn' aria-live='polite'></p></div>`],
+['bd-use','Use it well',`<h2>Using behavioural insight responsibly</h2><ul class='tk'><li><b>Ask whether it helps the person,</b> as well as the business.</li><li><b>Be honest:</b> real numbers, real prices.</li><li><b>Make opting out easy.</b></li></ul>`],
+['bd-check','Quick check',quick([['What is a default?','The option that is pre-selected, which many people keep.'],['What is social proof?','People looking to what others do.'],['What is the ethical test?','Does it help the person, and is it honest?']])],
+['bd-recap','Big ideas',bigideas(['People are not purely rational.','Defaults, social proof and anchoring shape choices.','Use them to help, honestly.'])]
+]);
+
+var TRUST=[['reviews','Genuine reviews'],['secure','Security badge and padlock'],['returns','Clear returns policy'],['contact','Contact details and a phone number'],['photos','Real photos of real products']];
+var L_TRUSTS=shell('Trust signals','Cues that reassure people.','trust',[
+['ts-what','What they are',`<h2>What trust signals are</h2><p>Trust signals are the cues that tell people a product is <b>safe, honest and competent</b>: genuine reviews, secure-payment indicators, clear returns policies, real contact details, professional design. They matter most when people are about to hand over money or personal information.</p>`],
+['ts-explore','Build trust',`<h2>Build trust at checkout</h2><div class='panel'>${togg('tst',TRUST.map(function(t){return [t[0],t[1]];}),{})}<div id='tso' style='margin-top:14px'></div><p class='mood' id='tsn' aria-live='polite'></p></div>`],
+['ts-use','Use it well',`<h2>Earning trust</h2><ul class='tk'><li><b>Be real.</b> Fake reviews and invented badges destroy trust and break laws.</li><li><b>Be clear about money and data.</b></li><li><b>Be reachable.</b></li></ul>`],
+['ts-check','Quick check',quick([['What are trust signals?','Cues that show a product is safe and honest.'],['When do they matter most?','When people hand over money or personal information.'],['Why avoid fake reviews?','They destroy trust and can be illegal.']])],
+['ts-recap','Big ideas',bigideas(['Trust signals reassure.','They must be real.','Be clear about money, data and contact.'])]
+]);
+
+var L_PERSUADE=shell('Persuasive design','Designing to encourage a behaviour.','persuade',[
+['pd-what','What it is',`<h2>What persuasive design is</h2><p>Persuasive design aims to <b>encourage a particular behaviour</b>. B.J. Fogg\u2019s <b>Behaviour Model</b> says a behaviour happens when three things meet: <b>motivation</b>, <b>ability</b> and a <b>prompt</b> (B = MAP). If a task is hard, you need strong motivation. If motivation is low, make the task very easy.</p>`],
+['pd-explore','Try the model',`<h2>Try the behaviour model</h2><div class='panel'>${rng('pdm','Motivation (1 to 10)',1,10,6)}${rng('pda','Ability, meaning how easy it is (1 to 10)',1,10,3)}${chipsHtml('pdp',[['no','No prompt'],['yes','Prompt present']],'no','Prompt')}<div class='stage' id='pds' style='margin-top:6px'></div><p class='mood' id='pdn' aria-live='polite'></p></div>`],
+['pd-use','Use it well',`<h2>Persuading responsibly</h2><ul class='tk'><li><b>Make the action easy</b> before trying to raise motivation.</li><li><b>Prompt at the right moment.</b></li><li><b>Persuade towards what people want,</b> not against their interests.</li></ul>`],
+['pd-check','Quick check',quick([['What does B = MAP stand for?','Behaviour happens with Motivation, Ability and a Prompt.'],['What if motivation is low?','Make the action very easy.'],['What is the responsible goal?','Help people do what they want to do.']])],
+['pd-recap','Big ideas',bigideas(['Behaviour needs motivation, ability and a prompt.','Make it easy first.','Persuade honestly.'])]
+]);
+
+var DARK={shame:['Confirmshaming','Guilt-tripping the decline option.','No thanks, I hate saving money','No thanks'],fees:['Hidden costs','Adding fees at the last step.','Total 48 pounds (plus 14 pounds of fees found at the end)','Total 62 pounds, all fees included'],roach:['Roach motel','Easy to get in, hard to get out.','Sign up in one tap. To cancel: call us during office hours.','Cancel anytime in two taps'],force:['Forced continuity','Free trial that silently becomes a charge.','Free trial. (Small print: 19 pounds a month, no reminder)','Free trial. We will remind you 3 days before charging.']};
+var L_DARK=shell('Dark patterns','Tricks that push people into bad choices.','dark',[
+['dp-what','What they are',`<h2>What dark patterns are</h2><p>Dark patterns are interface tricks that <b>push people into choices that benefit the business at the person\u2019s expense</b>. Harry Brignull coined the term in 2010. Examples: guilt-tripping wording (<b>confirmshaming</b>), <b>hidden costs</b>, subscriptions that are easy to start and hard to cancel (<b>roach motel</b>) and free trials that quietly start charging. Several laws and regulators now target them.</p>`],
+['dp-explore','Spot the trick',`<h2>Spot the trick</h2><div class='panel'>${chipsHtml('dpc',Object.keys(DARK).map(function(k){return [k,DARK[k][0]];}),'shame','Pattern')}${chipsHtml('dpf',[['dark','The dark version'],['fair','The fair version']],'dark','Version')}<div id='dpo' style='margin-top:14px;max-width:420px'></div><p class='mood' id='dpn' aria-live='polite'></p></div>`],
+['dp-use','Avoid them',`<h2>Avoiding dark patterns</h2><ul class='tk'><li><b>Make declining as easy as accepting.</b></li><li><b>Show the full price early.</b></li><li><b>Let people cancel the way they signed up.</b></li><li><b>Ask: would I be comfortable explaining this to the user?</b></li></ul>`],
+['dp-check','Quick check',quick([['What is confirmshaming?','Wording that guilt-trips people into not declining.'],['Who coined the term dark patterns?','Harry Brignull.'],['What is a roach motel?','Easy to enter, hard to leave.']])],
+['dp-recap','Big ideas',bigideas(['Dark patterns trick people against their interests.','They are increasingly regulated.','Make declining and cancelling easy.'])]
+]);
+
+var ETHQ=[['explain','I could explain this design to the user without embarrassment'],['benefit','It benefits the person, not only the business'],['optout','Opting out is as easy as opting in'],['honest','Everything it claims is true'],['vulnerable','It would still be fair to someone tired, young or stressed'],['data','It collects only the data it truly needs']];
+var L_ETHICAL=shell('Ethical design','Respecting people\u2019s interests and wellbeing.','ethical',[
+['ed-what','What it is',`<h2>What ethical design is</h2><p>Ethical design means respecting people\u2019s <b>autonomy, privacy, attention and wellbeing</b>. Designers hold real power over what millions of people see and do. Ethical designers ask not only \u201ccan we?\u201d but \u201c<b>should we?</b>\u201d, and consider who is harmed, who is excluded and what happens at scale.</p>`],
+['ed-explore','Run an ethics check',`<h2>Run an ethics check</h2><p>Tick every statement that is true of a design you are working on.</p><div class='panel'>${togg('edt',ETHQ.map(function(q){return [q[0],q[1]];}),{})}<div id='edo' style='margin-top:14px' aria-live='polite'></div></div>`],
+['ed-use','Use it well',`<h2>Practising ethical design</h2><ul class='tk'><li><b>Raise concerns early,</b> when changes are cheap.</li><li><b>Consider the most vulnerable user.</b></li><li><b>Measure wellbeing,</b> not just engagement.</li><li><b>Know your limits.</b> It is fine to say no.</li></ul>`],
+['ed-check','Quick check',quick([['What does ethical design respect?','Autonomy, privacy, attention and wellbeing.'],['What question goes beyond \u201ccan we\u201d?','Should we?'],['When should concerns be raised?','Early, when changes are cheap.']])],
+['ed-recap','Big ideas',bigideas(['Designers hold real power.','Ask whether you should, not only whether you can.','Consider the most vulnerable user.'])]
+]);
+
+/* ===== inits: Understanding users ===== */
+function initResearchL(root){
+  var m=prep(root),$=m.$;
+  function draw(k){
+    var h=`<rect x='20' y='14' width='240' height='200' fill='#fff' stroke='#9AA0BC'/><line x1='140' y1='14' x2='140' y2='214' stroke='#C9CEE0' stroke-dasharray='4 4'/><line x1='20' y1='114' x2='260' y2='114' stroke='#C9CEE0' stroke-dasharray='4 4'/><g font-family='sans-serif' font-size='10' fill='#5A6180' font-weight='700'><text x='24' y='228'>What people say</text><text x='256' y='228' text-anchor='end'>What people do</text><text x='24' y='26'>How many</text><text x='24' y='210'>Why</text></g>`;
+    RESM.forEach(function(r){var x=20+r[5]*240,y=14+(1-r[6])*200,on=r[0]===k;h+=`<circle cx='${x}' cy='${y}' r='${on?13:9}' fill='${on?'var(--c)':'#9AA0BC'}' stroke='#fff' stroke-width='2'/><text x='${x}' y='${y-16}' text-anchor='middle' font-size='10' font-weight='700' font-family='sans-serif' fill='var(--ink)'>${r[1]}</text>`;});
+    $('#res').innerHTML=`<svg viewBox='0 0 280 236' width='100%' style='max-width:340px' role='img' aria-label='Research methods placed on two dimensions'>${h}</svg>`;
+    var r=RESM.filter(function(x){return x[0]===k;})[0];
+    $('#reo').innerHTML=`<h4>${r[1]}</h4><div class='facts'><p><b>Type:</b> ${r[2]}</p><p><b>What it is:</b> ${r[3]}</p><p><b>Use it:</b> ${r[4]}</p></div>`;
+  }
+  bindChips(root,'rec',draw);draw('int');
+}
+
+function initPersonaL(root){
+  var m=prep(root),$=m.$,nm='Maya',age=34,g='time',f='slow',t=4;
+  var G={time:'save time',money:'save money',sure:'feel confident about her choices'},F={slow:'slow apps that waste her time',cost:'costs she only discovers at the end',jargon:'confusing jargon'};
+  var T=['Finds technology daunting.','Uses technology when she must.','Comfortable with everyday apps.','Confident and quick with new apps.','An enthusiastic power user.'];
+  function draw(){
+    var n=(nm||'Maya').replace(/</g,'');
+    $('#peo').innerHTML=boxw(`<div style='display:flex;gap:14px;align-items:center;margin-bottom:10px'><div style='width:56px;height:56px;border-radius:50%;background:var(--c);color:#fff;display:grid;place-items:center;font-weight:800;font-size:1.4rem'>${n.charAt(0).toUpperCase()}</div><div><div style='font-weight:800;font-size:1.2rem'>${n}, ${age}</div><div style='color:#4A5070;font-size:.85rem'>Persona</div></div></div><p style='margin:0 0 6px'><b>Goal:</b> wants to ${G[g]}.</p><p style='margin:0 0 6px'><b>Frustration:</b> ${F[f]}.</p><p style='margin:0'><b>Technology:</b> ${T[t-1]}</p>`);
+  }
+  $('#pen').addEventListener('input',function(e){nm=e.target.value;draw();});
+  onRng(root,'pea',function(v){age=v;draw();});bindChips(root,'peg',function(v){g=v;draw();});bindChips(root,'pef',function(v){f=v;draw();});onRng(root,'pet',function(v){t=v;draw();});draw();
+}
+
+function initScenarioL(root){
+  var m=prep(root),$=m.$,p='commuter',c='rush';
+  function draw(){$('#sco').innerHTML=boxw(`<p style='margin:0 0 8px'><b>Scenario:</b> ${SCEN[p][1]} ${SCEN[p][2]} ${CTX[c][0]}</p><p style='margin:0'><b>Design questions:</b> ${CTX[c][1]}</p>`);}
+  bindChips(root,'scp',function(v){p=v;draw();});bindChips(root,'scx',function(v){c=v;draw();});draw();
+}
+
+function initJourneyL(root){
+  var m=prep(root),$=m.$;
+  function draw(k){
+    var i=parseInt(k,10),pts=JSTAGES.map(function(s,j){return [30+j*65,100-(s[4]-1)*20];}),h=`<polyline points='${pts.map(function(p){return p.join(',');}).join(' ')}' fill='none' stroke='#9AA0BC' stroke-width='3'/>`;
+    pts.forEach(function(p,j){var on=j===i;h+=`<circle cx='${p[0]}' cy='${p[1]}' r='${on?10:6}' fill='${on?'var(--c)':'#9AA0BC'}' stroke='#fff' stroke-width='2'/><text x='${p[0]}' y='118' text-anchor='middle' font-size='10' font-weight='700' font-family='sans-serif' fill='var(--ink)'>${JSTAGES[j][0]}</text>`;});
+    h+=`<text x='4' y='24' font-size='9' fill='#1F7A46' font-family='sans-serif'>Happy</text><text x='4' y='98' font-size='9' fill='#B01E2D' font-family='sans-serif'>Unhappy</text>`;
+    $('#jos').innerHTML=`<svg viewBox='0 0 350 126' width='100%' style='max-width:460px' role='img' aria-label='Emotion line across five journey stages'>${h}</svg>`;
+    var s=JSTAGES[i];
+    $('#joo').innerHTML=`<div class='facts' style='margin-top:10px'><p><b>${s[0]}.</b> Touchpoints: ${s[1]}.</p><p><b>Thinking:</b> ${s[2]}</p><p><b>Pain point:</b> ${s[3]}</p><p><b>Opportunity:</b> ${s[4]<=2?'This is a low point, so it is the best place to improve.':'A reasonable moment. Look for small gains.'}</p></div>`;
+  }
+  bindChips(root,'joc',draw);draw('2');
+}
+
+function initUXFlowL(root){
+  var m=prep(root),$=m.$,on={email:1,pass:1};
+  function draw(){
+    var keys=FSTEPS.filter(function(s){return on[s[0]];}),pct=100,h='';
+    keys.forEach(function(s){pct=pct*0.9;h+=bar(s[1],Math.round(pct),'var(--c)');});
+    if(!keys.length){h=`<p class='mood'>No steps. Switch some on.</p>`;}
+    $('#flo').innerHTML=h;
+    $('#fln').textContent=keys.length+' step'+(keys.length===1?'':'s')+': about '+Math.round(pct)+'% would finish in this illustrative model. '+(keys.length>=5?'Long flows lose many people. Which steps could wait until later?':'Fewer steps keep more people.');
+  }
+  bindTogg(root,'flt',on,draw);draw();
+}
+
+function initJTBDL(root){
+  var m=prep(root),$=m.$;
+  function draw(k){var j=JOBS[k];$('#jbo').innerHTML=`<div class='callout' style='margin:0'><p><b>Job:</b> ${j[1]}</p></div><p class='mood'>${j[2]}</p>`;}
+  bindChips(root,'jbc',draw);draw('commute');
+}
+
+function initPainL(root){
+  var m=prep(root),$=m.$,sev=4,fr=4;
+  function draw(){
+    var h=`<rect x='30' y='10' width='100' height='100' fill='#FFF4D6'/><rect x='130' y='10' width='100' height='100' fill='#FDE6E8'/><rect x='30' y='110' width='100' height='100' fill='#F1F3FA'/><rect x='130' y='110' width='100' height='100' fill='#E3F4EA'/><g font-family='sans-serif' font-size='10' font-weight='700' fill='#14213D'><text x='36' y='26'>Plan a fix</text><text x='136' y='26'>Fix now</text><text x='36' y='204'>Monitor</text><text x='136' y='204'>Quick win</text></g><text x='130' y='226' text-anchor='middle' font-size='10' font-family='sans-serif' fill='#5A6180'>How often it happens</text><text x='10' y='110' text-anchor='middle' font-size='10' font-family='sans-serif' fill='#5A6180' transform='rotate(-90 10 110)'>Severity</text><circle cx='${30+(fr-0.5)*40}' cy='${210-(sev-0.5)*40}' r='11' fill='#E8456B' stroke='#fff' stroke-width='3'/>`;
+    $('#pas').innerHTML=`<svg viewBox='0 0 240 232' width='260' role='img' aria-label='Pain point placed on a severity and frequency grid'>${h}</svg>`;
+    var hi=sev>=4,fq=fr>=4;
+    $('#pan').textContent=hi&&fq?'Fix now: severe and frequent. This is top priority.':hi?'Plan a proper fix: severe, but it affects fewer people.':fq?'Quick win: frequent but mild. Cheap fixes pay off a lot.':'Monitor: mild and rare. Keep an eye on it.';
+  }
+  onRng(root,'pai',function(v){sev=v;draw();});onRng(root,'paf',function(v){fr=v;draw();});draw();
+}
+
+/* ===== inits: Designing for people ===== */
+function initHCDL(root){
+  var m=prep(root),$=m.$;
+  function draw(k){
+    var s=HCDV[k],h='';
+    if(k==='designer'){h=`<div style='background:#12182E;color:#7A809C;border-radius:16px;padding:18px;text-align:center'><div style='font-size:3rem;font-weight:200;letter-spacing:.1em;color:#3A4270'>7:30</div><div style='display:flex;justify-content:center;gap:20px;margin-top:10px;font-size:1.4rem'><span>\u25D0</span><span>\u2736</span><span>\u25CC</span></div></div>`;}
+    if(k==='business'){h=`<div style='background:#fff;color:#14213D;border-radius:16px;padding:14px;text-align:center'><div style='background:linear-gradient(90deg,#E8456B,#F5B82E);color:#fff;font-weight:800;border-radius:10px;padding:8px'>GO PREMIUM: 50% OFF TODAY!</div><div style='font-size:1.1rem;margin:10px 0 4px'>7:30</div><div style='background:#2F6FD8;color:#fff;border-radius:10px;padding:8px;font-weight:700;margin-bottom:6px'>Unlock all alarms</div><div style='font-size:.65rem;color:#9AA0BC'>No thanks, I like waking up late</div></div>`;}
+    if(k==='human'){h=`<div style='background:#fff;color:#14213D;border-radius:16px;padding:16px;text-align:center'><div style='font-size:3rem;font-weight:800'>7:30</div><div style='color:#4A5070;margin-bottom:10px'>Weekdays</div><div style='display:flex;gap:8px;justify-content:center'><span style='background:#2F6FD8;color:#fff;border-radius:999px;padding:10px 22px;font-weight:700'>Save alarm</span><span style='border:2px solid #9AA0BC;border-radius:999px;padding:8px 18px;font-weight:700'>Cancel</span></div></div>`;}
+    $('#hco').innerHTML=h;$('#hcn').textContent=s[1]+' '+s[2];
+  }
+  bindChips(root,'hcc',draw);draw('human');
+}
+
+function initUsabilityL(root){
+  var m=prep(root),$=m.$,k='messy',t0=0,running=false,best={messy:null,clear:null},errors=0;
+  var now=function(){return (window.performance&&performance.now)?performance.now():Date.now();};
+  var L=['Save draft','Share link','Print','Export CSV','Add note','Reports','Pay now','Settings','Archive','Invite','Help','Preview'];
+  function draw(){
+    var h='';
+    if(!running){h=`<div style='padding:30px;text-align:center;color:#5A6180'>Press Start the task, then find <b>Pay now</b>.</div>`;}
+    else if(k==='messy'){h=`<div style='display:grid;grid-template-columns:repeat(4,1fr);gap:6px'>`+L.map(function(l){return `<button type='button' data-b='${l}' style='font:inherit;font-size:.78rem;border:1px solid #9AA0BC;background:#F4F4F4;color:#222;border-radius:4px;padding:8px 2px;cursor:pointer'>${l}</button>`;}).join('')+`</div>`;}
+    else{h=`<div style='text-align:center;padding:10px'><div style='font-weight:800;margin-bottom:10px'>Order total: 48 pounds</div><button type='button' data-b='Pay now' style='font:inherit;font-weight:700;border:0;background:#2F6FD8;color:#fff;border-radius:12px;padding:12px 28px;cursor:pointer'>Pay now</button><div><button type='button' data-b='Settings' style='font:inherit;border:0;background:none;color:#5A6180;margin-top:10px;cursor:pointer'>Settings</button></div></div>`;}
+    $('#uso').innerHTML=boxw(h);
+  }
+  function msg(){var a=best.messy,b=best.clear;$('#usn').textContent=(a!=null?'Cluttered best: '+a.toFixed(2)+' s. ':'')+(b!=null?'Clear best: '+b.toFixed(2)+' s. ':'')+(a==null&&b==null?'Your times will appear here. Try both layouts.':(a!=null&&b!=null?(b<a?'The clear layout was faster: that is usability in numbers.':'Surprisingly, the cluttered one was faster this time. Try again: one run proves little.'):'Now try the other layout and compare.'));}
+  $('#usb').addEventListener('click',function(){running=true;errors=0;t0=now();draw();});
+  $('#uso').addEventListener('click',function(e){var b=e.target.closest('[data-b]');if(!b||!running){return;}if(b.getAttribute('data-b')==='Pay now'){var s=(now()-t0)/1000;running=false;if(best[k]==null||s<best[k]){best[k]=s;}$('#uso').innerHTML=boxw(`<div style='text-align:center;padding:24px'><b style='font-size:1.4rem'>${s.toFixed(2)} seconds</b><div style='color:#4A5070'>${errors} wrong click${errors===1?'':'s'}</div></div>`);msg();}else{errors++;}});
+  bindChips(root,'usc',function(v){k=v;running=false;draw();msg();});draw();msg();
+}
+
+function initAccessL(root){
+  var m=prep(root),$=m.$;
+  function pair(bad,good){return `<div class='cols'><div style='border:2px solid #D62839;border-radius:12px;padding:10px'><b>\u2717 Not this</b><div style='margin-top:6px'>${bad}</div></div><div style='border:2px solid #1F9D55;border-radius:12px;padding:10px'><b>\u2713 This</b><div style='margin-top:6px'>${good}</div></div></div>`;}
+  function draw(k){
+    var h='';
+    if(k==='p'){h=pair(`<div style='background:#fff;color:#BBBBBB;padding:8px;border-radius:8px'>Light grey text on white. Hard to read.</div>`,`<div style='background:#fff;color:#1B1F3B;padding:8px;border-radius:8px'>Dark text on white. Easy to read.</div>`);}
+    if(k==='o'){h=pair(`<span style='display:inline-block;background:#2F6FD8;color:#fff;border-radius:8px;padding:8px 14px;outline:none'>Button (no focus outline)</span>`,`<span style='display:inline-block;background:#2F6FD8;color:#fff;border-radius:8px;padding:8px 14px;outline:3px solid #14213D;outline-offset:3px'>Button (clear focus outline)</span>`);}
+    if(k==='u'){h=pair(`<div style='background:#FDE6E8;color:#B01E2D;padding:8px;border-radius:8px'>Error 0x80</div>`,`<div style='background:#FDE6E8;color:#B01E2D;padding:8px;border-radius:8px'>Enter a date like 12/03/2026.</div>`);}
+    if(k==='r'){h=pair(`<code style='font-size:.8rem'>&lt;div onclick="pay()"&gt;Pay&lt;/div&gt;</code><div style='font-size:.8rem;color:#5A6180;margin-top:4px'>A screen reader does not know it is a button.</div>`,`<code style='font-size:.8rem'>&lt;button&gt;Pay&lt;/button&gt;</code><div style='font-size:.8rem;color:#5A6180;margin-top:4px'>Semantic: keyboard and screen readers just work.</div>`);}
+    $('#aco').innerHTML=`<p><b>${POUR[k][0]}:</b> ${POUR[k][1]}</p>`+boxw(h,'font-size:.9rem');
+  }
+  bindChips(root,'acc',draw);draw('p');
+}
+
+function initInclusiveL(root){
+  var m=prep(root),$=m.$;
+  function draw(k){var s=SPEC[k];$('#ino').innerHTML=`<div class='cols' style='grid-template-columns:repeat(3,1fr)'>`+['Permanent','Temporary','Situational'].map(function(l,i){return `<div style='background:var(--surface);border:2px solid var(--c);border-radius:12px;padding:12px'><b>${l}</b><div style='margin-top:4px'>${s[1][i]}</div></div>`;}).join('')+`</div><p class='mood'>${s[2]}</p>`;}
+  bindChips(root,'inc',draw);draw('touch');
+}
+
+function initMentalL(root){
+  var m=prep(root),$=m.$,k='match',done=false;
+  function draw(){
+    var h=`<div style='background:#fff;color:#14213D;border-radius:14px;padding:16px;font-family:Inter,sans-serif'>`;
+    if(!done){h+=`<div style='margin-bottom:10px'>Account settings</div><button type='button' id='mmb' style='font:inherit;font-weight:700;border:0;background:#D62839;color:#fff;border-radius:10px;padding:10px 18px;cursor:pointer'>Delete account</button>`;}
+    else if(k==='match'){h+=`<div style='font-weight:800;margin-bottom:4px'>Delete your account?</div><div style='color:#4A5070;margin-bottom:10px'>All your data will be removed.</div><div style='display:flex;gap:8px'><button type='button' id='mmr' class='btn'>Cancel</button><button type='button' class='btn' style='background:#D62839;color:#fff;border-color:#D62839'>Delete</button></div>`;}
+    else{h+=`<div style='font-weight:800;color:#B01E2D;margin-bottom:4px'>Account deleted.</div><div style='color:#4A5070;margin-bottom:10px'>Everything is gone. There is no undo.</div><button type='button' id='mmr' class='btn'>Reset the demo</button>`;}
+    $('#mmo').innerHTML=h+'</div>';
+    $('#mmn').textContent=!done?'Press Delete account and see what happens.':(k==='match'?'Matches the mental model: a destructive action asks you to confirm first. People feel safe.':'Breaks the mental model: it deleted instantly, with no warning. People feel betrayed and make costly mistakes.');
+    var b=$('#mmb'),r=$('#mmr');if(b){b.addEventListener('click',function(){done=true;draw();});}if(r){r.addEventListener('click',function(){done=false;draw();});}
+  }
+  bindChips(root,'mmc',function(v){k=v;done=false;draw();});draw();
+}
+
+function initContentL(root){
+  var m=prep(root),$=m.$,st='pyr',vw='all';
+  function draw(){
+    var P=st==='pyr'?[['Council approves new riverside park','h'],['Councillors voted on Tuesday to build a 2 km riverside park, opening next spring.','p'],['The park will include cycle paths, playgrounds and a market square, at a cost of 3 million pounds.','p'],['The idea was first proposed ten years ago, after a flood destroyed the old riverside warehouses.','p']]:[['Riverside park plan wins backing','h'],['Ten years ago a flood destroyed the old riverside warehouses, and local people began asking what should replace them.','p'],['After a decade of meetings and consultations, a plan emerged for cycle paths, playgrounds and a market square.','p'],['On Tuesday councillors voted to build the 2 km park, opening next spring.','p']];
+    var h=P.map(function(x,i){var dim=vw==='skim'&&i>2;var txt=x[0];if(vw==='skim'&&i>0&&i<3){txt=txt.split(' ').slice(0,8).join(' ')+'\u2026';}return x[1]==='h'?`<div style='font-weight:800;font-size:1.2rem;margin-bottom:8px'>${txt}</div>`:`<p style='margin:0 0 8px;opacity:${dim?.15:1}'>${txt}</p>`;}).join('');
+    $('#cho').innerHTML=boxw(h);
+  }
+  bindChips(root,'chc',function(v){st=v;draw();});bindChips(root,'chs',function(v){vw=v;draw();});draw();
+}
+
+/* ===== inits: Getting things done ===== */
+function initTaskL(root){
+  var m=prep(root),$=m.$,k='rate';
+  $('#tco').innerHTML=`<table class='t'><tr><th>User</th><th>Finished?</th><th>Time (s)</th><th>Errors</th></tr>`+TASKD.map(function(r,i){return `<tr><td>User ${i+1}</td><td>${r[0]?'Yes':'No'}</td><td>${r[1]}</td><td>${r[2]}</td></tr>`;}).join('')+`</table>`;
+  function draw(){
+    var done=TASKD.filter(function(r){return r[0];}),rate=done.length/TASKD.length*100,avgT=done.reduce(function(a,r){return a+r[1];},0)/done.length,avgE=TASKD.reduce(function(a,r){return a+r[2];},0)/TASKD.length;
+    $('#tcm').innerHTML={rate:`<div class='callout' style='margin:0'><p><b>Completion rate: ${rate}%.</b> ${done.length} of ${TASKD.length} people finished.</p></div>`,time:`<div class='callout' style='margin:0'><p><b>Average time for those who finished: ${avgT.toFixed(0)} seconds.</b> Failures are left out, since they never finished.</p></div>`,err:`<div class='callout' style='margin:0'><p><b>Average errors: ${avgE.toFixed(1)} per person.</b> The two who failed made the most.</p></div>`}[k];
+  }
+  bindChips(root,'tcc',function(v){k=v;draw();});draw();
+}
+
+function initConvL(root){
+  var m=prep(root),$=m.$,r=[60,25,60,70];
+  var N=['Visit to product page','Product page to basket','Basket to checkout','Checkout to paid'];
+  function draw(){
+    var n=1000,h='',prod=1,i;
+    h+=bar('Visitors',100,'var(--c)');
+    for(i=0;i<4;i++){prod*=r[i]/100;h+=bar(N[i].split(' to ')[1].replace(/^./,function(c){return c.toUpperCase();}),Math.round(prod*100),'var(--c)');}
+    var low=0;r.forEach(function(v,j){if(v<r[low]){low=j;}});
+    $('#cvo').innerHTML=h;
+    $('#cvn').textContent='Out of 1,000 visitors, about '+Math.round(prod*1000)+' pay ('+(prod*100).toFixed(1)+'%). The biggest leak is '+N[low].toLowerCase()+' at '+r[low]+'%.';
+  }
+  onRng(root,'cv1',function(v){r[0]=v;draw();});onRng(root,'cv2',function(v){r[1]=v;draw();});onRng(root,'cv3',function(v){r[2]=v;draw();});onRng(root,'cv4',function(v){r[3]=v;draw();});draw();
+}
+
+function initScentL(root){
+  var m=prep(root),$=m.$;
+  var S={vague:[['Solutions',15],['Resources',20],['Company',10],['Get in touch',10],['Explore',25]],clear:[['Pricing',95],['Help centre',10],['About us',5],['Contact support',5],['Features',20]]};
+  function draw(k){
+    var best=0;S[k].forEach(function(s,i){if(s[1]>S[k][best][1]){best=i;}});
+    $('#iso').innerHTML=S[k].map(function(s,i){return bar(s[0]+(i===best?' (strongest)':''),s[1],i===best?'var(--c)':'#9AA0BC');}).join('');
+    $('#isn').textContent=k==='vague'?'Nothing clearly smells like \u201cpricing\u201d. People will guess, hesitate or give up. Best guess: '+S[k][best][0]+' at only '+S[k][best][1]+'%.':'\u201cPricing\u201d has a strong scent: people go straight to it.';
+  }
+  bindChips(root,'isc',draw);draw('vague');
+}
+
+function initFrictionL(root){
+  var m=prep(root),$=m.$,on={};
+  function draw(){
+    var tot=FRIC.reduce(function(a,f){return a+(on[f[0]]?f[1]:0);},0),on2=FRIC.filter(function(f){return on[f[0]];});
+    $('#fro').innerHTML=boxw(`<div style='font-weight:800;margin-bottom:8px'>Checkout</div>`+(on2.length?on2.map(function(f){return `<div style='background:#FDE6E8;border-left:5px solid #D62839;border-radius:8px;padding:6px 10px;margin-bottom:6px;font-size:.85rem'>${f[2]}</div>`;}).join(''):`<div style='background:#E3F4EA;border-left:5px solid #1F7A46;border-radius:8px;padding:6px 10px;font-size:.85rem'>A short guest checkout with one clear Pay button.</div>`)+bar('Friction score',tot*10,'#D62839'));
+    $('#frn').textContent=tot===0?'Smooth: nothing slows people down.':tot<5?'Some friction. Each item loses a few people.':'Heavy friction: many people will abandon this checkout.';
+  }
+  bindTogg(root,'frt',on,draw);draw();
+}
+
+function initUXWL(root){
+  var m=prep(root),$=m.$,k='button',v='after';
+  function draw(){
+    var u=UXW[k],txt=v==='before'?u[1]:u[2],h='';
+    if(k==='button'){h=`<span style='display:inline-block;background:#2F6FD8;color:#fff;border-radius:10px;padding:10px 20px;font-weight:700'>${txt}</span>`;}
+    if(k==='error'){h=`<div style='background:#FDE6E8;border-left:6px solid #D62839;border-radius:8px;padding:10px 14px;color:#B01E2D;font-weight:700'>${txt}</div>`;}
+    if(k==='empty'){h=`<div style='text-align:center;color:#4A5070;padding:14px'>${txt}</div>`;}
+    if(k==='confirm'){h=`<div style='background:#E3F4EA;border-left:6px solid #1F7A46;border-radius:8px;padding:10px 14px;color:#14213D'>\u2713 ${txt}</div>`;}
+    $('#wro').innerHTML=boxw(h);$('#wrn').textContent=v==='before'?'Before: vague or technical.':'After: '+u[3];
+  }
+  bindChips(root,'wrc',function(x){k=x;draw();});bindChips(root,'wrb',function(x){v=x;draw();});draw();
+}
+
+/* ===== inits: Testing and improving ===== */
+function initUTestL(root){
+  var m=prep(root),$=m.$;
+  function draw(n){
+    var pts=[],i,h='';
+    for(i=0;i<=15;i++){pts.push([30+i*14,170-(1-Math.pow(0.69,i))*150]);}
+    h=`<line x1='30' y1='170' x2='250' y2='170' stroke='#9AA0BC'/><line x1='30' y1='20' x2='30' y2='170' stroke='#9AA0BC'/><polyline points='${pts.map(function(p){return p.join(',');}).join(' ')}' fill='none' stroke='var(--c)' stroke-width='3'/><circle cx='${pts[n][0]}' cy='${pts[n][1]}' r='7' fill='#E8456B' stroke='#fff' stroke-width='2'/><g font-size='10' font-family='sans-serif' fill='#5A6180'><text x='140' y='190' text-anchor='middle'>Number of users</text><text x='24' y='24' text-anchor='end'>100%</text><text x='24' y='174' text-anchor='end'>0%</text></g>`;
+    $('#uts').innerHTML=`<svg viewBox='0 0 270 196' width='320' role='img' aria-label='Share of problems found as users increase'>${h}</svg>`;
+    var pct=Math.round((1-Math.pow(0.69,n))*100);
+    $('#utm').textContent=n+' user'+(n===1?'':'s')+': about '+pct+'% of the problems found. '+(n<=2?'Each new user adds a lot.':n<=6?'Returns are shrinking, but still worthwhile.':'Little new is found: better to fix problems and test again with fresh users.');
+  }
+  onRng(root,'utn',draw);draw(5);
+}
+
+function initABL(root){
+  var m=prep(root),$=m.$,s={a:[0,0],b:[0,0]};
+  function add(k){var i;for(i=0;i<k;i++){var v=i%2?'b':'a';s[v][0]++;if(Math.random()<(v==='a'?0.10:0.13)){s[v][1]++;}}draw();}
+  function draw(){
+    var na=s.a[0],nb=s.b[0],ca=s.a[1],cb=s.b[1],pa=na?ca/na:0,pb=nb?cb/nb:0,msg='Add some visitors to begin.';
+    if(na>=10&&nb>=10){var p=(ca+cb)/(na+nb),se=Math.sqrt(p*(1-p)*(1/na+1/nb)),z=se?(pb-pa)/se:0;msg='Version B converts '+(pb*100).toFixed(1)+'% against A at '+(pa*100).toFixed(1)+'%. '+(Math.abs(z)>1.96?'The difference is large enough to be statistically significant (95% level) with this much data.':'With only '+(na+nb)+' visitors this gap could easily be chance. Keep going.');}
+    $('#abo').innerHTML=bar('A: '+ca+' of '+na,Math.round(pa*100),'#9AA0BC')+bar('B: '+cb+' of '+nb,Math.round(pb*100),'var(--c)');$('#abn').textContent=msg;
+  }
+  $('#abr').addEventListener('click',function(){add(50);});$('#abm').addEventListener('click',function(){add(500);});$('#abx').addEventListener('click',function(){s={a:[0,0],b:[0,0]};draw();});draw();
+}
+
+function initHeurL(root){
+  var m=prep(root),$=m.$;
+  function draw(k){
+    var i=parseInt(k,10),hl=function(n){return i===n?'outline:3px solid #E8456B;outline-offset:3px;':'';};
+    $('#heo').innerHTML=boxw(`<div style='font-weight:800;margin-bottom:8px'>My files</div><div style='display:flex;justify-content:space-between;align-items:center;border:1px solid #D9DDEB;border-radius:8px;padding:8px 10px;margin-bottom:10px'><span>report.pdf</span><span style='${hl(2)}padding:2px 6px;border-radius:6px'>\u2715 Delete</span></div><div style='margin-bottom:10px'><span style='${hl(1)}display:inline-block;border-radius:8px'>${ubtn(tk({}),{label:'Save',sz:'S'})}</span> <span style='font-size:.8rem;color:#9AA0BC'>(no message appears)</span></div><div style='display:flex;gap:8px;align-items:center'><span style='${hl(0)}display:inline-block;background:#E6EEFC;border-radius:6px;padding:5px 10px;font-weight:700'>Initiate transmission</span><span style='${hl(3)}display:inline-block;background:#1F9D55;color:#fff;border-radius:999px;padding:5px 12px'>OK</span><span style='color:#D62839;border-radius:0;padding:5px 12px;border:2px solid #D62839'>Cancel</span></div>`,'font-size:.9rem');
+    var h=[HEUR[1],HEUR[0],HEUR[2],HEUR[3]][i];
+    $('#hen').innerHTML=`<h4>${h[0]}: ${h[1]}</h4><div class='facts'><p><b>Rule:</b> ${h[2]}</p><p><b>The problem:</b> ${h[3]}</p><p><b>Fix:</b> ${h[4]}</p></div>`;
+  }
+  bindChips(root,'hec',draw);draw('0');
+}
+
+/* ===== inits: Influence and ethics ===== */
+function initBehavL(root){
+  var m=prep(root),$=m.$;
+  function draw(k){
+    var h='';
+    if(k==='default'){h=`<label style='display:flex;gap:10px;align-items:center'><input type='checkbox' checked> Add a 1 pound donation to the charity of the month</label><div style='margin-top:6px;font-size:.8rem;color:#5A6180'>Pre-ticked: many people leave it as it is.</div>`;}
+    if(k==='social'){h=`<div style='font-weight:800'>Join 2,314 people who signed up this week</div><div style='margin-top:6px'>${ubtn(tk({}),{label:'Sign up'})}</div>`;}
+    if(k==='anchor'){h=`<div style='display:flex;gap:10px;align-items:baseline'><span style='text-decoration:line-through;color:#7A809C;font-size:1.2rem'>99 pounds</span><span style='font-weight:800;font-size:1.6rem;color:#B01E2D'>59 pounds</span></div><div style='margin-top:6px;font-size:.8rem;color:#5A6180'>The crossed-out price makes 59 pounds feel like a bargain.</div>`;}
+    $('#bdo').innerHTML=boxw(h);$('#bdn').textContent=BEH[k][1]+' '+BEH[k][2];
+  }
+  bindChips(root,'bdc',draw);draw('default');
+}
+
+function initTrustL(root){
+  var m=prep(root),$=m.$,on={};
+  function draw(){
+    var n=TRUST.filter(function(t){return on[t[0]];}).length,h=`<div style='font-weight:800;margin-bottom:8px'>Pay securely</div>`+['Card number','Expiry and CVC'].map(function(l){return `<div style='border:2px solid #9AA0BC;border-radius:8px;padding:8px 10px;color:#9AA0BC;margin-bottom:6px'>${l}</div>`;}).join('')+`<div style='margin:8px 0'>${ubtn(tk({}),{label:'Pay 48 pounds'})}</div>`;
+    if(on.reviews){h+=`<div style='font-size:.85rem;margin-bottom:4px'>\u2605\u2605\u2605\u2605\u2606 4.6 from 1,210 verified reviews</div>`;}
+    if(on.secure){h+=`<div style='font-size:.85rem;margin-bottom:4px'>\u{1F512} Payments are encrypted and processed securely</div>`;}
+    if(on.returns){h+=`<div style='font-size:.85rem;margin-bottom:4px'>30-day returns, free of charge</div>`;}
+    if(on.contact){h+=`<div style='font-size:.85rem;margin-bottom:4px'>Questions? Call 0800 000 000 or email help@shop.example</div>`;}
+    if(on.photos){h+=`<div style='font-size:.85rem;margin-bottom:4px'>Photos of our actual products, taken in our studio</div>`;}
+    $('#tso').innerHTML=boxw(h);
+    $('#tsn').textContent=bar('Trust cues present',Math.round(n/5*100),'var(--c)')?n+' of 5 trust cues. '+(n<2?'A bare payment form asks people to take a lot on faith.':n<4?'Better. Each cue answers a worry.':'Strong: the common worries are all answered, as long as every claim is true.'):'';
+  }
+  bindTogg(root,'tst',on,draw);draw();
+}
+
+function initPersuadeL(root){
+  var m=prep(root),$=m.$,M=6,A=3,P='no';
+  function draw(){
+    var h=`<line x1='30' y1='190' x2='250' y2='190' stroke='#9AA0BC'/><line x1='30' y1='20' x2='30' y2='190' stroke='#9AA0BC'/>`,pts=[],a;
+    for(a=2;a<=10;a+=0.25){pts.push([30+(a-1)/9*210,190-(Math.min(10,20/a)-1)/9*165]);}
+    h+=`<polyline points='${pts.map(function(p){return p.join(',');}).join(' ')}' fill='none' stroke='#E8456B' stroke-width='3' stroke-dasharray='6 4'/><text x='200' y='60' font-size='10' font-weight='700' font-family='sans-serif' fill='#E8456B'>Action line</text><g font-size='10' font-family='sans-serif' fill='#5A6180'><text x='140' y='208' text-anchor='middle'>Ability (easy to do)</text><text x='10' y='105' transform='rotate(-90 10 105)' text-anchor='middle'>Motivation</text></g>`;
+    var above=M*A>=20;
+    h+=`<circle cx='${30+(A-1)/9*210}' cy='${190-(M-1)/9*165}' r='9' fill='${above&&P==='yes'?'#1F9D55':'#2F6FD8'}' stroke='#fff' stroke-width='3'/>`;
+    $('#pds').innerHTML=`<svg viewBox='0 0 260 216' width='300' role='img' aria-label='Behaviour model with motivation and ability'>${h}</svg>`;
+    $('#pdn').textContent=above?(P==='yes'?'Above the action line with a prompt: the behaviour is likely to happen.':'Above the action line, but with no prompt. Motivation and ability are enough; nothing reminds the person to act.'):'Below the action line: even with a prompt, this is unlikely. Make the task easier or raise motivation.';
+  }
+  onRng(root,'pdm',function(v){M=v;draw();});onRng(root,'pda',function(v){A=v;draw();});bindChips(root,'pdp',function(v){P=v;draw();});draw();
+}
+
+function initDarkL(root){
+  var m=prep(root),$=m.$,k='shame',v='dark';
+  function draw(){
+    var d=DARK[k],txt=v==='dark'?d[2]:d[3],bad=v==='dark';
+    $('#dpo').innerHTML=boxw(`<div style='border-left:6px solid ${bad?'#D62839':'#1F7A46'};padding-left:12px'><b style='color:${bad?'#B01E2D':'#1F7A46'}'>${bad?'Dark pattern':'Fair version'}</b><div style='margin-top:6px'>${txt}</div></div>`);
+    $('#dpn').textContent=bad?d[0]+': '+d[1]:'Fair: honest, clear, and the person stays in control.';
+  }
+  bindChips(root,'dpc',function(x){k=x;draw();});bindChips(root,'dpf',function(x){v=x;draw();});draw();
+}
+
+function initEthicalL(root){
+  var m=prep(root),$=m.$,on={};
+  function draw(){
+    var n=ETHQ.filter(function(q){return on[q[0]];}).length;
+    $('#edo').innerHTML=bar('Statements true',Math.round(n/6*100),'var(--c)')+`<p class='mood'>${n===6?'All six are true. That is a good sign, but keep asking, and keep testing with real people.':n>=4?'Mostly sound. Look at the unticked statements and ask what would make them true.':'Several concerns. Pause and reconsider before shipping this.'}</p>`;
+  }
+  bindTogg(root,'edt',on,draw);draw();
+}
+
+/* ===== registration, hero, start ===== */
+var LESSONS={
+ 'user-research':{html:L_RESEARCH,init:initResearchL,g:''},'user-personas':{html:L_PERSONA,init:initPersonaL,g:''},'user-scenarios':{html:L_SCENARIO,init:initScenarioL,g:''},'user-journeys':{html:L_JOURNEY,init:initJourneyL,g:''},'user-flows':{html:L_UXFLOW,init:initUXFlowL,g:''},'jobs-to-be-done':{html:L_JTBD,init:initJTBDL,g:''},'pain-points':{html:L_PAIN,init:initPainL,g:''},
+ 'human-centred-design':{html:L_HCD,init:initHCDL,g:'f'},'usability':{html:L_USAB,init:initUsabilityL,g:'f'},'accessibility':{html:L_ACCESS,init:initAccessL,g:'f'},'inclusive-design':{html:L_INCLUSIVE,init:initInclusiveL,g:'f'},'mental-models':{html:L_MENTAL,init:initMentalL,g:'f'},'content-hierarchy':{html:L_CONTENT,init:initContentL,g:'f'},
+ 'task-completion':{html:L_TASK,init:initTaskL,g:'s'},'conversion-paths':{html:L_CONV,init:initConvL,g:'s'},'information-scent':{html:L_SCENT,init:initScentL,g:'s'},'friction':{html:L_FRICTION,init:initFrictionL,g:'s'},'ux-writing':{html:L_UXW,init:initUXWL,g:'s'},
+ 'user-testing':{html:L_UTEST,init:initUTestL,g:'c'},'a-b-testing':{html:L_AB,init:initABL,g:'c'},'heuristic-evaluation':{html:L_HEUR,init:initHeurL,g:'c'},
+ 'behavioural-design':{html:L_BEHAV,init:initBehavL,g:''},'trust-signals':{html:L_TRUSTS,init:initTrustL,g:''},'persuasive-design':{html:L_PERSUADE,init:initPersuadeL,g:''},'dark-patterns':{html:L_DARK,init:initDarkL,g:''},'ethical-design':{html:L_ETHICAL,init:initEthicalL,g:''}
+};
+
+(function(){
+  var lab=document.getElementById('lab'),timer=null,left=0,guess=false;
+  lab.innerHTML="<h2>Try it: the five-second test</h2><p>UX researchers show a page for five seconds, then ask what people remember. Try it on yourself.</p><div class='ctrls'><button class='btn' id='fvb' type='button'>Start the test</button></div><div id='fvo' style='margin-top:6px;min-height:200px'></div>";
+  var page="<div style='background:#EAF4EE;color:#1F3B24;border-radius:14px;padding:18px;font-family:Inter,sans-serif'><div style='font-weight:700;margin-bottom:10px'>Moss and Leaf</div><div style='font-weight:800;font-size:1.5rem;line-height:1.15;margin-bottom:6px'>Loose-leaf tea, delivered monthly</div><div style='margin-bottom:12px'>Twelve small-batch blends, picked by tasters and sent to your door.</div><span style='display:inline-block;background:#3C8A4E;color:#fff;border-radius:999px;padding:9px 20px;font-weight:700'>Start my subscription</span></div>";
+  function stop(){clearInterval(timer);}
+  document.getElementById('fvb').addEventListener('click',function(){
+    stop();left=5;guess=false;
+    document.getElementById('fvo').innerHTML="<div style='font-size:.85rem;font-weight:700;margin-bottom:6px'>Look closely: <span id='fvt'>5</span></div>"+page;
+    timer=setInterval(function(){
+      var t=document.getElementById('fvt');if(!t){stop();return;}
+      left--;t.textContent=left;
+      if(left<=0){stop();document.getElementById('fvo').innerHTML="<div style='background:var(--bg);border:1px solid var(--line);border-radius:14px;padding:16px'><b>Time is up. What does this company sell?</b><div class='ctrls' style='margin-top:10px'><button class='chip' type='button' data-a='bikes'>Bikes</button><button class='chip' type='button' data-a='tea'>Tea</button><button class='chip' type='button' data-a='software'>Software</button></div><p id='fvr' class='mood' aria-live='polite'></p></div>";}
+    },1000);
+  });
+  document.getElementById('fvo').addEventListener('click',function(e){var b=e.target.closest('[data-a]');if(!b){return;}var r=document.getElementById('fvr');if(!r){return;}r.textContent=b.getAttribute('data-a')==='tea'?'Correct: tea. The headline, the picture of the offer and the button all said so. That is a clear first impression.':'Not quite: it sells tea. If many people miss it in five seconds, the page is not communicating clearly enough.';});
+})();
+
+startSite();
+
+</script>
+</body>
+</html>
