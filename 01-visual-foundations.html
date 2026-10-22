@@ -210,6 +210,15 @@ footer strong{color:var(--ink);}
 .lfoot a:hover{color:var(--ink);border-color:var(--ink);}
 .lfoot a:focus-visible{outline:3px solid var(--ink);outline-offset:2px;}
 .jump a.j5{--c:var(--g1);} .jump a.j6{--c:var(--g2);}
+input[type=range]{background:var(--track,linear-gradient(90deg,color-mix(in srgb,var(--c,var(--g2)) 14%,var(--line)),var(--c,var(--g2))));}
+input[type=range].hue{--track:linear-gradient(90deg,hsl(0 80% 55%),hsl(60 80% 55%),hsl(120 80% 45%),hsl(180 80% 45%),hsl(240 80% 60%),hsl(300 80% 55%),hsl(360 80% 55%));}
+input[type=range].kelvin{--track:linear-gradient(90deg,#FF9A3C,#FFD9A8,#FFFFFF,#CFE0FF,#8FB4FF);}
+input[type=range].ch-r{--track:linear-gradient(90deg,#000,#FF0000);}
+input[type=range].ch-g{--track:linear-gradient(90deg,#000,#00FF00);}
+input[type=range].ch-b{--track:linear-gradient(90deg,#000,#0000FF);}
+input[type=range].lightness{--track:linear-gradient(90deg,#000,#fff);}
+input[type=range].sat{--track:linear-gradient(90deg,#9A9A9A,#2F6FD8);}
+input[type=range].blur{--track:linear-gradient(90deg,var(--line),var(--muted));}
 </style>
 </head>
 <body>
@@ -249,7 +258,7 @@ footer strong{color:var(--ink);}
         <p>Now that you know how colour, shape and space behave, the next set of ideas covers how type works.</p>
         <div class="next-actions"><a class="nbtn primary" href="02-typography.html">Start Typography <svg viewBox='0 0 24 24' aria-hidden='true' fill='none' stroke='currentColor' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'><path d='M5 12h14M13 6l6 6-6 6'/></svg></a><a class="nbtn" href="index.html">See all sections</a></div>
       </div>
-      <svg class='next-art' viewBox='0 0 180 150' aria-hidden='true' focusable='false'><circle cx='50' cy='52' r='34' fill='var(--g1)'/><text x='50' y='64' text-anchor='middle' font-size='34' font-weight='700' fill='#fff' font-family='Georgia,serif'>Aa</text><rect x='82' y='26' width='62' height='62' rx='14' fill='var(--g2)' opacity='.92' transform='rotate(10 113 57)'/><polygon points='40,138 84,70 120,138' fill='var(--g4)' opacity='.95'/><circle cx='142' cy='116' r='20' fill='var(--g3)'/></svg>
+      <svg class='next-art' viewBox='0 0 180 150' aria-hidden='true' focusable='false'><circle cx='90' cy='75' r='64' fill='var(--g1)'/><text x='90' y='98' text-anchor='middle' font-size='62' font-weight='700' font-family='Georgia,serif' fill='#fff'>Aa</text></svg>
     </aside>
   </div>
 </footer>
@@ -1686,6 +1695,17 @@ function siteFoot(){
   return '<nav class="lfoot" aria-label="Other sections"><span>Explore other sections</span><div>'+a+'</div></nav>';
 }
 
+function tagSliders(root){
+  var map={wk:'kelvin',mr:'ch-r',mg:'ch-g',mb:'ch-b',vl:'lightness',vs:'sat',csl:'blur'};
+  Array.prototype.slice.call((root||document).querySelectorAll('input[type=range]')).forEach(function(i){
+    if(i.getAttribute('data-ts')){return;}
+    i.setAttribute('data-ts','1');
+    var id=i.id,lab=id?document.querySelector('label[for="'+id+'"]'):null,t=lab?lab.textContent:'';
+    if(map[id]){i.classList.add(map[id]);}
+    else if(/hue/i.test(t)){i.classList.add('hue');}
+  });
+}
+
 /* routing between the overview and lessons */
 var homeEl=document.getElementById("home"),lessonEl=document.getElementById("lesson");
 function showLesson(id){
@@ -1723,7 +1743,7 @@ function copyText(t,btn){
   function fallback(){try{var ta=document.createElement('textarea');ta.value=t;ta.setAttribute('readonly','');ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.select();var r=document.execCommand('copy');document.body.removeChild(ta);if(r){ok();}}catch(e){}}
   if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(ok,fallback);}else{fallback();}
 }
-function wrapHex(root){
+function wrapHex(root){tagSliders(root);
   var w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,null),nodes=[],n,test=/#[0-9A-Fa-f]{6}(?![0-9A-Fa-f])/;
   while((n=w.nextNode())){if(test.test(n.nodeValue)&&n.parentNode&&n.parentNode.closest&&!n.parentNode.closest('script,style,textarea,button,svg')){nodes.push(n);}}
   nodes.forEach(function(n){

@@ -214,6 +214,15 @@ footer strong{color:var(--ink);}
 .lfoot a:hover{color:var(--ink);border-color:var(--ink);}
 .lfoot a:focus-visible{outline:3px solid var(--ink);outline-offset:2px;}
 .jump a.j5{--c:var(--g1);} .jump a.j6{--c:var(--g2);}
+input[type=range]{background:var(--track,linear-gradient(90deg,color-mix(in srgb,var(--c,var(--g2)) 14%,var(--line)),var(--c,var(--g2))));}
+input[type=range].hue{--track:linear-gradient(90deg,hsl(0 80% 55%),hsl(60 80% 55%),hsl(120 80% 45%),hsl(180 80% 45%),hsl(240 80% 60%),hsl(300 80% 55%),hsl(360 80% 55%));}
+input[type=range].kelvin{--track:linear-gradient(90deg,#FF9A3C,#FFD9A8,#FFFFFF,#CFE0FF,#8FB4FF);}
+input[type=range].ch-r{--track:linear-gradient(90deg,#000,#FF0000);}
+input[type=range].ch-g{--track:linear-gradient(90deg,#000,#00FF00);}
+input[type=range].ch-b{--track:linear-gradient(90deg,#000,#0000FF);}
+input[type=range].lightness{--track:linear-gradient(90deg,#000,#fff);}
+input[type=range].sat{--track:linear-gradient(90deg,#9A9A9A,#2F6FD8);}
+input[type=range].blur{--track:linear-gradient(90deg,var(--line),var(--muted));}
 
 input[type='text']{width:100%;font:inherit;padding:10px 12px;border:2px solid var(--line);border-radius:12px;background:var(--surface);color:var(--ink);margin:2px 0 12px;box-sizing:border-box;}
 input[type='text']:focus-visible{outline:3px solid var(--ink);outline-offset:2px;}
@@ -251,7 +260,7 @@ input[type='text']:focus-visible{outline:3px solid var(--ink);outline-offset:2px
         <p>That section isn’t built yet. In the meantime, you can revisit User Experience or browse all sections.</p>
         <div class="next-actions"><a class="nbtn primary" href="index.html">See all sections <svg viewBox='0 0 24 24' aria-hidden='true' fill='none' stroke='currentColor' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'><path d='M5 12h14M13 6l6 6-6 6'/></svg></a><a class="nbtn" href="08-user-experience.html">Back to User Experience</a></div>
       </div>
-      <svg class='next-art' viewBox='0 0 180 150' aria-hidden='true' focusable='false'><circle cx='50' cy='52' r='34' fill='var(--g1)'/><rect x='82' y='26' width='62' height='62' rx='14' fill='var(--g2)' opacity='.92' transform='rotate(10 113 57)'/><polygon points='40,138 84,70 120,138' fill='var(--g4)' opacity='.95'/><circle cx='142' cy='116' r='20' fill='var(--g3)'/></svg>
+      <svg class='next-art' viewBox='0 0 180 150' aria-hidden='true' focusable='false'><circle cx='90' cy='75' r='64' fill='var(--g4)'/><g transform='translate(42 27) scale(2)' fill='none' stroke='#fff' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round' style='color:#fff'><circle cx='24' cy='10' r='4'/><path d='M8 18h32M24 18v12M16 42l8-12 8 12'/></g></svg>
     </aside>
   </div>
 </footer>
@@ -312,7 +321,7 @@ function bigideas(arr){return `<h2>The big ideas</h2><ul class='tk'>`+arr.map(fu
 function steps(arr){return `<ol class='steps'>`+arr.map(function(x){return '<li>'+x+'</li>';}).join('')+'</ol>';}
 function chipsHtml(id,items,cur,lab){return `<div class='ctrls' id='${id}' role='group' aria-label='${lab}'>`+items.map(function(x){return `<button class='chip' type='button' data-v='${x[0]}' aria-pressed='${x[0]===cur}'>${x[1]}</button>`;}).join('')+`</div>`;}
 function bindChips(root,id,cb){var c=root.querySelector('#'+id);c.addEventListener('click',function(e){var b=e.target.closest('.chip');if(!b)return;Array.prototype.slice.call(c.querySelectorAll('.chip')).forEach(function(x){x.setAttribute('aria-pressed',x===b?'true':'false');});cb(b.getAttribute('data-v'));});}
-function rng(id,lab,min,max,val,step,unit){return `<label for='${id}'>${lab}: <span id='${id}v'>${val}</span>${unit||''}</label><input id='${id}' type='range' min='${min}' max='${max}' step='${step||1}' value='${val}'>`;}
+function rng(id,lab,min,max,val,step,unit){return `<label for='${id}'>${lab}: <span id='${id}v'>${val}</span>${unit||''}</label><input id='${id}' class='${/hue/i.test(lab)?'hue':''}' type='range' min='${min}' max='${max}' step='${step||1}' value='${val}'>`;}
 function onRng(root,id,cb){var el=root.querySelector('#'+id),sp=root.querySelector('#'+id+'v');el.addEventListener('input',function(){if(sp){sp.textContent=el.value;}cb(parseFloat(el.value));});}
 function pr(i,k){var x=Math.sin(i*127.1+k*311.7)*43758.5453;return x-Math.floor(x);}
 function copyText(t,btn){
@@ -320,7 +329,7 @@ function copyText(t,btn){
   function fallback(){try{var ta=document.createElement('textarea');ta.value=t;ta.setAttribute('readonly','');ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.select();var r=document.execCommand('copy');document.body.removeChild(ta);if(r){ok();}}catch(e){}}
   if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(ok,fallback);}else{fallback();}
 }
-function wrapHex(root){
+function wrapHex(root){tagSliders(root);
   var w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,null),nodes=[],n,test=/#[0-9A-Fa-f]{6}(?![0-9A-Fa-f])/;
   while((n=w.nextNode())){if(test.test(n.nodeValue)&&n.parentNode&&n.parentNode.closest&&!n.parentNode.closest('script,style,textarea,button,svg')){nodes.push(n);}}
   nodes.forEach(function(n){
@@ -347,6 +356,17 @@ function siteFoot(){
   a+='<a href="index.html">All sections</a>';
   if(S.next){a+='<a href="'+S.next[1]+'">'+S.next[0]+' &rarr;</a>';}
   return '<nav class="lfoot" aria-label="Other sections"><span>Explore other sections</span><div>'+a+'</div></nav>';
+}
+
+function tagSliders(root){
+  var map={wk:'kelvin',mr:'ch-r',mg:'ch-g',mb:'ch-b',vl:'lightness',vs:'sat',csl:'blur'};
+  Array.prototype.slice.call((root||document).querySelectorAll('input[type=range]')).forEach(function(i){
+    if(i.getAttribute('data-ts')){return;}
+    i.setAttribute('data-ts','1');
+    var id=i.id,lab=id?document.querySelector('label[for="'+id+'"]'):null,t=lab?lab.textContent:'';
+    if(map[id]){i.classList.add(map[id]);}
+    else if(/hue/i.test(t)){i.classList.add('hue');}
+  });
 }
 
 function startSite(){
@@ -622,7 +642,7 @@ var L_CONV=shell('Conversion paths','The routes people take towards a goal.','co
 
 var L_SCENT=shell('Information scent','Cues that tell people where a link leads.','scent',[
 ['is-what','What it is',`<h2>What information scent is</h2><p>People browse like animals foraging for food: they follow the <b>strongest scent</b>. Information scent is how well a link, label or heading <b>signals what is behind it</b>. Strong scent means people confidently click. Weak scent means they hesitate, guess wrong or leave. The idea comes from information foraging theory (Pirolli and Card).</p>`],
-['is-explore','Smell the labels',`<h2>Smell the labels</h2><p>Task: <b>find out how much a plan costs</b>. The bars show how strongly each label signals the answer.</p><div class='panel'>${chipsHtml('isc',[['vague','Vague labels'],['clear','Clear labels']],'vague','Labels')}<div id='iso' style='margin-top:14px'></div><p class='mood' id='isn' aria-live='polite'></p></div>`],
+['is-explore','Follow the scent',`<h2>Follow the scent</h2><p>Your task: <b>find out how much the Pro plan costs</b>. Click the link in the navigation that you think will take you there. Then switch to the other set of labels and try again.</p><div class='panel'>${chipsHtml('isc',[['vague','Vague labels'],['clear','Clear labels']],'vague','Navigation labels')}<div id='iso' style='margin-top:14px'></div><p class='mood' id='isn' aria-live='polite'></p></div>`],
 ['is-use','Use it well',`<h2>Strengthening scent</h2><ul class='tk'><li><b>Use the user\u2019s words</b> in labels and headings.</li><li><b>Make link text specific:</b> \u201cView pricing\u201d, not \u201cClick here\u201d.</li><li><b>Test with a first-click test:</b> where do people click first?</li></ul>`],
 ['is-check','Quick check',quick([['What is information scent?','How well a link signals what is behind it.'],['What does weak scent cause?','Hesitation, wrong clicks and abandonment.'],['What is a first-click test?','Asking where people would click first to do a task.']])],
 ['is-recap','Big ideas',bigideas(['People follow the strongest scent.','Use clear, specific, familiar words.','Test with first clicks.'])]
@@ -890,14 +910,34 @@ function initConvL(root){
 }
 
 function initScentL(root){
-  var m=prep(root),$=m.$;
-  var S={vague:[['Solutions',15],['Resources',20],['Company',10],['Get in touch',10],['Explore',25]],clear:[['Pricing',95],['Help centre',10],['About us',5],['Contact support',5],['Features',20]]};
-  function draw(k){
-    var best=0;S[k].forEach(function(s,i){if(s[1]>S[k][best][1]){best=i;}});
-    $('#iso').innerHTML=S[k].map(function(s,i){return bar(s[0]+(i===best?' (strongest)':''),s[1],i===best?'var(--c)':'#9AA0BC');}).join('');
-    $('#isn').textContent=k==='vague'?'Nothing clearly smells like \u201cpricing\u201d. People will guess, hesitate or give up. Best guess: '+S[k][best][0]+' at only '+S[k][best][1]+'%.':'\u201cPricing\u201d has a strong scent: people go straight to it.';
+  var m=prep(root),$=m.$,set='vague',clicks=0,found=false,view=null,lastWrong=false;
+  var SETS={vague:['Solutions','Resources','Company','Get in touch','Explore'],clear:['Pricing','Help centre','About us','Contact support','Features']};
+  var PAGES={
+    vague:{'Solutions':'An overview of what Taskly does. There are no prices on this page.','Resources':'Blog posts, guides and webinars. There are no prices on this page.','Company':'The team, careers and press. There are no prices on this page.','Get in touch':'A contact form. There are no prices on this page.','Explore':'A catalogue of pages. One link is called Plans.'},
+    clear:{'Help centre':'Support articles and answers. There are no prices on this page.','About us':'Our story and our team. There are no prices on this page.','Contact support':'A contact form and a phone number. There are no prices on this page.','Features':'Everything Taskly can do. There are no prices on this page.'}
+  };
+  function draw(){
+    var nav=SETS[set].map(function(l){return `<button type='button' data-l='${l}' style='font:inherit;border:0;background:none;color:#14213D;font-weight:700;padding:6px 10px;border-radius:8px;cursor:pointer'>${l}</button>`;}).join('');
+    var body;
+    if(found){body=`<div style='text-align:center;padding:18px'><div style='font-size:1.4rem;font-weight:800;color:#1F7A46'>\u2713 Pro plan: 19 pounds a month</div><div style='margin-top:6px'>You found the price in <b>${clicks}</b> click${clicks===1?'':'s'}.</div><div style='margin-top:12px'><button type='button' class='btn' data-reset='1'>Try again</button></div></div>`;}
+    else if(view){body=`<div style='padding:12px 4px'><div style='font-weight:800;font-size:1.1rem;margin-bottom:4px'>${view}</div><div style='color:#4A5070;margin-bottom:12px'>${PAGES[set][view]}</div>${view==='Explore'?`<button type='button' data-plans='1' class='btn' style='margin-right:8px'>Plans</button>`:''}<button type='button' data-home='1' class='btn'>Back to the home page</button></div>`;}
+    else{body=`<div style='padding:14px 4px'><div style='font-weight:800;font-size:1.4rem;line-height:1.15;margin-bottom:6px'>Meet Taskly</div><div style='color:#4A5070;margin-bottom:12px'>The simple way to plan your team\u2019s week.</div><span style='display:inline-block;background:#2F6FD8;color:#fff;border-radius:999px;padding:8px 18px;font-weight:700'>Start free</span></div>`;}
+    $('#iso').innerHTML=`<div style='background:#fff;color:#14213D;border-radius:14px;padding:12px 14px;font-family:Inter,sans-serif'><div style='display:flex;align-items:center;gap:6px;flex-wrap:wrap;border-bottom:1px solid #E4E8F2;padding-bottom:8px'><b style='margin-right:auto'>Taskly</b>${nav}</div>${body}</div>`;
+    var msg;
+    if(found){msg=set==='clear'?'Found in '+clicks+' click'+(clicks===1?'':'s')+'. The label \u201cPricing\u201d matches the thing you were looking for, word for word. That match is information scent, and it is why most people would click it first.':'Found in '+clicks+' click'+(clicks===1?'':'s')+', after guessing. None of the vague labels (Solutions, Resources, Company\u2026) said \u201cprice\u201d. Switch to the clear labels and compare.';}
+    else if(view){msg='Not here. The label did not tell you what was behind it, so you had to guess. Go back and try another.';}
+    else{msg='Click the link you think leads to the price. Which label smells most like \u201cpricing\u201d?';}
+    $('#isn').textContent=msg;
   }
-  bindChips(root,'isc',draw);draw('vague');
+  function reset(){clicks=0;found=false;view=null;}
+  $('#iso').addEventListener('click',function(e){
+    var l=e.target.closest('[data-l]'),p=e.target.closest('[data-plans]'),h=e.target.closest('[data-home]'),r=e.target.closest('[data-reset]');
+    if(l){var lab=l.getAttribute('data-l');clicks++;if(set==='clear'&&lab==='Pricing'){found=true;view=null;}else{view=lab;}draw();}
+    else if(p){clicks++;found=true;view=null;draw();}
+    else if(h){view=null;draw();}
+    else if(r){reset();draw();}
+  });
+  bindChips(root,'isc',function(v){set=v;reset();draw();});draw();
 }
 
 function initFrictionL(root){

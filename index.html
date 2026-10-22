@@ -213,6 +213,15 @@ footer strong{color:var(--ink);}
 .lfoot a:hover{color:var(--ink);border-color:var(--ink);}
 .lfoot a:focus-visible{outline:3px solid var(--ink);outline-offset:2px;}
 .jump a.j5{--c:var(--g1);} .jump a.j6{--c:var(--g2);}
+input[type=range]{background:var(--track,linear-gradient(90deg,color-mix(in srgb,var(--c,var(--g2)) 14%,var(--line)),var(--c,var(--g2))));}
+input[type=range].hue{--track:linear-gradient(90deg,hsl(0 80% 55%),hsl(60 80% 55%),hsl(120 80% 45%),hsl(180 80% 45%),hsl(240 80% 60%),hsl(300 80% 55%),hsl(360 80% 55%));}
+input[type=range].kelvin{--track:linear-gradient(90deg,#FF9A3C,#FFD9A8,#FFFFFF,#CFE0FF,#8FB4FF);}
+input[type=range].ch-r{--track:linear-gradient(90deg,#000,#FF0000);}
+input[type=range].ch-g{--track:linear-gradient(90deg,#000,#00FF00);}
+input[type=range].ch-b{--track:linear-gradient(90deg,#000,#0000FF);}
+input[type=range].lightness{--track:linear-gradient(90deg,#000,#fff);}
+input[type=range].sat{--track:linear-gradient(90deg,#9A9A9A,#2F6FD8);}
+input[type=range].blur{--track:linear-gradient(90deg,var(--line),var(--muted));}
 
 .hubhero{padding:44px 0 18px;}
 .hubhero h1{font-size:clamp(2.1rem,5.4vw,3.6rem);font-weight:700;letter-spacing:.01em;line-height:1.2;max-width:18ch;}
